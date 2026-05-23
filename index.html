@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duong Tran - HR Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --forest: #1E2D24;
+      --sage: #7D927B;
+      --moss: #A8B7A1;
+      --mist: #E8EEE7;
+      --ivory: #F7F4EE;
+      --charcoal: #2F342F;
+      --muted: #5F6F5C;
+      --line: rgba(125, 146, 123, 0.45);
+      --line-soft: rgba(168, 183, 161, 0.35);
+      --shadow: 0 18px 40px rgba(30, 45, 36, 0.08);
+      --radius: 22px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .pf {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #fbf8f3 0%, var(--ivory) 100%);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .serif { font-family: 'Cormorant Garamond', serif; }
+
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      color: var(--forest);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .section-intro {
+      margin-top: 16px;
+      max-width: 680px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(247, 244, 238, 0.82);
+      border-bottom: 1px solid rgba(168, 183, 161, 0.25);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      transition: color 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--forest); }
+
+    .hero {
+      padding: 36px 0 24px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,0.24);
+      border-radius: calc(var(--radius) + 4px);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .hero-left {
+      padding: 72px 64px;
+      background: linear-gradient(180deg, rgba(247,244,238,0.98) 0%, rgba(247,244,238,0.92) 100%);
+    }
+    .hero-right {
+      background: linear-gradient(180deg, #dfe8de 0%, var(--mist) 100%);
+      padding: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 580px;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 24px;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.8rem, 9vw, 5.3rem);
+      font-weight: 500;
+      line-height: 0.95;
+      color: var(--forest);
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .hero-alias-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #A06C1D;
+      font-weight: 500;
+    }
+    .hero-alias-note .sun-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #F7D76A;
+      color: #8A6412;
+      font-size: 13px;
+      line-height: 1;
+      box-shadow: 0 4px 10px rgba(247, 215, 106, 0.25);
+      flex-shrink: 0;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.25;
+      color: var(--sage);
+      margin-bottom: 26px;
+    }
+    .hero-desc {
+      max-width: 520px;
+      font-size: 17px;
+      line-height: 1.92;
+      color: var(--charcoal);
+      margin-bottom: 34px;
+    }
+    .hero-note {
+      max-width: 480px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 34px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--forest);
+      color: var(--ivory);
+      border: 1px solid var(--forest);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--forest);
+      border: 1px solid var(--sage);
+    }
+    .hero-image-card {
+      width: min(420px, 100%);
+      background: rgba(247,244,238,0.72);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(30, 45, 36, 0.12);
+    }
+    .hero-image {
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #9aad9b 0%, #5f755f 100%);
+      position: relative;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(30,45,36,0.04) 0%, rgba(30,45,36,0.18) 100%);
+      pointer-events: none;
+    }
+    .hero-aside {
+      position: absolute;
+      left: 36px;
+      bottom: 30px;
+      background: rgba(247,244,238,0.78);
+      border: 1px solid rgba(125,146,123,0.25);
+      color: var(--forest);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(8px);
+    }
+
+    .stats {
+      padding-top: 28px;
+      padding-bottom: 12px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.34);
+      border: 1px solid var(--line-soft);
+      border-radius: 22px;
+      padding: 28px 24px;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 54px;
+      line-height: 0.95;
+      color: var(--forest);
+      font-weight: 500;
+    }
+    .stat-label {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .about-grid,
+    .working-grid,
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .about-copy {
+      font-size: 16px;
+      line-height: 1.95;
+      color: var(--charcoal);
+    }
+    .about-copy p + p { margin-top: 18px; }
+
+    .expertise-wrap {
+      background: linear-gradient(180deg, rgba(232,238,231,0.82) 0%, rgba(232,238,231,0.58) 100%);
+    }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+    .expertise-card {
+      min-height: 180px;
+      background: rgba(247,244,238,0.84);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px 20px;
+    }
+    .expertise-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .expertise-card-desc {
+      font-size: 14px;
+      line-height: 1.78;
+      color: var(--muted);
+    }
+
+    .experience-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 34px;
+    }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--line-soft); }
+    .exp-period {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      padding-top: 2px;
+    }
+    .exp-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--forest);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .exp-company {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--sage);
+      margin-bottom: 12px;
+    }
+    .exp-desc {
+      font-size: 15px;
+      line-height: 1.82;
+      color: var(--charcoal);
+      max-width: 860px;
+    }
+    .exp-subnote {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .education-card {
+      max-width: 520px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .education-school {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--forest);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .education-degree {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.7;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+    }
+    .education-period {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .toolkit-wrap {
+      background: var(--forest);
+      color: var(--ivory);
+    }
+    .toolkit-wrap .section-title,
+    .toolkit-wrap .section-label { color: var(--ivory); }
+    .toolkit-wrap .section-intro { color: rgba(247,244,238,0.78); }
+    .toolkit-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .toolkit-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(168, 183, 161, 0.45);
+      color: #d8e0d6;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.04);
+      text-align: center;
+    }
+
+    .credentials-subtitle {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 14px;
+    }
+    .credentials-group + .credentials-group { margin-top: 28px; }
+    .credentials-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .credentials-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--charcoal);
+    }
+    .credentials-item span:last-child {
+      color: var(--muted);
+      text-align: right;
+    }
+    .credentials-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .credential-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(232,238,231,0.75);
+      color: var(--charcoal);
+      font-size: 13px;
+      line-height: 1.4;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .credential-tag:hover {
+      background: rgba(232,238,231,1);
+      border-color: var(--sage);
+      transform: translateY(-1px);
+    }
+
+    .working-traits {
+      display: grid;
+      gap: 16px;
+    }
+    .working-trait {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+    .working-trait:last-child { border-bottom: 1px solid var(--line-soft); }
+    .working-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--moss);
+      padding-top: 2px;
+    }
+    .working-text-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+    .working-text-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 32px 0 44px;
+      background: var(--forest);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--ivory);
+      margin-bottom: 6px;
+    }
+    .footer-note {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(247,244,238,0.72);
+      max-width: 420px;
+    }
+    .footer-contact {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .footer-contact a,
+    .footer-contact span {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(247,244,238,0.84);
+      text-decoration: none;
+    }
+    .footer-contact a:hover {
+      color: var(--ivory);
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: flex-end;
+    }
+    .footer-links a {
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,238,231,0.85);
+    }
+    .footer-links a:hover { color: var(--ivory); }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .about-grid,
+      .working-grid,
+      .credentials-grid,
+      .education-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        min-height: 420px;
+      }
+
+      .stats-grid,
+      .expertise-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(var(--max), calc(100% - 32px)); }
+      .section { padding: 56px 0; }
+
+      .nav {
+        min-height: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links { gap: 14px; }
+      .nav-logo { font-size: 22px; }
+
+      .hero { padding-top: 18px; }
+      .hero-left {
+        padding: 44px 24px;
+      }
+      .hero-right {
+        padding: 20px;
+        min-height: 360px;
+      }
+      .hero-title { font-size: 24px; }
+      .hero-desc { font-size: 16px; }
+      .hero-note { font-size: 14px; }
+      .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn { width: 100%; }
+      .hero-aside {
+        left: 20px;
+        bottom: 20px;
+      }
+
+      .stats-grid,
+      .expertise-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-copy,
+      .section-intro,
+      .exp-desc,
+      .working-text-desc,
+      .stat-label,
+      .credentials-item {
+        font-size: 15px;
+      }
+
+      .credentials-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .credentials-item span:last-child { text-align: left; }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+      .footer-right {
+        align-items: flex-start;
+      }
+      .footer-links {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="pf">
+    <div class="nav-wrap">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">Duong Tran</div>
+          <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#experience">Experience</a>
+            <a href="#learning">Learning</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-left">
+            <div class="hero-eyebrow">HR Professional</div>
+            <h1 class="hero-name serif">Duong<br />Tran</h1>
+            <div class="hero-alias-note"><span class="sun-icon">☀</span><span>You can call me Sunny, or 阳光 in Chinese.</span></div>
+            <div class="hero-title">People. Process. Purpose. Lifelong learning.</div>
+            <p class="hero-desc">
+              Six years of hands-on HR experience across software, gaming, and entertainment environments, with a practical focus on recruitment, engagement, and people operations.
+            </p>
+            <p class="hero-note">
+              I enjoy work that supports both people and clarity, from thoughtful hiring to well-structured people operations, documentation, and employee support.
+            </p>
+            <div class="hero-ctas">
+              <a class="btn btn-primary" href="https://www.linkedin.com/in/duong-tran-hr-learning/" target="_blank" rel="noreferrer">View LinkedIn</a>
+              <a class="btn btn-outline" href="#experience">Explore My Work</a>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="hero-image-card">
+              <div class="hero-image">
+                <img src="assets/images/profile.png" alt="Duong Tran portrait" />
+              </div>
+            </div>
+            <div class="hero-aside">6+ years in HR</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">6+</div>
+            <div class="stat-label">Years of HR experience across tech, gaming, and entertainment</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">137</div>
+            <div class="stat-label">Hires supported from 2022 to 2025</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Employee engagement initiatives and internal events each year</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Office locations supported through day-to-day HR work</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div>
+          <div class="section-label">About</div>
+          <h2 class="section-title serif">The kind of HR work I care about</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            I care about HR work that is both people-centered and well-structured. I enjoy helping employees feel welcomed, informed, and supported, while also keeping everyday processes clear, consistent, and practical.
+          </p>
+          <p>
+            Over the past six years, I have built hands-on experience across recruitment, employee engagement, internal communication, and people operations in software, gaming, and entertainment environments. I have also been involved in policy updates, contract and insurance coordination, and practical HR administration that supports compliant, employee-friendly operations.
+          </p>
+          <p>
+            As I continue growing in HR, I am especially interested in analytics, compensation and benefits, and labor-law-aware practice in Vietnam. For me, professional growth is not only about doing more, but about understanding people and the workplace more thoughtfully over time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section expertise-wrap" id="expertise">
+      <div class="container">
+        <div class="section-label">Core Expertise</div>
+        <h2 class="section-title serif">What I do well</h2>
+        <p class="section-intro">
+          My work spans both people experience and day-to-day HR execution, with a focus on clarity, communication, and practical support.
+        </p>
+        <div class="expertise-grid">
+          <div class="expertise-card">
+            <div class="expertise-card-title">Talent &amp; People Operations</div>
+            <div class="expertise-card-desc">Managing hiring and employee lifecycle processes from sourcing and onboarding to documentation, offboarding, and day-to-day people administration.</div>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-card-title">Employee Engagement</div>
+            <div class="expertise-card-desc">Driving internal activities and communication efforts that help teams feel more connected, supported, and informed.</div>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-card-title">Employer Branding</div>
+            <div class="expertise-card-desc">Managing employer branding across digital channels to communicate workplace culture and attract aligned candidates.</div>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-card-title">HR Analytics</div>
+            <div class="expertise-card-desc">Using data and reporting to improve hiring visibility, strengthen reporting clarity, and guide more informed people decisions.</div>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-card-title">Compensation &amp; Benefits Awareness</div>
+            <div class="expertise-card-desc">Building practical knowledge in compensation and benefits, payroll-related coordination, and compliance-linked employee support.</div>
+          </div>
+          <div class="expertise-card">
+            <div class="expertise-card-title">Policy &amp; Compliance Support</div>
+            <div class="expertise-card-desc">Supporting internal policy updates, contract-related matters, insurance processes, and labor-law-aware HR practice in Vietnam.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-label">Experience</div>
+        <h2 class="section-title serif">Selected experience</h2>
+        <p class="section-intro">
+          A brief look at the roles and environments that have shaped how I work today.
+        </p>
+
+        <div class="experience-grid">
+          <div class="exp-item">
+            <div class="exp-period">Apr 2022 - Present</div>
+            <div>
+              <div class="exp-title">HR Generalist</div>
+              <div class="exp-company">Ather Labs</div>
+              <div class="exp-desc">
+                Manage full-spectrum HR execution across recruitment, onboarding, offboarding, employee engagement, internal communication, employer branding, and HR data administration for multiple office locations, with a stronger focus on ownership, cross-site coordination, documentation, and consistent people operations.
+              </div>
+              <div class="exp-subnote">Selected hiring contribution: 25 hires in 2022 · 34 in 2023 · 34 in 2024 · 44 in 2025</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-period">Jan 2020 - Apr 2022</div>
+            <div>
+              <div class="exp-title">HR Officer</div>
+              <div class="exp-company">TCI Tech Vietnam</div>
+              <div class="exp-desc">
+                Managed the recruitment cycle while creating content for social and internal channels, maintaining employer branding touchpoints, and driving engagement communication across teams. The role also included hiring-related reporting, contract and insurance processes, and day-to-day HR administration.
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-period">Jun 2019 - Nov 2019</div>
+            <div>
+              <div class="exp-title">HR Intern</div>
+              <div class="exp-company">Sun Asterisk Inc.</div>
+              <div class="exp-desc">
+                Supported recruitment activities, onboarding coordination, HR documentation, and internal communication within a structured software company environment.
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-period">May 2017 - May 2019</div>
+            <div>
+              <div class="exp-title">Teaching Assistant (Part-time)</div>
+              <div class="exp-company">Broadway English Center</div>
+              <div class="exp-desc">
+                Built early strengths in communication, coordination, and people support through student-facing work and classroom assistance.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container education-grid">
+        <div>
+          <div class="section-label">Education</div>
+          <h2 class="section-title serif">Academic foundation</h2>
+          <p class="section-intro">
+            My academic background in business administration has shaped how I approach HR with both people awareness and business understanding.
+          </p>
+        </div>
+        <div>
+          <div class="education-card">
+            <div class="education-school">Danang University of Economics</div>
+            <div class="education-degree">Bachelor of Business Administration</div>
+            <div class="education-period">2015 - 2019</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section toolkit-wrap">
+      <div class="container">
+        <div class="section-label">Digital, AI &amp; Creative Toolkit</div>
+        <h2 class="section-title serif">Working more clearly with the right tools</h2>
+        <p class="section-intro">
+          I use digital tools in practical ways to improve documentation, reporting, communication, and process efficiency in everyday HR work.
+        </p>
+        <div class="toolkit-grid">
+          <div class="toolkit-chip">ChatGPT</div>
+          <div class="toolkit-chip">Claude</div>
+          <div class="toolkit-chip">NotebookLM</div>
+          <div class="toolkit-chip">Google Workspace</div>
+          <div class="toolkit-chip">Sheets &amp; Reporting</div>
+          <div class="toolkit-chip">GitHub</div>
+          <div class="toolkit-chip">Canva</div>
+          <div class="toolkit-chip">CapCut</div>
+          <div class="toolkit-chip">Photoshop</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="learning">
+      <div class="container credentials-grid">
+        <div>
+          <div class="section-label">Languages &amp; Learning</div>
+          <h2 class="section-title serif">A quieter part of my professional growth</h2>
+          <p class="section-intro">
+            I value continuous learning that supports my work more thoughtfully, from language development to practical HR and analytical foundations.
+          </p>
+        </div>
+        <div>
+          <div class="credentials-group">
+            <div class="credentials-subtitle">Languages</div>
+            <div class="credentials-list">
+              <div class="credentials-item"><span>Vietnamese</span><span>Native</span></div>
+              <div class="credentials-item"><span>English</span><span>Professional working proficiency</span></div>
+              <div class="credentials-item"><span>Chinese</span><span>HSK4 level</span></div>
+            </div>
+          </div>
+
+          <div class="credentials-group">
+            <div class="credentials-subtitle">Selected Learning &amp; Certifications</div>
+            <div class="credentials-tags">
+              <span class="credential-tag">Advanced C&amp;B Training</span>
+              <a class="credential-tag" href="https://coursera.org/share/ae224ef218368df39de116c8ce8b0238" target="_blank" rel="noreferrer">Human Resources Analytics</a>
+              <a class="credential-tag" href="https://coursera.org/share/a6b0577c6b06b96c8f764db8a5e1f048" target="_blank" rel="noreferrer">Foundations: Data</a>
+              <a class="credential-tag" href="https://www.canva.com/design/DAGka6QzpNs/TtfWvrws7f5dJjROKmZxUA/edit" target="_blank" rel="noreferrer">EB Training</a>
+              <span class="credential-tag">TOEIC</span>
+              <span class="credential-tag">HSK4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container working-grid">
+        <div>
+          <div class="section-label">Working Style</div>
+          <h2 class="section-title serif">How I show up</h2>
+          <p class="section-intro">
+            I believe good HR work is often quiet, consistent, and thoughtful. These are the qualities I try to bring to my work.
+          </p>
+        </div>
+        <div class="working-traits">
+          <div class="working-trait">
+            <div class="working-num">01</div>
+            <div>
+              <div class="working-text-title">Structured, not rigid</div>
+              <div class="working-text-desc">I value clear processes and documentation, while staying flexible when people and situations need a more thoughtful response.</div>
+            </div>
+          </div>
+          <div class="working-trait">
+            <div class="working-num">02</div>
+            <div>
+              <div class="working-text-title">People-focused in practice</div>
+              <div class="working-text-desc">Whether supporting a candidate, a new joiner, or an existing team member, I try to make each interaction feel clear, respectful, and considered.</div>
+            </div>
+          </div>
+          <div class="working-trait">
+            <div class="working-num">03</div>
+            <div>
+              <div class="working-text-title">Collaborative by nature</div>
+              <div class="working-text-desc">I work comfortably across teams and functions, balancing what people need with what the organization can realistically sustain.</div>
+            </div>
+          </div>
+          <div class="working-trait">
+            <div class="working-num">04</div>
+            <div>
+              <div class="working-text-title">Continuously learning</div>
+              <div class="working-text-desc">I stay curious about HR analytics, labor-law updates, AI tools, and the small improvements that make day-to-day work more effective.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" id="contact">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-name">Duong Tran (Sunny) · HR Professional</div>
+          <div class="footer-contact">
+            <span>(+84) 035 6975 819</span>
+            <a href="mailto:tranthuyduong97tchpbm@gmail.com">tranthuyduong97tchpbm@gmail.com</a>
+          </div>
+        </div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <a href="https://www.linkedin.com/in/duong-tran-hr-learning/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/duongduongblue" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.facebook.com/thuyduong.tran.learning.dreamer/" target="_blank" rel="noreferrer">Facebook</a>
+            <a href="assets/docs/duong-tran-cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+            <a href="#contact">WeChat: Sunny / 阳光</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
