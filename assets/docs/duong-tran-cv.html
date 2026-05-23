@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duong Tran CV</title>
+  <style>
+    :root {
+      --forest: #1a1a1a;
+      --forest-soft: #f6f6f6;
+      --sage: #6e6e6e;
+      --moss: #e6e6e6;
+      --mist: #f3f3f3;
+      --ivory: #ffffff;
+      --paper: #ffffff;
+      --charcoal: #222222;
+      --muted: #666666;
+      --line: rgba(0, 0, 0, 0.12);
+      --line-strong: rgba(0, 0, 0, 0.2);
+      --gold: #3a3a3a;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #efefef;
+      color: var(--charcoal);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto 10mm;
+      background: var(--paper);
+      display: grid;
+      grid-template-columns: 72mm 1fr;
+      box-shadow: 0 20px 40px rgba(30, 45, 36, 0.14);
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    .sidebar {
+      background: #ffffff;
+      color: var(--charcoal);
+      padding: 10mm 8mm 10mm;
+      border-right: 1px solid var(--line);
+    }
+
+    .main {
+      padding: 0 12mm 10mm;
+    }
+
+    .photo-wrap {
+      margin-bottom: 6mm;
+    }
+
+    .sidebar-top {
+      padding-bottom: 4mm;
+    }
+
+    .photo {
+      width: 58mm;
+      height: 78mm;
+      overflow: hidden;
+      border: 2px solid rgba(0, 0, 0, 0.7);
+      background: #ffffff;
+      margin: 0 auto;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+    }
+
+    .name {
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 23px;
+      line-height: 1.02;
+      letter-spacing: 0.06em;
+      margin: 0;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--forest);
+    }
+
+    .name.compact {
+      font-size: 18px;
+      letter-spacing: 0.05em;
+    }
+
+    .role {
+      margin-top: 2mm;
+      font-size: 10px;
+      line-height: 1.45;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .sidebar-intro {
+      margin: 3mm 0 0;
+      font-size: 10.2px;
+      line-height: 1.62;
+      color: var(--muted);
+    }
+
+    .side-section {
+      margin-top: 5.2mm;
+      padding-top: 4mm;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .side-title {
+      margin: 0 0 3.4mm;
+      font-size: 9.4px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--forest);
+      font-weight: 700;
+    }
+
+    .side-list,
+    .skill-list,
+    .tool-list,
+    .language-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .side-list li,
+    .language-list li {
+      margin-bottom: 3.2mm;
+      font-size: 10.6px;
+      line-height: 1.52;
+      color: var(--charcoal);
+      word-break: break-word;
+    }
+
+    .side-list strong,
+    .language-list strong {
+      display: block;
+      font-size: 9.2px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8mm;
+    }
+
+    .portfolio-box {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    .portfolio-box .portfolio-link {
+      display: block;
+      color: var(--forest);
+      text-decoration: none;
+      font-size: 10px;
+      line-height: 1.5;
+      font-weight: 600;
+      word-break: break-word;
+      margin-bottom: 1.4mm;
+    }
+
+    .portfolio-box .portfolio-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 9.4px;
+      line-height: 1.52;
+    }
+
+    .skill-list li,
+    .tool-list li {
+      margin-bottom: 2.2mm;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      font-size: 10.2px;
+      line-height: 1.5;
+      color: var(--charcoal);
+    }
+
+    .main-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8mm;
+      align-items: flex-start;
+      background: #d9d9d9;
+      padding: 16mm 12mm 5mm;
+      margin: 0 -12mm 5mm;
+    }
+
+    .headline-block h2 {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 32px;
+      line-height: 1.02;
+      color: var(--forest);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .headline-block .subhead {
+      margin: 1.5mm 0 0;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #3a3a3a;
+      max-width: 108mm;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .badge {
+      flex-shrink: 0;
+      background: transparent;
+      color: var(--muted);
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font-size: 9px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .summary-box {
+      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 4.6mm 5mm;
+      margin-bottom: 5mm;
+    }
+
+    .summary-box p {
+      margin: 0;
+      font-size: 11.4px;
+      line-height: 1.8;
+      color: var(--charcoal);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3mm;
+      margin-bottom: 5.2mm;
+    }
+
+    .kpi-card {
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 3.8mm 4mm;
+      background: #fff;
+    }
+
+    .kpi-num {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--forest);
+      margin-bottom: 1.3mm;
+    }
+
+    .kpi-label {
+      font-size: 9.7px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .section {
+      margin-bottom: 5.2mm;
+    }
+
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      margin: 0 0 4.6mm;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-weight: 700;
+    }
+
+    .summary-title {
+      margin: 0 0 2mm;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+
+    .job {
+      display: grid;
+      grid-template-columns: 28mm 1fr;
+      gap: 5mm;
+      padding: 4mm 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .job:first-of-type { border-top: 0; padding-top: 1.2mm; }
+
+    .job-period {
+      font-size: 10.2px;
+      line-height: 1.55;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .job-role {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.3;
+      color: var(--forest);
+      font-weight: 700;
+    }
+
+    .job-company {
+      margin: 1mm 0 0;
+      font-size: 11.1px;
+      line-height: 1.5;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .job-desc {
+      margin: 2mm 0 0;
+      font-size: 10.7px;
+      line-height: 1.72;
+      color: var(--charcoal);
+    }
+
+    .bullet-list {
+      margin: 2.3mm 0 0 0;
+      padding-left: 4.2mm;
+    }
+
+    .bullet-list li {
+      margin-bottom: 1.5mm;
+      font-size: 10.4px;
+      line-height: 1.62;
+      color: var(--charcoal);
+    }
+
+    .highlight-line {
+      margin-top: 2.2mm;
+      font-size: 10px;
+      line-height: 1.5;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5mm;
+    }
+
+    .info-card {
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 4mm 4.4mm;
+      background: #fff;
+    }
+
+    .info-card h4 {
+      margin: 0 0 1.6mm;
+      font-size: 11px;
+      color: var(--forest);
+      line-height: 1.45;
+    }
+
+    .info-card p,
+    .info-card li {
+      margin: 0;
+      font-size: 10.4px;
+      line-height: 1.62;
+      color: var(--charcoal);
+    }
+
+    .references-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .reference-card {
+      border: 1px solid var(--line);
+      padding: 4mm 4.4mm;
+      background: #fff;
+    }
+
+    .reference-name {
+      margin: 0 0 1.4mm;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+
+    .reference-role {
+      margin: 0 0 2.2mm;
+      font-size: 10.6px;
+      line-height: 1.5;
+      color: var(--charcoal);
+    }
+
+    .reference-meta {
+      margin: 0 0 0.8mm;
+      font-size: 10px;
+      line-height: 1.5;
+      color: var(--charcoal);
+      display: grid;
+      grid-template-columns: 16mm 1fr;
+      gap: 1.5mm;
+      align-items: start;
+    }
+
+    .reference-meta strong {
+      display: block;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2mm;
+    }
+
+    .tag {
+      padding: 1.4mm 2.4mm;
+      border-radius: 0;
+      background: var(--mist);
+      color: var(--forest);
+      border: 1px solid rgba(30, 45, 36, 0.08);
+      font-size: 9.8px;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .footnote {
+      margin-top: 2.8mm;
+      font-size: 9.3px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    a { color: inherit; }
+
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="photo-wrap">
+          <div class="photo">
+            <img src="profile.png" alt="Duong Tran portrait" />
+          </div>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <h3 class="side-title">Contact</h3>
+        <ul class="side-list">
+          <li><strong>Phone</strong>(+84) 035 6975 819</li>
+          <li><strong>Email</strong>tranthuyduong97tchpbm@gmail.com</li>
+          <li><strong>LinkedIn</strong>linkedin.com/in/duong-tran-hr-learning</li>
+          <li><strong>Location</strong>Da Nang, Vietnam</li>
+        </ul>
+      </div>
+
+      <div class="side-section">
+        <h3 class="side-title">Portfolio</h3>
+        <div class="portfolio-box">
+          <a class="portfolio-link" href="https://duongduongblue.github.io/duong-tran-portfolio/">duongduongblue.github.io/duong-tran-portfolio</a>
+          <p class="portfolio-note">Additional profile details are available in the portfolio.</p>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <h3 class="side-title">Core Strengths</h3>
+        <ul class="skill-list">
+          <li>HRBP Support &amp; Employee Relations</li>
+          <li>End-to-End Recruitment</li>
+          <li>Employee Engagement &amp; Internal Communication</li>
+          <li>Employer Branding</li>
+          <li>HR Data Administration &amp; Reporting</li>
+          <li>Labor Contract &amp; Insurance Support</li>
+        </ul>
+      </div>
+
+      <div class="side-section">
+        <h3 class="side-title">Languages</h3>
+        <ul class="language-list">
+          <li><strong>Vietnamese</strong>Native</li>
+          <li><strong>English</strong>Professional working proficiency</li>
+          <li><strong>Chinese</strong>HSK4 level</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="main-top">
+        <div class="headline-block">
+          <h2>DUONG TRAN</h2>
+          <p class="subhead">
+            HR Generalist | HRBP Support | Talent Acquisition
+          </p>
+        </div>
+        <div class="badge">Open to HRBP-track roles</div>
+      </div>
+
+      <div class="summary-box">
+        <div class="summary-title">Profile</div>
+        <p>
+          HR professional with experience in full-cycle recruitment, onboarding, offboarding, employee engagement, internal communication, HR database management, and employer branding. Strong in execution, cross-team coordination, and maintaining clear HR processes across multiple office locations.
+        </p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-num">137+</div>
+          <div class="kpi-label">New hires supported from 2022 to 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">15+</div>
+          <div class="kpi-label">Internal events and engagement initiatives each year</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">3</div>
+          <div class="kpi-label">Office locations supported: HN, DN, HCM</div>
+        </div>
+      </div>
+
+      <section class="section">
+        <h3 class="section-title">Professional Experience</h3>
+
+        <article class="job">
+          <div class="job-period">Apr 2022 - Present</div>
+          <div>
+            <h4 class="job-role">HR Generalist</h4>
+            <div class="job-company">Ather Labs | Gaming &amp; Entertainment</div>
+            <p class="job-desc">
+              Support HR operations across multiple office locations, covering recruitment, onboarding, offboarding, employee engagement, internal communication, employer branding, and HR database administration.
+            </p>
+            <ul class="bullet-list">
+              <li>Manage end-to-end recruitment, onboarding, offboarding, and HR database maintenance.</li>
+              <li>Partner with managers to support performance, engagement, and retention.</li>
+              <li>Drive employer branding through LinkedIn, Facebook, TikTok, and Threads.</li>
+              <li>Organize monthly engagement activities and support internal communication across HN, DN, and HCM.</li>
+            </ul>
+            <div class="highlight-line">Selected hiring contribution: 25 hires in 2022 | 34 in 2023 | 34 in 2024 | 44 in 2025</div>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="job-period">Jan 2020 - Apr 2022</div>
+          <div>
+            <h4 class="job-role">HR Officer</h4>
+            <div class="job-company">TCI Tech Vietnam | IT Software</div>
+            <p class="job-desc">
+              Managed recruitment operations and supported employer branding, engagement communication, and HR administration in a software company environment.
+            </p>
+            <ul class="bullet-list">
+              <li>Managed the full recruitment cycle and coordinated branding activities with Vietnam and Malaysia teams.</li>
+              <li>Created social media content and maintained official recruitment channels.</li>
+              <li>Supported recruitment reporting, labor contract processing, and PVI insurance administration.</li>
+              <li>Organized internal events for around 50 employees and supported office administration.</li>
+            </ul>
+          </div>
+        </article>
+
+      </section>
+    </main>
+  </section>
+
+  <section class="page">
+    <aside class="sidebar">
+      <h2 class="name compact">DUONG TRAN</h2>
+      <div class="role">Additional Information</div>
+      <p class="sidebar-intro">
+        Career direction: HRBP, HR analytics, and compensation and benefits.
+      </p>
+
+      <div class="side-section">
+        <h3 class="side-title">Strengths</h3>
+        <ul class="skill-list">
+          <li>Recruitment and stakeholder coordination</li>
+          <li>Event organization and employee engagement</li>
+          <li>Employer branding and content creation</li>
+          <li>HR reporting and process discipline</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="section">
+        <h3 class="section-title">Professional Experience Continued</h3>
+
+        <article class="job">
+          <div class="job-period">Jun 2019 - Nov 2019</div>
+          <div>
+            <h4 class="job-role">HR Intern (Full-time)</h4>
+            <div class="job-company">Sun Asterisk Inc. | IT Software</div>
+            <ul class="bullet-list">
+              <li>Supported recruitment campaigns and onboarding programs.</li>
+              <li>Contributed to internal communication and HR documentation.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="job-period">May 2017 - May 2019</div>
+          <div>
+            <h4 class="job-role">Teaching Assistant (Part-time)</h4>
+            <div class="job-company">Broadway English Center</div>
+            <p class="job-desc">Built communication, coordination, and people support skills through student-facing work and classroom assistance.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <h3 class="section-title">Education &amp; Credentials</h3>
+        <div class="info-card">
+          <h4>Danang University of Economics</h4>
+          <p>Bachelor of Business Administration</p>
+          <p>2015 - 2019</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3 class="section-title">Certifications &amp; Learning</h3>
+        <div class="tag-row">
+          <span class="tag">Advanced C&amp;B Training</span>
+          <span class="tag">Human Resources Analytics</span>
+          <span class="tag">Foundations: Data</span>
+          <span class="tag">EB Training</span>
+          <span class="tag">TOEIC</span>
+          <span class="tag">HSK4</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3 class="section-title">Activities</h3>
+        <article class="job">
+          <div class="job-period">May 2016 - May 2018</div>
+          <div>
+            <h4 class="job-role">Executive Committee Member</h4>
+            <div class="job-company">Danang University of Economics Student Association</div>
+            <p class="job-desc">Supported student recruitment planning and organized university activities.</p>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="job-period">Jul 2017 - Jul 2018</div>
+          <div>
+            <h4 class="job-role">Volunteer</h4>
+            <div class="job-company">Danang International Marathon</div>
+            <p class="job-desc">Assisted in event coordination and logistics for an international sports event.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <h3 class="section-title">References</h3>
+        <div class="references-grid">
+          <div class="reference-card">
+            <div class="reference-name">Ms. Truc Bui</div>
+            <div class="reference-role">HR Manager - Ather Labs</div>
+            <p class="reference-meta"><strong>Phone:</strong> (+84) 090 8139 962</p>
+            <p class="reference-meta"><strong>Email:</strong> truc.bui@atherlabs.com</p>
+          </div>
+          <div class="reference-card">
+            <div class="reference-name">Ms. Nhung Quach</div>
+            <div class="reference-role">Engagement Lead - Ather Labs</div>
+            <p class="reference-meta"><strong>Phone:</strong> (+84) 070 4442 116</p>
+            <p class="reference-meta"><strong>Email:</strong> nhung.quach@atherlabs.com</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3 class="section-title">Portfolio</h3>
+        <div class="info-card">
+          <p>Portfolio: https://duongduongblue.github.io/duong-tran-portfolio/</p>
+        </div>
+      </section>
+    </main>
+  </section>
+</body>
+</html>
