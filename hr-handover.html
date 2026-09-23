@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HR handover playbook for recruitment, onboarding, employee engagement, employer branding and internal communications." />
+  <title>HR Handover Playbook | Duong Tran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1f2c27;
+      --ink-soft: #425149;
+      --muted: #718078;
+      --paper: #f7f5ef;
+      --paper-deep: #eeece3;
+      --card: #fffdf8;
+      --sage: #9caf9b;
+      --sage-soft: #dce6d9;
+      --forest: #294338;
+      --forest-deep: #1d3229;
+      --amber: #a76b28;
+      --amber-soft: #f3e5cf;
+      --line: #d9ded6;
+      --white: #ffffff;
+      --shadow: 0 18px 42px rgba(31, 44, 39, .08);
+      --radius-lg: 26px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .serif { font-family: "DM Serif Display", Georgia, serif; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(217, 222, 214, .88);
+      background: rgba(247, 245, 239, .93);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--forest-deep);
+    }
+    .brand strong { font-size: 15px; letter-spacing: .02em; }
+    .brand span { color: var(--muted); font-size: 12px; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav a:hover, .nav a:focus-visible { color: var(--forest); }
+
+    .hero { padding: 58px 0 34px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-copy {
+      padding: clamp(32px, 6vw, 72px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow, .section-kicker {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 18px;
+      color: var(--forest-deep);
+      font: 400 clamp(48px, 8vw, 88px)/.96 "DM Serif Display", Georgia, serif;
+      letter-spacing: -.035em;
+    }
+    .hero-lede {
+      max-width: 700px;
+      color: var(--ink-soft);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.75;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--forest);
+      background: var(--paper);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .hero-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--forest);
+      color: var(--paper);
+    }
+    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "DM Serif Display", Georgia, serif; }
+    .hero-panel p { color: #d9e5dd; font-size: 14px; line-height: 1.75; }
+    .panel-rule { height: 1px; background: rgba(255, 255, 255, .18); }
+    .panel-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+    .panel-list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; color: #edf3ee; font-size: 13px; }
+    .panel-list b { color: #e1bc81; }
+
+    .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "DM Serif Display", Georgia, serif; letter-spacing: -.02em; }
+    .section-intro { max-width: 650px; color: var(--muted); font-size: 15px; }
+    .section-note { max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
+
+    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .quick-card { min-height: 150px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .quick-card .number { color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+    .quick-card h3 { margin: 16px 0 7px; color: var(--forest); font-size: 16px; }
+    .quick-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .flow-wrap { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+    .flow-title { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .flow-title h3 { margin: 0; color: var(--forest); font-size: 18px; }
+    .flow-title span { color: var(--muted); font-size: 12px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(100px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+    .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
+    .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .lane-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 18px; }
+    .lane { padding: 21px; border-radius: 16px; background: var(--paper-deep); }
+    .lane h4 { margin: 0 0 8px; color: var(--forest); font-size: 15px; }
+    .lane p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+    .lane b { color: var(--amber); }
+
+    .sop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .sop-card { display: grid; grid-template-columns: 46px 1fr; gap: 17px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .sop-num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--sage-soft); color: var(--forest); font-weight: 700; }
+    .sop-card h3 { margin: 2px 0 7px; color: var(--forest); font-size: 16px; }
+    .sop-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .resource { display: inline-block; margin-top: 10px; color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+    .timeline { position: relative; display: grid; gap: 14px; }
+    .timeline::before { content: ""; position: absolute; left: 18px; top: 22px; bottom: 22px; width: 1px; background: var(--sage); }
+    .timeline-row { position: relative; display: grid; grid-template-columns: 38px 150px 1fr; gap: 18px; align-items: start; }
+    .timeline-dot { position: relative; z-index: 1; width: 37px; height: 37px; display: grid; place-items: center; border: 5px solid var(--paper); border-radius: 50%; background: var(--forest); color: var(--paper); font-size: 11px; font-weight: 700; }
+    .timeline-date { padding-top: 7px; color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .timeline-content { padding: 19px 21px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
+    .timeline-content h3 { margin: 0 0 7px; color: var(--forest); font-size: 16px; }
+    .timeline-content p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .timeline-content ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .info-card { padding: 25px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--line); }
+    .info-card.dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
+    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "DM Serif Display", Georgia, serif; }
+    .info-card.dark h3 { color: var(--paper); }
+    .info-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .info-card.dark p { color: #d8e5dc; }
+    .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
+    .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
+    .dark .checklist li { color: #edf3ee; }
+    .checklist li::before { content: "✓"; color: var(--amber); font-weight: 700; }
+
+    .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .program h3 { margin: 0 0 9px; color: var(--forest); font-size: 15px; }
+    .program p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .program .program-link { display: block; margin-top: 13px; color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .resource-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .resource-item { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-deep); }
+    .resource-item h3 { margin: 0 0 5px; color: var(--forest); font-size: 14px; }
+    .resource-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .resource-item em { display: block; margin-top: 10px; color: var(--amber); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .publish-note { margin-top: 22px; padding: 21px 23px; border-left: 4px solid var(--amber); border-radius: 0 14px 14px 0; background: var(--amber-soft); }
+    .publish-note h3 { margin: 0 0 7px; color: var(--forest); font-size: 15px; }
+    .publish-note p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+
+    footer { padding: 34px 0 54px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+    .footer-inner a { color: var(--forest); font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: repeat(4, 1fr); }
+      .flow-step:nth-child(4)::after { display: none; }
+      .flow-step:nth-child(5)::before { content: ""; position: absolute; left: 50%; top: -13px; width: 1px; height: 13px; background: var(--sage); }
+      .program-grid, .resource-map { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 15px 0; }
+      .nav { gap: 10px 14px; justify-content: flex-start; }
+      .hero { padding-top: 28px; }
+      .hero-copy { padding: 32px 24px; }
+      .hero-panel { padding: 25px; }
+      .section { padding: 56px 0; }
+      .section-head { display: block; }
+      .section-note { margin-top: 15px; text-align: left; }
+      .quick-grid, .sop-grid, .lane-grid, .program-grid, .resource-map { grid-template-columns: 1fr; }
+      .flow-wrap { padding: 19px; }
+      .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .flow-step:nth-child(odd)::after { content: "↓"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
+      .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
+      .timeline-content { grid-column: 2; grid-row: 2; }
+      .timeline-dot { width: 30px; height: 30px; font-size: 10px; }
+      .timeline::before { left: 14px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html" aria-label="Back to Duong Tran portfolio"><strong>Duong Tran</strong><span>HR Handover Playbook</span></a>
+      <nav class="nav" aria-label="Page navigation">
+        <a href="#start">Start here</a>
+        <a href="#recruitment">Recruitment</a>
+        <a href="#onboarding">Onboarding</a>
+        <a href="#engagement">EE / EB / IC</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="start">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Internal working guide · HR operations</div>
+          <h1>Start with clarity.<br />Run with care.</h1>
+          <p class="hero-lede">A practical handover playbook for the next HR team member: what happens, when it happens, who is involved, and where the working files live.</p>
+          <div class="hero-meta" aria-label="Guide scope">
+            <span class="tag">Recruitment</span>
+            <span class="tag">Onboarding</span>
+            <span class="tag">Probation</span>
+            <span class="tag">Employee experience</span>
+            <span class="tag">Internal communications</span>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <div>
+            <div class="eyebrow" style="color:#e1bc81">First 15 minutes</div>
+            <h2>Use this page as your map.</h2>
+            <p>Read the process overview first, then open the relevant section when a task lands. The source document names the systems and templates; access links can be added before publication.</p>
+          </div>
+          <div class="panel-rule"></div>
+          <ol class="panel-list">
+            <li><b>01</b><span>Check the role or employee milestone you are handling.</span></li>
+            <li><b>02</b><span>Open the matching tracker, template or channel.</span></li>
+            <li><b>03</b><span>Record the next action and the owner before you close the task.</span></li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">01 · Overview</div>
+            <h2>The operating rhythm at a glance</h2>
+          </div>
+          <p class="section-note">This guide reflects the handover information supplied for HR work at Ather Labs.</p>
+        </div>
+        <div class="quick-grid">
+          <article class="quick-card"><div class="number">01</div><h3>Recruitment</h3><p>From a new hiring request to offer approval and candidate communication.</p></article>
+          <article class="quick-card"><div class="number">02</div><h3>People lifecycle</h3><p>Onboarding, offboarding, probation tracking and recurring reporting.</p></article>
+          <article class="quick-card"><div class="number">03</div><h3>Experience & brand</h3><p>Employee engagement, employer branding and internal communications.</p></article>
+          <article class="quick-card"><div class="number">04</div><h3>Ad-hoc HR</h3><p>Additional requests are captured in the private HR Team space in Notion.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="recruitment">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">02 · Recruitment / Tuyển dụng</div>
+            <h2>Move every candidate forward with a visible next step</h2>
+          </div>
+          <p class="section-note">The flow may flex by role, but the handoff points and records should stay clear.</p>
+        </div>
+
+        <div class="flow-wrap">
+          <div class="flow-title"><h3>General hiring flow</h3><span>Screening → Offer</span></div>
+          <div class="flow" aria-label="General recruitment flow diagram">
+            <div class="flow-step"><span class="step-no">01</span><strong>Screening CV</strong><small>Check against the JD criteria.</small></div>
+            <div class="flow-step"><span class="step-no">02</span><strong>Phone interview</strong><small>Collect role-specific information.</small></div>
+            <div class="flow-step"><span class="step-no">03</span><strong>HM review</strong><small>Share the candidate summary.</small></div>
+            <div class="flow-step"><span class="step-no">04</span><strong>Test</strong><small>Use the relevant test and deadline.</small></div>
+            <div class="flow-step"><span class="step-no">05</span><strong>Interview R1</strong><small>Technical team or livecode.</small></div>
+            <div class="flow-step"><span class="step-no">06</span><strong>Interview R2</strong><small>CEO round where applicable.</small></div>
+            <div class="flow-step"><span class="step-no">07</span><strong>Feedback</strong><small>Follow up promptly.</small></div>
+            <div class="flow-step"><span class="step-no">08</span><strong>Offer</strong><small>Align, approve, communicate.</small></div>
+          </div>
+        </div>
+
+        <div class="lane-grid">
+          <div class="lane"><h4>Game Designer</h4><p>Screening CV → Phone Interview → HM Review → <b>Test (2 weeks)</b> → Interview R1 (Technical Team) → Interview R2 (CEO).</p></div>
+          <div class="lane"><h4>Technical / Software</h4><p>Screening CV → Phone Interview → HM Review → <b>Test (2 weeks)</b> → <b>Livecode + Interview</b> (Technical Team) → Interview R2 (CEO).</p></div>
+        </div>
+
+        <div class="sop-grid" style="margin-top:18px;">
+          <article class="sop-card"><div class="sop-num">1</div><div><h3>Receive the hiring request</h3><p>Prepare the JD using the template, send it to the Hiring Manager for review and revision, then upload the approved JD to HRM and choose the appropriate sourcing channels.</p><span class="resource">Master Job Description · Notion / HRM</span></div></article>
+          <article class="sop-card"><div class="sop-num">2</div><div><h3>Screen the CV</h3><p>Review each CV against the agreed JD criteria. Keep the screening decision consistent and explainable.</p><span class="resource">Candidate profile · CV Drive</span></div></article>
+          <article class="sop-card"><div class="sop-num">3</div><div><h3>Store and track candidate data</h3><p>Record candidate information in the tracking file. Create a new tracker or use an automated intake tool when the hiring volume requires it.</p><span class="resource">Candidate Tracking · Google Sheets</span></div></article>
+          <article class="sop-card"><div class="sop-num">4</div><div><h3>Run the phone interview</h3><p>Use the call to gather the information needed for the specific role, then summarize the conversation and send it to the HM.</p><span class="resource">Role-specific phone screen notes</span></div></article>
+          <article class="sop-card"><div class="sop-num">5</div><div><h3>Send and follow up on the test</h3><p>Choose the right test, communicate the deadline, monitor submission and send reminders when needed.</p><span class="resource">Technical Test · Notion</span></div></article>
+          <article class="sop-card"><div class="sop-num">6</div><div><h3>Coordinate interview / livecode</h3><p>Arrange the session with the HM. Before the meeting, send the Interview Note so interviewers can capture feedback in one place.</p><span class="resource">Interview Notes · Notion</span></div></article>
+          <article class="sop-card"><div class="sop-num">7</div><div><h3>Chase feedback and propose offer</h3><p>Follow up with interviewers as early as possible. If the candidate passes, align the offer with the HRM before submitting it to the CEO for approval.</p><span class="resource">Feedback record · Offer alignment</span></div></article>
+          <article class="sop-card"><div class="sop-num">8</div><div><h3>Communicate with the candidate</h3><p>Discuss the agreed terms with the candidate and send the Offer Letter once approvals and details are complete.</p><span class="resource">Offer Letter · Email</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="onboarding">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">03 · People lifecycle / Vòng đời nhân sự</div>
+            <h2>Onboarding is a sequence, not a single day</h2>
+          </div>
+          <p class="section-note">Start one week before the join date so people, tools and space are ready together.</p>
+        </div>
+
+        <div class="timeline" aria-label="Onboarding timeline">
+          <div class="timeline-row"><div class="timeline-dot">D-7</div><div class="timeline-date">One week before</div><div class="timeline-content"><h3>Set up access and workplace readiness</h3><p>Create the new member's email in Google Admin Console and GitHub account using the format <strong>FirstNameLastNameRoleAther</strong>. Coordinate equipment and workspace needs with Operations and IT.</p></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D-5</div><div class="timeline-date">3–5 days before</div><div class="timeline-content"><h3>Make the arrival visible</h3><p>Post the pre-onboarding notice in Slack <strong>#pre-onboarding</strong>. Share the new member information with the relevant onboarding channel and confirm the responsible people are aware.</p><ul><li>Game Designer: <strong>#game-designer-onboarding-it-leader-admin</strong></li><li>Art: <strong>#art-team-onboarding-it-leader-admin</strong></li><li>Game QA / Producer: <strong>#game-qa-producer-onboard-it-leader-hr-admin</strong></li><li>Game Engineer: <strong>#game-engineer-onboard-it-leader-hr-admin</strong></li></ul></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D-2</div><div class="timeline-date">Before joining</div><div class="timeline-content"><h3>Close the practical details</h3><p>Register the parking card in the relevant Zalo group based on candidate information. Update the HCM seating map when needed. Prepare the Welcome / Orientation deck and the new-hire introduction visual.</p><ul><li>Parking card tracker: HCM and Đà Nẵng Google Sheets</li><li>Seating Map: Google Slides</li><li>Welcome Onboard Orientation: Google Slides</li><li>New Hire Introduction: Canva</li></ul></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D+1</div><div class="timeline-date">First day</div><div class="timeline-content"><h3>Welcome, orient and record completion</h3><p>Send the welcome email with employee information and account details, run the Welcome / Orientation session, and publish the welcome post in Slack <strong>#general</strong>.</p></div></div>
+        </div>
+
+        <div class="two-col" style="margin-top:20px;">
+          <article class="info-card"><h3>Offboarding</h3><p>Prepare the required offboarding information and documents using the prescribed form. Coordinate with chị Trúc, Operations and all relevant stakeholders.</p><ul class="checklist"><li>Use the required offboarding form.</li><li>Coordinate the handoff with Trúc and Operations.</li><li>Confirm all involved parties have the information they need.</li></ul></article>
+          <article class="info-card dark"><h3>Probation tracking</h3><p>Protect the deadline by starting early. Send the evaluation form and reminder at least two weeks before the probation review is due.</p><ul class="checklist"><li>Track the employee and Line Manager completion status.</li><li>Use Employee Tracking in Google Sheets.</li><li>Use the Probation Notification Email Template in Notion.</li></ul></article>
+        </div>
+
+        <div class="two-col" style="margin-top:18px;">
+          <article class="info-card"><h3>Reporting cadence</h3><p>Keep work visible and easy to pick up.</p><ul class="checklist"><li>Daily: post tasks in the Slack thread at <strong>09:15</strong>.</li><li>Weekly: update progress in the Weekly Report Google Sheet.</li><li>Reference the Daily Standup Report example in Notion.</li></ul></article>
+          <article class="info-card"><h3>People records</h3><p>Use the existing trackers as the source of truth for recurring employee milestones.</p><ul class="checklist"><li>2026 resignation information.</li><li>2026 new joiner information.</li><li>Employee Tracking for probation follow-up.</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="engagement">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">04 · EE / EB / IC</div>
+            <h2>Plan the moments that keep people connected</h2>
+          </div>
+          <p class="section-note">Employee Engagement, Employer Branding and Internal Communications should be planned as a steady rhythm, not only as one-off events.</p>
+        </div>
+        <div class="info-card" style="margin-bottom:18px;"><h3>How to work the calendar</h3><p>Maintain the communication plan, note the social post content, then build a monthly or annual timeline for execution. Use the existing recurring programs as the starting point and adapt them to the year's needs.</p><span class="resource">Communication Plan · Notion</span></div>
+        <div class="program-grid">
+          <article class="program"><h3>Company Trip Planning</h3><p>Annual company trip planning and execution.</p><span class="program-link">Reference: Company Trip Planning</span></article>
+          <article class="program"><h3>Women's Day Events</h3><p>Events for 8 March and 20 October.</p><span class="program-link">Reference: Women's Day Events</span></article>
+          <article class="program"><h3>Last Friday Get-together</h3><p>End-of-month connection activity.</p><span class="program-link">Reference: Last Friday Get-together</span></article>
+          <article class="program"><h3>Mini Internal Events</h3><p>Small internal events arranged when needed.</p><span class="program-link">Reference: Mini Internal Events</span></article>
+          <article class="program"><h3>Recharge Time</h3><p>A wellbeing activity once every three months, usually eating out.</p><span class="program-link">Reference: Recharge Time</span></article>
+          <article class="program"><h3>Business Trip</h3><p>Coordinate work-related travel using the established process.</p><span class="program-link">Reference: Business Trip</span></article>
+          <article class="program"><h3>New Year Party</h3><p>Plan and coordinate the year-end party.</p><span class="program-link">Reference: New Year Party</span></article>
+          <article class="program"><h3>Charity</h3><p>Coordinate charitable or community activities.</p><span class="program-link">Reference: Charity</span></article>
+          <article class="program"><h3>Leadership Meeting</h3><p>For leaders, producers, managers, directors and the BOD; usually once or twice a year, often early in the year.</p><span class="program-link">Reference: Leadership Meeting</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">05 · Resource map</div>
+            <h2>Open the right place before you start the task</h2>
+          </div>
+          <p class="section-note">The source handover names the resources below. Add direct URLs and access owners before publishing the final public page.</p>
+        </div>
+        <div class="resource-map">
+          <article class="resource-item"><h3>Notion</h3><p>Master Job Description, Technical Test, Interview Notes, Probation Notification Email Template, Communication Plan, Daily Standup Report and the private HR Team space.</p><em>Primary knowledge base</em></article>
+          <article class="resource-item"><h3>Google Sheets</h3><p>Candidate Tracking, HCM parking card, Đà Nẵng parking card, Employee Tracking and Weekly Report.</p><em>Trackers & reporting</em></article>
+          <article class="resource-item"><h3>Google Slides</h3><p>Seating Map and Welcome Onboard Orientation.</p><em>Workplace & orientation</em></article>
+          <article class="resource-item"><h3>Canva</h3><p>New Hire Introduction template for the welcome visual.</p><em>Internal brand asset</em></article>
+          <article class="resource-item"><h3>Google Admin Console</h3><p>Create the new member's Ather Labs email account.</p><em>Account setup</em></article>
+          <article class="resource-item"><h3>GitHub</h3><p>Create the new member's GitHub account using the agreed naming format.</p><em>Account setup</em></article>
+          <article class="resource-item"><h3>Slack</h3><p>#pre-onboarding, #general and the role-specific onboarding channels.</p><em>Coordination & announcements</em></article>
+          <article class="resource-item"><h3>Zalo</h3><p>Register parking cards through the relevant team group.</p><em>Parking registration</em></article>
+          <article class="resource-item"><h3>HRM</h3><p>Publish the approved Job Description. The exact HRM URL was not included in the source document.</p><em>System link to confirm</em></article>
+        </div>
+        <div class="publish-note"><h3>Before publishing to GitHub Pages</h3><p>The handover source includes resource names but not direct URLs for HRM, CV Drive, Candidate Tracking and several Google / Notion files. This page intentionally avoids inventing links. Add the correct URLs, confirm access permissions and verify channel names with the HR team before making the page public.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner"><span>HR Handover Playbook · Prepared for internal transition</span><a href="#start">Back to top ↑</a></div>
+  </footer>
+</body>
+</html>
