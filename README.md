@@ -7,6 +7,7 @@ Personal portfolio website for Duong Tran.
 - `index.html` - main portfolio page
 - `assets/images/profile.png` - profile image
 - `assets/docs/duong-tran-cv.pdf` - CV download
+- `resources/hr-handover.html` - separate HR handover playbook, not linked from the public portfolio
 
 ## Local preview
 
