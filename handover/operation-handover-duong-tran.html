@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operations Handover - Duong Tran</title>
+  <meta name="description" content="A clean operations handover document by Duong Tran, covering office operations, procurement, payment requests, contracts, onboarding, offboarding, internal events, and asset tracking." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --forest: #1E2D24;
+      --sage: #7D927B;
+      --moss: #A8B7A1;
+      --mist: #E8EEE7;
+      --ivory: #F7F4EE;
+      --paper: #FBF8F3;
+      --charcoal: #2F342F;
+      --muted: #5F6F5C;
+      --gold: #A06C1D;
+      --line: rgba(125, 146, 123, 0.42);
+      --line-soft: rgba(168, 183, 161, 0.35);
+      --shadow: 0 18px 44px rgba(30, 45, 36, 0.08);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--paper) 0%, var(--ivory) 100%);
+      color: var(--charcoal);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .serif { font-family: 'Cormorant Garamond', serif; }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line-soft);
+      background: rgba(247, 244, 238, 0.88);
+      backdrop-filter: blur(12px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--forest);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--sage);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--forest); }
+
+    .hero { padding: 48px 0 24px; }
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0;
+      border: 1px solid var(--line-soft);
+      border-radius: 28px;
+      background: rgba(255,255,255,0.32);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-left { padding: 70px 64px; }
+    .hero-right {
+      padding: 44px;
+      background: linear-gradient(180deg, #dfe8de 0%, var(--mist) 100%);
+      display: flex;
+      align-items: stretch;
+    }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 8vw, 5.3rem);
+      line-height: 0.94;
+      color: var(--forest);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.28;
+      color: var(--sage);
+      margin-bottom: 24px;
+    }
+    .hero-desc {
+      max-width: 620px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--charcoal);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(232,238,231,0.75);
+      color: var(--forest);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .panel {
+      width: 100%;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(30,45,36,0.96);
+      color: var(--ivory);
+    }
+    .panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(232,238,231,0.72);
+      margin-bottom: 20px;
+    }
+    .flow-list { display: grid; gap: 12px; }
+    .flow-step {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(247,244,238,0.18);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .flow-step:last-child { border-bottom: 0; }
+    .flow-step span {
+      display: inline-flex;
+      width: 26px;
+      height: 26px;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      border-radius: 999px;
+      background: rgba(247,244,238,0.12);
+      color: #F7D76A;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      color: var(--forest);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .section-intro {
+      margin-top: 16px;
+      max-width: 780px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+    .overview-card,
+    .workstream-card,
+    .note-card {
+      border: 1px solid var(--line-soft);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.38);
+      padding: 24px;
+    }
+    .overview-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      line-height: 0.95;
+      color: var(--forest);
+      font-weight: 500;
+    }
+    .overview-label {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .workstream-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+    .workstream-card h3 {
+      color: var(--forest);
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .workstream-card p,
+    .workstream-card li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .workstream-card ul { padding-left: 18px; display: grid; gap: 6px; }
+    .workstream-tag {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(232,238,231,0.78);
+      color: var(--forest);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .flow-section {
+      background: linear-gradient(180deg, rgba(232,238,231,0.72) 0%, rgba(232,238,231,0.42) 100%);
+    }
+    .process-box {
+      margin-top: 34px;
+      border: 1px solid var(--line-soft);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.46);
+      overflow: hidden;
+    }
+    .process-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 24px;
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--line-soft);
+      align-items: start;
+    }
+    .process-row:last-child { border-bottom: 0; }
+    .process-key {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+    .process-value {
+      color: var(--charcoal);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+    .note-card h3 {
+      color: var(--forest);
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+    .note-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    footer {
+      padding: 34px 0 46px;
+      background: var(--forest);
+      color: rgba(247,244,238,0.82);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ivory);
+      font-size: 24px;
+    }
+    .footer-note {
+      margin-top: 6px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(247,244,238,0.72);
+    }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+    .footer-links a {
+      color: rgba(232,238,231,0.88);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 980px) {
+      .hero-card,
+      .overview-grid,
+      .workstream-grid,
+      .notes-grid { grid-template-columns: 1fr; }
+      .hero-left, .hero-right { padding: 42px 28px; }
+      .process-row { grid-template-columns: 1fr; gap: 8px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    @media print {
+      .nav-wrap { position: static; }
+      body { background: #fff; }
+      .hero-card, .overview-card, .workstream-card, .note-card, .process-box { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="container nav">
+      <a class="nav-logo" href="#top">Operations Handover</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#flow">Flow</a>
+        <a href="#workstreams">Workstreams</a>
+        <a href="#controls">Controls</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-left">
+            <div class="eyebrow">Duong Tran · Operations Handover</div>
+            <h1>Operations<br />Working Process</h1>
+            <div class="hero-title">A clear handover map for office, admin, people operations, and internal support work.</div>
+            <p class="hero-desc">
+              This file organizes recurring operations work into clear workstreams, so another person can understand what needs to happen, who should be involved, what documents matter, and how each task should be followed through.
+            </p>
+            <div class="chips">
+              <span class="chip">Office Operations</span>
+              <span class="chip">Payment Requests</span>
+              <span class="chip">Contracts & Records</span>
+              <span class="chip">Onboarding / Offboarding</span>
+              <span class="chip">Internal Events</span>
+              <span class="chip">Asset Tracking</span>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="panel">
+              <div class="panel-title">Standard Request Flow</div>
+              <div class="flow-list">
+                <div class="flow-step"><span>1</span>Request comes in</div>
+                <div class="flow-step"><span>2</span>Classify the task group</div>
+                <div class="flow-step"><span>3</span>Check required input information</div>
+                <div class="flow-step"><span>4</span>Contact the right owner or support point</div>
+                <div class="flow-step"><span>5</span>Execute, save records, and update tracking</div>
+                <div class="flow-step"><span>6</span>Follow through until completed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="container">
+        <div class="section-label">Overview</div>
+        <h2 class="section-title">What This Handover Covers</h2>
+        <p class="section-intro">
+          This document is a sanitized version of an internal handover. It keeps the operating logic and task structure while removing sensitive contact names, private folders, vendor-specific details, and company identifiers.
+        </p>
+        <div class="overview-grid">
+          <div class="overview-card">
+            <div class="overview-num">9</div>
+            <div class="overview-label">Main work groups across office administration, people operations, payment, contract, event, and asset work.</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-num">3</div>
+            <div class="overview-label">Key operating habits: classify the task, document the evidence, and follow through until closed.</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-num">1</div>
+            <div class="overview-label">Shared handover map designed to make recurring work easier to continue without confusion.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section flow-section" id="flow">
+      <div class="container">
+        <div class="section-label">Workflow Logic</div>
+        <h2 class="section-title">How Requests Should Move</h2>
+        <p class="section-intro">
+          The operating pattern is simple by design. Before jumping into execution, the task should be classified, checked for required information, routed to the right support point, and tracked until completion.
+        </p>
+        <div class="process-box">
+          <div class="process-row">
+            <div class="process-key">Intake</div>
+            <div class="process-value">Receive the request or identify a recurring need. Clarify what is being requested, where it applies, the urgency, and whether approval is required.</div>
+          </div>
+          <div class="process-row">
+            <div class="process-key">Classification</div>
+            <div class="process-value">Group the task under office/building, procurement, payment, contracts, onboarding, offboarding, events, ad-hoc support, or asset tracking.</div>
+          </div>
+          <div class="process-row">
+            <div class="process-key">Coordination</div>
+            <div class="process-value">Contact the correct support point such as building management, IT, vendor, HR, line manager, accounting, or legal.</div>
+          </div>
+          <div class="process-row">
+            <div class="process-key">Execution</div>
+            <div class="process-value">Complete the task, collect required documents, prepare forms or records, and check whether follow-up action is needed.</div>
+          </div>
+          <div class="process-row">
+            <div class="process-key">Tracking</div>
+            <div class="process-value">Save evidence, update the tracking file, and keep following until the task is complete rather than stopping at submission.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workstreams">
+      <div class="container">
+        <div class="section-label">Workstreams</div>
+        <h2 class="section-title">Main Areas Of Work</h2>
+        <p class="section-intro">
+          Each workstream below summarizes the task purpose and the practical checks that make the handover usable.
+        </p>
+
+        <div class="workstream-grid">
+          <div class="workstream-card">
+            <span class="workstream-tag">A · Office</span>
+            <h3>Office And Building Management</h3>
+            <p>Keep the office operating smoothly across electricity, water, AC, meeting rooms, pantry, plants, cleaning, access cards, and visitor areas.</p>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">B · Procurement</span>
+            <h3>Office Procurement / Pantry / Equipment</h3>
+            <ul>
+              <li>Weekly snacks and drinks</li>
+              <li>Stationery and shared office supplies</li>
+              <li>Electronics, furniture, and equipment</li>
+              <li>Hardware checks with IT before purchase</li>
+            </ul>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">C · Payment</span>
+            <h3>Cost Management And Payment Requests</h3>
+            <p>Track costs, check approval needs, collect supporting documents, prepare DNTT / payment requests, submit to accounting, and follow payment status.</p>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">D · Records</span>
+            <h3>Contracts, Invoices, Mail, And Records</h3>
+            <p>Handle vendor contracts, renewal tracking, invoice records, outgoing mail, incoming mail, scans, and filing discipline.</p>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">E · Onboarding</span>
+            <h3>New Employee Onboarding</h3>
+            <ul>
+              <li>Confirm work location, start date, team, and equipment standard</li>
+              <li>Arrange seat, laptop or desktop, monitor, accessories, software, and access cards</li>
+              <li>Coordinate IT setup and asset handover records</li>
+            </ul>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">F · Offboarding</span>
+            <h3>Employee Offboarding</h3>
+            <p>Collect assets, confirm data handover with leaders, scan records, coordinate IT reset, cancel access, and update tracking files.</p>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">G · Events</span>
+            <h3>Internal Events And Communication</h3>
+            <p>Plan employee engagement events, prepare ideas, budget, timeline, vendors, internal content, post-event records, and communication materials.</p>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">H · Ad-hoc</span>
+            <h3>BOD Support, Business Trips, Guests, And Access Cards</h3>
+            <p>Support travel research and booking, guest welcoming, meeting room preparation, access cards, repairs, urgent requests, and other operational needs.</p>
+          </div>
+
+          <div class="workstream-card">
+            <span class="workstream-tag">I · Assets</span>
+            <h3>Office Asset Tracking</h3>
+            <p>Track laptops, desktops, monitors, accessories, IT equipment, assigned assets, returned assets, and stock waiting for assignment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section flow-section" id="controls">
+      <div class="container">
+        <div class="section-label">Controls</div>
+        <h2 class="section-title">Important Operating Checks</h2>
+        <p class="section-intro">
+          These controls help reduce missing records, payment delays, unclear ownership, and handover gaps.
+        </p>
+        <div class="notes-grid">
+          <div class="note-card">
+            <h3>Payment Evidence</h3>
+            <p>Payment requests should include quotation, VAT invoice if applicable, contract or appendix if needed, and delivery / acceptance / handover records.</p>
+          </div>
+          <div class="note-card">
+            <h3>Approval Logic</h3>
+            <p>Check approval needs before purchase, especially for new costs, high-value items, out-of-budget expenses, or advance payment cases.</p>
+          </div>
+          <div class="note-card">
+            <h3>Contract Renewal</h3>
+            <p>Review expiring contracts at the start of each month and leave enough time for vendor, legal, accounting, and signer review.</p>
+          </div>
+          <div class="note-card">
+            <h3>Hardware Setup</h3>
+            <p>For laptops, desktops, RAM, SSD, VGA, CPU, and similar hardware, check with IT before purchase or handover.</p>
+          </div>
+          <div class="note-card">
+            <h3>Offboarding Reset</h3>
+            <p>Do not reset machines until the leader confirms that work data has been handed over and admin is allowed to proceed.</p>
+          </div>
+          <div class="note-card">
+            <h3>Tracking Discipline</h3>
+            <p>The task is not closed when submitted. It closes when payment, handover, filing, or follow-up has been fully completed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-name">Duong Tran · Operations Handover</div>
+        <div class="footer-note">Standalone handover file stored in GitHub. Not linked from the public portfolio homepage.</div>
+      </div>
+      <div class="footer-links">
+        <a href="operation-handover-duong-tran.md">Markdown Version</a>
+        <a href="#top">Back To Top</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
