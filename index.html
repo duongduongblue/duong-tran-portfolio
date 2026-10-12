@@ -353,6 +353,96 @@
       color: var(--muted);
     }
 
+    .selected-work-wrap {
+      background: linear-gradient(180deg, rgba(247,244,238,0.98) 0%, rgba(232,238,231,0.42) 100%);
+    }
+    .work-card {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1fr 0.82fr;
+      gap: 34px;
+      align-items: stretch;
+      padding: 30px;
+      border: 1px solid var(--line-soft);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.38);
+      box-shadow: var(--shadow);
+    }
+    .work-card-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+    .work-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.06;
+      color: var(--forest);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .work-card-desc {
+      max-width: 720px;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--charcoal);
+    }
+    .work-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .work-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(232,238,231,0.72);
+      color: var(--forest);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .work-card-panel {
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(30,45,36,0.95);
+      color: var(--ivory);
+    }
+    .work-panel-item {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(247,244,238,0.18);
+    }
+    .work-panel-item:last-child { border-bottom: 0; }
+    .work-panel-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(232,238,231,0.72);
+      margin-bottom: 5px;
+    }
+    .work-panel-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(247,244,238,0.92);
+    }
+    .work-card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
     .experience-grid {
       display: grid;
       gap: 18px;
@@ -634,7 +724,8 @@
       .about-grid,
       .working-grid,
       .credentials-grid,
-      .education-grid {
+      .education-grid,
+      .work-card {
         grid-template-columns: 1fr;
       }
 
@@ -731,6 +822,7 @@
             <a href="#about">About</a>
             <a href="#expertise">Expertise</a>
             <a href="#experience">Experience</a>
+            <a href="#selected-work">Work</a>
             <a href="#learning">Learning</a>
             <a href="#contact">Contact</a>
           </div>
@@ -896,6 +988,51 @@
               <div class="exp-desc">
                 Built early strengths in communication, coordination, and people support through student-facing work and classroom assistance.
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section selected-work-wrap" id="selected-work">
+      <div class="container">
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title serif">A real operations handover case study</h2>
+        <p class="section-intro">
+          This case study turns day-to-day admin, office, people operations, payment request, contract, onboarding, offboarding, and internal event work into a structured handover playbook.
+        </p>
+
+        <div class="work-card">
+          <div>
+            <div class="work-card-kicker">Process design / HR operations documentation</div>
+            <div class="work-card-title">Operations &amp; Engagement Working Process</div>
+            <p class="work-card-desc">
+              Built from actual recurring work at Ather Labs, this page maps how requests move from intake to classification, owner coordination, execution, file tracking, and follow-up. It shows the practical side of my HR operations work: making scattered tasks easier to understand, repeat, and hand over.
+            </p>
+            <div class="work-card-meta">
+              <span class="work-chip">Office Operations</span>
+              <span class="work-chip">Payment Requests</span>
+              <span class="work-chip">Contracts &amp; Records</span>
+              <span class="work-chip">Onboarding / Offboarding</span>
+              <span class="work-chip">Internal Events</span>
+            </div>
+            <div class="work-card-actions">
+              <a class="btn btn-primary" href="working-process.html">View Case Study</a>
+              <a class="btn btn-outline" href="ops-handover.html">Open Task Directory</a>
+            </div>
+          </div>
+          <div class="work-card-panel">
+            <div class="work-panel-item">
+              <div class="work-panel-label">Problem</div>
+              <div class="work-panel-text">Operational knowledge was spread across messages, sheets, vendor contacts, folders, and informal memory.</div>
+            </div>
+            <div class="work-panel-item">
+              <div class="work-panel-label">What I built</div>
+              <div class="work-panel-text">A structured workflow and task directory covering office management, procurement, DNTT/payment requests, contracts, onboarding, offboarding, events, and ad-hoc support.</div>
+            </div>
+            <div class="work-panel-item">
+              <div class="work-panel-label">Result</div>
+              <div class="work-panel-text">Clearer handover, easier task lookup, stronger process continuity, and better follow-through for recurring admin and people operations work.</div>
             </div>
           </div>
         </div>

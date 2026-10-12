@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operations Handover Playbook | Duong Tran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#1f2c27;--soft:#40524a;--muted:#728077;--paper:#f7f5ef;--card:#fffdf8;--sage:#9caf9b;--sage-soft:#e3eadf;--forest:#294338;--forest-deep:#1d3229;--amber:#a76b28;--amber-soft:#f3e5cf;--line:#d9ded6;--max:1180px}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased} a{color:inherit} .wrap{width:min(var(--max),calc(100% - 44px));margin:0 auto}
+    .topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(247,245,239,.94);backdrop-filter:blur(12px)} .topbar-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px} .brand{color:var(--forest-deep);font-weight:700;text-decoration:none} .brand span{margin-left:10px;color:var(--muted);font-size:12px;font-weight:400} .top-links{display:flex;gap:14px;flex-wrap:wrap} .top-links a{color:var(--forest);font-size:12px;font-weight:700;text-decoration:none}
+    .hero{padding:64px 0 34px} .eyebrow{color:var(--amber);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase} h1{max-width:840px;margin:17px 0 16px;color:var(--forest-deep);font:400 clamp(48px,8vw,84px)/.96 "DM Serif Display",Georgia,serif;letter-spacing:-.035em} .lede{max-width:760px;color:var(--soft);font-size:18px;line-height:1.8} .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px} .hero-actions a{display:inline-flex;align-items:center;min-height:38px;padding:0 14px;border-radius:999px;background:var(--forest);color:var(--paper);font-size:12px;font-weight:700;text-decoration:none} .hero-actions a.secondary{background:var(--amber-soft);color:var(--forest)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 0} .stat{padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--card)} .stat b{display:block;color:var(--amber);font-size:24px} .stat span{color:var(--muted);font-size:12px}
+    .layout{display:grid;grid-template-columns:280px 1fr;gap:22px;padding:28px 0 78px} .sidebar{position:sticky;top:92px;align-self:start;display:grid;gap:14px} .search{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--card)} .search label{display:block;margin-bottom:8px;color:var(--forest);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em} .search input{width:100%;min-height:42px;border:1px solid var(--line);border-radius:12px;background:#fbfaf6;padding:0 12px;color:var(--ink);font:inherit}
+    .filters{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--card)} .filters button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:0;border-radius:11px;background:transparent;padding:10px 11px;color:var(--soft);font:inherit;text-align:left;cursor:pointer} .filters button:hover,.filters button.active{background:var(--sage-soft);color:var(--forest)} .filters button span{font-size:12px;font-weight:700} .filters button b{color:var(--amber);font-size:11px}
+    .list-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--card)} .list-head span{display:block;color:var(--amber);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.list-head h2{margin:6px 0 0;color:var(--forest);font:400 30px/1.1 "DM Serif Display",Georgia,serif}.list-head p{max-width:420px;margin:0;color:var(--muted);font-size:13px}
+    .task-list{display:grid;gap:16px} .task-card{padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--card)} .task-card.hidden{display:none} .task-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px} .task-no{color:var(--amber);font-size:12px;font-weight:700;letter-spacing:.12em} .task-category{padding:5px 10px;border-radius:999px;background:var(--sage-soft);color:var(--forest);font-size:11px;font-weight:700} .task-card h3{margin:0 0 14px;color:var(--forest);font-size:20px;line-height:1.3} .task-body{display:grid;grid-template-columns:1fr 1fr;gap:14px} .task-body section{padding:14px;border-radius:13px;background:#fbfaf6;border:1px solid rgba(217,222,214,.7)} .task-body h4{margin:0 0 7px;color:var(--amber);font-size:11px;letter-spacing:.08em;text-transform:uppercase} .task-body p{margin:0;color:var(--soft);font-size:13px;line-height:1.75;white-space:normal} .task-body p a{color:var(--forest);font-weight:700;word-break:break-word} .task-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px} .task-links a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:var(--forest);color:var(--paper);font-size:11px;font-weight:700;text-decoration:none} .task-links a:hover{background:var(--amber)} .empty{display:none;padding:24px;border:1px dashed var(--sage);border-radius:18px;color:var(--muted);text-align:center}
+    footer{padding:28px 0 46px;border-top:1px solid var(--line);color:var(--muted);font-size:12px} footer a{color:var(--forest);font-weight:700;text-decoration:none}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:static}.category-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.wrap{width:min(var(--max),calc(100% - 28px))}.topbar-inner{align-items:flex-start;flex-direction:column;padding:15px 0}.hero{padding-top:38px}.category-grid,.task-body,.stats{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="index.html">Duong Tran <span>Operations Handover</span></a><nav class="top-links"><a href="hr-handover.html">HR Handover</a><a href="handover/">Task Directory</a><a href="https://docs.google.com/spreadsheets/d/1FPnguDisfU3e6KZ3RDEKwH2cVAuyv0Q3vDFOEHlPrf8/edit?gid=0#gid=0" target="_blank" rel="noreferrer">Source Sheet</a></nav></div></header>
+  <main>
+    <section class="hero wrap"><div class="eyebrow">Admin / Office Operations handover</div><h1>Operations work, organized by task.</h1><p class="lede">A readable playbook generated from the shared Google Sheet. Use it to understand what each workstream covers, who or what to contact, and which files or folders support the task.</p><div class="hero-actions"><a href="working-process.html">View case study</a><a href="https://docs.google.com/spreadsheets/d/1FPnguDisfU3e6KZ3RDEKwH2cVAuyv0Q3vDFOEHlPrf8/edit?gid=0#gid=0" target="_blank" rel="noreferrer">Open source Google Sheet ↗</a><a class="secondary" href="#task-list">Browse all tasks</a></div><div class="stats"><div class="stat"><b>64</b><span>handover items</span></div><div class="stat"><b>13</b><span>workstreams</span></div><div class="stat"><b>5</b><span>items with links</span></div><div class="stat"><b>Published</b><span>portfolio artifact</span></div></div></section>
+    <section class="layout wrap"><aside class="sidebar"><div class="search"><label for="searchBox">Search tasks</label><input id="searchBox" type="search" placeholder="Search category, action, contact, file..." /></div><div class="filters" id="filters"><button type="button" class="active" data-filter="all"><span>All workstreams</span><b>64</b></button><button type="button" data-filter="BAN QUẢN LÍ TÒA NHÀ"><span>BAN QUẢN LÍ TÒA NHÀ</span><b>2</b></button><button type="button" data-filter="OFFICE PROCUREMENT"><span>OFFICE PROCUREMENT</span><b>8</b></button><button type="button" data-filter="QUẢN LÝ CHI PHÍ"><span>QUẢN LÝ CHI PHÍ</span><b>2</b></button><button type="button" data-filter="OFFICE MANAGEMENT"><span>OFFICE MANAGEMENT</span><b>15</b></button><button type="button" data-filter="DOCUMENTS (PR, CONTRACTS,BILLS,...)"><span>DOCUMENTS (PR, CONTRACTS,BILLS,...)</span><b>11</b></button><button type="button" data-filter="ONBOARDING"><span>ONBOARDING</span><b>3</b></button><button type="button" data-filter="OFFBOARDING"><span>OFFBOARDING</span><b>3</b></button><button type="button" data-filter="MERCHANDISING"><span>MERCHANDISING</span><b>2</b></button><button type="button" data-filter="GUEST WECOMING"><span>GUEST WECOMING</span><b>1</b></button><button type="button" data-filter="TV SHOW"><span>TV SHOW</span><b>3</b></button><button type="button" data-filter="EVENT"><span>EVENT</span><b>6</b></button><button type="button" data-filter="COMMUNICATION &amp; BRANDING"><span>COMMUNICATION &amp; BRANDING</span><b>4</b></button><button type="button" data-filter="AD-HOC TASKS"><span>AD-HOC TASKS</span><b>4</b></button></div></aside><div><div class="list-head"><div><span>Task list</span><h2>All handover tasks</h2></div><p>Use the search box and workstream filter on the left to narrow the list. Each card keeps the source sheet details in one place.</p></div><div class="task-list" id="task-list">
+      <article class="task-card" id="task-01" data-category="BAN QUẢN LÍ TÒA NHÀ" data-search="ban quản lí tòa nhà làm việc với ban quản lý tòa nhà về tất cả các công việc liên quan: làm việc với ban quản lý tòa nhà về tất cả các công việc liên quan:
+a/ điện nói chung, máy lạnh, cửa ra vào, cửa sổ, đèn văn phòng.
+b/ đăng ký/ hủy thẻ xe, cấp quyền cho khách ra vào tòa nhà, feedback những vấn đề liên quan đến wc, đồ thất lạc,...
+c/ hợp đồng gia hạn thuê mặt bằng hàng năm
+d/ giấy tờ, hóa đơn, bill điện nước hàng tháng để làm dntt thông tin xuát vat:
+công ty tnhh công nghệ vihali
+mã số thuế 0316959226
+địa chỉ lầu 3, tòa nhà miss áo dài, 21 nguyễn trung ngạn, phường sài gòn, thành phố hồ chí minh, việt nam
+email: nhung.quach@atherlabs.com | duong.tran@atherlabs.com
+
+hcm: tầng 3, tòa miss áo dài, 21 nguyễn trung ngạn, phường sài gòn, tphcm
+zalo hcm:
+a/ kỷ thuật tòa nhà miss áo dài 
+b/ bql miss áo dài
+c/ it-support
+ - đây là zalo sẽ được sử dụng nhiều nhất. vì mình sử dụng chung service it của tòa nhà. mỗi khi có vấn đề liên quan đến: mạng, pc, laptop, request máy của anh tín, onboarding, offboarding - chúng ta đều cần đến sự trợ giúp của các anh it vihali - danh sách đăng kí gửi xe tháng - vp hcm.xlsx
+
+kiem_soat_licenses-it-tuandoan.xlsx ">
+        <div class="task-top"><span class="task-no">01</span><span class="task-category">BAN QUẢN LÍ TÒA NHÀ</span></div>
+        <h3>Làm việc với ban quản lý tòa nhà về tất cả các công việc liên quan:</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Làm việc với ban quản lý tòa nhà về tất cả các công việc liên quan:<br>a/ Điện nói chung, máy lạnh, cửa ra vào, cửa sổ, đèn văn phòng.<br>b/ Đăng ký/ Hủy Thẻ xe, cấp quyền cho khách ra vào tòa nhà, feedback những vấn đề liên quan đến WC, đồ thất lạc,...<br>c/ Hợp đồng gia hạn thuê mặt bằng hàng năm<br>d/ Giấy tờ, hóa đơn, bill điện nước hàng tháng để làm DNTT</p></section><section><h4>Contact point / Description</h4><p>THÔNG TIN XUÁT VAT:<br>CÔNG TY TNHH CÔNG NGHỆ VIHALI<br>Mã số thuế 0316959226<br>Địa chỉ Lầu 3, Tòa nhà Miss Áo Dài, 21 Nguyễn Trung Ngạn, Phường Sài Gòn, Thành phố Hồ Chí Minh, Việt Nam<br>email: nhung.quach@atherlabs.com | duong.tran@atherlabs.com<br><br>HCM: Tầng 3, tòa Miss Áo Dài, 21 Nguyễn Trung Ngạn, Phường Sài Gòn, TPHCM<br>Zalo HCM:<br>a/ KỶ THUẬT TÒA NHÀ MISS ÁO DÀI <br>b/ BQL Miss Áo Dài<br>c/ IT-Support<br> - ĐÂY LÀ ZALO SẼ ĐƯỢC SỬ DỤNG NHIỀU NHẤT. Vì mình sử dụng chung service IT của tòa nhà. Mỗi khi có vấn đề liên quan đến: MẠNG, PC, LAPTOP, REQUEST MÁY CỦA ANH TÍN, ONBOARDING, OFFBOARDING - chúng ta đều cần đến sự trợ giúp của các anh IT</p></section><section><h4>Files / Folder</h4><p>VIHALI - DANH SÁCH ĐĂNG KÍ GỬI XE THÁNG - VP HCM.xlsx<br><br>kiem_soat_licenses-it-tuandoan.xlsx</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-02" data-category="BAN QUẢN LÍ TÒA NHÀ" data-search="ban quản lí tòa nhà đn: tầng 11 tòa g8 đường hải phòng, phường hải châu, đn - thường chị dương sẽ hỗ trợ trực tiếp các công việc phát sinh t  đn: tầng 11 tòa g8 đường hải phòng, phường hải châu, đn - thường chị dương sẽ hỗ trợ trực tiếp các công việc phát sinh tại đn
+zalo đn: 
+a/ atherlabs t11- g8
+b/ gic land-vihali
+- chuyên về hợp đồng, giấy tờ ather labs - sipher / đăng kí gửi xe tháng 2024-2025.xlsx ">
+        <div class="task-top"><span class="task-no">02</span><span class="task-category">BAN QUẢN LÍ TÒA NHÀ</span></div>
+        <h3>ĐN: Tầng 11 tòa G8 đường Hải phòng, phường Hải Châu, ĐN - thường chị Dương sẽ hỗ trợ trực tiếp các công việc phát sinh t</h3>
+        <div class="task-body"><section><h4>Contact point / Description</h4><p>ĐN: Tầng 11 tòa G8 đường Hải phòng, phường Hải Châu, ĐN - thường chị Dương sẽ hỗ trợ trực tiếp các công việc phát sinh tại ĐN<br>Zalo ĐN: <br>a/ ATHERLABS T11- G8<br>b/ GIC LAND-VIHALI<br>- Chuyên về Hợp đồng, giấy tờ</p></section><section><h4>Files / Folder</h4><p>ATHER LABS - SIPHER / ĐĂNG KÍ GỬI XE THÁNG 2024-2025.xlsx</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-03" data-category="OFFICE PROCUREMENT" data-search="office procurement daily task_văn phòng hcm only: daily task_văn phòng hcm only:
+kiểm tra văn phòng - hằng ngày daily check văn phòng hàng ngày và khi rảnh
+- kiểm tra: 
+    + 4 phòng họp có được fill đủ nước (4 chai/ phòng), kẹo, bút lông và đồ lau bảng
+    + ghế và các vật dụng văn phòng được xếp gọn gàng
+    + bàn được lau chùi sạch sẽ
+    + không còn rác trong meeting room
+    + cây xanh văn phòng:  - cây héo thì báo bên cây xanh hoàng duy đến đổi cây + note thêm với cô tealady để cô double check khi họ đến. thời gian đến kiểm tra cây xanh: thứ 2 hoặc thứ 6 hàng tuần (mỗi tuần 1 lần)  ">
+        <div class="task-top"><span class="task-no">03</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>DAILY TASK_VĂN PHÒNG HCM ONLY:</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>DAILY TASK_VĂN PHÒNG HCM ONLY:<br>KIỂM TRA VĂN PHÒNG - HẰNG NGÀY</p></section><section><h4>Contact point / Description</h4><p>Daily check văn phòng hàng ngày và khi rảnh<br>- Kiểm tra: <br>    + 4 phòng họp có được fill đủ nước (4 chai/ phòng), kẹo, bút lông và đồ lau bảng<br>    + Ghế và các vật dụng văn phòng được xếp gọn gàng<br>    + Bàn được lau chùi sạch sẽ<br>    + Không còn rác trong meeting room<br>    + Cây xanh văn phòng:  - Cây héo thì báo bên Cây xanh Hoàng Duy đến đổi cây + note thêm với cô tealady để cô double check khi họ đến. Thời gian đến kiểm tra cây xanh: thứ 2 hoặc thứ 6 hàng tuần (mỗi tuần 1 lần)</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-04" data-category="OFFICE PROCUREMENT" data-search="office procurement quản lý tealady, văn phòng &amp; nhà kho hcm quản lý tealady, văn phòng &amp; nhà kho hcm - tealady: cô lan - 0354555457 (công ty chủ quản: vietclean)
+- thời gian làm: 7h-11h30, 12h30-16h, 11h30-12h30 nghỉ trưa
+- theo dõi sát sao quá trình làm việc của cô, đảm bảo khu vực pantry và 4 phòng họp luôn gọn gàng và được lau chùi sạch sẽ. (đặc biệc là gameroom + room c)
+   + pantry luôn fill đủ nước thùng + kẹo + cà phê + snack drinks + detox + đá viên
+- admin đang quản lý 01 nhà kho nằm ở phía ngoài vp + 01 phòng server quản lý chung với it + các trang thiết bị lầu 13
+- ngoài ra, còn các tủ cá nhân đựng các thiết bị máy móc và linh kiện: [hcm] bảng theo dõi thu - nước uống
+vietclean.pdf
+danh mục cv vihali q1.xlsx - các đầu công biệc của cô lan ">
+        <div class="task-top"><span class="task-no">04</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>Quản lý Tealady, Văn phòng &amp; Nhà kho HCM</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Quản lý Tealady, Văn phòng &amp; Nhà kho HCM</p></section><section><h4>Contact point / Description</h4><p>- Tealady: Cô Lan - 0354555457 (Công ty chủ quản: Vietclean)<br>- Thời gian làm: 7h-11h30, 12h30-16h, 11h30-12h30 nghỉ trưa<br>- Theo dõi sát sao quá trình làm việc của cô, đảm bảo khu vực pantry và 4 phòng họp luôn gọn gàng và được lau chùi sạch sẽ. (đặc biệc là GAMEROOM + ROOM C)<br>   + Pantry luôn fill đủ nước thùng + kẹo + cà phê + snack drinks + detox + đá viên<br>- Admin đang quản lý 01 nhà kho nằm ở phía ngoài VP + 01 Phòng Server quản lý chung với IT + CÁC TRANG THIẾT BỊ LẦU 13<br>- Ngoài ra, còn các tủ cá nhân đựng các thiết bị máy móc và linh kiện:</p></section><section><h4>Files / Folder</h4><p>[HCM] BẢNG THEO DÕI THU - NƯỚC UỐNG<br>Vietclean.pdf<br>DANH MỤC CV VIHALI Q1.xlsx - Các đầu công biệc của cô Lan</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-05" data-category="OFFICE PROCUREMENT" data-search="office procurement quản lý tealady, văn phòng &amp; nhà kho đn quản lý tealady, văn phòng &amp; nhà kho đn - tealday: chị nga đn - 0905269968
+- thời gian làm: 7h-16h
+- ở đn sẽ có chị dương trần hr hỗ trợ trực tiếp hình ảnh chi tiết văn phòng đà nẵng.pdf ">
+        <div class="task-top"><span class="task-no">05</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>Quản lý Tealady, Văn phòng &amp; Nhà kho ĐN</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Quản lý Tealady, Văn phòng &amp; Nhà kho ĐN</p></section><section><h4>Contact point / Description</h4><p>- Tealday: Chị Nga ĐN - 0905269968<br>- Thời gian làm: 7h-16h<br>- Ở ĐN sẽ có chị Dương Trần HR hỗ trợ trực tiếp</p></section><section><h4>Files / Folder</h4><p>Hình ảnh chi tiết văn phòng Đà Nẵng.pdf</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-06" data-category="OFFICE PROCUREMENT" data-search="office procurement mua sắm snacks &amp; drinks hàng tuần mua sắm snacks &amp; drinks hàng tuần how to order:
+- hcm - coopmart: https://cooponline.vn/dat-hang/ (link đặt hàng + nhớ điền thông tin xuất hđ)
+- đn - bigc đà nằng
+đối với đn, mình tải app go! về sử dụng để mua sắm
+note thông tin xuât hđ cụ thể trong mục ghi chú và mục xuất hđ của công ty. ngoài ra, về thời gian giao hàng nên ưu tiên đặt buổi sáng thứ 6 trước 11h để kịp giao lúc 14-16h trong ngày thứ 6 do go rất hay delay giao hàng vào thứ 7
+--------
+when to order:
+- thời điểm phù hợp để đặt snacks &amp; drinks sẽ là trước 11h thứ 6 hàng tuần để kịp giao cho đn vào chiều cùng ngày.
+---------
+what to order:
+- đã tổng hợp danh sách vật phẩm cần mua + số lượng ở các tab bên cạnh, click vào xem nhé
+- chi phí snacks &amp; drink hàng tuần: hcm 1tr-1tr2, đn 500k - 520k (nhưng k cần quá cố định như vậy, tùy vào tình hình báo cáo mỗi tuần của các cô tealady, thì mình ước lượng mà mua)
+- riêng đối với hcm: mình cần mua thêm cam + sả nhánh làm nước detox cho mỗi tuần (hiện tại đang nhờ cô lan mua giúp và gửi tiền lại cho cô, thường sẽ là 70k/tuần, tuy nhiên nếu cam mắc hơn cô sẽ báo lại).
+- đôi khi siêu thị hết món mình đã mua thì họ sẽ gọi thông báo với mình để đổi sang mặt hàng khác, thường sẽ đổi sang loại khác có giá ngang hoặc thấp hơn 1-200đ - thường hay hết bánh, kẹo nhất thông tin xuất hđ vat:
+tên công ty: công ty tnhh công nghệ vihali
+mst:  0316959226
+địa chỉ:  lầu 3, tòa nhà miss áo dài, 21 nguyễn trung ngạn, phường sài gòn, thành phố hồ chí minh, việt nam
+email nhận hđ: ghi email của admin phụ trách nhóe
+- - - - 
+full name : vihali technology company limited
+address  :3rd floor, miss ao dai building, 21 nguyen trung ngan street, sai gon ward, ho chi minh city, vietnam
+tax code :316959226
+---
+- hcm: link
+- đn: link
+-------------------- ">
+        <div class="task-top"><span class="task-no">06</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>Mua sắm snacks &amp; drinks hàng tuần</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Mua sắm snacks &amp; drinks hàng tuần</p></section><section><h4>Contact point / Description</h4><p>HOW TO ORDER:<br>- HCM - Coopmart: <a href="https://cooponline.vn/dat-hang/" target="_blank" rel="noreferrer">https://cooponline.vn/dat-hang/</a> (link đặt hàng + nhớ điền thông tin xuất HĐ)<br>- ĐN - BigC Đà Nằng<br>Đối với ĐN, mình tải app GO! về sử dụng để mua sắm<br>Note thông tin xuât HĐ cụ thể trong mục ghi chú và mục xuất HĐ của công ty. Ngoài ra, về thời gian giao hàng nên ưu tiên đặt buổi sáng thứ 6 trước 11h để kịp giao lúc 14-16h trong ngày thứ 6 do Go rất hay delay giao hàng vào thứ 7<br>--------<br>WHEN TO ORDER:<br>- Thời điểm phù hợp để đặt snacks &amp; drinks sẽ là trước 11h thứ 6 hàng tuần để kịp giao cho ĐN vào chiều cùng ngày.<br>---------<br>WHAT TO ORDER:<br>- Đã tổng hợp danh sách vật phẩm cần mua + số lượng ở các tab bên cạnh, click vào xem nhé<br>- Chi phí snacks &amp; drink hàng tuần: HCM 1TR-1TR2, ĐN 500K - 520K (Nhưng k cần quá cố định như vậy, tùy vào tình hình báo cáo mỗi tuần của các cô Tealady, thì mình ước lượng mà mua)<br>- Riêng đối với HCM: Mình cần mua thêm CAM + SẢ NHÁNH Làm nước detox cho mỗi tuần (Hiện tại đang nhờ cô Lan mua giúp và gửi tiền lại cho cô, thường sẽ là 70k/tuần, tuy nhiên nếu cam mắc hơn cô sẽ báo lại).<br>- Đôi khi siêu thị hết món mình đã mua thì họ sẽ gọi thông báo với mình để đổi sang mặt hàng khác, thường sẽ đổi sang loại khác có giá ngang hoặc thấp hơn 1-200đ - thường hay hết bánh, kẹo nhất</p></section><section><h4>Files / Folder</h4><p>Thông tin xuất HĐ VAT:<br>Tên công ty: CÔNG TY TNHH CÔNG NGHỆ VIHALI<br>MST:  0316959226<br>Địa chỉ:  Lầu 3, Tòa nhà Miss Áo Dài, 21 Nguyễn Trung Ngạn, Phường Sài Gòn, Thành phố Hồ Chí Minh, Việt Nam<br>Email nhận hđ: ghi email của Admin phụ trách nhóe<br>- - - - <br>Full name : VIHALI TECHNOLOGY COMPANY LIMITED<br>Address  :3rd Floor, Miss Ao Dai building, 21 Nguyen Trung Ngan Street, Sai Gon Ward, Ho Chi Minh City, Vietnam<br>Tax code :316959226<br>---<br>- HCM: LINK<br>- ĐN: LINK<br>--------------------</p></section></div>
+        <div class="task-links"><a href="https://cooponline.vn/dat-hang/" target="_blank" rel="noreferrer">Coop Online ↗</a></div>
+      </article>
+      <article class="task-card" id="task-07" data-category="OFFICE PROCUREMENT" data-search="office procurement mua sắm vpp -  thiết bị test game - dụng cụ - nội thất văn phòng mua sắm vpp -  thiết bị test game - dụng cụ - nội thất văn phòng a - thiết bị điện tử - cá nhân
+- tùy theo request của từng team/ cá nhân thì mình sẽ:
+(1) tìm báo giá và cập nhập vào sheet báo giá 
+(2) chị nhung review - approve để có thể tiến hành mua sản phẩm đề xuất trong file
+(3) làm việc với ncc để nhận file báo giá, và xác nhận các thông tin: ưu đãi, xuất hóa đơn, làm hợp đồng (tùy chọn), file báo giá 
+(3) gửi thông tin sản phẩm chi tiết + chi phí (file báo gía) và gửi cho người/team request để họ xin chi phí trên slack channel #internalsupport-procurement 
+theo flow như sau:
+workflow
+- team chịu phí: theo team request
+- headcode: tùy theo sản phẩm request
+- budget holder: thông thường là chị nhung quach, nhưng nên double check lại headcode xem chị nhung hay ai khác quản lý
+- nội dung: chi tiết sản phẩm + mục đích sử dụng
+- tổng chi phí: theo file báo giá (nên có đủ vat + ước tính thêm phí vận chuyển hoặc chi phí có thể phát sinh khác - hỏi vendor là biết)
+- đã có budget: thông thường sẽ là &#x27;&#x27;chưa có&#x27;&#x27;
+- dùng ngay 1. tổng hợp (báo giá + bbg tổng hợp + giấy ủy quyền + in ấn )
+2026 - file này có guq mới nhất do legal cập nhật
+---
+mình thường order thiết bị điện tử thông qua các ncc sau:
+1/ memory zone: hay mua mấy cái ổ cứng ssd, ram,..vì chỗ này giá ổn
+2/ hotegear - mua mấy set desktop mắc tiền vài chục triệu trở lên
+zalo: liên hệ trực tiếp hotgear - không có group chung
+3/ cellphones - giao nhanh
+- cellphones trần quang khải
+- cellphones hai hai mươi trần quang khải
+- kai trần - cellphones nguyễn thái học
+4/ laptopnew: thường sẽ có các dòng laptop gaming mới nhất ...
+---------------------------
+các loại thiết bị link kiện điện tử thường hay dùng trong vp
+1/ ổ cứng ssd: ổ cứng chứa dung lượng/ data -&gt; thường được request nhiều (có loại 500gb, 1tb, 2tb)
+-&gt; thường sẽ mua 1tb trở lên, do hiện tại cấu hình máy ở công ty chỉ chưa được tối đa 4 ổ
+-&gt; thường sẽ đáp ứng ssd nvme m.2 ( double check với anh hoài it hoặc nhắn lên nhóm it support nếu không chắc chắn có tương thích với máy không)
+2/ ram - 8x8gb -&gt; 16x16gb ( hoặc theo yêu cầu)
+-&gt; ddr4 hoặc ddr5 mới đáp ứng máy
+3/ hdmi - dây kết nối màn hình với các thiết bị trình chiếu (laptop, iphone, ipad)
+4/ hub chia hdmi -&gt; giành cho máy mac
+5/ dây mạng pc -&gt; kết nối mạng lan
+6/ cpu -&gt; standard i5. còn upgrade lên i7 là tùy thuộc vào yêu cầu của anh tín
+7/ ups - bộ lưu điện
+-&gt; không chỉ riêng ssd, nếu có linh kiện cần mua thì mình cứ double check lại với vesper, các tool ai, và các anh it để đảm bảo chính xác nhất ">
+        <div class="task-top"><span class="task-no">07</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>Mua sắm VPP -  thiết bị test game - dụng cụ - nội thất văn phòng</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Mua sắm VPP -  thiết bị test game - dụng cụ - nội thất văn phòng</p></section><section><h4>Contact point / Description</h4><p>A - THIẾT BỊ ĐIỆN TỬ - CÁ NHÂN<br>- Tùy theo request của từng team/ cá nhân thì mình sẽ:<br>(1) Tìm báo giá và cập nhập vào sheet báo giá <br>(2) Chị Nhung review - approve để có thể tiến hành mua sản phẩm đề xuất trong file<br>(3) Làm việc với NCC để nhận file báo giá, và xác nhận các thông tin: ƯU ĐÃI, XUẤT HÓA ĐƠN, LÀM Hợp đồng (Tùy chọn), File báo giá <br>(3) Gửi thông tin sản phẩm chi tiết + Chi phí (file báo gía) và gửi cho người/team request để họ Xin chi phí trên Slack channel #internalsupport-procurement <br>Theo flow như sau:<br>Workflow<br>- Team chịu phí: Theo team request<br>- Headcode: Tùy theo sản phẩm request<br>- Budget holder: Thông thường là chị Nhung Quach, nhưng nên double check lại headcode xem chị Nhung hay ai khác quản lý<br>- Nội dung: Chi tiết sản phẩm + mục đích sử dụng<br>- Tổng chi phí: Theo file báo giá (nên có đủ VAT + ước tính thêm phí vận chuyển hoặc chi phí có thể phát sinh khác - hỏi vendor là biết)<br>- Đã có budget: Thông thường sẽ là &#x27;&#x27;CHƯA CÓ&#x27;&#x27;<br>- Dùng ngay</p></section><section><h4>Files / Folder</h4><p>1. Tổng hợp (Báo giá + BBG tổng hợp + giấy ủy quyền + in ấn )<br>2026 - FIle này có GUQ mới nhất do Legal cập nhật<br>---<br>Mình thường order thiết bị điện tử thông qua các NCC sau:<br>1/ MEMORY ZONE: Hay mua mấy cái ổ cứng SSD, RAM,..vì chỗ này giá ổn<br>2/ HOTEGEAR - Mua mấy set Desktop mắc tiền vài chục triệu trở lên<br>Zalo: Liên hệ trực tiếp HOTGEAR - không có group chung<br>3/ CellphoneS - giao nhanh<br>- Cellphones Trần Quang Khải<br>- Cellphones Hai Hai Mươi Trần Quang Khải<br>- Kai Trần - CellphoneS Nguyễn Thái Học<br>4/ LAPTOPNEW: thường sẽ có các dòng laptop gaming mới nhất ...<br>---------------------------<br>Các loại thiết bị link kiện điện tử thường hay dùng trong VP<br>1/ Ổ CỨNG SSD: Ổ cứng chứa dung lượng/ data -&gt; Thường được request nhiều (có loại 500gb, 1TB, 2TB)<br>-&gt; thường sẽ mua 1TB trở lên, do hiện tại cấu hình máy ở công ty chỉ chưa được tối đa 4 ổ<br>-&gt; Thường sẽ đáp ứng SSD NVMe M.2 ( double check với anh Hoài IT hoặc nhắn lên nhóm IT Support nếu không chắc chắn có tương thích với máy không)<br>2/ RAM - 8x8gb -&gt; 16x16gb ( hoặc theo yêu cầu)<br>-&gt; DDR4 hoặc DDR5 mới đáp ứng máy<br>3/ HDMI - Dây kết nối màn hình với các thiết bị trình chiếu (Laptop, iphone, ipad)<br>4/ Hub chia HDMI -&gt; giành cho máy Mac<br>5/ Dây mạng PC -&gt; Kết nối mạng LAN<br>6/ CPU -&gt; Standard i5. Còn upgrade lên i7 là tùy thuộc vào yêu cầu của anh Tín<br>7/ UPS - Bộ lưu điện<br>-&gt; Không chỉ riêng SSD, nếu có linh kiện cần mua thì mình cứ double check lại với Vesper, các tool AI, và các anh IT để đảm bảo chính xác nhất</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-08" data-category="OFFICE PROCUREMENT" data-search="office procurement a - thiết bị điện tử - anh tín  a - thiết bị điện tử - anh tín
+đối với request của anh tín ceo:
+- luôn ưu tiên tìm thông tin gấp/ order gấp (trong vòng 2 tiếng kể từ khi nhận được request)
+(1) tìm báo giá và cập nhập vào sheet báo giá 
+(2) chị nhung review và check với anh tín
+(3) anh tín approve - để có thể tiến hành mua sản phẩm đề xuất trong file
+(3) làm việc với ncc để nhận file báo giá, và xác nhận các thông tin: ưu đãi, xuất hóa đơn, làm hợp đồng (tùy chọn), file báo giá
+(4) raise approval
+(5) tiến hành mua hàng (đồ đắt tiền trên 10tr thì sử dụng thẻ visa công ty - anh đức hồ giữ/ hóa đơn dưới 10tr thì có thể nhờ chị nhung cho ứng tiền) 
+--
+lưu ý: 
+- request của  anh tín thì mình sẽ tự raise approval trên  slack channel #internalsupport-procurement 
+- chi phí lưu về admin
+- và tự động làm dntt  ">
+        <div class="task-top"><span class="task-no">08</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>A - THIẾT BỊ ĐIỆN TỬ - ANH TÍN</h3>
+        <div class="task-body"><section><h4>Contact point / Description</h4><p>A - THIẾT BỊ ĐIỆN TỬ - ANH TÍN<br>Đối với request của anh Tín CEO:<br>- Luôn ưu tiên tìm thông tin gấp/ order gấp (trong vòng 2 tiếng kể từ khi nhận được request)<br>(1) Tìm báo giá và cập nhập vào sheet báo giá <br>(2) Chị Nhung review và check với anh Tín<br>(3) Anh Tín approve - để có thể tiến hành mua sản phẩm đề xuất trong file<br>(3) Làm việc với NCC để nhận file báo giá, và xác nhận các thông tin: ƯU ĐÃI, XUẤT HÓA ĐƠN, LÀM Hợp đồng (Tùy chọn), File báo giá<br>(4) Raise approval<br>(5) Tiến hành mua hàng (đồ đắt tiền trên 10tr thì sử dụng thẻ Visa công ty - anh Đức Hồ giữ/ Hóa đơn dưới 10tr thì có thể nhờ chị Nhung cho ứng tiền) <br>--<br>LƯU Ý: <br>- REQUEST CỦA  ANH TÍN THÌ MÌNH SẼ TỰ RAISE APPROVAL trên  Slack channel #internalsupport-procurement <br>- Chi phí lưu về ADMIN<br>- Và tự động làm DNTT</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-09" data-category="OFFICE PROCUREMENT" data-search="office procurement văn phòng phẩm văn phòng phẩm - mình thường mua vpp tân tiến 
+- đặt giao tùy vào thời điểm thích hợp 
+- nhớ điền thông tin hóa đơn vat
+- mình sẽ thanh toán sau khi nhận hàng
+- trước khi đặt nhớ hỏi 1 vòng team bo xem có ai cần order thêm vpp nào không do bo sẽ xài vpp nhiều. https://trungtamvanphongpham.vn/ ">
+        <div class="task-top"><span class="task-no">09</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>VĂN PHÒNG PHẨM</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>VĂN PHÒNG PHẨM</p></section><section><h4>Contact point / Description</h4><p>- Mình thường mua VPP Tân tiến <br>- Đặt giao tùy vào thời điểm thích hợp <br>- Nhớ điền thông tin hóa đơn VAT<br>- Mình sẽ thanh toán sau khi nhận hàng<br>- Trước khi đặt nhớ hỏi 1 vòng team BO xem có ai cần order thêm VPP nào không do BO sẽ xài VPP nhiều.</p></section><section><h4>Files / Folder</h4><p><a href="https://trungtamvanphongpham.vn/" target="_blank" rel="noreferrer">https://trungtamvanphongpham.vn/</a></p></section></div>
+        <div class="task-links"><a href="https://trungtamvanphongpham.vn/" target="_blank" rel="noreferrer">trungtamvanphongpham.vn ↗</a></div>
+      </article>
+      <article class="task-card" id="task-10" data-category="OFFICE PROCUREMENT" data-search="office procurement theo dõi + update chi phí mua hàng 3 vp hàng ngày-tuần-tháng theo dõi + update chi phí mua hàng 3 vp hàng ngày-tuần-tháng cập nhập chi phí mua hàng ngày 
+- sẽ update chi tiết thông tin mua hàng trong file này
+- đủ các thông tin: location - headcode - tên sản phẩm - ngày mua hàng/ ngày xuất hóa đơn - giá tiền - người thanh toán
+- vị trí điền: các tabs chia theo từng tháng. mỗi tháng sẽ cần duplicate ra 1 tab mới -
+tab &#x27;&#x27;month + year&#x27;&#x27;. vd: 03.2025 ops - payment request tracking 2026 ">
+        <div class="task-top"><span class="task-no">10</span><span class="task-category">OFFICE PROCUREMENT</span></div>
+        <h3>Theo dõi + update chi phí mua hàng 3 VP hàng ngày-tuần-tháng</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Theo dõi + update chi phí mua hàng 3 VP hàng ngày-tuần-tháng</p></section><section><h4>Contact point / Description</h4><p>Cập nhập chi phí mua hàng ngày <br>- Sẽ update chi tiết thông tin mua hàng trong FILE này<br>- Đủ các thông tin: LOCATION - HEADCODE - TÊN SẢN PHẨM - NGÀY MUA HÀNG/ NGÀY XUẤT HÓA ĐƠN - GIÁ TIỀN - NGƯỜI THANH TOÁN<br>- Vị trí điền: các tabs chia theo từng tháng. Mỗi tháng sẽ cần duplicate ra 1 tab mới -<br>Tab &#x27;&#x27;Month + Year&#x27;&#x27;. VD: 03.2025</p></section><section><h4>Files / Folder</h4><p>Ops - Payment Request Tracking 2026</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-11" data-category="QUẢN LÝ CHI PHÍ" data-search="quản lý chi phí báo cáo chi phí hàng tuần do chị nhung ứng tiền admin báo cáo chi phí hàng tuần do chị nhung ứng tiền admin 1/ mỗi khi chi các khoản nào, note lại trong ops - payment request tracking 2026 theo các đề mục tương ứng từng tháng để tracking và lên dntt. lưu ý nếu có chi tiền trước thì note thêm bên cạnh để tổng hợp và báo lại chị nhung , chị nhung sẽ claim tiền lại.
+2/ hàng tuần, mình thường lên pr vào thứ 3 sau khi tổng hợp hết các chi phí và lên dntt
+3/ sau khi submit xong các dntt cho kế toán ,  mình sẽ tổng hợp lại thông tin các dntt vào sheet dntt ko hđ 2026 để chi nhung follow và check xem kế toán đã đi thanh toán chưa ops - payment request tracking 2026 ">
+        <div class="task-top"><span class="task-no">11</span><span class="task-category">QUẢN LÝ CHI PHÍ</span></div>
+        <h3>Báo cáo chi phí hàng tuần do chị Nhung ứng tiền Admin</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Báo cáo chi phí hàng tuần do chị Nhung ứng tiền Admin</p></section><section><h4>Contact point / Description</h4><p>1/ Mỗi khi chi các khoản nào, note lại trong Ops - Payment Request Tracking 2026 theo các đề mục tương ứng từng tháng để tracking và lên DNTT. Lưu ý nếu có chi tiền trước thì note thêm bên cạnh để tổng hợp và báo lại chị Nhung , chị Nhung sẽ claim tiền lại.<br>2/ Hàng tuần, mình thường lên PR vào thứ 3 sau khi tổng hợp hết các chi phí và lên DNTT<br>3/ Sau khi submit xong các DNTT cho kế toán ,  mình sẽ tổng hợp lại thông tin các DNTT vào Sheet DNTT Ko HĐ 2026 để chi Nhung follow và check xem kế toán đã đi thanh toán chưa</p></section><section><h4>Files / Folder</h4><p>Ops - Payment Request Tracking 2026</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-12" data-category="QUẢN LÝ CHI PHÍ" data-search="quản lý chi phí dự trù và quản lý chi phí hàng năm dự trù và quản lý chi phí hàng năm - cùng với chị dương lên dự trù chi phí, dựa trên các chi phí hàng tuần lẫn chi phí hàng tháng và hàng năm admin/budget 2026 ">
+        <div class="task-top"><span class="task-no">12</span><span class="task-category">QUẢN LÝ CHI PHÍ</span></div>
+        <h3>Dự trù và quản lý chi phí hàng năm</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Dự trù và quản lý chi phí hàng năm</p></section><section><h4>Contact point / Description</h4><p>- Cùng với chị Dương lên dự trù chi phí, dựa trên các chi phí hàng tuần lẫn chi phí hàng tháng và hàng năm</p></section><section><h4>Files / Folder</h4><p>ADMIN/BUDGET 2026</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-13" data-category="OFFICE MANAGEMENT" data-search="office management seatmap: cập nhật khi có thay đổi về chỗ ngồi, xem vị trí chỗ trống hiện tại để setup cho người mới,… seatmap: cập nhật khi có thay đổi về chỗ ngồi, xem vị trí chỗ trống hiện tại để setup cho người mới,…  hcm office - seating map ">
+        <div class="task-top"><span class="task-no">13</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>Seatmap: Cập nhật khi có thay đổi về chỗ ngồi, xem vị trí chỗ trống hiện tại để setup cho người mới,…</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Seatmap: Cập nhật khi có thay đổi về chỗ ngồi, xem vị trí chỗ trống hiện tại để setup cho người mới,…</p></section><section><h4>Files / Folder</h4><p>HCM OFFICE - SEATING MAP</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-14" data-category="OFFICE MANAGEMENT" data-search="office management phối hợp với các head/lead team khác trong việc thay đổi chỗ ngồi_theo yêu cầu phối hợp với các head/lead team khác trong việc thay đổi chỗ ngồi_theo yêu cầu   ">
+        <div class="task-top"><span class="task-no">14</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>Phối hợp với các Head/Lead team khác trong việc thay đổi chỗ ngồi_Theo yêu cầu</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Phối hợp với các Head/Lead team khác trong việc thay đổi chỗ ngồi_Theo yêu cầu</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-15" data-category="OFFICE MANAGEMENT" data-search="office management thay đổi vị trí thiết bị/chỗ ngồi_theo yêu cầu của bod thay đổi vị trí thiết bị/chỗ ngồi_theo yêu cầu của bod   ">
+        <div class="task-top"><span class="task-no">15</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>Thay đổi vị trí thiết bị/chỗ ngồi_Theo yêu cầu của BOD</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Thay đổi vị trí thiết bị/chỗ ngồi_Theo yêu cầu của BOD</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-16" data-category="OFFICE MANAGEMENT" data-search="office management theo dõi và liên hệ ncc bảo hành hoặc sửa chửa nội thất văn phòng nếu có phát sinh hư hỏng theo dõi và liên hệ ncc bảo hành hoặc sửa chửa nội thất văn phòng nếu có phát sinh hư hỏng  sheet hotline bên cạnh nha ">
+        <div class="task-top"><span class="task-no">16</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>Theo dõi và liên hệ NCC bảo hành hoặc sửa chửa nội thất văn phòng nếu có phát sinh hư hỏng</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Theo dõi và liên hệ NCC bảo hành hoặc sửa chửa nội thất văn phòng nếu có phát sinh hư hỏng</p></section><section><h4>Files / Folder</h4><p>Sheet HOTLINE bên cạnh nha</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-17" data-category="OFFICE MANAGEMENT" data-search="office management nước uống văn phòng hcm nước uống văn phòng hcm - nhắn trực tiếp group zalo sapuwa tag chị huong giang , nếu chị giang không phản hồi gọi lêntổng đài để order nước - 18002085
+- cô sẽ báo lên nhóm để mình ord -&gt; nếu bình có vòi hết: order 3 bình có vòi và 9 không vòi / bình có vòi còn 1 bình: ord 2 bình có vòi và 10 bình không vòi =&gt; tổng order bình là 12 ( không vòi + có vòi) , nếu cô báo ord thêm thùng nước suối 330ml thì order
+- qui trình thanh toán:
+1/ sapuwa sẽ xuất hđ cho từng lần order 
+2/ admin lưu lại từng hđ và sẽ cộng chung để làm thanh toán vào cuối tháng
+3/ làm dntt có hđ đặt lúc 8h sáng thì sẽ nhận được trong ngày
+đặt sau 9h thì hôm sau mới nhận được nước
+thông thường còn 4 bình thì sẽ tranh thủ đặt nước
+-----------
+[hcm] bảng theo dõi thu - nước uống ">
+        <div class="task-top"><span class="task-no">17</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>NƯỚC UỐNG VĂN PHÒNG HCM</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>NƯỚC UỐNG VĂN PHÒNG HCM</p></section><section><h4>Contact point / Description</h4><p>- Nhắn trực tiếp group Zalo SAPUWA tag chị Huong Giang , nếu chị Giang không phản hồi gọi lênTổng đài để order nước - 18002085<br>- Cô sẽ báo lên nhóm để mình ord -&gt; Nếu bình có vòi hết: order 3 bình có vòi và 9 không vòi / Bình có vòi còn 1 bình: ord 2 bình có vòi và 10 bình không vòi =&gt; tổng order bình là 12 ( không vòi + có vòi) , nếu cô báo ord thêm thùng nước suối 330ml thì order<br>- Qui trình thanh toán:<br>1/ Sapuwa sẽ xuất HĐ cho từng lần order <br>2/ Admin lưu lại từng HĐ và sẽ cộng chung để làm thanh toán vào cuối tháng<br>3/ Làm DNTT có HĐ</p></section><section><h4>Files / Folder</h4><p>Đặt lúc 8h sáng thì sẽ nhận được trong ngày<br>Đặt sau 9h thì hôm sau mới nhận được nước<br>Thông thường còn 4 bình thì sẽ tranh thủ đặt nước<br>-----------<br>[HCM] BẢNG THEO DÕI THU - NƯỚC UỐNG</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-18" data-category="OFFICE MANAGEMENT" data-search="office management nước uống vp đn nước uống vp đn - gia phát - cái này có chị dương hr handle
+- qui trình thanh toán:
+1/ xác nhận bảng kê từ mail của gia phát gửi đến tầm cuối tháng qua zalo (cỡ 28-29 mà chưa thấy gửi bảng kê nước thì nhắn zalo hỏi)
+2/ gia phát xuất hđ + scan bảng kê
+3/ làm dntt có hđ  ">
+        <div class="task-top"><span class="task-no">18</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>NƯỚC UỐNG VP ĐN</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>NƯỚC UỐNG VP ĐN</p></section><section><h4>Contact point / Description</h4><p>- Gia Phát - cái này có chị Dương HR handle<br>- Qui trình thanh toán:<br>1/ Xác nhận bảng kê từ mail của Gia Phát gửi đến tầm cuối tháng qua Zalo (cỡ 28-29 mà chưa thấy gửi bảng kê nước thì nhắn Zalo hỏi)<br>2/ Gia Phát xuất HĐ + scan bảng kê<br>3/ Làm DNTT có HĐ</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-19" data-category="OFFICE MANAGEMENT" data-search="office management máy in canon máy in canon - hướng dẫn cách sử dụng + cách thay mực máy in (phải chỉ trực tiếp thì mới biết được)
+hdsd: lưu ý đầu tiên là laptop phải cài sẵn phần mềm máy in nhé, nếu chưa nhắn các anh it hỗ trợ
+1. nếu bấm in mà máy không in:
+- check wifi xem laptop đã để đúng wifi meeting room c chưa, máy in chỉ xài mạng meeting room c không xài mạng khác  -&gt; chưa thì chuyển về meeting room c, rồi thì kiểm tra tới máy in
+- check xem màn hình máy in đang hiển thị gì , màn hình tối thì bấm nhẹ 1 cái cho hiển thị -&gt; sau đó nếu hiện màn hình chọn trang in cứ bấm chọn a2/plain là in được nhé
+2. vấn đề mực in:
+- nếu máy báo lỗi hết mực màu khi khởi động máy -&gt; cứ bấm continue printing -&gt; mực màu mình rất ít xài nên sẽ lâu hết, theo dõi nếu thấy trang in bị sọc thì hãy báo lên chị nhung trước để mua mực màu thay
+- nếu hết mực đen thì ord nhé.
+3. nếu máy có vấn đề:
+- do hiện tại máy đã hết bảo hành từ huy hoàng nên khi có vấn đề phát sinh gọi bên máy in huy hoàng qua sẽ tốn giá tầm 100k -120k - mực in the9 - 0842 307 607
+báo shop chuẩn bị hàng, chuyển khoản sau khi nhận hàng  495,000 (gồm vat) -&gt; nhớ nhắc anh bán mực xuất vat, tại ảnh hay quên lắm
+mỗi tháng order 1 lần - 1 hộp mực đen - hộp mực in đen cho máy canon laser màu đa chức năng i-sensys mf655cwd ạ ">
+        <div class="task-top"><span class="task-no">19</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>MÁY IN CANON</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>MÁY IN CANON</p></section><section><h4>Contact point / Description</h4><p>- Hướng dẫn cách sử dụng + cách thay mực máy in (phải chỉ trực tiếp thì mới biết được)<br>HDSD: lưu ý đầu tiên là laptop phải cài sẵn phần mềm máy in nhé, nếu chưa nhắn các anh IT hỗ trợ<br>1. Nếu bấm in mà máy không in:<br>- check wifi xem laptop đã để đúng wifi meeting room C chưa, máy in chỉ xài mạng Meeting Room C không xài mạng khác  -&gt; chưa thì chuyển về meeting room C, rồi thì kiểm tra tới máy in<br>- check xem màn hình máy in đang hiển thị gì , màn hình tối thì bấm nhẹ 1 cái cho hiển thị -&gt; sau đó nếu hiện màn hình chọn trang in cứ bấm chọn A2/Plain là in được nhé<br>2. Vấn đề mực in:<br>- Nếu máy báo lỗi hết mực màu khi khởi động máy -&gt; cứ bấm Continue Printing -&gt; mực màu mình rất ít xài nên sẽ lâu hết, theo dõi nếu thấy trang in bị sọc thì hãy báo lên chị Nhung trước để mua mực màu thay<br>- Nếu hết mực đen thì ord nhé.<br>3. Nếu máy có vấn đề:<br>- Do hiện tại máy đã hết bảo hành từ Huy Hoàng nên khi có vấn đề phát sinh gọi bên máy in Huy Hoàng qua sẽ tốn giá tầm 100k -120k</p></section><section><h4>Files / Folder</h4><p>- Mực in The9 - 0842 307 607<br>Báo shop chuẩn bị hàng, chuyển khoản sau khi nhận hàng  495,000 (gồm VAT) -&gt; nhớ nhắc anh bán mực xuất VAT, tại ảnh hay quên lắm<br>Mỗi tháng order 1 lần - 1 hộp mực đen - Hộp mực in Đen cho máy Canon laser màu đa chức năng i-SENSYS MF655Cwd ạ</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-20" data-category="OFFICE MANAGEMENT" data-search="office management máy in hp máy in hp giáy in cho máy này mình sẽ order chung vpp tân tiến - giấy in màu epson, in 1 mặt, 1 mặt bóng 1 mặt nhám
+con máy này mình thuê, nên có bất cứ vấn đề nào cần hỗ trợ cứ nhắn lên group zalo: cty công nghệ vihali - print logic
+hàng tháng khoảng ngày 20 -26 sẽ có nhân viên kĩ thuật của print logic đến bảo trì máy và chốt số trang in. mình thuê máy giá 540k/tháng/ gồm vat cho 250 trang in - chị nhung sẽ thanh toán trực tiếp cho ncc , sau đó gộp làm pr chung cphc hcm để kế toán claim tiền về lại 
+máy này đa số anh tín xài, lâu lâu sẽ là các anh/chị leader
+admin cần cài thì follow file notion để cài nha: notion cài máy in hp  ">
+        <div class="task-top"><span class="task-no">20</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>MÁY IN HP</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>MÁY IN HP</p></section><section><h4>Contact point / Description</h4><p>GIÁY IN CHO MÁY NÀY MÌNH SẼ ORDER CHUNG VPP TÂN TIẾN - GIẤY IN MÀU EPSON, IN 1 MẶT, 1 MẶT BÓNG 1 MẶT NHÁM<br>Con máy này mình thuê, nên có bất cứ vấn đề nào cần hỗ trợ cứ nhắn lên group zalo: CTY CÔNG NGHỆ VIHALI - PRINT LOGIC<br>Hàng tháng khoảng ngày 20 -26 sẽ có nhân viên kĩ thuật của Print Logic đến bảo trì máy và chốt số trang in. Mình thuê máy giá 540k/tháng/ gồm VAT cho 250 trang in - chị Nhung sẽ thanh toán trực tiếp cho NCC , sau đó gộp làm PR chung CPHC HCM để kế toán claim tiền về lại <br>Máy này đa số anh Tín xài, lâu lâu sẽ là các anh/chị leader<br>Admin cần cài thì follow file Notion để cài nha: NOTION CÀI MÁY IN HP</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-21" data-category="OFFICE MANAGEMENT" data-search="office management máy pha cà phê máy pha cà phê - hướng dẫn cách vệ sinh máy
+- các vấn đề liên quan cứ nhắn lên nhóm hỏi team epicure
+zalo: vihali - máy cà phê vp hcm f11 espresso - deep brewer clean - youtube ">
+        <div class="task-top"><span class="task-no">21</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>MÁY PHA CÀ PHÊ</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>MÁY PHA CÀ PHÊ</p></section><section><h4>Contact point / Description</h4><p>- Hướng dẫn cách vệ sinh máy<br>- Các vấn đề liên quan cứ nhắn lên nhóm hỏi team Epicure<br>Zalo: VIHALi - Máy Cà Phê Vp HCM</p></section><section><h4>Files / Folder</h4><p>F11 Espresso - Deep Brewer Clean - YouTube</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-22" data-category="OFFICE MANAGEMENT" data-search="office management máy làm đá máy làm đá - hướng dẫn cách sử dụng-&gt; đổ nước vào và cắm điện máy sẽ tự làm đá ( cô lan sẽ tự chủ động cắm máy mỗi sáng và fill nước)
+- may này anh tín mua trên sàn tmđt nên không có hóa đơn hay vendor sửa đâu  ">
+        <div class="task-top"><span class="task-no">22</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>MÁY LÀM ĐÁ</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>MÁY LÀM ĐÁ</p></section><section><h4>Contact point / Description</h4><p>- Hướng dẫn cách sử dụng-&gt; đổ nước vào và cắm điện máy sẽ tự làm đá ( cô Lan sẽ tự chủ động cắm máy mỗi sáng và fill nước)<br>- May này anh Tín mua trên sàn TMĐT nên không có hóa đơn hay vendor sửa đâu</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-23" data-category="OFFICE MANAGEMENT" data-search="office management máy nước lọc toshiba máy nước lọc toshiba - hướng dẫn các sử dụng và vendor sửa chữa khi có hư hỏng:
+hiện tại máy ở lầu 3 thì cứ liên hệ zalo của công ty tnhh hoàng đức hải, bên này sẽ liên  - còn bảo hành 12 tháng ( đến hết 31/12/2026) - sdt mua hàng : 0914693293
+zalo 1: phúc trường sinh - bên này chi phí sửa cố định là 324.000 (vat 8%) 
+zalo 2: bhuq toshiba - bên này có chi phí kỹ thuật tới nhà là 300,000 (vat 8%). nhưng nếu cần thay linh kiện của máy thì sẽ được free phí đến nhà, hoặc là nếu máy cần sửa thật, thì người ta lấy phí sữa chữa (tùy mức độ mà có nhiều khung giá khác nhau) và free phí đến nhà  ">
+        <div class="task-top"><span class="task-no">23</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>MÁY NƯỚC LỌC TOSHIBA</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>MÁY NƯỚC LỌC TOSHIBA</p></section><section><h4>Contact point / Description</h4><p>- Hướng dẫn các sử dụng và vendor sửa chữa khi có hư hỏng:<br>Hiện tại máy ở Lầu 3 thì cứ liên hệ Zalo của Công ty TNHH Hoàng Đức Hải, bên này sẽ liên  - còn bảo hành 12 tháng ( đến hết 31/12/2026) - SDT mua hàng : 0914693293<br>Zalo 1: PHÚC TRƯỜNG SINH - Bên này chi phí sửa cố định là 324.000 (VAT 8%) <br>Zalo 2: Bhuq Toshiba - Bên này có chi phí kỹ thuật tới nhà là 300,000 (VAT 8%). Nhưng nếu cần thay linh kiện của máy thì sẽ được free phí đến nhà, hoặc là nếu máy cần sửa thật, thì người ta lấy phí sữa chữa (tùy mức độ mà có nhiều khung giá khác nhau) và free phí đến nhà</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-24" data-category="OFFICE MANAGEMENT" data-search="office management điện thoại bàn công ty - 02877779090 điện thoại bàn công ty - 02877779090 hàng tháng chị nhung sẽ thanh toán tự động qua momo sau đó indochina ( công ty cổ phần viễn thông đông dương telecom) sẽ gửi hóa đơn về và mình làm thanh toán gộp chung chi phí hành chính hcm cho chị nhung 
+trường hợp có vấn đề không nghe , gọi được hay bất cứ vấn đề liên quan đến số điện thoại này =&gt; nhắn lên nhóm vihali x indochina để họ hỗ trợ  ">
+        <div class="task-top"><span class="task-no">24</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>ĐIỆN THOẠI BÀN CÔNG TY - 02877779090</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>ĐIỆN THOẠI BÀN CÔNG TY - 02877779090</p></section><section><h4>Contact point / Description</h4><p>Hàng tháng chị Nhung sẽ thanh toán tự động qua Momo sau đó Indochina ( CÔNG TY CỔ PHẦN VIỄN THÔNG ĐÔNG DƯƠNG TELECOM) sẽ gửi hóa đơn về và mình làm thanh toán gộp chung chi phí hành chính HCM cho chị Nhung <br>Trường hợp có vấn đề không nghe , gọi được hay bất cứ vấn đề liên quan đến số điện thoại này =&gt; nhắn lên nhóm Vihali x Indochina để họ hỗ trợ</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-25" data-category="OFFICE MANAGEMENT" data-search="office management bàn giao tài sản ( hcm) bàn giao tài sản ( hcm) - bất kể các case: onboarding, offboarding, mua thiết bị mới, thanh lý thiết bị cũ, vận chuyển thiết bị giữ 3 vp đều cần ghi chú lại đầy đủ
+quy trình:
+1- tiếp nhận thông tin bàn giao/ thu hồi tài sản trên thường sẽ là onboarding/ offboarding , lâu lâu sẽ có request theo yêu cầu trên slack
+2- điền thông tin trên template có sẵn ở bbbg - thu hồi ts hoặc bbbg - cấp phát ts và in ra để gửi cho đối tượng nhận/ trả tài sản ký
+3- scan giấy tờ được ký và lưu về scan_bbbg cấp phát ts + bbbg thu hồi ts 
+4- report lại trên file hcm hcm_theo dõi tài sản  tương ứng: thời gian + họ tên + tính chất (bàn giao/ thu hồi) + tên tài sản + mã số theo dõi tài sản vp hcm
+
+quản lý tài sản_ vihali
+bbbg 
+
+vihali 221004ttg_danh mục bàn giao sipher ">
+        <div class="task-top"><span class="task-no">25</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>BÀN GIAO TÀI SẢN ( HCM)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>BÀN GIAO TÀI SẢN ( HCM)</p></section><section><h4>Contact point / Description</h4><p>- Bất kể các case: onboarding, offboarding, mua thiết bị mới, thanh lý thiết bị cũ, vận chuyển thiết bị giữ 3 VP đều cần ghi chú lại đầy đủ<br>QUY TRÌNH:<br>1- Tiếp nhận thông tin Bàn giao/ Thu hồi tài sản trên thường sẽ là onboarding/ offboarding , lâu lâu sẽ có request theo yêu cầu trên Slack<br>2- Điền thông tin trên TEMPLATE có sẵn ở BBBG - Thu hồi TS hoặc BBBG - Cấp phát TS và in ra để gửi cho đối tượng nhận/ trả tài sản ký<br>3- Scan giấy tờ được ký và lưu về Scan_BBBG cấp phát TS + BBBG thu hồi TS <br>4- Report lại trên file HCM HCM_THEO DÕI TÀI SẢN  tương ứng: THỜI GIAN + HỌ TÊN + TÍNH CHẤT (BÀN GIAO/ THU HỒI) + TÊN TÀI SẢN + MÃ SỐ THEO DÕI</p></section><section><h4>Files / Folder</h4><p>TÀI SẢN VP HCM<br><br>QUẢN LÝ TÀI SẢN_ VIHALI<br>BBBG <br><br>VIHALI 221004TTG_Danh mục bàn giao Sipher</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-26" data-category="OFFICE MANAGEMENT" data-search="office management tài sản vp đn   tài sản vp đn ">
+        <div class="task-top"><span class="task-no">26</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>TÀI SẢN VP ĐN</h3>
+        <div class="task-body"><section><h4>Files / Folder</h4><p>TÀI SẢN VP ĐN</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-27" data-category="OFFICE MANAGEMENT" data-search="office management hcm_theo dõi tài sản   hcm_theo dõi tài sản ">
+        <div class="task-top"><span class="task-no">27</span><span class="task-category">OFFICE MANAGEMENT</span></div>
+        <h3>HCM_THEO DÕI TÀI SẢN</h3>
+        <div class="task-body"><section><h4>Files / Folder</h4><p>HCM_THEO DÕI TÀI SẢN</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-28" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) đề nghị thanh toán (payment request) đề nghị thanh toán (payment request)
+thực hiện + ai review + submit + lưu trữ đề nghị thanh toán (dntt)
+quy trỉnh chuẩn chung: 1/ raise approval request
+- bước này là bước đầu tiên trong qui trinh làm dntt.
+- tuy nhiên, bước này chỉ dành cho những loại hàng hóa phát sinh, chưa có trong budget dự kiến ban đầu thì cần phải làm request for approval (hoặc những khoản tiền có số lượng cao). vì kế toán sẽ cần đi qua nhiều bước để ứng tiền cho mình → thời gian khá lâu.  lưu ý 1: đối với những chi phí được thanh toán đều đặn hàng tuần (snack and drink, văn phòng phẩm, các vât dụng link kiện không hóa đơn vat,...) hay là hằng tháng (dịch vụ vệ sinh văn phòng, thuê văn phòng, nước, giấy vệ sinh, bao rác, cà phê,...) thì không cần phải raise approval
+- - - 
+lưu ý 2: về cách sử dụng tool submit dntt trên slack #payment-request
+1- workflow
+2- entity name/đơn vị chi trả: dopa hoặc vihali tùy thuộc vào tính chất của dntt mình tạo
+3- budget holder: thường là chị nhung quach
+4- headcode/mã chi phí: tùy thuộc vào tính chất sản phẩm/ dntt mình raise
+5- product/service (sản phẩm/dịch vụ): khi nội dung sản phẩm, dịch vụ của dntt mình raise 
+6- vendor/staff (người thụ hưởng):
+  + nếu là chi phí hành chính hàng tuần thì cứ mặc định quách hồng nhung
+   + chi phí dntt có hợp đồng thì để tên doanh nghiệp cung cấp dịch vụ vào
+7- amount to be paid/số tiền đề nghị: đúng y chang trên dntt
+8- due date (ddmmyyyy)/hạn thanh toán
+   + chi phí hành chính thì để cách 1 tuần kể từ ngày submit
+    + chi phí có hđ thì để cách 7-12 ngày kể từ ngày submit
+9- payment request letter/đề nghị thanh toán: luôn cố
+còn các mục ở dưới thì tùy tình hình mà điền cho phù hợp
+10- shared folder:
+- link đường link gg drive của folder dntt theo từng ngày mà mình tạo trên folder chung với kế toán
+- link thêm 1 đường link sheet chi phí hàng tuần gửi kế toán
+- - - 
+lưu ý 3:
+- file ops - tracking dùng để theo dõi kế toán có đi tiền đúng hạn không
+- đối với những dntt đã hết hạn, nên thường xuyên kiểm tra với kế toán">
+        <div class="task-top"><span class="task-no">28</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>ĐỀ NGHỊ THANH TOÁN (PAYMENT REQUEST)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>ĐỀ NGHỊ THANH TOÁN (PAYMENT REQUEST)<br>Thực hiện + AI REVIEW + Submit + Lưu Trữ ĐỀ NGHỊ THANH TOÁN (DNTT)<br>Quy trỉnh chuẩn chung:</p></section><section><h4>Contact point / Description</h4><p>1/ RAISE APPROVAL REQUEST<br>- Bước này là bước đầu tiên trong qui trinh làm DNTT.<br>- TUY NHIÊN, bước này chỉ dành cho những loại hàng hóa phát sinh, chưa có trong budget dự kiến ban đầu thì cần phải làm Request for Approval (hoặc những khoản tiền có số lượng cao). Vì Kế toán sẽ cần đi qua nhiều bước để ứng tiền cho mình → thời gian khá lâu.</p></section><section><h4>Notes</h4><p>LƯU Ý 1: Đối với những chi phí được thanh toán đều đặn hàng tuần (Snack and drink, văn phòng phẩm, các vât dụng link kiện không hóa đơn VAT,...) hay là hằng tháng (dịch vụ vệ sinh văn phòng, thuê văn phòng, nước, giấy vệ sinh, bao rác, cà phê,...) thì không cần phải RAISE APPROVAL<br>- - - <br>LƯU Ý 2: Về cách sử dụng tool submit DNTT trên Slack #PAYMENT-REQUEST<br>1- Workflow<br>2- Entity name/Đơn vị chi trả: DOPA hoặc VIHALI tùy thuộc vào tính chất của DNTT mình tạo<br>3- Budget holder: Thường là chị Nhung Quach<br>4- Headcode/Mã chi phí: Tùy thuộc vào tính chất sản phẩm/ DNTT mình raise<br>5- Product/Service (Sản phẩm/Dịch vụ): Khi nội dung sản phẩm, dịch vụ của DNTT mình raise <br>6- Vendor/Staff (Người thụ hưởng):<br>  + Nếu là chi phí hành chính hàng tuần thì cứ mặc định QUÁCH HỒNG NHUNG<br>   + Chi phí DNTT có Hợp đồng thì để tên doanh nghiệp cung cấp dịch vụ vào<br>7- Amount to be paid/Số tiền đề nghị: đúng y chang trên DNTT<br>8- Due date (DDMMYYYY)/Hạn thanh toán<br>   + Chi phí hành chính thì để cách 1 tuần kể từ ngày submit<br>    + Chi phí có HĐ thì để cách 7-12 ngày kể từ ngày submit<br>9- Payment Request Letter/Đề nghị thanh toán: Luôn cố<br>CÒN CÁC MỤC Ở DƯỚI THÌ TÙY TÌNH HÌNH MÀ ĐIỀN CHO PHÙ HỢP<br>10- Shared folder:<br>- Link đường link GG Drive của folder DNTT theo từng ngày mà mình tạo trên folder chung với kế toán<br>- Link thêm 1 đường link Sheet chi phí hàng tuần gửi kế toán<br>- - - <br>LƯU Ý 3:<br>- File Ops - Tracking dùng để theo dõi kế toán có đi tiền đúng hạn không<br>- Đối với những DNTT đã hết hạn, nên thường xuyên kiểm tra với kế toán</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-29" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) 2/ tạo và submit dntt  2/ tạo và submit dntt
+thực hiện + trình ký + submit + lưu trữ dntt
+1/ mua và tổng hợp, lưu trữ thông tin chi tiết vào ops - payment request tracking 2026
+2/ làm dntt payment- supplier  (lưu ý: vì mình làm dntt online, không in ấn, nên cần phải có sẵn chữ ký của chị nhung và người lập dntt trên teamplate newform chuẩn của công ty)
+3/ gộp sheet newform template chuẩn + file chứng từ lại thành 1 -&gt; tải về dạng pdf (lưu ý note tên các file rõ ràng chi tiết + ngày tháng để dễ phân biệt)
+4/ kiểm tra thông qua vesper - tải và cài đặt vesper trước, có thể hỏi anh tân để anh support -&gt; upload flow duyệt pr của anh đức up trong chanel adminn - acc, nếu stuck khúc này có thể liên hệ anh nguyên fa nha
+mở `readme.md`, chạy script cài hoặc paste prompt;
+flow chuẩn:
+-&gt; /payment-guide
+-&gt; /payment-evidence-extract
+-&gt; /payment-review -&gt; (/payment-batch-review nếu là batch)
+-&gt; /payment-request-slack-draft
+-&gt; /payment-request-validator
+-&gt; /payment-control-report
+khi cài xong, thì hỏi vesper để sử dụng tiếp nhé.
+5/ vesper chấp thuận dntt + copy và lưu vào file dntt
+6/ gộp tất cả chứng từ, dntt, vesper review vào chung 1 file pdf sau đó gửi lại cho chị nhung kiểm tra trên channel admin-hr-danang -&gt; nếu sang tháng mới tạo 1 chat box mới pr tháng ... cc chị nhung và chị dương sau đó pin trên channel và gửi pr vào đây để chị nhung duyệt.
+7/ chị nhung tick check chấp thuận
+8/ upload dntt được chấp thuận vào admin-&gt; tùy vào entities mà click chọn , thường admin sẽ lên nhiều của vihali và dopa -&gt; nhớ chọn đúng mục pr cần lên để dễ follow và kiếm lại pr
+9/ submit pr trên channel #payment-request, đính kèm file dntt đã upload lên admin :
+ - nêu là chi phí có hợp đồng: sau khi lên pr thì update tiếp tục vào folder này theo từng sheet tháng để dễ tracking theo dõi 2026_ops_tổng hợp theo dõi thời hạn và chi phi có hợp đồng
+ - nếu là chi phí không hợp đồng: sau khi lên pr thì update vào ops - payment request tracking 2026 theo từng sheet tháng để dễ tracking theo dõi
+10/ in pr
+- sau khi đã submit online, in bản cứng của pr đó để đưa kế toán để kế toán lưu chứng từ ( in 2 mặt để tiết kiệm giấy).
+- các chứng từ chỉ có 1 bản gốc như hợp đồng, plhđ, ... : admin giữ lại bản gốc, kế toán giữ bản in ( có thể in 2 mặt)
+- các chứng từ như bb giao hàng, đề nghị thanh toán, hóa đơn vat bản in có mộc từ ncc.... hoặc hđ có 4 bản ncc giữ 2 bản , mình giữ 2 bản thì có thể đưa kế toán 1 bản gốc 
+----
+lưu ý
+riêng với các pr liên quan đến việc mua các trang thiết bị mới chẳng hạn như: pc, laptop, ssd .... =&gt; kẹp thêm bbbg vào bộ chứng từ cho kế toán, bản gốc bbbg admin giữ , có thể đưa kế toán bản in  ">
+        <div class="task-top"><span class="task-no">29</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>2/ TẠO VÀ SUBMIT DNTT</h3>
+        <div class="task-body"><section><h4>Contact point / Description</h4><p>2/ TẠO VÀ SUBMIT DNTT<br>Thực hiện + Trình ký + Submit + Lưu Trữ DNTT<br>1/ Mua và Tổng hợp, lưu trữ thông tin chi tiết vào Ops - Payment Request Tracking 2026<br>2/ Làm DNTT Payment- Supplier  (Lưu ý: vì mình làm DNTT online, không in ấn, nên cần phải có sẵn chữ ký của chị Nhung và người lập DNTT trên TEAMPLATE NEWFORM Chuẩn của công ty)<br>3/ Gộp sheet Newform template chuẩn + File chứng từ lại thành 1 -&gt; tải về dạng PDF (Lưu ý Note tên các file rõ ràng chi tiết + ngày tháng để dễ phân biệt)<br>4/ Kiểm tra thông qua Vesper - Tải và cài đặt Vesper trước, có thể hỏi anh Tân để anh support -&gt; Upload flow duyệt PR của anh Đức up trong Chanel adminn - acc, nếu stuck khúc này có thể liên hệ anh Nguyên FA nha<br>Mở `README.md`, chạy script cài hoặc paste prompt;<br>flow chuẩn:<br>-&gt; /payment-guide<br>-&gt; /payment-evidence-extract<br>-&gt; /payment-review -&gt; (/payment-batch-review nếu là batch)<br>-&gt; /payment-request-slack-draft<br>-&gt; /payment-request-validator<br>-&gt; /payment-control-report<br>Khi cài xong, thì hỏi Vesper để sử dụng tiếp nhé.<br>5/ Vesper chấp thuận DNTT + copy và lưu vào file DNTT<br>6/ Gộp tất cả chứng từ, DNTT, Vesper review vào chung 1 file PDF sau đó gửi lại cho chị Nhung kiểm tra trên Channel admin-hr-danang -&gt; nếu sang tháng mới tạo 1 chat box mới PR THÁNG ... cc chị Nhung và chị Dương sau đó pin trên channel và gửi PR vào đây để chị Nhung duyệt.<br>7/ Chị Nhung tick check chấp thuận<br>8/ Upload DNTT được chấp thuận vào ADMIN-&gt; tùy vào Entities mà click chọn , thường Admin sẽ lên nhiều của Vihali và DOPA -&gt; nhớ chọn đúng mục PR cần lên để dễ follow và kiếm lại PR<br>9/ Submit PR trên channel #Payment-request, đính kèm file DNTT đã upload lên ADMIN :<br> - Nêu là chi phí có hợp đồng: sau khi lên PR thì update tiếp tục vào Folder này theo từng sheet tháng để dễ tracking theo dõi 2026_OPS_TỔNG HỢP THEO DÕI THỜI HẠN VÀ CHI PHI CÓ HỢP ĐỒNG<br> - Nếu là chi phí không hợp đồng: sau khi lên PR thì update vào Ops - Payment Request Tracking 2026 theo từng sheet tháng để dễ tracking theo dõi<br>10/ In PR<br>- Sau khi đã submit online, in bản cứng của PR đó để đưa kế toán để kế toán lưu chứng từ ( in 2 mặt để tiết kiệm giấy).<br>- Các chứng từ chỉ có 1 bản gốc như Hợp đồng, PLHĐ, ... : Admin giữ lại bản gốc, kế toán giữ bản in ( có thể in 2 mặt)<br>- Các chứng từ như BB giao hàng, Đề nghị thanh toán, hóa đơn VAT bản in có mộc từ NCC.... hoặc HĐ có 4 bản NCC giữ 2 bản , mình giữ 2 bản thì có thể đưa kế toán 1 bản gốc <br>----<br>LƯU Ý<br>Riêng với các PR liên quan đến việc mua các trang thiết bị mới chẳng hạn như: PC, Laptop, SSD .... =&gt; kẹp thêm BBBG vào bộ chứng từ cho kế toán, bản gốc BBBG Admin giữ , có thể đưa kế toán bản in</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-30" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) 3/ thời gian submit dntt cho kế toán  3/ thời gian submit dntt cho kế toán
+- thông thường, kế toán cần đến 5-7 ngày làm việc để thanh toán dntt chi phí hành chính
+- 10-14 ngày làm việc để thanh toán dntt chi phí có hợp đồng
+- ưu tiên gom đầy đủ hóa đơn và làm và submit dntt trong đầu tuần (thứ 2 hoặc thứ 3) để đầu tuần sau nhận được tiền
+- những case urgent thì cứ nhắn xin chị thảo, anh nguyên hỗ trợ  ">
+        <div class="task-top"><span class="task-no">30</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>3/ THỜI GIAN SUBMIT DNTT CHO KẾ TOÁN</h3>
+        <div class="task-body"><section><h4>Contact point / Description</h4><p>3/ THỜI GIAN SUBMIT DNTT CHO KẾ TOÁN<br>- Thông thường, kế toán cần đến 5-7 ngày làm việc để thanh toán DNTT chi phí hành chính<br>- 10-14 ngày làm việc để thanh toán DNTT chi phí có Hợp đồng<br>- Ưu tiên gom đầy đủ hóa đơn và làm và submit DNTT trong đầu tuần (thứ 2 hoặc thứ 3) để đầu tuần sau nhận được tiền<br>- Những case Urgent thì cứ nhắn xin chị Thảo, anh Nguyên hỗ trợ</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-31" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) loại 1: dntt có hợp đồng loại 1: dntt có hợp đồng vihali
+- là dntt của các nhà cung cấp có ký hợp đồng với vihali, và cung cấp các dịch vụ hàng tháng như: vệ sinh, chuyển phát nhanh, nước uống, văn phòng,.....
+- hoặc là dntt của các nhà cung cấp các thiết bị thanh toán dùng 1 lần có chi phí lớn, cần phải tạo hợp đồng để đảm bảo quyền lợi cho phía mình như: mua máy tính, laptop, nội thất,... 
+- luôn được thanh toán dưới danh nghĩa của vihali
+- luôn phải xuất hóa đơn vat (gtgt)
+-------
+lưu ý khi làm hợp đồng dưới tên vihali:
+- các hợp đồng dưới 200 triệu -&gt; chị nhung sẽ đứng tên, gửi kèm guq cho ncc để làm hợp đồng
+- các hợp đồng trên 200 triệu -&gt; chị hồ thị yến nhi sẽ đứng tên và sẽ cần trình ký lâu hơn 2. dntt có hợp đồng
+1/ dntt có hđ - hcm 
+2/ dntt có hđ - đà nẵng - theo dõi hóa đơn vat của các ncc trong link trên (thường là mình sẽ theo dõi qua mail hoặc zalo → sau khi nhận được vat invoice thì ngay lập tức lưu vào trong provided folder link)
+
+- thu tất cả hóa đơn viết tay , giấy giao hàng , giấy nhận hàng , giấy nghiêm thu , giấy xuất kho từ các nhà cung cấp → tạo 1 folder mới cho chủ thể mua đó (nếu chưa có, còn có rồi thì vào trong folder mẹ để tạo folder con) → scan và upload toàn bộ thư từ vào đó. 
+
+- tạo pr trên drive theo đúng mục khu vực (hcm/đn) và ncc (đã có tên từng mục trong drive). form mẫu pr có thể tham khảo những pr trước
+
+- check lại đúng tất cả thông tin pr (thông tin trên pr phải tương ứng với thông tin trên vat invoice và contract (nếu có))">
+        <div class="task-top"><span class="task-no">31</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>LOẠI 1: DNTT CÓ HỢP ĐỒNG</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>LOẠI 1: DNTT CÓ HỢP ĐỒNG</p></section><section><h4>Contact point / Description</h4><p>VIHALI<br>- Là DNTT của các nhà cung cấp có ký Hợp đồng với Vihali, và cung cấp các dịch vụ hàng tháng như: Vệ sinh, chuyển phát nhanh, nước uống, văn phòng,.....<br>- Hoặc là DNTT của các nhà cung cấp các thiết bị thanh toán dùng 1 lần có chi phí lớn, cần phải tạo hợp đồng để đảm bảo quyền lợi cho phía mình như: Mua máy tính, laptop, nội thất,... <br>- Luôn được thanh toán dưới danh nghĩa của VIHALI<br>- Luôn phải xuất hóa đơn VAT (GTGT)<br>-------<br>LƯU Ý KHI LÀM HỢP ĐỒNG DƯỚI TÊN VIHALI:<br>- Các hợp đồng dưới 200 triệu -&gt; chị Nhung sẽ đứng tên, gửi kèm GUQ cho NCC để làm Hợp đồng<br>- Các hợp đồng trên 200 triệu -&gt; chị Hồ Thị Yến Nhi sẽ đứng tên và sẽ cần trình ký lâu hơn</p></section><section><h4>Files / Folder</h4><p>2. DNTT CÓ HỢP ĐỒNG<br>1/ DNTT có HĐ - HCM <br>2/ DNTT có HĐ - Đà Nẵng</p></section><section><h4>Notes</h4><p>- Theo dõi hóa đơn VAT của các NCC trong link trên (thường là mình sẽ theo dõi qua mail hoặc Zalo → sau khi nhận được VAT invoice thì ngay lập tức lưu vào trong provided folder link)<br><br>- Thu tất cả hóa đơn viết tay , giấy giao hàng , giấy nhận hàng , giấy nghiêm thu , giấy xuất kho từ các nhà cung cấp → Tạo 1 folder mới cho chủ thể mua đó (nếu chưa có, còn có rồi thì vào trong folder mẹ để tạo folder con) → Scan và upload toàn bộ thư từ vào đó. <br><br>- Tạo PR trên drive theo đúng mục khu vực (HCM/ĐN) và NCC (Đã có tên từng mục trong drive). Form mẫu PR có thể tham khảo những PR trước<br><br>- Check lại đúng tất cả thông tin PR (Thông tin trên PR phải tương ứng với thông tin trên VAT invoice và Contract (nếu có))</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-32" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) vihali - others team request  vihali - others team request
+- dntt này không tính vào chi phí admin, mà sẽ tính vào chi phí của các team request mua sản phẩm đó
+- hiện tại mình đang follow hđ license phần mềm đồ họa maya và adobe của team art
+- merchandise thì sẽ xuất hiện vào những lúc mà team mkt tổ chức sự kiện/ hoặc yêu cầu từ phía bod (sản xuất áo, túi, nón, gấu, keychain, truyện tranh,...) art team - license - tân đức/ d3design
+
+marketing team - merchandise ">
+        <div class="task-top"><span class="task-no">32</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>VIHALI - OTHERS TEAM REQUEST</h3>
+        <div class="task-body"><section><h4>Contact point / Description</h4><p>VIHALI - OTHERS TEAM REQUEST<br>- DNTT này không tính vào chi phí ADMIN, mà sẽ tính vào chi phí của các team request mua sản phẩm đó<br>- Hiện tại mình đang follow HĐ License Phần mềm đồ họa Maya và Adobe của Team Art<br>- Merchandise thì sẽ xuất hiện vào những lúc mà team MKT tổ chức sự kiện/ hoặc yêu cầu từ phía BOD (sản xuất áo, túi, nón, gấu, keychain, truyện tranh,...)</p></section><section><h4>Files / Folder</h4><p>ART TEAM - License - TÂN ĐỨC/ D3DESIGN<br><br>MARKETING TEAM - Merchandise</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-33" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) loại 2: dntt không hợp đồng loại 2: dntt không hợp đồng vihali:
+- phần lớn dùng để làm dntt các chi phí hành chính văn phòng hcm và đn hằng tuần (snacks &amp; drinks, văn phòng phẩm, linh kiện máy móc có giá trị dưới 5tr,...)
+- có xuất hóa đơn vat (gtgt) 
+-----
+lưu ý về việc xuất vat:
+- hiện tại sẽ có quy định về thuế liên quan đến việc xuất hóa đơn cho công ty, phải check kĩ xem có thể chuyển khoản từ tài khoản cá nhân rồi xuất vat cho vihali được không ( thường đơn trên 500k là không được rồi) -&gt; nếu ncc không đồng ý chuyển khoản cá nhân -&gt; báo với anh nguyên để hỗ trợ đi tiền/ phương án giải quyết do phần đi thanh toán kế toán chịu trách nhiệm 1. dntt không hợp đồng
+1/ 4. dntt k0 hợp đồng - hcm 
+2/ 5. dntt k0 hợp đồng - đà nẵng ">
+        <div class="task-top"><span class="task-no">33</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>LOẠI 2: DNTT KHÔNG HỢP ĐỒNG</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>LOẠI 2: DNTT KHÔNG HỢP ĐỒNG</p></section><section><h4>Contact point / Description</h4><p>VIHALI:<br>- Phần lớn dùng để làm DNTT các chi phí hành chính văn phòng HCM và ĐN hằng tuần (Snacks &amp; drinks, văn phòng phẩm, linh kiện máy móc có giá trị dưới 5tr,...)<br>- Có xuất hóa đơn VAT (GTGT) <br>-----<br>LƯU Ý VỀ VIỆC XUẤT VAT:<br>- Hiện tại sẽ có quy định về thuế liên quan đến việc xuất hóa đơn cho công ty, phải check kĩ xem có thể chuyển khoản từ tài khoản cá nhân rồi xuất VAT cho Vihali được không ( thường đơn trên 500k là không được rồi) -&gt; nếu NCC không đồng ý chuyển khoản cá nhân -&gt; báo với anh Nguyên để hỗ trợ đi tiền/ phương án giải quyết do phần đi thanh toán kế toán chịu trách nhiệm</p></section><section><h4>Files / Folder</h4><p>1. DNTT KHÔNG HỢP ĐỒNG<br>1/ 4. DNTT K0 hợp đồng - HCM <br>2/ 5. DNTT K0 hợp đồng - Đà Nẵng</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-34" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) dopa  dopa
+- dntt của bất kỳ chi phí nào mà không xuất được hóa đơn vat
+- ví dụ: mua đồ trên shopee, grab, hoặc mua ở những cửa hàng tạp hóa nhỏ lẻ
+- thông thường, dopa hành chính hàng tuần thì chỉ cần gộp chung dopa hcm và đn với nhau trong dopa-hcm (mình dùng folder dopa hcm là chính) -&gt; phần headcode vẫn phải ghi rõ của vp nào để theo dõi
+- sẽ có trường hợp làm thanh toán dopa thẳng cho ncc nên lưu ý đổi lại người thụ hưởng .dopa - hcm (chính) ">
+        <div class="task-top"><span class="task-no">34</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>DOPA</h3>
+        <div class="task-body"><section><h4>Contact point / Description</h4><p>DOPA<br>- DNTT của bất kỳ chi phí nào mà không xuất được hóa đơn VAT<br>- Ví dụ: mua đồ trên Shopee, Grab, hoặc mua ở những cửa hàng tạp hóa nhỏ lẻ<br>- Thông thường, DOPA hành chính hàng tuần thì chỉ cần gộp chung DOPA HCM và ĐN với nhau trong DOPA-HCM (MÌNH DÙNG FOLDER DOPA HCM LÀ CHÍNH) -&gt; phần Headcode vẫn phải ghi rõ của VP nào để theo dõi<br>- Sẽ có trường hợp làm thanh toán DOPA thẳng cho NCC nên lưu ý đổi lại Người thụ hưởng</p></section><section><h4>Files / Folder</h4><p>.DOPA - HCM (Chính)</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-35" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) review hợp đồng các ncc + làm việc trực tiếp với ncc/ legal/ kế toán review hợp đồng các ncc + làm việc trực tiếp với ncc/ legal/ kế toán bước đầu tiên quan trọng nhất trước khi yêu cầu bên ncc gửi bản soạn thảo hợp đồng sẽ là: ưu đãi/ giảm giá của đợt ký tiếp theo
+-&gt; ưu tiên deal giảm giá, ưu đãi càng nhiều càng tốt
+các bước cơ bản:
+1- nhận hồ sơ hợp đồng bản draft (word, doc) từ vendor/ hoặc tạo mới hồ sơ hợp đồng
+2- gửi mail đính kèm hợp đồng cho legal review + kế toán check về khoản thanh toán (mail: lien.nguyen@atherlabs.com ( legal), thao.dinh@atherlabs.com (kế toán trưởng), cc chị nhung, chị dương và anh nguyên)
+3- check lại với ncc các điều khoản legal và kế toán input vào nếu có -&gt; nếu 2 bên đều ok proceed tiếp
+3- thường mình sẽ chờ ncc trình kí trước và gửi mình để kí sau -&gt; sau khi nhận bản cứng, double check và kí nháy từng trang nếu hđ đã khớp với bản final -&gt; gửi chị liên kí nháy -
+4- người đại diện hợp đồng ký sống 
+5- đóng dấu mộc tròn (chị nhung giữ) 
+6- gửi lại cho vendor 1 bản để lưu
+7- nhận lại hồ sơ đã có đầy đủ chữ ký → scan và lưu trên folder hợp đồng nhà cung cấp 
+---------------------------
+đối với hđ tái gia hạn theo từng giai đoạn (1 năm, 2 năm, 3 năm,...)
+1- nhận hồ sơ hợp đồng bản draft (word, doc) từ vendor/ hoặc tạo mới hồ sơ hợp đồng
+2- gửi lại với legal view qua các điều khoản thông qua mail, nếu có thay đổi về thanh toán thì gửi thêm cho kế toán - nhằm chính thức xác nhận là hđ đã thỏa yêu cầu
+4- in hợp đồng, thường sẽ yêu cầu ncc ký và đóng dấu sống trước, sau đó mới gửi về phía mình
+5- người đại diện hđ ký sống
+6- gửi lại 1 bản ch vendor
+7- scan lưu file 2026_ops_tổng hợp theo dõi thời hạn và chi phi có hợp đồng
+
+hợp đồng nhà cung cấp ">
+        <div class="task-top"><span class="task-no">35</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>Review HỢP ĐỒNG các NCC + Làm việc trực tiếp với NCC/ Legal/ Kế toán</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Review HỢP ĐỒNG các NCC + Làm việc trực tiếp với NCC/ Legal/ Kế toán</p></section><section><h4>Contact point / Description</h4><p>Bước đầu tiên quan trọng nhất trước khi yêu cầu bên NCC gửi bản soạn thảo Hợp đồng sẽ là: ƯU ĐÃI/ GIẢM GIÁ CỦA ĐỢT KÝ TIẾP THEO<br>-&gt; Ưu tiên deal giảm giá, ưu đãi càng nhiều càng tốt<br>Các bước cơ bản:<br>1- Nhận hồ sơ Hợp đồng bản draft (word, doc) từ vendor/ hoặc tạo mới hồ sơ hợp đồng<br>2- Gửi mail đính kèm Hợp đồng cho Legal review + kế toán check về khoản thanh toán (mail: lien.nguyen@atherlabs.com ( legal), thao.dinh@atherlabs.com (kế toán trưởng), cc chị Nhung, chị Dương và anh Nguyên)<br>3- Check lại với NCC các điều khoản Legal và Kế toán input vào nếu có -&gt; nếu 2 bên đều OK proceed tiếp<br>3- Thường mình sẽ chờ NCC trình kí trước và gửi mình để kí sau -&gt; sau khi nhận bản cứng, double check và kí nháy từng trang nếu HĐ đã khớp với bản final -&gt; gửi chị Liên kí nháy -<br>4- Người đại diện hợp đồng ký sống <br>5- Đóng dấu mộc tròn (chị Nhung giữ) <br>6- Gửi lại cho vendor 1 bản để lưu<br>7- Nhận lại Hồ sơ đã có đầy đủ chữ ký → Scan và lưu trên folder Hợp Đồng nhà cung cấp <br>---------------------------<br>Đối với HĐ tái gia hạn theo từng giai đoạn (1 năm, 2 năm, 3 năm,...)<br>1- Nhận hồ sơ Hợp đồng bản draft (word, doc) từ vendor/ hoặc tạo mới hồ sơ hợp đồng<br>2- Gửi lại với Legal view qua các điều khoản thông qua mail, nếu có thay đổi về thanh toán thì gửi thêm cho Kế toán - nhằm chính thức xác nhận là HĐ đã thỏa yêu cầu<br>4- In Hợp đồng, thường sẽ yêu cầu NCC ký và đóng dấu sống trước, sau đó mới gửi về phía mình<br>5- Người đại diện HĐ ký sống<br>6- Gửi lại 1 bản ch vendor<br>7- Scan lưu file</p></section><section><h4>Files / Folder</h4><p>2026_OPS_TỔNG HỢP THEO DÕI THỜI HẠN VÀ CHI PHI CÓ HỢP ĐỒNG<br><br>Hợp Đồng nhà cung cấp</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-36" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) follow thời hạn hđ của các ncc follow thời hạn hđ của các ncc nên bắt đầu check gia hạn hđ mỗi đầu tháng mới  ">
+        <div class="task-top"><span class="task-no">36</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>Follow thời hạn HĐ của các NCC</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Follow thời hạn HĐ của các NCC</p></section><section><h4>Contact point / Description</h4><p>Nên bắt đầu check gia hạn HĐ mỗi đầu tháng mới</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-37" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) nhận và gửi thư nhận và gửi thư - vị trí: bàn lễ tân
+hỗ trợ cpn asean - 0981818718 
+lấy thư hcm - anh thành (zalo) ⇒ group zalo https://zalo.me/g/xoovpw015 
+lấy thư từ hn vào hcm: https://zalo.me/g/tyznxx750
+- - - 
+zalo:
+a/ kt asean express - sipher - chuyên về hóa đơn và hợp đồng mỗi tháng
+b/ vihali - asean đà nẵng
+- nhóm này tạo riêng cho phía đn
+c/ vihali - lấy thư cpn - anh thành
+- nhóm này tạo cho việc lấy thư ở vp hcm, nhắn lên nhóm báo chiều đến lấy thư và tag anh thành
+- lưu ý: sẽ lấy thư cố định vào lúc khoảng 16h - 16h30 nên nếu có thư cần báo trước khung giờ đó để anh thành sang lấy kịp - nhận thư đến và gửi cho người nhận
+- liên hệ ncc qua zalo gửi thư đi theo yêu cầu 
+- nhận hồ sơ trình ký anh tín và gửi lại theo yêu cầu 
+———
+- qui trình gửi thư đi:
+  + packing (if needed)
+  + điền thông tin vào giấy post office (tổng cộng 3 tờ → tờ trắng ngoài cùng sẽ được dán lên kiện hàng/ thư + 1 tờ giấy đỏ/ xanh giữ lại, cất vào trong bao bì → lọc theo tháng) 
+   + điền thông tin người gửi và người nhận → đóng mộc theo nơi tương ứng (mộc là của 3 miền) ">
+        <div class="task-top"><span class="task-no">37</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>Nhận và gửi thư</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Nhận và gửi thư</p></section><section><h4>Contact point / Description</h4><p>- VỊ TRÍ: BÀN LỄ TÂN<br>Hỗ trợ CPN Asean - 0981818718 <br>Lấy thư HCM - Anh Thành (Zalo) ⇒ group zalo <a href="https://zalo.me/g/xoovpw015" target="_blank" rel="noreferrer">https://zalo.me/g/xoovpw015</a> <br>Lấy thư từ HN vào HCM: <a href="https://zalo.me/g/tyznxx750" target="_blank" rel="noreferrer">https://zalo.me/g/tyznxx750</a><br>- - - <br>Zalo:<br>a/ KT Asean Express - Sipher - CHUYÊN VỀ HÓA ĐƠN VÀ HỢP ĐỒNG MỖI THÁNG<br>b/ VIHALI - ASEAN ĐÀ NẴNG<br>- Nhóm này tạo riêng cho phía ĐN<br>c/ VIHALI - lấy thư CPN - anh Thành<br>- Nhóm này tạo cho việc lấy thư ở vp HCM, nhắn lên nhóm báo chiều đến lấy thư và tag anh Thành<br>- Lưu ý: sẽ lấy thư cố định vào lúc khoảng 16h - 16h30 nên nếu có thư cần báo trước khung giờ đó để anh Thành sang lấy kịp</p></section><section><h4>Files / Folder</h4><p>- Nhận thư đến và gửi cho người nhận<br>- Liên hệ NCC qua zalo gửi thư đi theo yêu cầu <br>- Nhận hồ sơ trình ký anh Tín và gửi lại theo yêu cầu <br>———<br>- Qui trình gửi thư đi:<br>  + Packing (if needed)<br>  + Điền thông tin vào giấy post office (tổng cộng 3 tờ → tờ trắng ngoài cùng sẽ được dán lên kiện hàng/ thư + 1 tờ giấy đỏ/ xanh giữ lại, cất vào trong bao bì → lọc theo tháng) <br>   + Điền thông tin người gửi và người nhận → đóng mộc theo nơi tương ứng (Mộc là của 3 miền)</p></section></div>
+        <div class="task-links"><a href="https://zalo.me/g/xoovpw015" target="_blank" rel="noreferrer">zalo.me ↗</a><a href="https://zalo.me/g/tyznxx750" target="_blank" rel="noreferrer">zalo.me ↗</a></div>
+      </article>
+      <article class="task-card" id="task-38" data-category="DOCUMENTS (PR, CONTRACTS,BILLS,...)" data-search="documents (pr, contracts,bills,...) file nhân sự file nhân sự - vị trí: bàn lễ tân
+hỗ trợ cpn asean - 0981818718 
+lấy thư hcm - anh thành (zalo) ⇒ group zalo https://zalo.me/g/xoovpw015 
+lấy thư từ hn vào hcm: https://zalo.me/g/tyznxx750
+- - - 
+zalo:
+a/ kt asean express - sipher - chuyên về hóa đơn và hợp đồng mỗi tháng
+b/ asean - lấy thư sipher hanoi - đn - hcm
+- nhắn lên nhóm này để có người nhận lấy thư ở 2 đầu hn và đn
+c/ vihali - asean đà nẵng
+- nhóm này tạo riêng cho phía đn
+d/ hoặc muốn nhanh thì liên hệ với anh thành cpn - sẽ add zalo vào nhóm sau 2023_thông tin nhân sự - ather labs (original).xlsx ">
+        <div class="task-top"><span class="task-no">38</span><span class="task-category">DOCUMENTS (PR, CONTRACTS,BILLS,...)</span></div>
+        <h3>FILE NHÂN SỰ</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>FILE NHÂN SỰ</p></section><section><h4>Contact point / Description</h4><p>- VỊ TRÍ: BÀN LỄ TÂN<br>Hỗ trợ CPN Asean - 0981818718 <br>Lấy thư HCM - Anh Thành (Zalo) ⇒ group zalo <a href="https://zalo.me/g/xoovpw015" target="_blank" rel="noreferrer">https://zalo.me/g/xoovpw015</a> <br>Lấy thư từ HN vào HCM: <a href="https://zalo.me/g/tyznxx750" target="_blank" rel="noreferrer">https://zalo.me/g/tyznxx750</a><br>- - - <br>Zalo:<br>a/ KT Asean Express - Sipher - CHUYÊN VỀ HÓA ĐƠN VÀ HỢP ĐỒNG MỖI THÁNG<br>b/ ASEAN - Lấy thư Sipher HANOI - ĐN - HCM<br>- Nhắn lên nhóm này để có người nhận lấy thư ở 2 đầu HN và ĐN<br>c/ VIHALI - ASEAN ĐÀ NẴNG<br>- Nhóm này tạo riêng cho phía ĐN<br>d/ Hoặc muốn nhanh thì liên hệ với anh Thành CPN - sẽ add Zalo vào nhóm sau</p></section><section><h4>Files / Folder</h4><p>2023_THÔNG TIN NHÂN SỰ - ATHER LABS (Original).xlsx</p></section></div>
+        <div class="task-links"><a href="https://zalo.me/g/xoovpw015" target="_blank" rel="noreferrer">zalo.me ↗</a><a href="https://zalo.me/g/tyznxx750" target="_blank" rel="noreferrer">zalo.me ↗</a></div>
+      </article>
+      <article class="task-card" id="task-39" data-category="ONBOARDING" data-search="onboarding làm bbbg cấp phát ts làm bbbg cấp phát ts chuẩn bị sẵn sàng:
+1/ mặc định
+- chỗ ngồi: vị trí bàn + ghế
+- thẻ xe - nếu có đăng ký -&gt; theo dõi thông tin nhân sự onboarding (responses) này để nắm thông tin -&gt; sau đó cập nhật thông tin thẻ xe mới lên vihali - danh sách đăng kí gửi xe tháng - vp hcm.xlsx
+2/ theo request của line manager - double check kỹ nha!!!
+các chanel onboarding đã có sẵn trên slack ( trên đây cũng sẽ có cấu hình ở các vị trí máy tương ứng)
+- ge: game-engineer-onboard-it-leader-hr-admin
+- gd: game-designer-onboard-it-leader-hr-admin
+- art: art-team-onboarding-it-leader-admin
+- mots: mots-team-onboarding-it-leader-admin
+=&gt; khi nhắn trên slack này , nhớ cc anh it, leader, anh vu.truong devops và team mình
+- thiết bị cứng:
+   + laptop hay desktop (desktop luôn đi kèm với 1 bàn phím và 1 chuột) - đảm bảo máy đều được it reset rồi!! 
+             (+) thông thường: team data, blockchain, server devops và publishing sẽ được cấp laptop
+             (+) các team game engineer, qa, dev, game design, art teams - 2d, 2d, teach art, animation -&gt; desktop 
+   + bao nhiêu màn hình? 
+             (+) các team game engineer, qa, dev, game design, art teams - 2d, 2d, teach art, animation đều mặc định 2 màn hình
+             (+) data, blockchain, publishing -&gt; 1 laptop + 1 màn hình
+             (+) backoffice (hr, legal, accountant) -&gt; 1 laptop (màn hình tùy vào request)
+   + ổ cứng ssd và ram: 
+             (+) đảm bảo it đã format lại toàn bộ ổ cứng
+             (+) check với it về dung lượng ổ cứng và ram - hỏi mấy ảnh xuống kiểm tra giúp mình
+             (+) sau khi nhận thông tin từ it, thì báo với line manager thông tin như it báo để họ tự quyết định có muốn nâng cấp thêm dung lượng không
+- phần mềm: tham khảo trong file notion này hoặc tiện hơn thì copy tin nhắn cũ mới nhất ở các vị trí tương ứng trong channel onboarding team trên slack do các phần mềm sẽ thay đổi nếu leaders request
+3/ hẹn it
+   + các anh it không có ở mab , tổng hợp thông tin onboard để gửi các anh trên zalo để các anh sắp xếp qua hỗ trợ, nếu các anh nhắn hỏi về cấu hình máy hay thông tin onboard thì gửi thông tin đã gửi ở trên nhóm cho các anh + kèm sơ đồ chỗ ngồi để các anh setup đúng chỗ
+   + sau khi it cài theo yêu cầu xong, mình phải đứng ra confirm thêm lần nữa với line manager là đã đáp ứng yêu cầu chưa nhé
+   + line manager confirm ok -&gt; trách nhiệm sau này thuộc về line manager
+
+4/ update files
+- file theo dõi tài sản (3 miền) bbbg - cấp phát ts
+
+qui trình onboarding - chi tiết
+thông tin nhân sự onboarding (responses)
+
+onboarding notion checklist
+---
+đối với team hn và đn thì cho làm bbbg online: https://docs.google.com/forms/d/e/1faipqlsc9z1i7z_knebrs2rycajos5jvhedk0dtqavtpawuqied7uzw/viewform
+tài sản f13 (mocap studio)
+hcm_theo dõi tài sản 
+ vihali - quản lý tài sản- đà nẵng-2026
+hcm office - seating map dương cho đn làm bbbg online">
+        <div class="task-top"><span class="task-no">39</span><span class="task-category">ONBOARDING</span></div>
+        <h3>Làm BBBG cấp phát TS</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Làm BBBG cấp phát TS</p></section><section><h4>Contact point / Description</h4><p>Chuẩn bị sẵn sàng:<br>1/ MẶC ĐỊNH<br>- Chỗ ngồi: vị trí bàn + ghế<br>- Thẻ xe - Nếu có đăng ký -&gt; Theo dõi Thông Tin Nhân Sự onboarding (Responses) này để nắm thông tin -&gt; Sau đó cập nhật thông tin thẻ xe mới lên VIHALI - DANH SÁCH ĐĂNG KÍ GỬI XE THÁNG - VP HCM.xlsx<br>2/ THEO REQUEST CỦA LINE MANAGER - Double check kỹ nha!!!<br>Các chanel onboarding đã có sẵn trên Slack ( trên đây cũng sẽ có cấu hình ở các vị trí máy tương ứng)<br>- GE: game-engineer-onboard-it-leader-hr-admin<br>- GD: game-designer-onboard-it-leader-hr-admin<br>- Art: art-team-onboarding-it-leader-admin<br>- MOTS: MOTS-team-onboarding-it-leader-admin<br>=&gt; Khi nhắn trên slack này , nhớ cc anh IT, Leader, Anh vu.truong DevOps và team mình<br>- Thiết bị cứng:<br>   + Laptop hay Desktop (desktop luôn đi kèm với 1 bàn phím và 1 chuột) - Đảm bảo máy đều được IT reset rồi!! <br>             (+) Thông thường: Team Data, Blockchain, Server Devops và Publishing sẽ được cấp Laptop<br>             (+) Các team Game Engineer, QA, Dev, Game Design, Art teams - 2D, 2D, Teach Art, Animation -&gt; Desktop <br>   + Bao nhiêu màn hình? <br>             (+) Các team Game Engineer, QA, Dev, Game Design, Art teams - 2D, 2D, Teach Art, Animation đều mặc định 2 màn hình<br>             (+) Data, Blockchain, Publishing -&gt; 1 Laptop + 1 màn hình<br>             (+) Backoffice (HR, Legal, Accountant) -&gt; 1 Laptop (Màn hình tùy vào request)<br>   + Ổ cứng SSD và RAM: <br>             (+) Đảm bảo IT đã format lại toàn bộ ổ cứng<br>             (+) Check với IT về dung lượng ổ cứng và RAM - hỏi mấy ảnh xuống kiểm tra giúp mình<br>             (+) Sau khi nhận thông tin từ IT, thì báo với Line Manager thông tin như IT báo để họ tự quyết định có muốn nâng cấp thêm dung lượng không<br>- Phần mềm: tham khảo trong file NOTION NÀY hoặc tiện hơn thì Copy tin nhắn cũ mới nhất ở các vị trí tương ứng trong channel onboarding team trên Slack do các phần mềm sẽ thay đổi nếu leaders request<br>3/ HẸN IT<br>   + Các anh IT không có ở MAB , tổng hợp thông tin onboard để gửi các anh trên zalo để các anh sắp xếp qua hỗ trợ, nếu các anh nhắn hỏi về cấu hình máy hay thông tin onboard thì gửi thông tin đã gửi ở trên nhóm cho các anh + kèm sơ đồ chỗ ngồi để các anh setup đúng chỗ<br>   + Sau khi IT cài theo yêu cầu xong, mình phải đứng ra confirm thêm lần nữa với line manager là đã đáp ứng yêu cầu chưa nhé<br>   + Line manager confirm ok -&gt; trách nhiệm sau này thuộc về Line manager<br><br>4/ UPDATE FILES<br>- File Theo dõi tài sản (3 miền)</p></section><section><h4>Files / Folder</h4><p>BBBG - Cấp phát TS<br><br>QUI TRÌNH ONBOARDING - CHI TIẾT<br>Thông Tin Nhân Sự onboarding (Responses)<br><br>ONBOARDING NOTION CHECKLIST<br>---<br>Đối với team HN và ĐN thì cho làm BBBG online: <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9z1i7Z_KNeBrs2RYcajoS5JVHeDk0DTQaVtPAwuQiED7uZw/viewform" target="_blank" rel="noreferrer">https://docs.google.com/forms/d/e/1FAIpQLSc9z1i7Z_KNeBrs2RYcajoS5JVHeDk0DTQaVtPAwuQiED7uZw/viewform</a><br>TÀI SẢN F13 (MOCAP STUDIO)<br>HCM_THEO DÕI TÀI SẢN <br> VIHALI - QUẢN LÝ TÀI SẢN- ĐÀ NẴNG-2026<br>HCM OFFICE - SEATING MAP</p></section><section><h4>Notes</h4><p>Dương cho ĐN làm BBBG online</p></section></div>
+        <div class="task-links"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc9z1i7Z_KNeBrs2RYcajoS5JVHeDk0DTQaVtPAwuQiED7uZw/viewform" target="_blank" rel="noreferrer">docs.google.com ↗</a></div>
+      </article>
+      <article class="task-card" id="task-40" data-category="ONBOARDING" data-search="onboarding kiểm tra tài sản thiết bị công việc (pc, lap, chuột, bàn phím,...) với it kiểm tra tài sản thiết bị công việc (pc, lap, chuột, bàn phím,...) với it   ">
+        <div class="task-top"><span class="task-no">40</span><span class="task-category">ONBOARDING</span></div>
+        <h3>Kiểm tra tài sản thiết bị công việc (PC, Lap, chuột, bàn phím,...) với IT</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Kiểm tra tài sản thiết bị công việc (PC, Lap, chuột, bàn phím,...) với IT</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-41" data-category="ONBOARDING" data-search="onboarding sắp xếp chỗ ngồi (check với line manager) sắp xếp chỗ ngồi (check với line manager)
+làm thẻ xe - tracking chi phí xe   ">
+        <div class="task-top"><span class="task-no">41</span><span class="task-category">ONBOARDING</span></div>
+        <h3>Sắp xếp chỗ ngồi (check với line manager)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Sắp xếp chỗ ngồi (check với line manager)<br>Làm thẻ xe - Tracking chi phí xe</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-42" data-category="OFFBOARDING" data-search="offboarding bbbg thu hồi tài sản - bbbg thu hồi tài sản 1/ tiếp nhận request offboarding từ hr (chị dương trần hoặc chị trúc bùi)
+2/ tạo template bbbg có lưu lại thông tin người bàn giao + tài sản bàn giao + thời gian trong folder này
+3/ ký
+4/ scan và lưu file theo từng folder được tạo 
+5/ xác nhận với leader/ line manager của người nghỉ là máy là hoàn toàn thuộc quyền admin, và admin có quyền reset máy, tất cả data cần team đó xác nhận đã lưu trữ trên drive/ bàn giao về team rồi
+6/ báo it reset máy của người đã nghỉ - thông thường sẽ vào thứ 7 mỗi tuần nếu có case offboarding trong tuần đó
+7/ báo hủy thẻ xe lên zalo bql tòa nhà miss áo dài, tag chị thuy an vào và báo đầy đủ thông tin hủy: họ tên + biển số xe + ngày hủy bbbg - thu hồi ts ">
+        <div class="task-top"><span class="task-no">42</span><span class="task-category">OFFBOARDING</span></div>
+        <h3>BBBG Thu hồi tài sản</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>- BBBG Thu hồi tài sản</p></section><section><h4>Contact point / Description</h4><p>1/ Tiếp nhận request offboarding từ HR (chị Dương Trần hoặc chị Trúc Bùi)<br>2/ Tạo template BBBG có lưu lại thông tin Người bàn giao + Tài sản bàn giao + Thời gian trong FOLDER này<br>3/ Ký<br>4/ Scan và lưu file theo từng folder được tạo <br>5/ Xác nhận với Leader/ Line Manager của người nghỉ là máy là hoàn toàn thuộc quyền Admin, và Admin có quyền reset máy, tất cả data cần team đó xác nhận đã lưu trữ trên drive/ bàn giao về team rồi<br>6/ Báo IT reset máy của người đã nghỉ - thông thường sẽ vào thứ 7 mỗi tuần nếu có case offboarding trong tuần đó<br>7/ Báo hủy thẻ xe lên Zalo BQL Tòa nhà Miss Áo dài, tag chị Thuy An vào và báo đầy đủ thông tin hủy: HỌ TÊN + BIỂN SỐ XE + NGÀY HỦY</p></section><section><h4>Files / Folder</h4><p>BBBG - Thu hồi TS</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-43" data-category="OFFBOARDING" data-search="offboarding thu hồi lại thiết bị (pc, chuột, bàn phím, laptop) thu hồi lại thiết bị (pc, chuột, bàn phím, laptop) 
+thu hồi thẻ thang máy (nếu có)
+xóa vân tay, faceid (nếu có)-  form bbbg online dn 
+bbbg (bàn giao tài sản) (responses) ">
+        <div class="task-top"><span class="task-no">43</span><span class="task-category">OFFBOARDING</span></div>
+        <h3>Thu hồi lại thiết bị (PC, Chuột, bàn phím, laptop)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Thu hồi lại thiết bị (PC, Chuột, bàn phím, laptop) <br>Thu hồi thẻ thang máy (nếu có)<br>Xóa vân tay, faceID (nếu có)-</p></section><section><h4>Files / Folder</h4><p>FORM BBBG ONLINE DN <br>BBBG (BÀN GIAO TÀI SẢN) (Responses)</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-44" data-category="OFFBOARDING" data-search="offboarding hủy thẻ xe (nếu có) - tracking chi phí xe hàng tháng hủy thẻ xe (nếu có) - tracking chi phí xe hàng tháng  vihali - danh sách đăng kí gửi xe tháng - vp hcm.xlsx
+ather labs - sipher / đăng kí gửi xe tháng 2024-2025.xlsx ">
+        <div class="task-top"><span class="task-no">44</span><span class="task-category">OFFBOARDING</span></div>
+        <h3>Hủy thẻ xe (nếu có) - Tracking chi phí xe hàng tháng</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Hủy thẻ xe (nếu có) - Tracking chi phí xe hàng tháng</p></section><section><h4>Files / Folder</h4><p>VIHALI - DANH SÁCH ĐĂNG KÍ GỬI XE THÁNG - VP HCM.xlsx<br>ATHER LABS - SIPHER / ĐĂNG KÍ GỬI XE THÁNG 2024-2025.xlsx</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-45" data-category="MERCHANDISING" data-search="merchandising làm việc trực tiếp với ncc để sản xuất hàng hóa merch theo yêu cầu team marketing (báo giá, samples, hợp đồng, thanh toá làm việc trực tiếp với ncc để sản xuất hàng hóa merch theo yêu cầu team marketing (báo giá, samples, hợp đồng, thanh toán...) thường sau khi nhận request thì team mình sẽ liên hệ với team creative để nhờ creative lên mẫu thiết kế =&gt; sau đó mính sẽ tìm ncc để sản xuất theo yêu cầu
+báo giá, hợp đồng, nghiệm thu và thanh toán team mình sẽ là người đứng ra để check sinh nhật công ty 2025
+- in áo: printstyle
+- in túi: thời trang cava 
+- nón: nón phú hưng
+vesper 
+- in áo: convee
+chiana joy 2025
+- sổ: trống đồng ">
+        <div class="task-top"><span class="task-no">45</span><span class="task-category">MERCHANDISING</span></div>
+        <h3>Làm việc trực tiếp với NCC để sản xuất hàng hóa merch theo yêu cầu team Marketing (báo giá, samples, hợp đồng, thanh toá</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Làm việc trực tiếp với NCC để sản xuất hàng hóa merch theo yêu cầu team Marketing (báo giá, samples, hợp đồng, thanh toán...)</p></section><section><h4>Contact point / Description</h4><p>Thường sau khi nhận request thì team mình sẽ liên hệ với team Creative để nhờ Creative lên mẫu thiết kế =&gt; sau đó mính sẽ tìm NCC để sản xuất theo yêu cầu<br>Báo giá, hợp đồng, nghiệm thu và thanh toán team mình sẽ là người đứng ra để check</p></section><section><h4>Files / Folder</h4><p>Sinh nhật công ty 2025<br>- In áo: Printstyle<br>- In túi: Thời trang CAVA <br>- Nón: Nón Phú Hưng<br>Vesper <br>- In áo: Convee<br>Chiana Joy 2025<br>- Sổ: Trống Đồng</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-46" data-category="MERCHANDISING" data-search="merchandising quản lý &amp; theo dõi in out, vận chuyển tượng &amp; các sản phẩm khác quản lý &amp; theo dõi in out, vận chuyển tượng &amp; các sản phẩm khác tượng inu và neko là các hộp carton được chất đống trong văn phòng 2023 - [admin tracking] vihali - merch/sculptures in/out - kho#2 ">
+        <div class="task-top"><span class="task-no">46</span><span class="task-category">MERCHANDISING</span></div>
+        <h3>Quản lý &amp; theo dõi in out, vận chuyển tượng &amp; các sản phẩm khác</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Quản lý &amp; theo dõi in out, vận chuyển tượng &amp; các sản phẩm khác</p></section><section><h4>Contact point / Description</h4><p>Tượng Inu và Neko là các Hộp carton được chất đống trong văn phòng</p></section><section><h4>Files / Folder</h4><p>2023 - [Admin tracking] VIHALI - Merch/sculptures in/out - Kho#2</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-47" data-category="GUEST WECOMING" data-search="guest wecoming đảm bảo khu vực tiếp khách luôn gọn gàng, sạch sẽ, đầy đủ kẹo và nước welcome (3 miền) đảm bảo khu vực tiếp khách luôn gọn gàng, sạch sẽ, đầy đủ kẹo và nước welcome (3 miền) - khách vào thì check xem họ là ai:
+(1) candidate đi phỏng vấn job 
+   + dẫn vào ngồi sofa
+   + check xem có phòng họp nào trống (ưu tiên rooma và roomb)
+   + dẫn ứng viên vào phòng họp
+   + nhắn lên group cho chị trúc và chị dương nắm thông tin
+(2) khách của nhân viên cty 
+   + welcome + check thông tin và hỏi họ muốn hẹn gặp ai hôm nay
+   + mời họ vào và ngồi sofa uống nước lọc
+   + nhắn tin cho người có khách nếu họ không có ở đó
+(3) khách của anh tín:
+   + thông tin này mình phải chủ động nắm bắt trước 
+   + nếu có, báo cô tealday dọn dẹp sạch sẽ hơn ngày thường, đặc biệt lưu ý các phòng họp
+   + kiểm tra nhiệt độ các phòng họp có đủ lạnh không, ưu tiên thấp ở 23 độ
+   + nếu chưa có ai ra tiếp, thì mình tự ra welcome và mời họ ngồi sofa + hỏi muốn uốn coke hay coffee gì không để làm  ">
+        <div class="task-top"><span class="task-no">47</span><span class="task-category">GUEST WECOMING</span></div>
+        <h3>Đảm bảo khu vực tiếp khách luôn gọn gàng, sạch sẽ, đầy đủ kẹo và nước welcome (3 miền)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Đảm bảo khu vực tiếp khách luôn gọn gàng, sạch sẽ, đầy đủ kẹo và nước welcome (3 miền)</p></section><section><h4>Contact point / Description</h4><p>- Khách vào thì check xem họ là ai:<br>(1) Candidate đi phỏng vấn job <br>   + Dẫn vào ngồi sofa<br>   + Check xem có phòng họp nào trống (ưu tiên RoomA và roomB)<br>   + Dẫn ứng viên vào phòng họp<br>   + Nhắn lên group cho chị Trúc và chị Dương nắm thông tin<br>(2) Khách của nhân viên cty <br>   + Welcome + check thông tin và hỏi họ muốn hẹn gặp ai hôm nay<br>   + Mời họ vào và ngồi sofa uống nước lọc<br>   + Nhắn tin cho người có khách nếu họ không có ở đó<br>(3) Khách của anh Tín:<br>   + Thông tin này mình phải chủ động nắm bắt trước <br>   + Nếu có, báo cô tealday dọn dẹp sạch sẽ hơn ngày thường, đặc biệt lưu ý các phòng họp<br>   + Kiểm tra nhiệt độ các phòng họp có đủ lạnh không, ưu tiên thấp ở 23 độ<br>   + Nếu chưa có ai ra tiếp, thì mình tự ra welcome và mời họ ngồi sofa + hỏi muốn uốn Coke hay coffee gì không để làm</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-48" data-category="TV SHOW" data-search="tv show bật tv mỗi sáng bật tv mỗi sáng thời gian mở tv: 9h -17h30 mỗi ngày
+cách bật: nút công tắc thứ 2 từ ngoài vào - trong it server room
+-----
+lưu ý nếu tv bị đứng:
+-  ở dưới tủ lễ tân sẽ có 1 cục pc mini asus màu đen hình vuông 
+- cục đó sẽ có nút nguồn ở phía trước -&gt; bấm giữ để tắt hẳn nguồn của pc -&gt; đợi khoảng 30s - 1p -&gt; mở lại nút nguồn , thấy sáng đèn -&gt; sau đó chờ kết nối và màn hình sẽ mở lại 
+- kiếm folder for tv -&gt; mở clip chiếu -&gt; nhớ bật chế độ vòng lặp để video phát liên tục 
+=&gt; thường nếu có clip nào mới thì anh quang phạm publishing sẽ update và nhờ mình hỗ trợ ảnh để ảnh chép video mới vào tv và bật chiếu  ">
+        <div class="task-top"><span class="task-no">48</span><span class="task-category">TV SHOW</span></div>
+        <h3>Bật TV mỗi sáng</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Bật TV mỗi sáng</p></section><section><h4>Contact point / Description</h4><p>Thời gian mở TV: 9h -17h30 mỗi ngày<br>Cách bật: Nút công tắc thứ 2 từ ngoài vào - trong IT Server room<br>-----<br>LƯU Ý NẾU TV BỊ ĐỨNG:<br>-  Ở dưới tủ lễ tân sẽ có 1 cục PC Mini Asus màu đen hình vuông <br>- Cục đó sẽ có nút nguồn ở phía trước -&gt; Bấm giữ để tắt hẳn nguồn của PC -&gt; Đợi khoảng 30s - 1p -&gt; Mở lại nút nguồn , thấy sáng đèn -&gt; Sau đó chờ kết nối và màn hình sẽ mở lại <br>- Kiếm folder FOR TV -&gt; mở clip chiếu -&gt; nhớ bật chế độ vòng lặp để video phát liên tục <br>=&gt; Thường nếu có clip nào mới thì anh Quang Phạm Publishing sẽ update và nhờ mình hỗ trợ ảnh để ảnh chép video mới vào TV và bật chiếu</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-49" data-category="TV SHOW" data-search="tv show thiết kế file trình chiếu (cập nhật tin tức, sinh nhật, các hoạt động...) thiết kế file trình chiếu (cập nhật tin tức, sinh nhật, các hoạt động...) - tùy theo mỗi sự kiện và nếu mình muốn quảng bá cho mọi người nắm thông tin thì show lên  ">
+        <div class="task-top"><span class="task-no">49</span><span class="task-category">TV SHOW</span></div>
+        <h3>Thiết kế file trình chiếu (Cập nhật tin tức, Sinh nhật, Các hoạt động...)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Thiết kế file trình chiếu (Cập nhật tin tức, Sinh nhật, Các hoạt động...)</p></section><section><h4>Contact point / Description</h4><p>- Tùy theo mỗi sự kiện và nếu mình muốn quảng bá cho mọi người nắm thông tin thì show lên</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-50" data-category="TV SHOW" data-search="tv show on-air các videos quảng bá game theo yêu cầu của các team on-air các videos quảng bá game theo yêu cầu của các team - tùy theo request, thường sẽ đến từ publishing team  ">
+        <div class="task-top"><span class="task-no">50</span><span class="task-category">TV SHOW</span></div>
+        <h3>On-air các Videos quảng bá game theo yêu cầu của các Team</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>On-air các Videos quảng bá game theo yêu cầu của các Team</p></section><section><h4>Contact point / Description</h4><p>- Tùy theo request, thường sẽ đến từ PUBLISHING TEAM</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-51" data-category="EVENT" data-search="event lên ideas, plan tổ chức chương trình lên ideas, plan tổ chức chương trình điền tất cả thông tin vào 1 sheet tổng hợp để dễ theo dõi
+trong thời điểm hiện tại, mình tập trung cho những kiểu sự kiện đơn giản, tổ chức không tốn quá nhiều thời gian của người tham dự
+những sự kiện cốt lõi hàng năm như:
+- company trip - tạm thời pending
+- recharge time - tùy theo yêu cầu của bod
+- company birhday - chắc chắn sẽ làm (20/9)
+- new year party - tùy yêu cầu bod
+- charity - tùy vào định hướng và tình hình doanh nghiệp
+những sự kiện theo tháng nên tổ chức như:
+- lfg - last friday together - thường được tổ chức vào mỗi thứ 6 cuối cùng của tháng
+- women day
+- men day
+- halloween
+- mid autumn
+- happiness day
+- thất tịch
+- children day
+- christmas ee &amp; eb events planning
+các event nội bộ từng tổ chức: notion
+got-it - money voucher - contact point: 
+ms. vi kiên - điện thoại: 0326033877
+email: kien.nguyen@gotit.vn ">
+        <div class="task-top"><span class="task-no">51</span><span class="task-category">EVENT</span></div>
+        <h3>Lên ideas, plan tổ chức chương trình</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Lên ideas, plan tổ chức chương trình</p></section><section><h4>Contact point / Description</h4><p>Điền tất cả thông tin vào 1 sheet tổng hợp để dễ theo dõi<br>Trong thời điểm hiện tại, mình tập trung cho những kiểu sự kiện đơn giản, tổ chức không tốn quá nhiều thời gian của người tham dự<br>Những sự kiện cốt lõi hàng năm như:<br>- Company Trip - tạm thời pending<br>- Recharge Time - Tùy theo yêu cầu của BOD<br>- Company Birhday - chắc chắn sẽ làm (20/9)<br>- NEW YEAR Party - Tùy yêu cầu BOD<br>- CHARITY - Tùy vào định hướng và tình hình doanh nghiệp<br>Những sự kiện theo tháng nên tổ chức như:<br>- LFG - LAST FRIDAY TOGETHER - Thường được tổ chức vào mỗi thứ 6 cuối cùng của tháng<br>- Women Day<br>- Men day<br>- Halloween<br>- Mid Autumn<br>- Happiness Day<br>- Thất tịch<br>- Children day<br>- Christmas</p></section><section><h4>Files / Folder</h4><p>EE &amp; EB Events Planning<br>Các event nội bộ từng tổ chức: NOTION<br>Got-it - money voucher - Contact point: <br>Ms. Vi Kiên - Điện thoại: 0326033877<br>Email: kien.nguyen@gotit.vn</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-52" data-category="EVENT" data-search="event mua sắm đồ dùng cần thiết mua sắm đồ dùng cần thiết   ">
+        <div class="task-top"><span class="task-no">52</span><span class="task-category">EVENT</span></div>
+        <h3>Mua sắm đồ dùng cần thiết</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Mua sắm đồ dùng cần thiết</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-53" data-category="EVENT" data-search="event trang trí vp trang trí vp   ">
+        <div class="task-top"><span class="task-no">53</span><span class="task-category">EVENT</span></div>
+        <h3>Trang trí VP</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Trang trí VP</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-54" data-category="EVENT" data-search="event làm file trình chiếu (powerpoint, game online...) làm file trình chiếu (powerpoint, game online...) nếu cần  ">
+        <div class="task-top"><span class="task-no">54</span><span class="task-category">EVENT</span></div>
+        <h3>Làm file trình chiếu (powerpoint, game online...)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Làm file trình chiếu (powerpoint, game online...)</p></section><section><h4>Contact point / Description</h4><p>Nếu cần</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-55" data-category="EVENT" data-search="event mc mc tự chuẩn bị mc script và tự làm mc  ">
+        <div class="task-top"><span class="task-no">55</span><span class="task-category">EVENT</span></div>
+        <h3>MC</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>MC</p></section><section><h4>Contact point / Description</h4><p>Tự chuẩn bị MC Script và tự làm MC</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-56" data-category="EVENT" data-search="event đặt teabreak đặt teabreak - thông thường, mình hay đặt liêm chính để làm tiệc teabreak
+- nếu bạn có nhà cung cấp nào ngon hơn thì cứ sử dụng nhé  ">
+        <div class="task-top"><span class="task-no">56</span><span class="task-category">EVENT</span></div>
+        <h3>Đặt teabreak</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Đặt teabreak</p></section><section><h4>Contact point / Description</h4><p>- Thông thường, mình hay đặt LIÊM CHÍNH để làm tiệc teabreak<br>- Nếu bạn có nhà cung cấp nào ngon hơn thì cứ sử dụng nhé</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-57" data-category="COMMUNICATION &amp; BRANDING" data-search="communication &amp; branding lên ý tưởng, content, đăng sccial posts (fb, linkedin, tiktok,...) lên ý tưởng, content, đăng sccial posts (fb, linkedin, tiktok,...) 1/ account facebook
+
+2/ account tiktok
+
+3/ account linkedin
+
+4/ account canva
+username: hi@sipher.xyz
+pass: atherlabs.com123
+5/ account thread notion: social content planning ">
+        <div class="task-top"><span class="task-no">57</span><span class="task-category">COMMUNICATION &amp; BRANDING</span></div>
+        <h3>Lên ý tưởng, content, đăng sccial posts (FB, Linkedin, Tiktok,...)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Lên ý tưởng, content, đăng sccial posts (FB, Linkedin, Tiktok,...)</p></section><section><h4>Contact point / Description</h4><p>1/ ACCOUNT FACEBOOK<br><br>2/ ACCOUNT TIKTOK<br><br>3/ ACCOUNT LINKEDIN<br><br>4/ ACCOUNT CANVA<br>Username: hi@sipher.xyz<br>Pass: AtherLabs.com123<br>5/ ACCOUNT THREAD</p></section><section><h4>Files / Folder</h4><p>NOTION: SOCIAL CONTENT PLANNING</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-58" data-category="COMMUNICATION &amp; BRANDING" data-search="communication &amp; branding edit video, hình ảnh edit video, hình ảnh tùy vào từng sự kiện và sáng tạo thêm creative material ">
+        <div class="task-top"><span class="task-no">58</span><span class="task-category">COMMUNICATION &amp; BRANDING</span></div>
+        <h3>Edit video, hình ảnh</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Edit video, hình ảnh</p></section><section><h4>Contact point / Description</h4><p>Tùy vào từng sự kiện và sáng tạo thêm</p></section><section><h4>Files / Folder</h4><p>Creative Material</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-59" data-category="COMMUNICATION &amp; BRANDING" data-search="communication &amp; branding làm việc với các team liên quan (mkt, creative...) làm việc với các team liên quan (mkt, creative...) - dạo gần đây, team creative hơi bận để có thể nhận order của engagament team. vậy nên tất cả các post social đều tự design  ">
+        <div class="task-top"><span class="task-no">59</span><span class="task-category">COMMUNICATION &amp; BRANDING</span></div>
+        <h3>Làm việc với các team liên quan (MKT, Creative...)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Làm việc với các team liên quan (MKT, Creative...)</p></section><section><h4>Contact point / Description</h4><p>- Dạo gần đây, team Creative hơi bận để có thể nhận order của Engagament team. Vậy nên tất cả các post social đều tự design</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-60" data-category="COMMUNICATION &amp; BRANDING" data-search="communication &amp; branding các thông báo quan trọng, hoặc theo yêu cầu để toàn bộ nhân viên đều lưu ý các thông báo quan trọng, hoặc theo yêu cầu để toàn bộ nhân viên đều lưu ý channel #lifeatatherlabs  ">
+        <div class="task-top"><span class="task-no">60</span><span class="task-category">COMMUNICATION &amp; BRANDING</span></div>
+        <h3>Các thông báo quan trọng, hoặc theo yêu cầu để toàn bộ nhân viên đều lưu ý</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Các thông báo quan trọng, hoặc theo yêu cầu để toàn bộ nhân viên đều lưu ý</p></section><section><h4>Contact point / Description</h4><p>CHANNEL #LIFEATATHERLABS</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-61" data-category="AD-HOC TASKS" data-search="ad-hoc tasks phối hợp với it và kỹ thuật bql để sửa chữa các vấn đề kỹ thuật phát sinh phối hợp với it và kỹ thuật bql để sửa chữa các vấn đề kỹ thuật phát sinh nhắn các anh it không được thi gọi - sdt đươc dán trên bàn lễ tân ngoài cửa
+lưu ý: có việc cần hỗ trợ thì tổng hợp và nhắn lên nhóm, các anh it sẽ nhận thông tin và điều phối qua hỗ trợ. thường sẽ là anh hoài sang hỗ trợ, lâu lâu sẽ là anh tuấn. do các anh it không có sẵn ở mab nên sẽ cần thời gian, nếu việc không urgent thì tổng hợp lại và nhắn lên để thứ 7 các anh sắp xếp sang hỗ trợ hoặc sớm hơn các anh sẽ báo lại thời gian  ">
+        <div class="task-top"><span class="task-no">61</span><span class="task-category">AD-HOC TASKS</span></div>
+        <h3>Phối hợp với IT và Kỹ thuật BQL để sửa chữa các vấn đề kỹ thuật phát sinh</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Phối hợp với IT và Kỹ thuật BQL để sửa chữa các vấn đề kỹ thuật phát sinh</p></section><section><h4>Contact point / Description</h4><p>Nhắn các anh IT không được thi gọi - sdt đươc dán trên bàn lễ tân ngoài cửa<br>Lưu ý: Có việc cần hỗ trợ thì tổng hợp và nhắn lên nhóm, các anh IT sẽ nhận thông tin và điều phối qua hỗ trợ. Thường sẽ là anh Hoài sang hỗ trợ, lâu lâu sẽ là anh Tuấn. Do các anh IT không có sẵn ở MAB nên sẽ cần thời gian, nếu việc không urgent thì tổng hợp lại và nhắn lên để thứ 7 các anh sắp xếp sang hỗ trợ hoặc sớm hơn các anh sẽ báo lại thời gian</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-62" data-category="AD-HOC TASKS" data-search="ad-hoc tasks research báo giá &amp; order thiết bị cho bod theo yêu cầu research báo giá &amp; order thiết bị cho bod theo yêu cầu nếu là anh tín yêu cầu thì luôn là urgent báo giá tổng hợp_2025 ">
+        <div class="task-top"><span class="task-no">62</span><span class="task-category">AD-HOC TASKS</span></div>
+        <h3>Research báo giá &amp; Order thiết bị cho BOD theo yêu cầu</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Research báo giá &amp; Order thiết bị cho BOD theo yêu cầu</p></section><section><h4>Contact point / Description</h4><p>Nếu là anh Tín yêu cầu thì luôn là Urgent</p></section><section><h4>Files / Folder</h4><p>BÁO GIÁ TỔNG HỢP_2025</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-63" data-category="AD-HOC TASKS" data-search="ad-hoc tasks hỗ trợ nhân viên/bod đi công tác (đặt vé máy bay, khách sạn, event...) hỗ trợ nhân viên/bod đi công tác (đặt vé máy bay, khách sạn, event...) - nếu là của nhân viên/ leader thì hr sẽ lo phần dntt - mình vẫn support research/book flight và hotel
+- nếu là của anh tín thì mình lo từ a đến á 
+- vé máy bay + khách sạn : traveloka, booking.com ....
+- vendor hỗ trợ làm visa
+   zalo: visa mỹ trung thuỷ - vihali ( sipher)
+   zalo: visa chị vân x atherlabs
+   zalo: visa sài gòn notion: business trip ">
+        <div class="task-top"><span class="task-no">63</span><span class="task-category">AD-HOC TASKS</span></div>
+        <h3>Hỗ trợ nhân viên/BOD đi công tác (Đặt vé máy bay, khách sạn, event...)</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Hỗ trợ nhân viên/BOD đi công tác (Đặt vé máy bay, khách sạn, event...)</p></section><section><h4>Contact point / Description</h4><p>- Nếu là của nhân viên/ leader thì HR sẽ lo phần DNTT - Mình vẫn support research/book Flight và Hotel<br>- Nếu là của anh Tín thì mình lo từ a đến á <br>- VÉ MÁY BAY + KHÁCH SẠN : TRAVELOKA, BOOKING.COM ....<br>- VENDOR HỖ TRỢ LÀM VISA<br>   ZALO: VISA MỸ TRUNG THUỶ - VIHALI ( SIPHER)<br>   Zalo: Visa chị Vân x AtherLabs<br>   Zalo: Visa Sài Gòn</p></section><section><h4>Files / Folder</h4><p>NOTION: BUSINESS TRIP</p></section></div>
+        <div class="task-links"></div>
+      </article>
+      <article class="task-card" id="task-64" data-category="AD-HOC TASKS" data-search="ad-hoc tasks thẻ từ thang máy thẻ từ thang máy vp hcm có 2 lầu, làm việc chính ở lầu 3 và lầu 13 dành cho mocap studio. cả 2 lầu đều cần có thẻ thang máy mới bấm thang lên được. hiện tại admin đang giữ ~6 thẻ từ thang máy 3+13 
+thẻ từ thang máy lầu 3 =&gt; sẽ cấp phát cho các bạn nhân viên mới vào và các bạn nhân viên chưa có thẻ
+thẻ từ thang máy lầu 3 + 13 =&gt; sẽ cấp phát đa số cho lm hoặc nhân viên được sự đồng ý của lm và hay lên f13 để làm việc
+lưu ý:
+- trường hợp thẻ có vấn đề không thể bấm được thang máy =&gt; liên hệ với anh ngọc kĩ thuật trưởng mab hoặc nhắn lên nhóm kỷ thuật mab và tag anh ngọc nhờ anh hỗ trợ check và cài lại
+- trường hợp anh báo thẻ hư =&gt; note lại thẻ đó để hủy thẻ , thẻ do bên mình tự mua nên chỉ đổi hàng được khi vừa mới mua xong và phát hiện vấn đề thôi
+-  nếu đã hết thẻ backup =&gt; tìm ncc để mua thẻ mới ( thẻ mifare, tần số 13.56mhz ) , mình hay mua bên này sieuthivienthong.com =&gt; sau khi nhận được thẻ, liên hệ anh ngọc để cài đặt  ">
+        <div class="task-top"><span class="task-no">64</span><span class="task-category">AD-HOC TASKS</span></div>
+        <h3>Thẻ từ thang máy</h3>
+        <div class="task-body"><section><h4>Action item</h4><p>Thẻ từ thang máy</p></section><section><h4>Contact point / Description</h4><p>VP HCM có 2 lầu, làm việc chính ở lầu 3 và lầu 13 dành cho Mocap Studio. Cả 2 lầu đều cần có thẻ thang máy mới bấm thang lên được. Hiện tại Admin đang giữ ~6 thẻ từ thang máy 3+13 <br>THẺ TỪ THANG MÁY LẦU 3 =&gt; sẽ cấp phát cho các bạn nhân viên mới vào và các bạn nhân viên chưa có thẻ<br>THẺ TỪ THANG MÁY LẦU 3 + 13 =&gt; sẽ cấp phát đa số cho LM hoặc nhân viên được sự đồng ý của LM và hay lên F13 để làm việc<br>Lưu ý:<br>- Trường hợp thẻ có vấn đề không thể bấm được thang máy =&gt; liên hệ với anh Ngọc Kĩ thuật trưởng MAB hoặc nhắn lên nhóm Kỷ thuật MAB và tag anh Ngọc nhờ anh hỗ trợ check và cài lại<br>- Trường hợp anh báo thẻ hư =&gt; note lại thẻ đó để hủy thẻ , thẻ do bên mình tự mua nên chỉ đổi hàng được khi vừa mới mua xong và phát hiện vấn đề thôi<br>-  Nếu đã hết thẻ backup =&gt; tìm NCC để mua thẻ mới ( thẻ Mifare, tần số 13.56Mhz ) , mình hay mua bên này sieuthivienthong.com =&gt; sau khi nhận được thẻ, liên hệ anh Ngọc để cài đặt</p></section></div>
+        <div class="task-links"></div>
+      </article></div><div class="empty" id="empty">No matching tasks. Try another keyword or category.</div></div></section>
+  </main>
+  <footer><div class="wrap">Generated from the provided Google Sheet · <a href="https://docs.google.com/spreadsheets/d/1FPnguDisfU3e6KZ3RDEKwH2cVAuyv0Q3vDFOEHlPrf8/edit?gid=0#gid=0" target="_blank" rel="noreferrer">Open source</a></div></footer>
+  <script>
+    const cards = Array.from(document.querySelectorAll('.task-card'));
+    const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+    const searchBox = document.getElementById('searchBox');
+    const empty = document.getElementById('empty');
+    let active = 'all';
+    function applyFilters(){
+      const q = searchBox.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach(card => {
+        const categoryOk = active === 'all' || card.dataset.category === active;
+        const searchOk = !q || card.dataset.search.includes(q);
+        const visible = categoryOk && searchOk;
+        card.classList.toggle('hidden', !visible);
+        if (visible) shown++;
+      });
+      empty.style.display = shown ? 'none' : 'block';
+    }
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      active = btn.dataset.filter;
+      buttons.forEach(b => b.classList.toggle('active', b === btn));
+      applyFilters();
+    }));
+    document.querySelectorAll('[data-filter-link]').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault();
+      const target = link.dataset.filterLink;
+      const btn = buttons.find(b => b.dataset.filter === target);
+      if (btn) btn.click();
+      document.getElementById('task-list').scrollIntoView({behavior:'smooth', block:'start'});
+    }));
+    searchBox.addEventListener('input', applyFilters);
+  </script>
+</body>
+</html>
