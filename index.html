@@ -569,6 +569,66 @@
       color: var(--muted);
     }
 
+    #ai-build .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+    #ai-build .ai-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      background: rgba(247,244,238,0.84);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px 20px;
+    }
+    #ai-build .ai-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--moss);
+      margin-bottom: 12px;
+    }
+    #ai-build .ai-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--forest);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    #ai-build .ai-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #ai-build .ai-card li {
+      font-size: 14px;
+      line-height: 1.78;
+      color: var(--muted);
+    }
+    #ai-build .ai-card li b {
+      color: var(--forest);
+      font-weight: 600;
+    }
+    #ai-build .ai-card a {
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--forest);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    #ai-build .ai-card a:hover { color: var(--sage); }
+    #ai-build .ai-note {
+      margin-top: 22px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
     .footer {
       padding: 32px 0 44px;
       background: var(--forest);
@@ -643,7 +703,8 @@
       }
 
       .stats-grid,
-      .expertise-grid {
+      .expertise-grid,
+      #ai-build .ai-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -688,7 +749,8 @@
       }
 
       .stats-grid,
-      .expertise-grid {
+      .expertise-grid,
+      #ai-build .ai-grid {
         grid-template-columns: 1fr;
       }
 
@@ -841,6 +903,47 @@
             <div class="expertise-card-desc">Contributing to policy updates and maintaining clear employee documentation, contract processes, insurance coordination, and labor-law-aware HR practices.</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="ai-build">
+      <div class="container">
+        <div class="section-label">How I build with AI</div>
+        <h2 class="section-title serif">I use AI as a team, not a shortcut</h2>
+        <p class="section-intro">I break the work down, assign it to AI agents, review every output, and only ship what I approve.</p>
+        <div class="ai-grid">
+          <div class="ai-card">
+            <span class="ai-num">01</span>
+            <h3>Handover site</h3>
+            <ul>
+              <li><b>Problem:</b> Years of HR, Ops, PR and Events know-how lived in scattered docs.</li>
+              <li><b>How:</b> I ran a team of AI agents, one per area, and set the brief, structure and review rules.</li>
+              <li><b>Result:</b> One consistent handover hub with a page per area, reviewed before going public.</li>
+            </ul>
+            <a href="review/handover-hub.html">View the hub &rarr;</a>
+          </div>
+          <div class="ai-card">
+            <span class="ai-num">02</span>
+            <h3>Recruitment dashboard</h3>
+            <ul>
+              <li><b>Problem:</b> Hiring data from 2022 to 2026 sat in tracking sheets with no overall view.</li>
+              <li><b>How:</b> AI pulled and cleaned the sheet data. I checked every number against the source.</li>
+              <li><b>Result:</b> A dashboard that shows hiring trends across five years at a glance.</li>
+            </ul>
+            <a href="review/recruitment-dashboard.html">View the dashboard &rarr;</a>
+          </div>
+          <div class="ai-card">
+            <span class="ai-num">03</span>
+            <h3>HR and admin workflows</h3>
+            <ul>
+              <li><b>Problem:</b> Routine checks such as contract expiry and payment reviews were easy to miss.</li>
+              <li><b>How:</b> I set up scheduled AI reminders and tracking sheets with automatic overdue warnings.</li>
+              <li><b>Result:</b> Fewer missed deadlines and less manual follow-up each week.</li>
+            </ul>
+            <a href="review/ai-case-payment.html">Read the case study &rarr;</a>
+          </div>
+        </div>
+        <p class="ai-note">Built with an AI agent team coordinated by Duong.</p>
       </div>
     </section>
 
