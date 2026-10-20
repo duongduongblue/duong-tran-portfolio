@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Recruitment 2022–2026 · Duong Tran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--forest:#1E2D24;--sage:#7D927B;--moss:#A8B7A1;--mist:#E8EEE7;--ivory:#F7F4EE;--char:#2F342F;--muted:#5F6F5C;--line:#E2E0D8}
+*{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--char);font:15px/1.6 Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+.top{padding:22px 0}.top a{color:var(--forest);text-decoration:none;font-size:14px}.top a:hover{text-decoration:underline}
+h1{font:600 44px/1.1 'Cormorant Garamond',Georgia,'Times New Roman',serif;color:var(--forest);margin:40px 0 8px}
+.sub{color:var(--muted);margin:0 0 32px}
+.years{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:36px}
+.years button{font:500 14px Inter;background:none;border:0;padding:10px 14px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.years button:hover{color:var(--forest)}.years button.on{color:var(--forest);border-color:var(--forest)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:56px}
+.kpi{padding:0 24px;border-left:1px solid var(--line)}.kpi:first-child{padding-left:0;border:0}
+.kpi .l{font-size:13px;color:var(--muted)}.kpi .v{font:600 40px/1.2 'Cormorant Garamond',Georgia,'Times New Roman',serif;color:var(--forest)}
+.kpi .n{font-size:13px;color:var(--muted)}
+section{margin-bottom:56px}
+h2{font:600 26px/1.2 'Cormorant Garamond',Georgia,'Times New Roman',serif;color:var(--forest);margin:0 0 4px}
+section p{color:var(--muted);margin:0 0 20px;max-width:620px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.box{position:relative}svg{display:block;width:100%;height:auto;overflow:visible}svg text{font-family:Inter,system-ui,Arial,sans-serif;fill:#5F6F5C;font-size:12px}.leg{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:8px}.leg i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}.tip{position:fixed;pointer-events:none;background:#fff;border:1px solid var(--line);padding:8px 10px;font-size:12px;color:var(--char);border-radius:4px;opacity:0;transition:opacity .1s;z-index:9;max-width:220px}.hit{cursor:pointer}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);font-size:13px}
+@media(max-width:720px){h1{font-size:34px}.kpis{grid-template-columns:1fr 1fr;row-gap:24px}.kpi:nth-child(3){padding-left:0;border:0}.grid{grid-template-columns:1fr;gap:56px}}
+</style></head><body>
+<div class="wrap">
+<div class="top"><a href="../index.html">← Duong Tran</a></div>
+<h1>Recruitment, 2022–2026</h1>
+<p class="sub">CVs received and hires made at Ather Labs. Numbers are rounded.</p>
+<nav class="years" id="years"></nav>
+<div class="kpis" id="kpis"></div>
+<section><h2>Volume and hire rate</h2><p id="t1"></p><div class="box" id="c1"></div><div class="leg"><span><i style="background:#A8B7A1"></i>CVs</span><span><i style="background:#1E2D24"></i>Hire rate</span></div></section>
+<div class="grid">
+<section><h2>Where candidates came from</h2><p id="t2"></p><div class="box" id="c2"></div><div class="leg"><span><i style="background:#A8B7A1"></i>Share of CVs</span><span><i style="background:#1E2D24"></i>Share of hires</span></div></section>
+<section><h2>Where candidates stopped</h2><p id="t3"></p><div class="box" id="c3"></div></section>
+</div>
+<footer>Source: internal candidate tracker. 2026 covers January to October. Shares are of rejected candidates with a recorded step.</footer>
+</div>
+<div class="tip" id="tip"></div>
+<script>
+const D={"2022": {"cv": 570, "hired": 35, "rate": 6, "src": {"HR networking": [1, 6, 33], "Referral": [11, 53, 29], "Facebook": [7, 6, 5], "LinkedIn": [54, 32, 4], "Other": [8, 0, 0], "Job boards": [18, 3, 1], "Direct email": [2, 0, 0]}, "loc": {"Ho Chi Minh City": 65, "Da Nang": 14, "Hanoi": 6, "Not recorded": 1, "Other provinces": 2, "Overseas": 14}, "rej": {"1st interview": 32, "Candidate withdrew": 8, "2nd interview": 7, "CV screen": 39, "Hiring manager screen": 9, "HR screen": 4}, "rejShare": 36, "nostatus": 0, "pos": [["Game Engineer", 15], ["Product Marketing Lead", 11], ["Copywriter", 8], ["Senior Legal Executive", 8], ["Full-stack Engineer", 7], ["Performance Marketing Specialist", 6]]}, "2023": {"cv": 560, "hired": 5, "rate": 1, "src": {"LinkedIn": [53, 29, 1], "Referral": [8, 57, 9], "Direct email": [13, 14, 1], "Other": [5, 0, 0], "Job boards": [17, 0, 0], "Facebook": [3, 0, 0], "HR networking": [1, 0, 0]}, "loc": {"Overseas": 2, "Da Nang": 6, "Ho Chi Minh City": 86, "Other provinces": 5}, "rej": {"CV screen": 41, "HR screen": 14, "Hiring manager screen": 26, "1st interview": 16, "Candidate withdrew": 3, "Test": 1}, "rejShare": 34, "nostatus": 17, "pos": [["Business Analyst", 11], ["Game Engineer", 9], ["Mobile Engineer", 8], ["Chief Accountant", 8], ["QA Engineer - Game", 7], ["Office Administrator", 7]]}, "2024": {"cv": 550, "hired": 30, "rate": 5, "src": {"Direct email": [42, 24, 3], "Facebook": [11, 24, 12], "LinkedIn": [37, 28, 4], "HR networking": [1, 0, 0], "Referral": [5, 24, 24], "Other": [5, 0, 0]}, "loc": {"Ho Chi Minh City": 82, "Da Nang": 10, "Overseas": 5, "Other provinces": 4}, "rej": {"1st interview": 22, "CV screen": 46, "Hiring manager screen": 21, "HR screen": 5, "2nd interview": 3, "Candidate withdrew": 2, "Test": 2}, "rejShare": 67, "nostatus": 1, "pos": [["QA Engineer - Game", 13], ["Office Administrator", 13], ["Game Engineer", 9], ["QA Engineer - Blockchain", 5], ["Game Marketing Senior/Lead", 4], ["DevOps Engineer", 4]]}, "2025": {"cv": 980, "hired": 40, "rate": 4, "src": {"Facebook": [6, 2, 2], "Referral": [5, 25, 21], "Direct email": [65, 48, 3], "LinkedIn": [21, 15, 3], "Other": [2, 5, 8], "HR networking": [1, 5, 18]}, "loc": {"Ho Chi Minh City": 91, "Other provinces": 3, "Overseas": 4, "Da Nang": 2, "Not recorded": 1}, "rej": {"CV screen": 44, "2nd interview": 1, "Candidate withdrew": 8, "Hiring manager screen": 23, "HR screen": 5, "Test": 10, "1st interview": 8}, "rejShare": 55, "nostatus": 7, "pos": [["3D Artist", 22], ["2D Artist", 19], ["Game Engineer", 8], ["QA Engineer - Game", 7], ["Game Design", 7], ["3D Animator", 7]]}, "2026": {"cv": 620, "hired": 20, "rate": 3, "src": {"LinkedIn": [7, 0, 0], "Direct email": [84, 89, 3], "Other": [3, 0, 0], "Referral": [3, 5, 6], "HR networking": [1, 5, 17], "Facebook": [2, 0, 0]}, "loc": {"Ho Chi Minh City": 99}, "rej": {"1st interview": 9, "HR screen": 6, "CV screen": 53, "Candidate withdrew": 7, "Hiring manager screen": 14, "2nd interview": 1, "Test": 9}, "rejShare": 44, "nostatus": 18, "pos": [["DevOps Engineer", 15], ["3D Artist", 13], ["Game Design", 12], ["QA Engineer - Game", 11], ["2D Artist", 11], ["Game Engineer", 8]]}, "all": {"cv": 3300, "hired": 130, "rate": 4, "src": {"HR networking": [1, 4, 15], "Referral": [6, 31, 20], "Facebook": [5, 8, 6], "LinkedIn": [32, 21, 3], "Other": [4, 2, 1], "Job boards": [6, 1, 0], "Direct email": [45, 34, 3]}, "loc": {"Ho Chi Minh City": 85, "Da Nang": 6, "Hanoi": 1, "Other provinces": 3, "Overseas": 5}, "rej": {"1st interview": 15, "Candidate withdrew": 6, "2nd interview": 2, "CV screen": 45, "Hiring manager screen": 20, "HR screen": 6, "Test": 5}, "rejShare": 48, "nostatus": 9, "pos": [["Game Engineer", 9], ["3D Artist", 9], ["2D Artist", 8], ["QA Engineer - Game", 8], ["Office Administrator", 5], ["Game Design", 5]]}};
+const YRS=['2022','2023','2024','2025','2026'];
+const F='#1E2D24',S='#7D927B',M='#A8B7A1',MI='#E8EEE7',G='#ECEAE3';
+let sel=new URLSearchParams(location.search).get('year');if(!D[sel])sel='all';
+const yb=document.getElementById('years'),tip=document.getElementById('tip');
+['all',...YRS].forEach(y=>{const b=document.createElement('button');b.textContent=y==='all'?'All years':y;b.dataset.y=y;b.onclick=()=>go(y);yb.appendChild(b)});
+const fmt=n=>n>=1000?'~'+(Math.round(n/100)/10)+'k':'~'+n;
+const topOf=o=>Object.entries(o).sort((a,b)=>b[1]-a[1])[0];
+function showTip(e,h){tip.innerHTML=h;tip.style.opacity=1;const x=Math.min(e.clientX+12,innerWidth-230);tip.style.left=x+'px';tip.style.top=(e.clientY+12)+'px'}
+document.addEventListener('mousemove',e=>{const t=e.target.closest&&e.target.closest('[data-tip]');t?showTip(e,t.dataset.tip):tip.style.opacity=0});
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-go]');if(t)go(t.dataset.go)});
+const W=()=>innerWidth<720;
+function trend(){const w=W()?420:880,h=W()?240:280,l=40,r=40,t=12,b=28,iw=w-l-r,ih=h-t-b,mx=1000,step=iw/5;
+ let o=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="CVs and hire rate by year">`;
+ [0,500,1000].forEach(v=>{const y=t+ih-ih*v/mx;o+=`<line x1="${l}" x2="${w-r}" y1="${y}" y2="${y}" stroke="${G}"/><text x="${l-8}" y="${y+4}" text-anchor="end">${v.toLocaleString()}</text>`});
+ [0,4,8].forEach(v=>{const y=t+ih-ih*v/8;o+=`<text x="${w-r+8}" y="${y+4}">${v}%</text>`});
+ const pts=[];YRS.forEach((y,i)=>{const d=D[y],bw=Math.min(56,step*.45),cx=l+step*i+step/2,bh=ih*d.cv/mx,on=sel==='all'||sel===y;
+  pts.push([cx,t+ih-ih*d.rate/8]);
+  o+=`<g class="hit" data-go="${y}" data-tip="<b>${y}${y==='2026'?' (Jan–Oct)':''}</b><br>~${d.cv} CVs · ~${d.hired} hires<br>Hire rate ${d.rate}%"><rect x="${cx-step/2}" y="${t}" width="${step}" height="${ih}" fill="transparent"/><rect x="${cx-bw/2}" y="${t+ih-bh}" width="${bw}" height="${bh}" rx="3" fill="${on?M:MI}"/></g><text x="${cx}" y="${h-8}" text-anchor="middle">${y}${y==='2026'?'*':''}</text>`});
+ o+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${F}" stroke-width="2" pointer-events="none"/>`;
+ pts.forEach((p,i)=>o+=`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="${YRS[i]===sel?F:'#fff'}" stroke="${F}" stroke-width="2" pointer-events="none"/>`);
+ return o+'</svg>'}
+function hbars(rows,series,max,lab){const w=420,lw=110,rh=series.length>1?30:28,bh=series.length>1?9:16,h=rows.length*rh+24,iw=w-lw-20;
+ let o=`<svg viewBox="0 0 ${w} ${h}" role="img">`;
+ for(let v=0;v<=max;v+=max/4){const x=lw+iw*v/max;o+=`<line x1="${x}" x2="${x}" y1="0" y2="${h-20}" stroke="${G}"/><text x="${x}" y="${h-4}" text-anchor="middle">${v}%</text>`}
+ rows.forEach((r,i)=>{const y=i*rh+4;o+=`<g class="hit" data-tip="${r.tip}"><rect x="0" y="${y}" width="${w}" height="${rh}" fill="transparent"/><text x="${lw-10}" y="${y+rh/2}" dominant-baseline="middle" text-anchor="end">${r.label}</text>`;
+  series.forEach((c,k)=>{const yy=y+(rh-bh*series.length-2*(series.length-1))/2+k*(bh+2);o+=`<rect x="${lw}" y="${yy}" width="${Math.max(1,iw*r.v[k]/max)}" height="${bh}" rx="2" fill="${c}"/>`});o+='</g>'});
+ return o+'</svg>'}
+const cap=v=>Math.max(20,Math.ceil(v/20)*20);
+function go(y){sel=y;const u=new URL(location);y==='all'?u.searchParams.delete('year'):u.searchParams.set('year',y);history.replaceState(null,'',u);
+ [...yb.children].forEach(b=>b.classList.toggle('on',b.dataset.y===y));render()}
+function render(){const d=D[sel],p=sel!=='all'&&D[+sel-1]?D[+sel-1]:null;
+ const bestSrc=Object.entries(d.src).sort((a,b)=>b[1][1]-a[1][1])[0];
+ const cmp=(a,b,pct)=>!p?(sel==='all'?'2022–2026':'First year tracked'):(pct?`${a>=b?'+':''}${a-b} pts vs ${+sel-1}`:`${a>=b?'+':''}${Math.round(100*(a-b)/b)}% vs ${+sel-1}`);
+ const K=[['CVs received',fmt(d.cv),cmp(d.cv,p&&p.cv)],['Hires',fmt(d.hired),cmp(d.hired,p&&p.hired)],['Hire rate',d.rate+'%',cmp(d.rate,p&&p.rate,1)],['Top source of hires',bestSrc[0],`${bestSrc[1][1]}% of hires`]];
+ document.getElementById('kpis').innerHTML=K.map(k=>`<div class="kpi"><div class="l">${k[0]}</div><div class="v"${k[1].length>8?' style="font-size:30px;line-height:1.6"':''}>${k[1]}</div><div class="n">${k[2]}</div></div>`).join('');
+ const ref=d.src.Referral||[0,0],de=d.src['Direct email']||[0,0];const rs=topOf(d.rej);
+ document.getElementById('t1').textContent=sel==='all'?'CVs nearly doubled in 2025, but hires grew more slowly, so the hire rate drifted down.':
+  ({'2022':'Fewer CVs than later years, but the highest share turned into hires.','2023':'Similar volume to 2022 with far fewer hires. Some records from this year have no status.','2024':'Same volume as before, and hiring picked back up.','2025':'The busiest year by far, for both CVs and hires.','2026':'January to October so far, focused on Ho Chi Minh City.'})[sel];
+ document.getElementById('t2').textContent=ref[1]>ref[0]*2?`Referrals were ${ref[0]}% of CVs but ${ref[1]}% of hires.`:`Direct email brought ${de[0]}% of CVs and ${de[1]}% of hires.`;
+ document.getElementById('t3').textContent=`Most rejections happened at the ${rs[0]==='CV screen'?'CV screen':rs[0].toLowerCase()} stage (${rs[1]}%).`;
+ document.getElementById('c1').innerHTML=trend();
+ const Sk=Object.keys(d.src).filter(s=>d.src[s][0]+d.src[s][1]>=3).sort((a,b)=>d.src[b][0]-d.src[a][0]);
+ document.getElementById('c2').innerHTML=hbars(Sk.map(s=>({label:s,v:d.src[s],tip:`<b>${s}</b><br>${d.src[s][0]}% of CVs · ${d.src[s][1]}% of hires<br>${d.src[s][2]}% of its CVs were hired`})),[M,F],cap(Math.max(...Sk.map(s=>Math.max(d.src[s][0],d.src[s][1])))));
+ const R=['CV screen','HR screen','Hiring manager screen','Test','1st interview','2nd interview','Candidate withdrew'].filter(r=>d.rej[r]);
+ document.getElementById('c3').innerHTML=hbars(R.map(r=>({label:r==='Hiring manager screen'?'Manager screen':r==='Candidate withdrew'?'Withdrew':r,v:[d.rej[r]],tip:`<b>${r}</b><br>${d.rej[r]}% of rejections`})),[S],cap(Math.max(...R.map(r=>d.rej[r]))));}
+go(sel);let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,150)});
+</script></body></html>
