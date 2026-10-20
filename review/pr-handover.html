@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="HR handover playbook for recruitment, onboarding, employee engagement, employer branding and internal communications." />
-  <title>PR Handover · Duong Tran</title>
+  <meta name="description" content="Payment request (PR) handover playbook." />
+  <title>PR Handover &middot; Duong Tran</title>
   <style>
     :root {
       --ink: #1f2c27;
@@ -33,14 +33,14 @@
       margin: 0;
       background: var(--paper);
       color: var(--ink);
-      font-family: "Be Vietnam Pro", "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: "Be Vietnam Pro", Arial, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
     a { color: inherit; }
     button { font: inherit; }
-    .serif { font-family: "Noto Serif", "Times New Roman", Georgia, serif; }
+    .serif { font-family: "Playfair Display", Georgia, serif; }
     .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
 
     .topbar {
@@ -104,7 +104,7 @@
       max-width: 780px;
       margin: 18px 0 18px;
       color: var(--forest-deep);
-      font: 400 clamp(48px, 8vw, 88px)/.96 "Noto Serif", "Times New Roman", Georgia, serif;
+      font: 400 clamp(48px, 8vw, 88px)/.96 "Playfair Display", Georgia, serif;
       letter-spacing: -.035em;
     }
     .hero-lede {
@@ -129,14 +129,14 @@
     .hero-panel {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 26px;
       padding: 30px;
       border-radius: var(--radius-lg);
       background: var(--forest);
       color: var(--paper);
     }
-    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "Noto Serif", "Times New Roman", Georgia, serif; }
+    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "Playfair Display", Georgia, serif; }
     .hero-panel p { color: #d9e5dd; font-size: 14px; line-height: 1.75; }
     .panel-rule { height: 1px; background: rgba(255, 255, 255, .18); }
     .panel-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
@@ -145,7 +145,7 @@
 
     .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
     .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
-    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "Noto Serif", "Times New Roman", Georgia, serif; letter-spacing: -.02em; }
+    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "Playfair Display", Georgia, serif; letter-spacing: -.02em; }
     .section-intro { max-width: 650px; color: var(--muted); font-size: 15px; }
     .section-note { max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
 
@@ -200,7 +200,7 @@
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .info-card { padding: 25px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--line); }
     .info-card.dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
-    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "Noto Serif", "Times New Roman", Georgia, serif; }
+    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "Playfair Display", Georgia, serif; }
     .info-card.dark h3 { color: var(--paper); }
     .info-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
     .info-card.dark p { color: #d8e5dc; }
@@ -259,73 +259,77 @@
       .timeline::before { left: 14px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
-  .flow{grid-template-columns:repeat(6,1fr)!important}@media(max-width:760px){.flow{grid-template-columns:1fr 1fr!important}}</style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap">
+  .flow{grid-template-columns:repeat(6,1fr)!important}@media(max-width:760px){.flow{grid-template-columns:1fr 1fr!important}}  .section-intro{margin:10px 0 0}.bul{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px}.bul li{margin:3px 0}.flow-step small{font-size:12px}.top-link::after{content:" \2191"}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="topbar"><div class="wrap topbar-inner">
 <a class="brand" href="#start"><strong>Duong Tran</strong><span>PR Handover</span></a>
-<nav class="nav"><a href="#start">Bắt đầu</a><a href="#flow">Quy trình</a><a href="#tasks">Việc chính</a><a href="#rhythm">Nhịp tháng</a><a href="#tips">Mẹo</a></nav>
+<nav class="nav"><a href="#what">What</a><a href="#flow">Flow</a><a href="#tasks">Tasks</a><a href="#rhythm">Rhythm</a><a href="#tips">Tips</a></nav>
 </div></header>
 <main>
 <section class="hero" id="start"><div class="wrap hero-grid">
 <div class="hero-copy">
-<div class="eyebrow">Sổ tay bàn giao · Thanh toán</div>
-<h1>Làm PR gọn.<br />Để người sau dễ tiếp.</h1>
-<p class="hero-lede">PR (đề nghị thanh toán, DNTT) là hồ sơ xin duyệt chi cho các khoản của văn phòng. Trang này ghi lại cách làm để ai nhận việc cũng làm tiếp được.</p>
-<div class="hero-meta"><span class="tag">DNTT</span><span class="tag">Chứng từ</span><span class="tag">Nộp kế toán</span><span class="tag">Tracking</span><span class="tag">HCM &amp; ĐN</span></div>
+<div class="eyebrow">Handover &middot; Payments</div>
+<h1>Clean PRs.<br>Easy to pick up.</h1>
+<p class="hero-lede">How office payment requests get done, step by step.</p>
+<div class="hero-meta"><span class="tag">Payment form</span><span class="tag">Documents</span><span class="tag">Accounting</span><span class="tag">Tracking</span></div>
 </div>
 <aside class="hero-panel"><div>
-<div class="eyebrow" style="color:#e1bc81">15 phút đầu</div>
-<h2>Đọc theo thứ tự này.</h2>
-<p>Xem quy trình trước, rồi mở phần việc khi có PR mới.</p></div>
+<div class="eyebrow" style="color:#e1bc81">First 15 minutes</div>
+<h2>Read in this order.</h2></div>
 <div class="panel-rule"></div>
 <ol class="panel-list">
-<li><b>01</b><span>Xem khoản chi thuộc loại nào.</span></li>
-<li><b>02</b><span>Làm theo 6 bước bên dưới.</span></li>
-<li><b>03</b><span>Cập nhật tracking trước khi đóng việc.</span></li>
+<li><b>01</b><span>What a PR is.</span></li>
+<li><b>02</b><span>The 6-step flow.</span></li>
+<li><b>03</b><span>The monthly rhythm.</span></li>
 </ol></aside>
 </div></section>
 
+<section class="section" id="what"><div class="wrap">
+<div class="section-head"><div><div class="section-kicker">01 &middot; Basics</div><h2>What is a PR?</h2><p class="section-intro">A payment request asks for approval to pay an office expense.</p></div></div>
+<div class="two-col">
+<article class="info-card"><h3>It includes</h3><ul class="checklist"><li>A payment form</li><li>Invoices and supporting documents</li><li>The contract, if there is one</li></ul></article>
+<article class="info-card dark"><h3>Two types</h3><ul class="checklist"><li>With contract</li><li>Without contract</li></ul></article>
+</div></div></section>
+
 <section class="section" id="flow"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">01 · Quy trình</div><h2>Một PR đi qua 6 bước</h2></div>
-<p class="section-note">Bước nào cũng nên để lại dấu vết để người khác tra lại được.</p></div>
-<div class="flow-wrap"><div class="flow-title"><h3>Từ chứng từ đến lúc gửi duyệt</h3><span>Đọc → Đăng</span></div>
+<div class="section-head"><div><div class="section-kicker">02 &middot; Flow</div><h2>Six steps per PR</h2><p class="section-intro">Follow every step, in order.</p></div></div>
+<div class="flow-wrap">
 <div class="flow">
-<div class="flow-step"><span class="step-no">01</span><strong>Đọc và phân loại</strong><small>Xem chứng từ, chia Có HĐ hay Không HĐ.</small></div>
-<div class="flow-step"><span class="step-no">02</span><strong>Điền DNTT</strong><small>Gọn trong 1 trang, kiểm kỹ ngày và hạn.</small></div>
-<div class="flow-step"><span class="step-no">03</span><strong>Gộp PDF</strong><small>Form và chứng từ thành 1 file.</small></div>
-<div class="flow-step"><span class="step-no">04</span><strong>Tạo folder nộp</strong><small>Mỗi lần nộp kế toán một folder theo ngày.</small></div>
-<div class="flow-step"><span class="step-no">05</span><strong>Cập nhật tracking</strong><small>Ghi vào bảng chung và canvas.</small></div>
-<div class="flow-step"><span class="step-no">06</span><strong>Đăng thread PR</strong><small>Gửi vào thread PR của tháng để duyệt.</small></div>
+<div class="flow-step"><span class="step-no">01</span><strong>Classify</strong><small>With or without contract.</small></div>
+<div class="flow-step"><span class="step-no">02</span><strong>Fill the form</strong><small>One A4 page, signed by the requester.</small></div>
+<div class="flow-step"><span class="step-no">03</span><strong>Merge</strong><small>All documents into one PDF.</small></div>
+<div class="flow-step"><span class="step-no">04</span><strong>Submit folder</strong><small>New folder for accounting.</small></div>
+<div class="flow-step"><span class="step-no">05</span><strong>Track</strong><small>Master sheet + monthly canvas.</small></div>
+<div class="flow-step"><span class="step-no">06</span><strong>Post</strong><small>Numbered update in the monthly PR thread, reviewed first.</small></div>
 </div></div>
 </div></section>
 
 <section class="section" id="tasks"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">02 · Việc chính</div><h2>Bốn mảng cần giữ đều tay</h2></div>
-<p class="section-note">Phần lớn PR rơi vào một trong bốn mảng này.</p></div>
+<div class="section-head"><div><div class="section-kicker">03 &middot; Tasks</div><h2>Four core tasks</h2><p class="section-intro">Most PRs fall into one of these.</p></div></div>
 <div class="quick-grid">
-<article class="quick-card"><div class="number">01</div><h3>Chi phí định kỳ</h3><p>Thuê văn phòng, điện nước, gửi xe, vệ sinh. Lặp lại mỗi tháng hoặc quý.</p></article>
-<article class="quick-card"><div class="number">02</div><h3>Hợp đồng &amp; gia hạn</h3><p>Theo dõi ngày hết hạn, phụ lục, tiền cọc và bản quyền phần mềm.</p></article>
-<article class="quick-card"><div class="number">03</div><h3>Hồ sơ kế toán</h3><p>Folder theo ngày, file PDF đã gộp, tên file đặt thống nhất.</p></article>
-<article class="quick-card"><div class="number">04</div><h3>Tracking</h3><p>Một bảng chung và canvas Có HĐ / Không HĐ để tra lịch sử.</p></article>
+<article class="quick-card"><div class="number">01</div><h3>Recurring costs</h3><ul class="bul"><li>Rent and utilities</li><li>Parking, cleaning</li></ul></article>
+<article class="quick-card"><div class="number">02</div><h3>Contracts</h3><ul class="bul"><li>Expiry dates</li><li>Renewals and licenses</li></ul></article>
+<article class="quick-card"><div class="number">03</div><h3>Accounting files</h3><ul class="bul"><li>One folder per submission</li><li>Consistent file names</li></ul></article>
+<article class="quick-card"><div class="number">04</div><h3>Tracking</h3><ul class="bul"><li>Master sheet</li><li>Monthly canvas</li></ul></article>
 </div></div></section>
 
 <section class="section" id="rhythm"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">03 · Nhịp tháng</div><h2>Việc nào đến hẹn thì làm</h2></div>
-<p class="section-note">Giữ nhịp đều thì cuối tháng không bị dồn.</p></div>
+<div class="section-head"><div><div class="section-kicker">04 &middot; Rhythm</div><h2>Monthly rhythm</h2><p class="section-intro">Steady work avoids a month-end rush.</p></div></div>
 <div class="timeline">
-<div class="timeline-row"><div class="timeline-dot">T</div><div class="timeline-date">Hằng tuần</div><div class="timeline-content"><h3>Xem cảnh báo sắp hết hạn</h3><p>Rà hợp đồng và phần mềm sắp đến hạn, báo sớm để kịp gia hạn.</p></div></div>
-<div class="timeline-row"><div class="timeline-dot">+</div><div class="timeline-date">Có chứng từ mới</div><div class="timeline-content"><h3>Làm PR ngay</h3><p>Đi đủ 6 bước, đừng để chứng từ nằm chờ.</p></div></div>
-<div class="timeline-row"><div class="timeline-dot">25</div><div class="timeline-date">Ngày 25 hằng tháng</div><div class="timeline-content"><h3>Rà lại cả tháng</h3><p>Đối chiếu tracking với thread PR, xem khoản nào còn thiếu.</p></div></div>
+<div class="timeline-row"><div class="timeline-dot">M</div><div class="timeline-date">Every Monday</div><div class="timeline-content"><h3>Expiry alerts</h3><ul class="bul"><li>Check contracts due soon</li><li>Flag renewals early</li></ul></div></div>
+<div class="timeline-row"><div class="timeline-dot">+</div><div class="timeline-date">New invoice</div><div class="timeline-content"><h3>Start the PR</h3><ul class="bul"><li>Run all 6 steps right away</li></ul></div></div>
+<div class="timeline-row"><div class="timeline-dot">25</div><div class="timeline-date">The 25th</div><div class="timeline-content"><h3>Monthly review</h3><ul class="bul"><li>Match tracking with the PR thread</li><li>Chase missing items</li></ul></div></div>
 </div></div></section>
 
 <section class="section" id="tips"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">04 · Mẹo</div><h2>Mấy điều nhỏ giúp đỡ phải sửa lại</h2></div></div>
+<div class="section-head"><div><div class="section-kicker">05 &middot; Tips</div><h2>Quick tips</h2><p class="section-intro">Small habits that prevent rework.</p></div></div>
 <div class="two-col">
-<article class="info-card"><h3>Trước khi gửi</h3><ul class="checklist"><li>Kiểm số và ngày trên chứng từ khớp với form.</li><li>Chứng từ đủ, rõ, đúng thứ tự trong PDF.</li><li>Tên file theo đúng quy ước chung.</li></ul></article>
-<article class="info-card dark"><h3>Khi bàn giao</h3><ul class="checklist"><li>Tracking luôn là nơi xem đầu tiên.</li><li>Khoản lạ thì hỏi trước, đừng đoán.</li><li>Ghi chú ngắn cho trường hợp đặc biệt.</li></ul></article>
+<article class="info-card"><h3>Before sending</h3><ul class="checklist"><li>Amounts and dates match the form</li><li>Documents complete and in order</li><li>File names follow the convention</li></ul></article>
+<article class="info-card dark"><h3>Always</h3><ul class="checklist"><li>Check tracking first</li><li>Ask, don&rsquo;t guess</li><li>Note special cases briefly</li></ul></article>
 </div></div></section>
 </main>
-<footer><div class="wrap footer-inner"><span>PR Handover · Bàn giao nội bộ</span><a href="#start">Lên đầu trang ↑</a></div></footer>
+<footer><div class="wrap footer-inner"><span>PR Handover</span><a class="top-link" href="#start">Back to top</a></div></footer>
 </body></html>

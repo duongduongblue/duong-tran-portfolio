@@ -1,430 +1,142 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bàn giao HR | Duong Tran</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HR Handover · Duong Tran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap&subset=vietnamese" rel="stylesheet" />
 <style>
-    :root {
-      --ink: #1f2c27;
-      --ink-soft: #425149;
-      --muted: #718078;
-      --paper: #f7f5ef;
-      --paper-deep: #eeece3;
-      --card: #fffdf8;
-      --sage: #9caf9b;
-      --sage-soft: #dce6d9;
-      --forest: #294338;
-      --forest-deep: #1d3229;
-      --amber: #a76b28;
-      --amber-soft: #f3e5cf;
-      --line: #d9ded6;
-      --white: #ffffff;
-      --shadow: 0 18px 42px rgba(31, 44, 39, .08);
-      --radius-lg: 26px;
-      --radius-md: 16px;
-      --max: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "Be Vietnam Pro", system-ui, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; }
-    button { font: inherit; }
-    .serif { font-family: "Playfair Display", Georgia, serif; }
-    .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid rgba(217, 222, 214, .88);
-      background: rgba(247, 245, 239, .93);
-      backdrop-filter: blur(14px);
-    }
-    .topbar-inner {
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand {
-      text-decoration: none;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      color: var(--forest-deep);
-    }
-    .brand strong { font-size: 15px; letter-spacing: .02em; }
-    .brand span { color: var(--muted); font-size: 12px; }
-    .nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
-    .nav a {
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-    .nav a:hover, .nav a:focus-visible { color: var(--forest); }
-
-    .hero { padding: 58px 0 34px; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
-      gap: 26px;
-      align-items: stretch;
-    }
-    .hero-copy {
-      padding: clamp(32px, 6vw, 72px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: var(--card);
-      box-shadow: var(--shadow);
-    }
-    .eyebrow, .section-kicker {
-      color: var(--amber);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 {
-      max-width: 780px;
-      margin: 18px 0 18px;
-      color: var(--forest-deep);
-      font: 400 clamp(48px, 8vw, 88px)/.96 "Playfair Display", Georgia, serif;
-      letter-spacing: -.035em;
-    }
-    .hero-lede {
-      max-width: 700px;
-      color: var(--ink-soft);
-      font-size: clamp(17px, 2vw, 20px);
-      line-height: 1.75;
-    }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 32px;
-      padding: 0 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--forest);
-      background: var(--paper);
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .hero-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 26px;
-      padding: 30px;
-      border-radius: var(--radius-lg);
-      background: var(--forest);
-      color: var(--paper);
-    }
-    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "Playfair Display", Georgia, serif; }
-    .hero-panel p { color: #d9e5dd; font-size: 14px; line-height: 1.75; }
-    .panel-rule { height: 1px; background: rgba(255, 255, 255, .18); }
-    .panel-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
-    .panel-list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; color: #edf3ee; font-size: 13px; }
-    .panel-list b { color: #e1bc81; }
-
-    .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
-    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "Playfair Display", Georgia, serif; letter-spacing: -.02em; }
-    .section-intro { max-width: 650px; color: var(--muted); font-size: 15px; }
-    .section-note { max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
-
-    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .quick-card { min-height: 150px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
-    .quick-card .number { color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
-    .quick-card h3 { margin: 16px 0 7px; color: var(--forest); font-size: 16px; }
-    .quick-card p { margin: 0; color: var(--muted); font-size: 13px; }
-
-    .flow-wrap { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
-    .flow-title { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
-    .flow-title h3 { margin: 0; color: var(--forest); font-size: 18px; }
-    .flow-title span { color: var(--muted); font-size: 12px; }
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(8, minmax(100px, 1fr));
-      gap: 10px;
-      align-items: stretch;
-    }
-    .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
-    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
-    .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
-    .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
-    .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
-    .lane-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 18px; }
-    .lane { padding: 21px; border-radius: 16px; background: var(--paper-deep); }
-    .lane h4 { margin: 0 0 8px; color: var(--forest); font-size: 15px; }
-    .lane p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
-    .lane b { color: var(--amber); }
-
-    .sop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .sop-card { display: grid; grid-template-columns: 46px 1fr; gap: 17px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
-    .sop-num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--sage-soft); color: var(--forest); font-weight: 700; }
-    .sop-card h3 { margin: 2px 0 7px; color: var(--forest); font-size: 16px; }
-    .sop-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
-    .resource { display: inline-block; margin-top: 10px; color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .resource:hover, .program-link:hover, .resource-card-link:hover { color: var(--forest); }
-    .resource, .program-link { text-decoration: none; }
-    .resource-card-link { color: inherit; text-decoration: none; }
-    .resource-card-link h3 { transition: color .2s ease; }
-
-    .timeline { position: relative; display: grid; gap: 14px; }
-    .timeline::before { content: ""; position: absolute; left: 18px; top: 22px; bottom: 22px; width: 1px; background: var(--sage); }
-    .timeline-row { position: relative; display: grid; grid-template-columns: 38px 150px 1fr; gap: 18px; align-items: start; }
-    .timeline-dot { position: relative; z-index: 1; width: 37px; height: 37px; display: grid; place-items: center; border: 5px solid var(--paper); border-radius: 50%; background: var(--forest); color: var(--paper); font-size: 11px; font-weight: 700; }
-    .timeline-date { padding-top: 7px; color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .timeline-content { padding: 19px 21px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
-    .timeline-content h3 { margin: 0 0 7px; color: var(--forest); font-size: 16px; }
-    .timeline-content p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
-    .timeline-content ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; }
-
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .info-card { padding: 25px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--line); }
-    .info-card.dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
-    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "Playfair Display", Georgia, serif; }
-    .info-card.dark h3 { color: var(--paper); }
-    .info-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
-    .info-card.dark p { color: #d8e5dc; }
-    .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
-    .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
-    .dark .checklist li { color: #edf3ee; }
-    .checklist li::before { content: "✓"; color: var(--amber); font-weight: 700; }
-
-    .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
-    .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .program h3 { margin: 0 0 9px; color: var(--forest); font-size: 15px; }
-    .program p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
-    .program .program-link { display: block; margin-top: 13px; color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-
-    .resource-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
-    .resource-item { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-deep); }
-    .resource-item h3 { margin: 0 0 5px; color: var(--forest); font-size: 14px; }
-    .resource-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
-    .resource-item em { display: block; margin-top: 10px; color: var(--amber); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-
-    .publish-note { margin-top: 22px; padding: 21px 23px; border-left: 4px solid var(--amber); border-radius: 0 14px 14px 0; background: var(--amber-soft); }
-    .publish-note h3 { margin: 0 0 7px; color: var(--forest); font-size: 15px; }
-    .publish-note p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
-
-    footer { padding: 34px 0 54px; }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
-    .footer-inner a { color: var(--forest); font-weight: 700; text-decoration: none; }
-
-    @media (max-width: 980px) {
-      .hero-grid, .two-col { grid-template-columns: 1fr; }
-      .quick-grid { grid-template-columns: repeat(2, 1fr); }
-      .flow { grid-template-columns: repeat(4, 1fr); }
-      .flow-step:nth-child(4)::after { display: none; }
-      .flow-step:nth-child(5)::before { content: ""; position: absolute; left: 50%; top: -13px; width: 1px; height: 13px; background: var(--sage); }
-      .program-grid, .resource-map { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .wrap { width: min(var(--max), calc(100% - 28px)); }
-      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 15px 0; }
-      .nav { gap: 10px 14px; justify-content: flex-start; }
-      .hero { padding-top: 28px; }
-      .hero-copy { padding: 32px 24px; }
-      .hero-panel { padding: 25px; }
-      .section { padding: 56px 0; }
-      .section-head { display: block; }
-      .section-note { margin-top: 15px; text-align: left; }
-      .quick-grid, .sop-grid, .lane-grid, .program-grid, .resource-map { grid-template-columns: 1fr; }
-      .flow-wrap { padding: 19px; }
-      .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .flow-step:not(:last-child)::after { display: none; }
-      .flow-step:nth-child(odd)::after { content: "↓"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
-      .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
-      .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
-      .timeline-content { grid-column: 2; grid-row: 2; }
-      .timeline-dot { width: 30px; height: 30px; font-size: 10px; }
-      .timeline::before { left: 14px; }
-      .footer-inner { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
+:root{--ink:#1f2c27;--ink-soft:#425149;--muted:#718078;--paper:#f7f5ef;--card:#fffdf8;--sage-soft:#dce6d9;--forest:#294338;--amber:#a76b28;--amber-soft:#f3e5cf;--line:#d9ded6;--max:1080px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,sans-serif;font-size:16px;line-height:1.6}
+a{color:inherit}
+nav{position:sticky;top:0;z-index:5;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .in{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;gap:22px;align-items:center;flex-wrap:wrap;font-size:14px}
+nav .brand{font-weight:700;margin-right:auto;text-decoration:none}
+nav a{text-decoration:none;color:var(--ink-soft)}nav a:hover{color:var(--forest)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+header{padding:80px 0 56px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+h1{font-size:clamp(44px,7vw,80px);margin:16px 0 20px}
+h2{font-size:clamp(28px,4vw,40px);margin:8px 0 10px}
+h3{font-size:21px;margin-bottom:8px}
+.lead{font-size:18px;color:var(--ink-soft);max-width:640px;margin:0}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.tag{background:var(--sage-soft);color:var(--forest);font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px}
+section{padding:56px 0;border-top:1px solid var(--line)}
+.intro{color:var(--ink-soft);max-width:640px;margin:0 0 28px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card ul{margin:0;padding-left:18px;color:var(--ink-soft)}.card li{margin:4px 0}
+.card p{margin:0;color:var(--ink-soft)}
+.num{font-family:"Playfair Display",serif;color:var(--amber);font-size:15px;font-weight:700;display:block;margin-bottom:6px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.step{background:var(--forest);color:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:500}
+.arrow{align-self:center;color:var(--muted)}
+.note{background:var(--amber-soft);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--ink-soft);margin-bottom:24px}
+footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between}
+footer a{text-decoration:none}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="brand" href="../index.html"><strong>Duong Tran</strong><span>Bàn giao HR</span></a>
-      <nav class="nav" aria-label="Điều hướng">
-        <a href="#start">Bắt đầu</a>
-        <a href="#recruitment">Tuyển dụng</a>
-        <a href="#onboarding">Onboarding</a>
-        <a href="#engagement">EE / EB / IC</a>
-        <a href="#adhoc">Việc phát sinh</a>
-        <a href="#related">Trang liên quan</a>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <section class="hero" id="start">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Sổ tay bàn giao · HR Ather Labs</div>
-          <h1>Rõ việc.<br />Làm bằng cả sự quan tâm.</h1>
-          <p class="hero-lede">Trang này gom lại những việc HR làm hằng ngày: việc gì, làm lúc nào, phối hợp với ai và cần mở file nào. Để người tiếp quản đọc là làm được, và sau này nhìn lại vẫn thấy quy trình nằm đó.</p>
-          <div class="hero-meta">
-            <span class="tag">Tuyển dụng</span><span class="tag">Onboarding</span><span class="tag">Thử việc</span><span class="tag">Gắn kết nhân sự</span><span class="tag">Truyền thông nội bộ</span>
-          </div>
-        </div>
-        <aside class="hero-panel">
-          <div>
-            <div class="eyebrow" style="color:#e1bc81">15 phút đầu tiên</div>
-            <h2>Coi trang này như tấm bản đồ.</h2>
-            <p>Đọc phần tổng quan trước, có việc tới thì mở đúng mục. Link tài liệu chi tiết sẽ được bàn giao trực tiếp, không để trên trang này.</p>
-          </div>
-          <div class="panel-rule"></div>
-          <ol class="panel-list">
-            <li><b>01</b><span>Xem mình đang xử lý vị trí tuyển nào, hay mốc nào của nhân sự.</span></li>
-            <li><b>02</b><span>Mở đúng file theo dõi, mẫu hoặc kênh trao đổi.</span></li>
-            <li><b>03</b><span>Ghi lại bước tiếp theo và ai phụ trách trước khi đóng việc.</span></li>
-          </ol>
-        </aside>
-      </div>
-    </section>
+<nav><div class="in">
+<a class="brand" href="../index.html">Duong Tran</a>
+<a href="#overview">Overview</a><a href="#recruitment">Recruitment</a><a href="#lifecycle">Employee lifecycle</a><a href="#engagement">Engagement</a><a href="#adhoc">Ad-hoc</a><a href="#related">Related</a>
+</div></nav>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="section-kicker">01 · Tổng quan</div><h2>Nhịp làm việc trong một cái nhìn</h2></div>
-          <p class="section-note">Tóm từ tài liệu bàn giao công việc HR thực tế ở văn phòng Đà Nẵng và HCM.</p>
-        </div>
-        <div class="quick-grid">
-          <article class="quick-card"><div class="number">01</div><h3>Tuyển dụng</h3><p>Từ lúc nhận yêu cầu tuyển đến khi chốt offer và trao đổi với ứng viên.</p></article>
-          <article class="quick-card"><div class="number">02</div><h3>Vòng đời nhân sự</h3><p>Onboarding, offboarding, theo dõi thử việc và báo cáo định kỳ.</p></article>
-          <article class="quick-card"><div class="number">03</div><h3>Gắn kết & thương hiệu</h3><p>Gắn kết nhân sự, thương hiệu tuyển dụng và truyền thông nội bộ.</p></article>
-          <article class="quick-card"><div class="number">04</div><h3>Việc phát sinh</h3><p>Những việc ngoài quy trình được ghi lại ở không gian riêng của team HR.</p></article>
-        </div>
-      </div>
-    </section>
+<div class="wrap">
+<header>
+<div class="kicker">Handover notes · HR</div>
+<h1>Clear work.<br>Done with care.</h1>
+<p class="lead">The day-to-day HR work in one place: what to do, when, and who to work with.</p>
+<div class="tags"><span class="tag">Recruitment</span><span class="tag">Onboarding</span><span class="tag">Probation</span><span class="tag">Engagement</span><span class="tag">Internal comms</span></div>
+</header>
 
-    <section class="section" id="recruitment">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="section-kicker">02 · Tuyển dụng</div><h2>Ứng viên nào cũng luôn có một bước tiếp theo rõ ràng</h2></div>
-          <p class="section-note">Quy trình có thể co giãn theo vị trí, nhưng các điểm chuyển giao và ghi chép thì luôn phải rõ. Vòng phỏng vấn với CEO tùy vị trí có thể bỏ qua.</p>
-        </div>
-        <div class="flow-wrap">
-          <div class="flow-title"><h3>Quy trình tuyển chung</h3><span>Lọc CV → Offer</span></div>
-          <div class="flow">
-            <div class="flow-step"><span class="step-no">01</span><strong>Lọc CV</strong><small>Đối chiếu tiêu chí trong JD.</small></div>
-            <div class="flow-step"><span class="step-no">02</span><strong>Gọi điện sơ bộ</strong><small>Hỏi thông tin theo vị trí.</small></div>
-            <div class="flow-step"><span class="step-no">03</span><strong>HM xem hồ sơ</strong><small>Gửi tóm tắt ứng viên.</small></div>
-            <div class="flow-step"><span class="step-no">04</span><strong>Bài test</strong><small>Đúng bài, rõ deadline.</small></div>
-            <div class="flow-step"><span class="step-no">05</span><strong>Phỏng vấn vòng 1</strong><small>Team chuyên môn hoặc livecode.</small></div>
-            <div class="flow-step"><span class="step-no">06</span><strong>Phỏng vấn vòng 2</strong><small>Với CEO, tùy vị trí.</small></div>
-            <div class="flow-step"><span class="step-no">07</span><strong>Feedback</strong><small>Hỏi kết quả càng sớm càng tốt.</small></div>
-            <div class="flow-step"><span class="step-no">08</span><strong>Offer</strong><small>Thống nhất, duyệt, gửi ứng viên.</small></div>
-          </div>
-        </div>
-        <div class="lane-grid">
-          <div class="lane"><h4>Game Designer</h4><p>Lọc CV → Gọi điện → HM xem hồ sơ → <b>Bài test (2 tuần)</b> → Phỏng vấn vòng 1 với team chuyên môn → Phỏng vấn vòng 2 với CEO.</p></div>
-          <div class="lane"><h4>Kỹ thuật / Software</h4><p>Lọc CV → Gọi điện → HM xem hồ sơ → <b>Bài test (2 tuần)</b> → <b>Livecode + phỏng vấn</b> với team chuyên môn → Phỏng vấn vòng 2 với CEO.</p></div>
-        </div>
-        <div class="sop-grid" style="margin-top:18px;">
-          <article class="sop-card"><div class="sop-num">1</div><div><h3>Nhận yêu cầu tuyển dụng</h3><p>Soạn JD theo mẫu, gửi Hiring Manager xem và góp ý. JD chốt xong thì đăng lên hệ thống HRM và chọn kênh đăng tuyển hợp với vị trí.</p></div></article>
-          <article class="sop-card"><div class="sop-num">2</div><div><h3>Lọc CV</h3><p>Đọc từng CV theo đúng tiêu chí đã thống nhất trong JD. Loại hay giữ đều nên giải thích được, để HM hỏi lại là trả lời ngay.</p></div></article>
-          <article class="sop-card"><div class="sop-num">3</div><div><h3>Lưu và theo dõi ứng viên</h3><p>Cập nhật thông tin ứng viên vào file theo dõi. Đợt nào tuyển nhiều thì tạo file mới hoặc dùng form tự động để đỡ nhập tay.</p></div></article>
-          <article class="sop-card"><div class="sop-num">4</div><div><h3>Gọi điện sơ bộ</h3><p>Dùng cuộc gọi để hỏi những thông tin cần cho vị trí đó, rồi tóm lại nội dung gửi HM.</p></div></article>
-          <article class="sop-card"><div class="sop-num">5</div><div><h3>Gửi bài test và nhắc deadline</h3><p>Chọn đúng bài test theo vị trí, báo rõ hạn nộp, theo dõi và nhắc khéo khi gần tới hạn.</p></div></article>
-          <article class="sop-card"><div class="sop-num">6</div><div><h3>Sắp xếp phỏng vấn / livecode</h3><p>Hẹn lịch cùng HM. Trước buổi phỏng vấn, gửi sẵn Interview Note để người phỏng vấn ghi nhận xét chung một chỗ.</p></div></article>
-          <article class="sop-card"><div class="sop-num">7</div><div><h3>Hỏi feedback và đề xuất offer</h3><p>Hỏi kết quả từ người phỏng vấn càng sớm càng tốt. Ứng viên đạt thì thống nhất đề xuất offer với HRM rồi trình CEO duyệt.</p></div></article>
-          <article class="sop-card"><div class="sop-num">8</div><div><h3>Trao đổi và gửi Offer Letter</h3><p>Trao đổi các điều khoản đã thống nhất với ứng viên, đủ duyệt và đủ thông tin thì gửi thư mời làm việc.</p></div></article>
-        </div>
-      </div>
-    </section>
+<section id="overview">
+<div class="kicker">01 · Overview</div>
+<h2>Four areas of work</h2>
+<p class="intro">Based on HR work across the Da Nang and HCM offices.</p>
+<div class="grid">
+<div class="card"><span class="num">01</span><h3>Recruitment</h3><p>From hiring request to signed offer.</p></div>
+<div class="card"><span class="num">02</span><h3>Employee lifecycle</h3><p>Onboarding, offboarding, probation, reporting.</p></div>
+<div class="card"><span class="num">03</span><h3>Engagement</h3><p>Employee engagement, employer branding, internal comms.</p></div>
+<div class="card"><span class="num">04</span><h3>Ad-hoc tasks</h3><p>Requests outside the usual process.</p></div>
+</div>
+</section>
 
-    <section class="section" id="onboarding">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="section-kicker">03 · Vòng đời nhân sự</div><h2>Onboarding là cả một chuỗi, không chỉ là ngày đầu</h2></div>
-          <p class="section-note">Bắt đầu chuẩn bị trước khoảng 1 tuần để người, công cụ và chỗ ngồi sẵn sàng cùng lúc.</p>
-        </div>
-        <div class="timeline">
-          <div class="timeline-row"><div class="timeline-dot">D-7</div><div class="timeline-date">Trước 1 tuần</div><div class="timeline-content"><h3>Chuẩn bị tài khoản và chỗ làm</h3><p>Tạo email công ty và tài khoản làm việc cho bạn mới theo quy ước đặt tên chung. Phối hợp với Operations và IT để chuẩn bị máy móc, thiết bị và chỗ ngồi.</p></div></div>
-          <div class="timeline-row"><div class="timeline-dot">D-5</div><div class="timeline-date">Trước 3–5 ngày</div><div class="timeline-content"><h3>Báo cho mọi người biết có bạn mới</h3><p>Đăng thông báo pre-onboarding trên kênh chat nội bộ, gửi thông tin bạn mới vào nhóm onboarding của từng team và xác nhận những người liên quan đã nắm.</p><ul><li>Game Designer</li><li>Art</li><li>Game QA / Producer</li><li>Game Engineer</li></ul></div></div>
-          <div class="timeline-row"><div class="timeline-dot">D-2</div><div class="timeline-date">Trước ngày vào làm</div><div class="timeline-content"><h3>Chốt các việc lặt vặt</h3><p>Đăng ký thẻ gửi xe theo thông tin ứng viên, cập nhật sơ đồ chỗ ngồi nếu cần. Chuẩn bị slide Welcome / Orientation và ảnh giới thiệu bạn mới.</p><ul><li>File theo dõi thẻ xe: Đà Nẵng và HCM</li><li>Sơ đồ chỗ ngồi</li><li>Slide Welcome Onboard Orientation</li><li>Mẫu ảnh giới thiệu nhân sự mới</li></ul></div></div>
-          <div class="timeline-row"><div class="timeline-dot">D+1</div><div class="timeline-date">Ngày đầu tiên</div><div class="timeline-content"><h3>Chào đón, giới thiệu và ghi nhận</h3><p>Gửi email chào mừng kèm thông tin nhân sự và tài khoản, chạy buổi Welcome / Orientation, rồi đăng bài chào bạn mới cho cả công ty.</p></div></div>
-        </div>
-        <div class="two-col" style="margin-top:20px;">
-          <article class="info-card"><h3>Offboarding</h3><p>Chuẩn bị thông tin và giấy tờ nghỉ việc theo đúng biểu mẫu, phối hợp với Operations và những người liên quan.</p><ul class="checklist"><li>Dùng đúng mẫu offboarding.</li><li>Phối hợp bàn giao với Operations.</li><li>Kiểm tra mọi bên đã có đủ thông tin cần.</li></ul></article>
-          <article class="info-card dark"><h3>Theo dõi thử việc</h3><p>Làm sớm để không trễ hạn: gửi form đánh giá và nhắc nhở ít nhất 2 tuần trước ngày đánh giá thử việc.</p><ul class="checklist"><li>Theo dõi nhân sự và Line Manager đã điền xong chưa.</li><li>Cập nhật vào file theo dõi nhân sự.</li><li>Dùng mẫu email thông báo thử việc có sẵn.</li></ul></article>
-        </div>
-        <div class="two-col" style="margin-top:18px;">
-          <article class="info-card"><h3>Báo cáo hằng ngày, hằng tuần</h3><p>Để việc luôn hiện rõ và ai cũng tiếp được.</p><ul class="checklist"><li>Hằng ngày: đăng việc trong ngày vào thread lúc <strong>09:15</strong>.</li><li>Hằng tuần: cập nhật tiến độ vào file Weekly Report.</li><li>Có sẵn mẫu Daily Standup để tham khảo.</li></ul></article>
-          <article class="info-card"><h3>Hồ sơ nhân sự</h3><p>Các file theo dõi hiện có là nguồn chuẩn cho những mốc định kỳ.</p><ul class="checklist"><li>Thông tin nghỉ việc năm 2026.</li><li>Thông tin nhân sự mới năm 2026.</li><li>File theo dõi thử việc.</li></ul></article>
-        </div>
-      </div>
-    </section>
+<section id="recruitment">
+<div class="kicker">02 · Recruitment</div>
+<h2>Every candidate has a clear next step</h2>
+<p class="intro">Steps flex by role. The CEO round is optional for some roles.</p>
+<div class="flow"><span class="step">CV screening</span><span class="arrow">→</span><span class="step">Phone screen</span><span class="arrow">→</span><span class="step">Hiring manager review</span><span class="arrow">→</span><span class="step">Test (2 weeks)</span><span class="arrow">→</span><span class="step">Round 1: team</span><span class="arrow">→</span><span class="step">Round 2: CEO</span><span class="arrow">→</span><span class="step">Feedback</span><span class="arrow">→</span><span class="step">Offer</span></div>
+<p class="note">Game Designer: Round 1 is an interview with the team. Engineering: Round 1 is a live-coding session plus interview.</p>
+<div class="grid">
+<div class="card"><span class="num">01</span><h3>Open the role</h3><ul><li>Draft the JD from the template.</li><li>Get hiring manager sign-off.</li><li>Post on the HRM system and job channels.</li></ul></div>
+<div class="card"><span class="num">02</span><h3>Screen and track</h3><ul><li>Screen CVs against the JD.</li><li>Log every candidate in the tracker.</li><li>Use a form for high-volume roles.</li></ul></div>
+<div class="card"><span class="num">03</span><h3>Phone screen and test</h3><ul><li>Send a short summary to the hiring manager.</li><li>Send the right test with a clear deadline.</li><li>Remind before the due date.</li></ul></div>
+<div class="card"><span class="num">04</span><h3>Interview and offer</h3><ul><li>Share the interview note before each round.</li><li>Collect feedback quickly.</li><li>Agree the offer with HRM, get CEO approval, send the letter.</li></ul></div>
+</div>
+</section>
 
-    <section class="section" id="engagement">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="section-kicker">04 · EE / EB / IC</div><h2>Lên lịch cho những khoảnh khắc giữ mọi người gần nhau</h2></div>
-          <p class="section-note">Gắn kết nhân sự, thương hiệu tuyển dụng và truyền thông nội bộ nên đi theo một nhịp đều, không chỉ là vài sự kiện lẻ.</p>
-        </div>
-        <div class="info-card" style="margin-bottom:18px;"><h3>Cách làm lịch</h3><p>Duy trì Communication Plan, ghi lại nội dung bài đăng mạng xã hội, rồi dựng timeline theo tháng hoặc theo năm để triển khai. Lấy các chương trình định kỳ bên dưới làm khung, rồi điều chỉnh theo nhu cầu từng năm.</p></div>
-        <div class="program-grid">
-          <article class="program"><h3>Du lịch công ty</h3><p>Lên kế hoạch và tổ chức chuyến đi hằng năm.</p></article>
-          <article class="program"><h3>Ngày Phụ nữ</h3><p>Sự kiện cho ngày 8/3 và 20/10.</p></article>
-          <article class="program"><h3>Last Friday</h3><p>Buổi gặp mặt cuối tháng cho mọi người kết nối.</p></article>
-          <article class="program"><h3>Sự kiện nội bộ nhỏ</h3><p>Các hoạt động nhỏ tổ chức khi cần.</p></article>
-          <article class="program"><h3>Recharge Time</h3><p>Ba tháng một lần, thường là đi ăn cùng nhau.</p></article>
-          <article class="program"><h3>Công tác</h3><p>Sắp xếp chuyến công tác theo quy trình đã có.</p></article>
-          <article class="program"><h3>Tiệc tất niên</h3><p>Lên kế hoạch và phối hợp tiệc cuối năm.</p></article>
-          <article class="program"><h3>Thiện nguyện</h3><p>Phối hợp các hoạt động thiện nguyện, cộng đồng.</p></article>
-          <article class="program"><h3>Leadership Meeting</h3><p>Dành cho leader, producer, manager, director và BOD; thường 1–2 lần mỗi năm, hay rơi vào đầu năm.</p></article>
-        </div>
-      </div>
-    </section>
+<section id="lifecycle">
+<div class="kicker">03 · Employee lifecycle</div>
+<h2>Onboarding starts a week early</h2>
+<p class="intro">People, tools and desk should be ready on day one.</p>
+<div class="grid">
+<div class="card"><span class="num">D-7</span><h3>Accounts and desk</h3><ul><li>Create company email and work accounts.</li><li>Prepare laptop and desk with Operations and IT.</li></ul></div>
+<div class="card"><span class="num">D-5</span><h3>Tell the team</h3><ul><li>Post the pre-onboarding note.</li><li>Brief each team's onboarding group.</li></ul></div>
+<div class="card"><span class="num">D-2</span><h3>Final prep</h3><ul><li>Register parking and update the seating plan.</li><li>Prepare welcome slides and intro image.</li></ul></div>
+<div class="card"><span class="num">Day 1</span><h3>Welcome</h3><ul><li>Send the welcome email.</li><li>Run the orientation session.</li><li>Introduce the new joiner company-wide.</li></ul></div>
+</div>
+<div class="grid" style="margin-top:16px">
+<div class="card"><h3>Offboarding</h3><ul><li>Use the offboarding template.</li><li>Coordinate handover with Operations.</li></ul></div>
+<div class="card"><h3>Probation</h3><ul><li>Send review forms 2 weeks ahead.</li><li>Follow up with employee and manager.</li><li>Update the employee tracker.</li></ul></div>
+<div class="card"><h3>Reporting</h3><ul><li>Daily: post today's tasks each morning.</li><li>Weekly: update the weekly report.</li></ul></div>
+<div class="card"><h3>Records</h3><ul><li>New joiners and leavers by year.</li><li>Probation tracker.</li></ul></div>
+</div>
+</section>
 
-    <section class="section" id="adhoc">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="section-kicker">05 · Việc phát sinh</div><h2>Việc ngoài quy trình cũng có chỗ để ghi lại</h2></div>
-          <p class="section-note">Những yêu cầu bất chợt không nằm trong các mục trên.</p>
-        </div>
-        <div class="two-col">
-          <article class="info-card"><h3>Không gian riêng của team HR</h3><p>Mỗi việc phát sinh được ghi vào không gian riêng của team HR trên Notion, kèm người yêu cầu, hạn và tình trạng, để người sau biết việc nào đang dở.</p></article>
-          <article class="info-card"><h3>Công cụ hay dùng</h3><ul class="checklist"><li>Notion: mẫu JD, bài test, Interview Note, mẫu email, Communication Plan.</li><li>Google Sheets: theo dõi ứng viên, nhân sự, thẻ xe, báo cáo tuần.</li><li>Google Slides và Canva: slide orientation, sơ đồ chỗ ngồi, ảnh chào bạn mới.</li><li>Hệ thống HRM: đăng JD đã duyệt.</li></ul></article>
-        </div>
-      </div>
-    </section>
+<section id="engagement">
+<div class="kicker">04 · Engagement</div>
+<h2>A steady rhythm, not one-off events</h2>
+<p class="intro">Keep a yearly communication plan and build the timeline around these programmes.</p>
+<div class="grid">
+<div class="card"><h3>Company trip</h3><p>Yearly trip, planned end to end.</p></div>
+<div class="card"><h3>Women's Day</h3><p>Events on 8/3 and 20/10.</p></div>
+<div class="card"><h3>Last Friday</h3><p>Monthly get-together.</p></div>
+<div class="card"><h3>Recharge Time</h3><p>Quarterly team meal.</p></div>
+<div class="card"><h3>Year-end party</h3><p>Planned with Operations.</p></div>
+<div class="card"><h3>Leadership meeting</h3><p>1–2 times a year for leads and BOD.</p></div>
+<div class="card"><h3>Small events</h3><p>Run as needed.</p></div>
+<div class="card"><h3>Business trips</h3><p>Booked via the set process.</p></div>
+<div class="card"><h3>Charity</h3><p>Community activities.</p></div>
+</div>
+</section>
 
-    <section class="section" id="related">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="section-kicker">06 · Trang liên quan</div><h2>Các trang bàn giao khác</h2></div>
-          <p class="section-note">Mỗi mảng có một trang riêng cho dễ tra.</p>
-        </div>
-        <div class="resource-map">
-          <article class="resource-item"><a class="resource-card-link" href="recruitment-dashboard.html"><h3>Recruitment Dashboard</h3><p>Pipeline và số liệu tuyển dụng.</p><em>Mở dashboard</em></a></article>
-          <article class="resource-item"><a class="resource-card-link" href="ops-handover.html"><h3>Operations</h3><p>Bàn giao mảng vận hành / admin.</p><em>Mở trang Operations</em></a></article>
-          <article class="resource-item"><a class="resource-card-link" href="pr-handover.html"><h3>PR</h3><p>Quy trình làm PR và các việc chính.</p><em>Mở trang PR</em></a></article>
-          <article class="resource-item"><a class="resource-card-link" href="events-handover.html"><h3>Sự kiện</h3><p>Các chương trình định kỳ và timeline trong năm.</p><em>Mở trang sự kiện</em></a></article>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer><div class="wrap footer-inner"><span>Bàn giao HR · Chuẩn bị cho giai đoạn chuyển giao</span><a href="#start">Về đầu trang ↑</a></div></footer>
+<section id="adhoc">
+<div class="kicker">05 · Ad-hoc</div>
+<h2>Every extra task gets logged</h2>
+<p class="intro">Log requester, deadline and status in the HR team workspace.</p>
+<div class="grid">
+<div class="card"><h3>Tools</h3><ul><li>Notion: templates, tests, interview notes.</li><li>Google Sheets: trackers and reports.</li><li>Slides and Canva: orientation and visuals.</li><li>HRM system: job posts.</li></ul></div>
+</div>
+</section>
+
+<section id="related">
+<div class="kicker">06 · Related</div>
+<h2>Other handover pages</h2>
+<div class="grid" style="margin-top:20px">
+<a class="card" href="recruitment-dashboard.html" style="text-decoration:none"><h3>Recruitment dashboard</h3><p>Pipeline and hiring numbers.</p></a>
+<a class="card" href="ops-handover.html" style="text-decoration:none"><h3>Operations</h3><p>Office and admin handover.</p></a>
+<a class="card" href="pr-handover.html" style="text-decoration:none"><h3>PR</h3><p>PR process and key tasks.</p></a>
+<a class="card" href="events-handover.html" style="text-decoration:none"><h3>Events</h3><p>Yearly programmes and timeline.</p></a>
+</div>
+</section>
+
+<footer><span>HR handover · Duong Tran</span><a href="#">Back to top ↑</a></footer>
+</div>
 </body>
 </html>
