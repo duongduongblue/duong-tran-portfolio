@@ -166,7 +166,7 @@
       align-items: stretch;
     }
     .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
-    .flow-step:not(:last-child)::after { content: "â†’"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step:not(:last-child)::after { content: "\2192"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
     .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
     .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
     .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
@@ -207,7 +207,7 @@
     .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
     .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
     .dark .checklist li { color: #edf3ee; }
-    .checklist li::before { content: "âœ“"; color: var(--amber); font-weight: 700; }
+    .checklist li::before { content: "\2713"; color: var(--amber); font-weight: 700; }
 
     .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
     .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -251,7 +251,7 @@
       .flow-wrap { padding: 19px; }
       .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .flow-step:not(:last-child)::after { display: none; }
-      .flow-step:nth-child(odd)::after { content: "â†“"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .flow-step:nth-child(odd)::after { content: "\2193"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
       .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
       .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
       .timeline-content { grid-column: 2; grid-row: 2; }
