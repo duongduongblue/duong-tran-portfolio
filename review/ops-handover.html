@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Operations handover playbook for building management, assets, test devices and vendor coordination." />
+  <title>Operations Handover Playbook | Duong Tran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1f2c27;
+      --ink-soft: #425149;
+      --muted: #718078;
+      --paper: #f7f5ef;
+      --paper-deep: #eeece3;
+      --card: #fffdf8;
+      --sage: #9caf9b;
+      --sage-soft: #dce6d9;
+      --forest: #294338;
+      --forest-deep: #1d3229;
+      --amber: #a76b28;
+      --amber-soft: #f3e5cf;
+      --line: #d9ded6;
+      --white: #ffffff;
+      --shadow: 0 18px 42px rgba(31, 44, 39, .08);
+      --radius-lg: 26px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .serif { font-family: "DM Serif Display", Georgia, serif; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(217, 222, 214, .88);
+      background: rgba(247, 245, 239, .93);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--forest-deep);
+    }
+    .brand strong { font-size: 15px; letter-spacing: .02em; }
+    .brand span { color: var(--muted); font-size: 12px; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav a:hover, .nav a:focus-visible { color: var(--forest); }
+
+    .hero { padding: 58px 0 34px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-copy {
+      padding: clamp(32px, 6vw, 72px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow, .section-kicker {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 18px;
+      color: var(--forest-deep);
+      font: 400 clamp(48px, 8vw, 88px)/.96 "DM Serif Display", Georgia, serif;
+      letter-spacing: -.035em;
+    }
+    .hero-lede {
+      max-width: 700px;
+      color: var(--ink-soft);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.75;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--forest);
+      background: var(--paper);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .hero-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--forest);
+      color: var(--paper);
+    }
+    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "DM Serif Display", Georgia, serif; }
+    .hero-panel p { color: #d9e5dd; font-size: 14px; line-height: 1.75; }
+    .panel-rule { height: 1px; background: rgba(255, 255, 255, .18); }
+    .panel-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+    .panel-list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; color: #edf3ee; font-size: 13px; }
+    .panel-list b { color: #e1bc81; }
+
+    .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "DM Serif Display", Georgia, serif; letter-spacing: -.02em; }
+    .section-intro { max-width: 650px; color: var(--muted); font-size: 15px; }
+    .section-note { max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
+
+    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .quick-card { min-height: 150px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .quick-card .number { color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+    .quick-card h3 { margin: 16px 0 7px; color: var(--forest); font-size: 16px; }
+    .quick-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .flow-wrap { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+    .flow-title { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .flow-title h3 { margin: 0; color: var(--forest); font-size: 18px; }
+    .flow-title span { color: var(--muted); font-size: 12px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(100px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
+    .flow-step:not(:last-child)::after { content: "â†’"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+    .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
+    .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .lane-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 18px; }
+    .lane { padding: 21px; border-radius: 16px; background: var(--paper-deep); }
+    .lane h4 { margin: 0 0 8px; color: var(--forest); font-size: 15px; }
+    .lane p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+    .lane b { color: var(--amber); }
+
+    .sop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .sop-card { display: grid; grid-template-columns: 46px 1fr; gap: 17px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .sop-num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--sage-soft); color: var(--forest); font-weight: 700; }
+    .sop-card h3 { margin: 2px 0 7px; color: var(--forest); font-size: 16px; }
+    .sop-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .resource { display: inline-block; margin-top: 10px; color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .resource:hover, .program-link:hover, .resource-card-link:hover { color: var(--forest); }
+    .resource, .program-link { text-decoration: none; }
+    .resource-card-link { color: inherit; text-decoration: none; }
+    .resource-card-link h3 { transition: color .2s ease; }
+
+    .timeline { position: relative; display: grid; gap: 14px; }
+    .timeline::before { content: ""; position: absolute; left: 18px; top: 22px; bottom: 22px; width: 1px; background: var(--sage); }
+    .timeline-row { position: relative; display: grid; grid-template-columns: 38px 150px 1fr; gap: 18px; align-items: start; }
+    .timeline-dot { position: relative; z-index: 1; width: 37px; height: 37px; display: grid; place-items: center; border: 5px solid var(--paper); border-radius: 50%; background: var(--forest); color: var(--paper); font-size: 11px; font-weight: 700; }
+    .timeline-date { padding-top: 7px; color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .timeline-content { padding: 19px 21px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
+    .timeline-content h3 { margin: 0 0 7px; color: var(--forest); font-size: 16px; }
+    .timeline-content p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .timeline-content ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .info-card { padding: 25px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--line); }
+    .info-card.dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
+    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "DM Serif Display", Georgia, serif; }
+    .info-card.dark h3 { color: var(--paper); }
+    .info-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .info-card.dark p { color: #d8e5dc; }
+    .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
+    .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
+    .dark .checklist li { color: #edf3ee; }
+    .checklist li::before { content: "âœ“"; color: var(--amber); font-weight: 700; }
+
+    .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .program h3 { margin: 0 0 9px; color: var(--forest); font-size: 15px; }
+    .program p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .program .program-link { display: block; margin-top: 13px; color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .resource-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .resource-item { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-deep); }
+    .resource-item h3 { margin: 0 0 5px; color: var(--forest); font-size: 14px; }
+    .resource-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .resource-item em { display: block; margin-top: 10px; color: var(--amber); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .publish-note { margin-top: 22px; padding: 21px 23px; border-left: 4px solid var(--amber); border-radius: 0 14px 14px 0; background: var(--amber-soft); }
+    .publish-note h3 { margin: 0 0 7px; color: var(--forest); font-size: 15px; }
+    .publish-note p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+
+    footer { padding: 34px 0 54px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+    .footer-inner a { color: var(--forest); font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: repeat(4, 1fr); }
+      .flow-step:nth-child(4)::after { display: none; }
+      .flow-step:nth-child(5)::before { content: ""; position: absolute; left: 50%; top: -13px; width: 1px; height: 13px; background: var(--sage); }
+      .program-grid, .resource-map { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 15px 0; }
+      .nav { gap: 10px 14px; justify-content: flex-start; }
+      .hero { padding-top: 28px; }
+      .hero-copy { padding: 32px 24px; }
+      .hero-panel { padding: 25px; }
+      .section { padding: 56px 0; }
+      .section-head { display: block; }
+      .section-note { margin-top: 15px; text-align: left; }
+      .quick-grid, .sop-grid, .lane-grid, .program-grid, .resource-map { grid-template-columns: 1fr; }
+      .flow-wrap { padding: 19px; }
+      .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .flow-step:nth-child(odd)::after { content: "â†“"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
+      .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
+      .timeline-content { grid-column: 2; grid-row: 2; }
+      .timeline-dot { width: 30px; height: 30px; font-size: 10px; }
+      .timeline::before { left: 14px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+
+</head>
+<body>
+  <header class="topbar"><div class="wrap topbar-inner">
+    <a class="brand" href="../index.html" aria-label="Back to Duong Tran portfolio"><strong>Duong Tran</strong><span>Operations Handover Playbook</span></a>
+    <nav class="nav" aria-label="Page navigation"><a href="#start">Start here</a><a href="#rhythm">Rhythm</a><a href="#building">Building</a><a href="#assets">Assets</a><a href="#devices">Test devices</a><a href="#vendors">Vendors</a><a href="#resources">Resources</a></nav>
+  </div></header>
+  <main>
+    <section class="hero" id="start"><div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Internal working guide · Office operations</div>
+        <h1>Keep the offices quiet.<br />Keep the records honest.</h1>
+        <p class="hero-lede">The main operations work for the Đà Nẵng and HCM offices, and where each record lives.</p>
+        <div class="hero-meta" aria-label="Guide scope"><span class="tag">Building & parking</span><span class="tag">Asset lifecycle</span><span class="tag">Test devices</span><span class="tag">Office supplies</span><span class="tag">Vendor coordination</span></div>
+      </div>
+      <aside class="hero-panel"><div>
+        <div class="eyebrow" style="color:#e1bc81">First 15 minutes</div>
+        <h2>Use this page as your map.</h2>
+        <p>Check the rhythm, open the matching flow, update the record the same day.</p></div>
+        <div class="panel-rule"></div>
+        <ol class="panel-list">
+          <li><b>01</b><span>Pick the office and the area.</span></li>
+          <li><b>02</b><span>Open the matching tracker.</span></li>
+          <li><b>03</b><span>Record the change and the next step.</span></li>
+        </ol>
+      </aside>
+    </div></section>
+
+    <section class="section" id="rhythm"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">01 · Overview</div><h2>The operating rhythm at a glance</h2></div><p class="section-note">Two active offices: Đà Nẵng and HCM. The Hà Nội office closed in early 2026.</p></div>
+      <div class="quick-grid">
+        <article class="quick-card"><div class="number">01</div><h3>Office & building</h3><p>Building contact, parking and day-to-day office care.</p></article>
+        <article class="quick-card"><div class="number">02</div><h3>Assets</h3><p>Issue, return, transfer and monthly inventory.</p></article>
+        <article class="quick-card"><div class="number">03</div><h3>Test devices</h3><p>Regular check with the Đà Nẵng team.</p></article>
+        <article class="quick-card"><div class="number">04</div><h3>Vendors & recurring schedule</h3><p>Recurring office vendors on a monthly or quarterly cycle.</p></article>
+      </div>
+      <div class="timeline" aria-label="Monthly rhythm" style="margin-top:22px;">
+        <div class="timeline-row"><div class="timeline-dot">D1</div><div class="timeline-date">Start of month</div><div class="timeline-content"><h3>Open the new month</h3><p>New monthly asset tab for each office; review contracts near expiry.</p><a class="resource" href="#">Open task guide · Monthly asset tab</a></div></div>
+        <div class="timeline-row"><div class="timeline-dot">D10</div><div class="timeline-date">By the 10th</div><div class="timeline-content"><h3>Close recurring vendor items</h3><p>Recurring vendor invoices collected and submitted.</p><a class="resource" href="#">Open task guide · Recurring vendor checklist</a></div></div>
+        
+        <div class="timeline-row"><div class="timeline-dot">D28</div><div class="timeline-date">End of month</div><div class="timeline-content"><h3>Reconcile and confirm</h3><p>Match joiners and leavers to parking and assets; holders confirm their lists.</p><a class="resource" href="#">Open task guide · Month-end reconciliation</a></div></div>
+        
+      </div>
+    </div></section>
+
+    <section class="section" id="building"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">02 · Building management & parking</div><h2>Stay close to the building, and the small things stay small</h2></div><p class="section-note">Building requests go through each office’s building management Zalo group.</p></div>
+      <div class="flow-wrap"><div class="flow-title"><h3>Parking card flow</h3><span>Request → Record</span></div>
+      <div class="flow" aria-label="Parking flow"><div class="flow-step"><span class="step-no">01</span><strong>Collect details</strong><small>Name, plate, start date.</small></div><div class="flow-step"><span class="step-no">02</span><strong>Send to building</strong><small>Via the building Zalo group.</small></div><div class="flow-step"><span class="step-no">03</span><strong>Confirm card</strong><small>Check the card is issued and working.</small></div><div class="flow-step"><span class="step-no">04</span><strong>Record it</strong><small>Add to the monthly parking tracker.</small></div><div class="flow-step"><span class="step-no">05</span><strong>Cancel on exit</strong><small>Notify the building and update the tracker.</small></div></div></div>
+      
+    </div></section>
+
+    <section class="section" id="assets"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">03 · Asset lifecycle</div><h2>Every device has one holder, one row and one story</h2></div><p class="section-note">One monthly tab per office; every move leaves a written trace.</p></div>
+      <div class="flow-wrap"><div class="flow-title"><h3>Asset lifecycle</h3><span>Issue → Transfer → Confirm</span></div>
+      <div class="flow"><div class="flow-step"><span class="step-no">01</span><strong>Issue</strong><small>Signed handover form.</small></div><div class="flow-step"><span class="step-no">02</span><strong>Record</strong><small>Add to the month tab.</small></div><div class="flow-step"><span class="step-no">03</span><strong>Return</strong><small>Back to admin storage.</small></div><div class="flow-step"><span class="step-no">04</span><strong>Transfer</strong><small>Between offices, with an origin note.</small></div><div class="flow-step"><span class="step-no">05</span><strong>Monthly tab</strong><small>Carry changes forward.</small></div><div class="flow-step"><span class="step-no">06</span><strong>Confirm</strong><small>Holders confirm by Slack DM.</small></div></div></div>
+      <div class="sop-grid" style="margin-top:18px;"><article class="sop-card"><div class="sop-num">1</div><div><h3>Issue equipment</h3><p>Standard setup per role, signed handover form, row updated.</p><a class="resource" href="#">Open task guide · Issue equipment</a></div></article><article class="sop-card"><div class="sop-num">2</div><div><h3>Take equipment back</h3><p>Return form on offboarding; item back to admin storage the same day.</p><a class="resource" href="#">Open task guide · Return equipment</a></div></article><article class="sop-card"><div class="sop-num">3</div><div><h3>Move equipment between offices</h3><p>Mark the source row as moved and add it to the receiving office’s file with an origin note.</p><a class="resource" href="#">Open task guide · Office transfer</a></div></article><article class="sop-card"><div class="sop-num">4</div><div><h3>Confirm with holders</h3><p>Each holder confirms their list by Slack DM; note the date.</p><a class="resource" href="#">Open task guide · Holder confirmation</a></div></article></div>
+    </div></section>
+
+    <section class="section" id="devices"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">04 · Test devices & office care</div><h2>Count the test kit with the people who use it</h2></div><p class="section-note">Test devices are checked with the Đà Nẵng team; office supplies sit with admin.</p></div>
+      <div class="two-col">
+        <article class="info-card"><h3>Test device check</h3><p>Check every device against the list with the team and note the date and any gaps.</p><a class="resource" href="#">Open task guide · Test device check</a></article>
+        <article class="info-card dark"><h3>Office supplies & wifi cabinet</h3><p>Keep supplies stocked and check the wifi cabinet regularly.</p><a class="resource" href="#">Open task guide · Office supplies</a></article>
+      </div>
+    </div></section>
+
+    <section class="section" id="vendors"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">05 · Vendor coordination</div><h2>Know who does what, and when they bill</h2></div><p class="section-note">Overview only; payments have their own playbook.</p></div>
+      <div class="program-grid"><article class="program"><h3>Office rent & utilities</h3><p>Monthly, around the 10th.</p><a class="program-link" href="#">Open program guide</a></article><article class="program"><h3>Cleaning & water</h3><p>Monthly statement and invoice.</p><a class="program-link" href="#">Open program guide</a></article><article class="program"><h3>Plants</h3><p>Quarterly cycle.</p><a class="program-link" href="#">Open program guide</a></article><article class="program"><h3>Courier</h3><p>As needed; may be billed over several months.</p><a class="program-link" href="#">Open program guide</a></article></div><div class="publish-note"><h3>Payments live elsewhere</h3><p>See the <a href="#">Payment Request playbook</a>.</p></div>
+    </div></section>
+
+    <section class="section" id="resources"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">06 · Resource map</div><h2>Open the right place before you start the task</h2></div><p class="section-note">Links are placeholders on this public page.</p></div>
+      <div class="resource-map"><article class="resource-item"><a class="resource-card-link" href="#"><h3>Google Sheets</h3><p>Asset files (ĐN, HCM), parking trackers and the vendor checklist.</p><em>Open task guide</em></a></article><article class="resource-item"><a class="resource-card-link" href="#"><h3>Slack</h3><p>Admin requests and holder confirmations.</p><em>Open task guide</em></a></article><article class="resource-item"><a class="resource-card-link" href="#"><h3>Zalo</h3><p>Building management groups.</p><em>Open task guide</em></a></article><article class="resource-item"><a class="resource-card-link" href="#"><h3>Notion</h3><p>Operations handover page.</p><em>Open task guide</em></a></article></div>
+    </div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>Operations Handover Playbook · Prepared for internal transition</span><a href="#start">Back to top ↑</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Events handover playbook: annual calendar, per-event checklists, budget model, roles and lessons learned." />
+  <title>Events Handover Playbook | Duong Tran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1f2c27;
+      --ink-soft: #425149;
+      --muted: #718078;
+      --paper: #f7f5ef;
+      --paper-deep: #eeece3;
+      --card: #fffdf8;
+      --sage: #9caf9b;
+      --sage-soft: #dce6d9;
+      --forest: #294338;
+      --forest-deep: #1d3229;
+      --amber: #a76b28;
+      --amber-soft: #f3e5cf;
+      --line: #d9ded6;
+      --white: #ffffff;
+      --shadow: 0 18px 42px rgba(31, 44, 39, .08);
+      --radius-lg: 26px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .serif { font-family: "DM Serif Display", Georgia, serif; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(217, 222, 214, .88);
+      background: rgba(247, 245, 239, .93);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--forest-deep);
+    }
+    .brand strong { font-size: 15px; letter-spacing: .02em; }
+    .brand span { color: var(--muted); font-size: 12px; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav a:hover, .nav a:focus-visible { color: var(--forest); }
+
+    .hero { padding: 58px 0 34px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-copy {
+      padding: clamp(32px, 6vw, 72px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow, .section-kicker {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 18px;
+      color: var(--forest-deep);
+      font: 400 clamp(48px, 8vw, 88px)/.96 "DM Serif Display", Georgia, serif;
+      letter-spacing: -.035em;
+    }
+    .hero-lede {
+      max-width: 700px;
+      color: var(--ink-soft);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.75;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--forest);
+      background: var(--paper);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .hero-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--forest);
+      color: var(--paper);
+    }
+    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "DM Serif Display", Georgia, serif; }
+    .hero-panel p { color: #d9e5dd; font-size: 14px; line-height: 1.75; }
+    .panel-rule { height: 1px; background: rgba(255, 255, 255, .18); }
+    .panel-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+    .panel-list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; color: #edf3ee; font-size: 13px; }
+    .panel-list b { color: #e1bc81; }
+
+    .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "DM Serif Display", Georgia, serif; letter-spacing: -.02em; }
+    .section-intro { max-width: 650px; color: var(--muted); font-size: 15px; }
+    .section-note { max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
+
+    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .quick-card { min-height: 150px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .quick-card .number { color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+    .quick-card h3 { margin: 16px 0 7px; color: var(--forest); font-size: 16px; }
+    .quick-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .flow-wrap { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+    .flow-title { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .flow-title h3 { margin: 0; color: var(--forest); font-size: 18px; }
+    .flow-title span { color: var(--muted); font-size: 12px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(100px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+    .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
+    .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .lane-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 18px; }
+    .lane { padding: 21px; border-radius: 16px; background: var(--paper-deep); }
+    .lane h4 { margin: 0 0 8px; color: var(--forest); font-size: 15px; }
+    .lane p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+    .lane b { color: var(--amber); }
+
+    .sop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .sop-card { display: grid; grid-template-columns: 46px 1fr; gap: 17px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .sop-num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--sage-soft); color: var(--forest); font-weight: 700; }
+    .sop-card h3 { margin: 2px 0 7px; color: var(--forest); font-size: 16px; }
+    .sop-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .resource { display: inline-block; margin-top: 10px; color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .resource:hover, .program-link:hover, .resource-card-link:hover { color: var(--forest); }
+    .resource, .program-link { text-decoration: none; }
+    .resource-card-link { color: inherit; text-decoration: none; }
+    .resource-card-link h3 { transition: color .2s ease; }
+
+    .timeline { position: relative; display: grid; gap: 14px; }
+    .timeline::before { content: ""; position: absolute; left: 18px; top: 22px; bottom: 22px; width: 1px; background: var(--sage); }
+    .timeline-row { position: relative; display: grid; grid-template-columns: 38px 150px 1fr; gap: 18px; align-items: start; }
+    .timeline-dot { position: relative; z-index: 1; width: 37px; height: 37px; display: grid; place-items: center; border: 5px solid var(--paper); border-radius: 50%; background: var(--forest); color: var(--paper); font-size: 11px; font-weight: 700; }
+    .timeline-date { padding-top: 7px; color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .timeline-content { padding: 19px 21px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
+    .timeline-content h3 { margin: 0 0 7px; color: var(--forest); font-size: 16px; }
+    .timeline-content p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .timeline-content ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .info-card { padding: 25px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--line); }
+    .info-card.dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
+    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "DM Serif Display", Georgia, serif; }
+    .info-card.dark h3 { color: var(--paper); }
+    .info-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .info-card.dark p { color: #d8e5dc; }
+    .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
+    .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
+    .dark .checklist li { color: #edf3ee; }
+    .checklist li::before { content: "✓"; color: var(--amber); font-weight: 700; }
+
+    .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .program h3 { margin: 0 0 9px; color: var(--forest); font-size: 15px; }
+    .program p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .program .program-link { display: block; margin-top: 13px; color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .resource-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .resource-item { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-deep); }
+    .resource-item h3 { margin: 0 0 5px; color: var(--forest); font-size: 14px; }
+    .resource-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .resource-item em { display: block; margin-top: 10px; color: var(--amber); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .publish-note { margin-top: 22px; padding: 21px 23px; border-left: 4px solid var(--amber); border-radius: 0 14px 14px 0; background: var(--amber-soft); }
+    .publish-note h3 { margin: 0 0 7px; color: var(--forest); font-size: 15px; }
+    .publish-note p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+
+    footer { padding: 34px 0 54px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+    .footer-inner a { color: var(--forest); font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: repeat(4, 1fr); }
+      .flow-step:nth-child(4)::after { display: none; }
+      .flow-step:nth-child(5)::before { content: ""; position: absolute; left: 50%; top: -13px; width: 1px; height: 13px; background: var(--sage); }
+      .program-grid, .resource-map { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 15px 0; }
+      .nav { gap: 10px 14px; justify-content: flex-start; }
+      .hero { padding-top: 28px; }
+      .hero-copy { padding: 32px 24px; }
+      .hero-panel { padding: 25px; }
+      .section { padding: 56px 0; }
+      .section-head { display: block; }
+      .section-note { margin-top: 15px; text-align: left; }
+      .quick-grid, .sop-grid, .lane-grid, .program-grid, .resource-map { grid-template-columns: 1fr; }
+      .flow-wrap { padding: 19px; }
+      .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .flow-step:nth-child(odd)::after { content: "↓"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
+      .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
+      .timeline-content { grid-column: 2; grid-row: 2; }
+      .timeline-dot { width: 30px; height: 30px; font-size: 10px; }
+      .timeline::before { left: 14px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  
+    .cal-table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; font-size:13px; }
+    .cal-table th { text-align:left; padding:14px 18px; background:var(--forest); color:var(--paper); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+    .cal-table td { padding:13px 18px; border-top:1px solid var(--line); color:var(--ink-soft); vertical-align:top; }
+    .cal-table td:first-child { color:var(--forest); font-weight:700; }
+    .cal-table td.when { color:var(--amber); font-weight:700; white-space:nowrap; }
+    .play { margin-top:18px; padding:26px; border:1px solid var(--line); border-radius:var(--radius-lg); background:var(--card); }
+    .play-head { display:flex; justify-content:space-between; align-items:baseline; gap:18px; margin-bottom:16px; }
+    .play-head h3 { margin:0; color:var(--forest-deep); font:400 30px/1.1 "DM Serif Display", Georgia, serif; }
+    .play-head span { color:var(--muted); font-size:12px; text-align:right; }
+    .phase-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .phase { padding:16px 18px; border-radius:14px; background:var(--paper-deep); }
+    .phase h4 { margin:0 0 6px; color:var(--amber); font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+    .phase ul, .meta-row ul { margin:0; padding-left:17px; color:var(--ink-soft); font-size:13px; line-height:1.65; }
+    .meta-row { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
+    .meta { padding:14px 18px; border:1px dashed var(--sage); border-radius:14px; font-size:13px; color:var(--ink-soft); }
+    .meta b { display:block; color:var(--forest); font-size:11px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; }
+    .ros { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .ros .flow-step { min-height:96px; }
+    .resource-item em { display:inline-block; margin-top:10px; color:var(--amber); font-size:11px; font-style:normal; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+    @media (max-width: 760px) { .phase-grid, .meta-row { grid-template-columns:1fr; } .ros { grid-template-columns:repeat(2,1fr); } .play-head { display:block; } }
+  </style>
+</head>
+<body>
+<header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="../index.html"><strong>Duong Tran</strong><span>Events Handover Playbook</span></a>
+<nav class="nav"><a href="#start">Start here</a><a href="#calendar">Calendar</a><a href="#playbook">Playbook</a><a href="#lessons">Lessons</a><a href="#resources">Resources</a></nav></div></header>
+<main>
+<section class="hero" id="start"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow">Internal working guide · Events & engagement</div>
+<h1>Plan early.<br />Celebrate in 3 miền.</h1>
+<p class="hero-lede">A practical playbook for running Ather Labs’ recurring events across HCM, ĐN and HN: what happens each year, how each event is prepared, who does what, and where the planning pages live.</p>
+<div class="hero-meta"><span class="tag">Company Trip</span><span class="tag">New Year Party</span><span class="tag">Company Birthday</span><span class="tag">Women’s / Men’s Day</span><span class="tag">LFG</span><span class="tag">Recharge Time</span><span class="tag">Workshops</span></div></div>
+<aside class="hero-panel"><div><div class="eyebrow" style="color:#e1bc81">First 15 minutes</div><h2>Use this page as your map.</h2><p>Check the calendar for what’s coming, open the matching playbook, then open last year’s Notion page and duplicate its structure.</p></div><div class="panel-rule"></div>
+<ol class="panel-list"><li><b>01</b><span>Find the next event in the calendar.</span></li><li><b>02</b><span>Copy the key steps into the new edition’s page.</span></li><li><b>03</b><span>Set the two budget lines, assign owners, and schedule the internal posts.</span></li></ol></aside></div></section>
+
+<section class="section" id="calendar"><div class="wrap"><div class="section-head"><div><div class="section-kicker">01 · Annual calendar</div><h2>What runs when</h2></div></div>
+<table class="cal-table"><thead><tr><th>Event</th><th>When</th></tr></thead><tbody><tr><td>Company Birthday</td><td class="when">20/9 every year</td></tr><tr><td>Company Trip</td><td class="when">Yearly</td></tr><tr><td>New Year Party</td><td class="when">Year start (2026: after Tết)</td></tr><tr><td>Tết “Break 3 miền”</td><td class="when">Before Tết</td></tr><tr><td>Women’s Day</td><td class="when">8/3 and 20/10</td></tr><tr><td>Men’s Day</td><td class="when">19/11</td></tr><tr><td>Last Friday Get-Together</td><td class="when">Monthly, last Friday</td></tr><tr><td>Christmas (LFG x Noel)</td><td class="when">Late December</td></tr><tr><td>Recharge Time</td><td class="when">About twice a year</td></tr><tr><td>Workshop series</td><td class="when">Ad hoc</td></tr><tr><td>Business Trip</td><td class="when">Per trade fair</td></tr></tbody></table></div></section>
+
+<section class="section" id="playbook"><div class="wrap"><div class="section-head"><div><div class="section-kicker">02 · Playbook per event type</div><h2>Every event follows Pre / In / Post</h2></div></div>
+<div class="two-col"><article class="info-card"><h3>Budget model</h3><p><strong>HR line:</strong> per-head, in VND, scaled to the event type .<br /><strong>Admin / Operation line:</strong> per office, in USD (HCM &gt; ĐN ≈ HN), with an optional contingency line.</p></article>
+<article class="info-card dark"><h3>Standard roles</h3><p><strong>HR lead:</strong> overall plan, budget, posts, summary. <strong>Event support:</strong> decor, gifts, MC script, photos, attendee lists, split by office. <strong>Leadership approval:</strong> recognitions and shoutouts (leaders choose, HR compiles, CEO approves).</p></article></div>
+<article class="play"><div class="play-head"><h3>Company Trip</h3><span>Annual · 3 days 2 nights · all 3 regions</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Theme + dates (2026: “A-STAR”), vendor contract</li><li><b>Pre</b> Logistics: participant list, buses, room-sharing</li><li><b>In</b> Teambuilding + gala night</li><li><b>Post</b> Recap on internal and social channels</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Budget model</b>HR per-head VND line (largest of all events) + Admin per-office USD line.</div><div class="meta"><b>Roles</b>HR-Operation plan jointly; HR lead owns theme and posts.</div></div></article><article class="play"><div class="play-head"><h3>New Year Party</h3><span>Yearly · 2026 held after Tết</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Theme, invitation, backdrop</li><li><b>Pre</b> Lucky-draw gifts + Star of the Year (3 regions)</li><li><b>In</b> Lucky draw, recognition, CEO sharing</li><li><b>Post</b> Wrap-up + recap</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Budget model</b>HR per-head VND line × headcount per office.</div><div class="meta"><b>Roles</b>Recognitions: leaders choose, HR compiles, Leadership approval.</div></div></article><article class="play"><div class="play-head"><h3>Company Birthday</h3><span>Every year on 20/9</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Theme + hashtags (2025 “Fourth & Forward”)</li><li><b>Pre</b> Budget sheet + merch and gifts</li><li><b>In</b> Celebration across all 3 offices</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Budget model</b>Admin per-office USD line (bundled with September LFG) + HR per-head VND line.</div><div class="meta"><b>Roles</b>HR lead plans; Event support per office.</div></div></article><article class="play"><div class="play-head"><h3>Women’s / Men’s Day</h3><span>8/3 · 20/10 · 19/11</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Vouchers (tested early), flowers, cake</li><li><b>Pre</b> Decor finished the afternoon before</li><li><b>In</b> Morning ceremony + lunch, gift set</li><li><b>Post</b> Same-day photos from all offices, recap</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Budget model</b>HR per-head VND line + Admin per-office USD line (+ contingency).</div><div class="meta"><b>Roles</b>HR lead: budget, vouchers, recap · Event support: decor, MC, photos.</div></div></article><article class="play"><div class="play-head"><h3>Last Friday Get-Together</h3><span>Monthly · last Friday, 5:00 PM</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Monthly timeline; special Halloween and “LFG x Noel” editions</li><li><b>In</b> Runs in HCM | HN | ĐN</li><li><b>Post</b> Photo recap + internal post</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Budget model</b>Admin per-office USD line; Christmas adds an HR per-head line.</div><div class="meta"><b>Roles</b>Shoutouts: leaders choose, HR compiles, Leadership approval.</div></div></article><article class="play"><div class="play-head"><h3>Recharge Time</h3><span>About twice a year · Friday 18:30</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Vendors, contract, deposit</li><li><b>Pre</b> Internal + reminder posts</li><li><b>In</b> Evening buffet in each region (fallback: same simple timeline)</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Roles</b>HR lead finds vendors; Admin supports contract and deposit.</div></div></article><article class="play"><div class="play-head"><h3>Workshop series</h3><span>Ad hoc · 30–60 min · hybrid</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Announcement + registration form</li><li><b>Pre</b> Collect attendee questions for the speaker; IT setup</li><li><b>In</b> HCM in the office lobby, other offices on Google Meet</li><li><b>Post</b> Thank-you + recap</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Roles</b>HR lead: overall, form · Event support: reminders, IT, photos.</div></div></article><article class="play"><div class="play-head"><h3>Mini internal events</h3><span>Tết, Children’s Day, Mid-Autumn…</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Tết “Break 3 miền”: áo dài, decor, 3-region menu</li><li><b>In</b> Back-to-work lì xì + spring meeting with the CEO</li><li><b>In</b> Children’s Day gifts per office; home delivery for Remote</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Budget model</b>HR per-head VND line or Admin per-office USD line.</div><div class="meta"><b>Roles</b>HR lead + Event support; office leaders help hand out gifts.</div></div></article><article class="play"><div class="play-head"><h3>Charity</h3><span>December 2023 edition</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Theme (“Mùa Yêu Thương / Light Up Xmas”)</li><li><b>Pre</b> Register the company visit</li><li><b>In</b> Donations from all 3 regions</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Roles</b>HR lead coordinates.</div></div></article><article class="play"><div class="play-head"><h3>Business Trip support</h3><span>Trade fairs: GDC, G-STAR, Token2049</span></div><div class="phase"><h4>Key steps</h4><ul><li><b>Pre</b> Drive folder + “Flight x Hotel x Visa” sheet</li><li><b>Pre</b> Event overview: dates, zones, passes</li><li><b>Pre</b> Day-by-day itinerary table</li></ul></div>
+<div class="meta-row"><div class="meta"><b>Roles</b>HR/Admin handles all travel logistics.</div></div></article>
+<div class="flow-wrap" style="margin-top:18px;"><div class="flow-title"><h3>Standard evening run-of-show</h3><span>New Year Party · Recharge Time</span></div><div class="ros"><div class="flow-step"><span class="step-no">18:30</span><strong>Welcome</strong></div><div class="flow-step"><span class="step-no">19:00</span><strong>Opening + CEO sharing</strong></div><div class="flow-step"><span class="step-no">19:30</span><strong>Toast + food</strong></div><div class="flow-step"><span class="step-no">20:15–22:00</span><strong>Lucky draw → close</strong></div></div></div>
+</div></section>
+
+<section class="section" id="lessons"><div class="wrap"><div class="section-head"><div><div class="section-kicker">03 · Lessons learned</div><h2>Small habits that prevented big problems</h2></div></div><div class="quick-grid" style="grid-template-columns:repeat(3,1fr)"><article class="quick-card"><div class="number">01</div><h3>Decor the day before</h3><p>Finish decor the afternoon before the event.</p></article><article class="quick-card"><div class="number">02</div><h3>Plan B per region</h3><p>Keep a local backup vendor in each region.</p></article><article class="quick-card"><div class="number">03</div><h3>Same-day photos</h3><p>Collect original photos from every office on the same day.</p></article></div></div></section>
+
+<section class="section" id="resources"><div class="wrap"><div class="section-head"><div><div class="section-kicker">04 · Open the right place first</div><h2>One Notion hub per event type</h2></div><p class="section-note">Links are placeholders; add access links before publication.</p></div><div class="hero-meta" style="margin-top:0"><a class="tag" style="text-decoration:none" href="#">Notion: Company Trip hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: New Year Party hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Company Birthday hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Women’s Day hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: LFG hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Recharge Time hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Workshop hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Mini events hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Charity hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Notion: Business Trip hub — link to add</a><a class="tag" style="text-decoration:none" href="#">Drive: events folder — link to add</a></div></div></section>
+</main>
+<footer><div class="wrap footer-inner"><span>Events Handover Playbook · Prepared for internal transition</span><a href="#start">Back to top ↑</a></div></footer>
+</body></html>
