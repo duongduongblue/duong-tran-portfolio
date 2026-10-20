@@ -1,89 +1,51 @@
-<!DOCTYPE html>
-<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PR &amp; Payment Handover | Duong Tran</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PR Handover · Duong Tran</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1f2c27;--soft:#425149;--muted:#718078;--paper:#f7f5ef;--card:#fffdf8;--sage:#9caf9b;--sage-soft:#dce6d9;--forest:#294338;--forest-deep:#1d3229;--amber:#a76b28;--amber-soft:#f3e5cf;--line:#d9ded6;--max:1080px}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.topbar{border-bottom:1px solid var(--line)}.topbar .wrap{min-height:66px;display:flex;align-items:center;justify-content:space-between}
-.brand{color:var(--forest-deep);font-weight:700;text-decoration:none}.brand span{margin-left:10px;color:var(--muted);font-size:12px;font-weight:400}
-.eyebrow{color:var(--amber);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-h1{margin:14px 0 12px;color:var(--forest-deep);font:400 clamp(42px,7vw,68px)/1 "DM Serif Display",Georgia,serif;letter-spacing:-.02em}
-h2{margin:0 0 14px;color:var(--forest);font:400 30px/1.1 "DM Serif Display",Georgia,serif}
-.hero{padding:56px 0 28px}.lede{max-width:680px;color:var(--soft);font-size:17px}
-section{padding:22px 0}.card{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.tabs button{padding:8px 15px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--forest);font:700 12px "DM Sans";cursor:pointer}
-.tabs button.on{background:var(--forest);color:var(--paper);border-color:var(--forest)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi{padding:18px;border:1px solid var(--line);border-radius:14px;background:#fbfaf5}
-.kpi b{display:block;color:var(--forest-deep);font:400 38px/1 "DM Serif Display",serif}.kpi span{color:var(--muted);font-size:12px}
-.grid2{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;margin-top:16px}
-svg text{font-family:"DM Sans";font-size:11px;fill:var(--muted)}.bar{cursor:pointer;transition:opacity .2s}.bar:hover{opacity:.75}
-.legend{display:flex;gap:14px;font-size:12px;color:var(--soft)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
-#tip{position:fixed;pointer-events:none;padding:7px 10px;border-radius:8px;background:var(--forest-deep);color:var(--paper);font-size:12px;opacity:0;transition:opacity .15s}
-.insight{border-left:4px solid var(--amber);background:var(--amber-soft);border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 10px;color:var(--soft);font-size:13px}.insight strong{color:var(--forest)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;list-style:none;padding:0;margin:0}.steps li{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--card);font-size:13px;color:var(--soft)}.steps b{display:block;color:var(--amber);font-size:12px}
-.tasks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.tasks div{padding:18px;border-radius:14px;background:var(--forest);color:#e6eee8;font-size:13px}.tasks h3{margin:0 0 6px;color:var(--paper);font:400 20px "DM Serif Display",serif}
-.tl{list-style:none;padding:0;margin:0;border-left:2px solid var(--sage)}.tl li{padding:0 0 14px 18px;position:relative;font-size:13px;color:var(--soft)}.tl li:before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--amber)}.tl b{color:var(--forest)}
-.note{font-size:12px;color:var(--muted);margin-top:10px}footer{padding:26px 0 44px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;margin-top:20px}
-@media(max-width:760px){.kpis,.grid2,.steps,.tasks{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+:root{--ink:#1f2c27;--soft:#425149;--muted:#718078;--paper:#f7f5ef;--card:#fffdf8;--sage:#9caf9b;--forest:#294338;--forest-deep:#1d3229;--amber:#a76b28;--line:#e3e6df}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 "DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{width:min(960px,calc(100% - 40px));margin:auto}
+header{padding:64px 0 32px}h1{margin:0 0 8px;color:var(--forest-deep);font:400 48px/1.05 "DM Serif Display",Georgia,serif}
+header p{margin:0;color:var(--muted)}
+h2{margin:0 0 16px;color:var(--forest);font:400 24px "DM Serif Display",Georgia,serif}
+section{padding:28px 0}
+.tabs{display:flex;gap:4px;margin-bottom:20px}.tabs button{padding:6px 14px;border:0;border-radius:8px;background:none;color:var(--muted);font:500 13px "DM Sans";cursor:pointer}
+.tabs button.on{background:var(--forest);color:var(--paper)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.kpi{padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.kpi b{display:block;color:var(--forest-deep);font:400 36px/1.1 "DM Serif Display",serif}.kpi span{color:var(--muted);font-size:13px}
+.card{margin-top:16px;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.head{display:flex;justify-content:space-between;color:var(--soft);font-size:13px;margin-bottom:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 5px 0 12px}
+svg text{font:11px "DM Sans";fill:var(--muted)}.bar{cursor:pointer}.bar:hover{opacity:.75}
+#tip{position:fixed;pointer-events:none;padding:6px 10px;border-radius:8px;background:var(--forest-deep);color:var(--paper);font-size:12px;opacity:0;transition:opacity .15s}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;list-style:none;padding:0;margin:0;counter-reset:s}
+.flow li{counter-increment:s;font-size:13px;color:var(--soft);border-top:2px solid var(--sage);padding-top:10px}.flow li:before{content:counter(s);display:block;color:var(--amber);font-weight:700}
+.tasks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tasks div{padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-size:13px;color:var(--soft)}
+.tasks b{display:block;color:var(--forest);font-size:14px;margin-bottom:4px}
+footer{padding:32px 0 48px;color:var(--muted);font-size:12px}
+@media(max-width:720px){.kpis,.tasks{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr 1fr}}
 </style></head><body>
-<header class="topbar"><div class="wrap"><a class="brand" href="../index.html">Duong Tran<span>Operations Handover</span></a><span class="eyebrow">PR &amp; Payment</span></div></header>
-<main class="wrap">
-<div class="hero"><div class="eyebrow">Đề nghị thanh toán · ĐN &amp; HCM</div><h1>PR &amp; Payment Handover</h1>
-<p class="lede">Quy trình lên đề nghị thanh toán (DNTT) cho chi phí vận hành văn phòng Đà Nẵng và Hồ Chí Minh: từ chứng từ, phân loại, form, nộp kế toán đến theo dõi.</p></div>
-
-<section><h2>Số liệu biết nói</h2>
-<div class="tabs" id="tabs"></div>
-<div class="kpis" id="kpis"></div>
-<div class="grid2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="color:var(--forest)">Số PR theo tháng</strong><div class="legend"><span><i style="background:var(--forest)"></i>HCM</span><span><i style="background:var(--sage)"></i>ĐN</span></div></div><svg id="chart" viewBox="0 0 560 230" width="100%"></svg></div>
-<div id="insights"></div></div>
-<p class="note">Nguồn: bảng tracking nội bộ, chỉ đếm số lượng PR (văn phòng ĐN &amp; HCM). Dữ liệu tracking bắt đầu từ 01/2026, cập nhật đến 20/10/2026. Không hiển thị số tiền hay thông tin đối tác.</p>
+<div class="wrap">
+<header><h1>PR Handover</h1><p>Đề nghị thanh toán của văn phòng HCM và ĐN, năm 2026.</p></header>
+<section><div class="tabs" id="tabs"></div>
+<div class="kpis"><div class="kpi"><b id="k1"></b><span>PR đã làm</span></div><div class="kpi"><b id="k2"></b><span>Văn phòng HCM</span></div><div class="kpi"><b id="k3"></b><span>Văn phòng ĐN</span></div></div>
+<div class="card"><div class="head"><span>Số PR mỗi tháng</span><span class="legend"><i style="background:var(--forest)"></i>HCM<i style="background:var(--sage)"></i>ĐN</span></div><svg id="chart" viewBox="0 0 560 220" width="100%"></svg></div>
 </section>
-
-<section><h2>Quy trình 6 bước</h2><ol class="steps">
-<li><b>01</b>Đọc chứng từ: hoá đơn GTGT, hợp đồng, phụ lục.</li>
-<li><b>02</b>Phân loại PR Có HĐ / Không HĐ.</li>
-<li><b>03</b>Điền form DNTT 1 trang A4, kiểm số HĐ, ngày HĐ, hạn TT.</li>
-<li><b>04</b>Merge toàn bộ chứng từ thành 1 file PDF.</li>
-<li><b>05</b>Tạo folder nộp kế toán theo ngày cho mỗi lần submit.</li>
-<li><b>06</b>Cập nhật tracking + gửi duyệt cho budget holder.</li></ol></section>
-
-<section><h2>4 việc chính</h2><div class="tasks">
-<div><h3>Chi phí định kỳ</h3>Thuê văn phòng, điện, gửi xe, nước, vệ sinh, cà phê theo tháng/quý.</div>
-<div><h3>Hợp đồng &amp; gia hạn</h3>Theo dõi hạn hợp đồng, phụ lục, các khoản cọc và gia hạn phần mềm.</div>
-<div><h3>Hồ sơ nộp kế toán</h3>Folder chuẩn theo ngày, file PDF đã merge, đặt tên thống nhất.</div>
-<div><h3>Tracking</h3>Bảng theo dõi tập trung + canvas Có HĐ / Không HĐ để tra lịch sử.</div></div></section>
-
-<section><h2>Timeline</h2><ul class="tl">
-<li><b>01–03/2026</b> · Chuẩn hoá form DNTT và cấu trúc folder kế toán.</li>
-<li><b>06–07/2026</b> · Văn phòng ĐN chuyển địa điểm, thêm hợp đồng thuê mới.</li>
-<li><b>10/2026</b> · Gom lịch sử PR về một tracking, chuẩn hoá tin nhắn gửi duyệt.</li>
-<li><b>23/10/2026</b> · Bàn giao.</li></ul></section>
-</main>
-<footer><div class="wrap">Duong Tran · Operations Handover · 2026</div></footer>
-<div id="tip"></div>
+<section><h2>Quy trình</h2><ol class="flow"><li>Đọc hoá đơn, hợp đồng</li><li>Chia PR có HĐ hoặc không HĐ</li><li>Điền form DNTT</li><li>Gộp chứng từ thành 1 PDF</li><li>Tạo folder nộp kế toán</li><li>Cập nhật tracking, gửi duyệt</li></ol></section>
+<section><h2>Việc chính</h2><div class="tasks"><div><b>Chi phí định kỳ</b>Thuê văn phòng, điện nước, gửi xe.</div><div><b>Hợp đồng</b>Theo dõi hạn, cọc, gia hạn phần mềm.</div><div><b>Hồ sơ kế toán</b>Folder theo ngày, tên file thống nhất.</div><div><b>Tracking</b>Một bảng chung để tra lại lịch sử.</div></div></section>
+<footer>Số liệu từ 01/2026 đến 20/10/2026. Chỉ đếm số PR. · Duong Tran</footer>
+</div><div id="tip"></div>
 <script>
 const M={"01":[5,2],"02":[4,3],"03":[10,6],"04":[7,1],"05":[8,4],"06":[2,4],"07":[5,4],"08":[6,0],"09":[7,2],"10":[6,3]};
-const P={"2026":{label:"Cả năm 2026",m:["01","02","03","04","05","06","07","08","09","10"],ins:[
-["HCM chiếm khoảng 2/3 số PR","HCM có nhiều nhà cung cấp định kỳ hơn (vệ sinh, nước, cà phê, côn trùng...), nên số PR gấp đôi ĐN."],
-["100% PR đều có hợp đồng","Các chi phí vận hành đã được ký hợp đồng khung/tự gia hạn, nên quy trình tập trung vào kiểm số HĐ và hạn hợp đồng."],
-["Đỉnh ở tháng 03","Tháng 03 dồn PR của nhiều kỳ (T1–T2 chưa nộp + kỳ mới), sau đó nhịp ổn định ~9 PR/tháng."]]},
-"Q1":{label:"Q1",m:["01","02","03"],ins:[["Q1 bận nhất: ~30 PR","Đầu năm vừa gia hạn hợp đồng, vừa xử lý các kỳ T12 năm trước còn tồn."],["Tháng 03 tăng vọt","Nhiều khoản gộp 2 kỳ được nộp cùng lúc."]]},
-"Q2":{label:"Q2",m:["04","05","06"],ins:[["~26 PR, nhịp đều","Quy trình đã chuẩn hoá nên mỗi tháng nộp đúng kỳ."],["ĐN tăng ở tháng 06","Chuẩn bị chuyển văn phòng ĐN: thêm PR điện, nước, chốt hợp đồng cũ."]]},
-"Q3":{label:"Q3",m:["07","08","09"],ins:[["~24 PR","HCM vẫn đều; tháng 08 ĐN không phát sinh PR vì kỳ thuê mới được nộp gộp."],["Văn phòng ĐN mới","Thêm hợp đồng thuê mới, các kỳ được gom để giảm số lần submit."]]},
-"Q4":{label:"Q4 (đến 20/10)",m:["10"],ins:[["~9 PR trong 20 ngày","Dọn tồn trước bàn giao: nộp đủ các kỳ còn thiếu, có cả khoản theo quý."],["Toàn bộ đã vào tracking","Người nhận bàn giao có thể tra lịch sử từng nhà cung cấp."]]}};
-const tabs=document.getElementById('tabs'),tip=document.getElementById('tip');
-Object.keys(P).forEach((k,i)=>{const b=document.createElement('button');b.textContent=P[k].label;b.onclick=()=>show(k);b.dataset.k=k;tabs.appendChild(b)});
-function show(k){const p=P[k];[...tabs.children].forEach(b=>b.classList.toggle('on',b.dataset.k==k));
-let h=0,d=0;p.m.forEach(x=>{h+=M[x][0];d+=M[x][1]});const t=h+d;
-document.getElementById('kpis').innerHTML=[[t,'PR đã nộp'],[Math.round(h/t*100)+'%','HCM ('+h+' PR)'],[Math.round(d/t*100)+'%','ĐN ('+d+' PR)'],['100%','Có HĐ · 0 Không HĐ']].map(x=>`<div class="kpi"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
-document.getElementById('insights').innerHTML=p.ins.map(x=>`<p class="insight"><strong>${x[0]}.</strong> ${x[1]}</p>`).join('');
-const s=document.getElementById('chart'),W=560,H=230,max=16,bw=Math.min(60,(W-40)/p.m.length-12);let g='';
-for(let y=0;y<=max;y+=4){const yy=H-24-y/max*(H-40);g+=`<line x1="28" x2="${W}" y1="${yy}" y2="${yy}" stroke="#e5e8e2"/><text x="0" y="${yy+4}">${y}</text>`}
-p.m.forEach((x,i)=>{const cx=40+i*((W-40)/p.m.length);const [a,b]=M[x];const ha=a/max*(H-40),hb=b/max*(H-40);const base=H-24;
-g+=`<rect class="bar" data-t="T${x}: HCM ${a} PR" x="${cx}" y="${base-ha}" width="${bw}" height="${ha}" rx="4" fill="#294338"/>`;
-g+=`<rect class="bar" data-t="T${x}: ĐN ${b} PR" x="${cx}" y="${base-ha-hb}" width="${bw}" height="${hb}" rx="4" fill="#9caf9b"/>`;
-g+=`<text x="${cx+bw/2}" y="${H-6}" text-anchor="middle">T${x}</text><text x="${cx+bw/2}" y="${base-ha-hb-5}" text-anchor="middle" style="fill:#1d3229;font-weight:700">${a+b}</text>`});
-s.innerHTML=g;s.querySelectorAll('.bar').forEach(r=>{r.onmousemove=e=>{tip.textContent=r.dataset.t;tip.style.left=e.clientX+12+'px';tip.style.top=e.clientY-30+'px';tip.style.opacity=1};r.onmouseleave=()=>tip.style.opacity=0})}
-show('2026');
+const P={"Cả năm":["01","02","03","04","05","06","07","08","09","10"],"Q1":["01","02","03"],"Q2":["04","05","06"],"Q3":["07","08","09"],"Q4":["10"]};
+const tip=document.getElementById('tip'),tabs=document.getElementById('tabs');
+function show(k){[...tabs.children].forEach(b=>b.classList.toggle('on',b.textContent==k));const ms=P[k];
+let h=0,d=0;ms.forEach(m=>{h+=M[m][0];d+=M[m][1]});const t=h+d;
+k1.textContent=t;k2.textContent=Math.round(h/t*100)+'%';k3.textContent=Math.round(d/t*100)+'%';
+const W=560,H=220,base=190,sc=150/16,bw=Math.min(40,(W-40)/ms.length*.5),step=(W-40)/ms.length;let g='';
+ms.forEach((m,i)=>{const[a,b]=M[m],x=20+i*step+(step-bw)/2,ha=a*sc,hb=b*sc,tt=`Tháng ${+m}: ${a+b} PR · HCM ${a} · ĐN ${b}`;
+g+=`<rect class="bar" data-t="${tt}" x="${x}" y="${base-ha}" width="${bw}" height="${ha}" rx="3" fill="#294338"/><rect class="bar" data-t="${tt}" x="${x}" y="${base-ha-hb}" width="${bw}" height="${hb}" rx="3" fill="#9caf9b"/><text x="${x+bw/2}" y="${H-8}" text-anchor="middle">T${+m}</text><text x="${x+bw/2}" y="${base-ha-hb-6}" text-anchor="middle" style="fill:#1d3229;font-weight:700">${a+b}</text>`});
+chart.innerHTML=`<line x1="20" x2="540" y1="${base}" y2="${base}" stroke="#e3e6df"/>`+g;
+chart.querySelectorAll('.bar').forEach(r=>{r.onmousemove=e=>{tip.textContent=r.dataset.t;tip.style.left=e.clientX+12+'px';tip.style.top=e.clientY+12+'px';tip.style.opacity=1};r.onmouseleave=()=>tip.style.opacity=0})}
+Object.keys(P).forEach(k=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>show(k);tabs.appendChild(b)});show('Cả năm');
 </script></body></html>
