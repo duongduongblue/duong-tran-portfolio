@@ -1,51 +1,330 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PR Handover · Duong Tran</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#1f2c27;--soft:#425149;--muted:#718078;--paper:#f7f5ef;--card:#fffdf8;--sage:#9caf9b;--forest:#294338;--forest-deep:#1d3229;--amber:#a76b28;--line:#e3e6df}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 "DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{width:min(960px,calc(100% - 40px));margin:auto}
-header{padding:64px 0 32px}h1{margin:0 0 8px;color:var(--forest-deep);font:400 48px/1.05 "DM Serif Display",Georgia,serif}
-header p{margin:0;color:var(--muted)}
-h2{margin:0 0 16px;color:var(--forest);font:400 24px "DM Serif Display",Georgia,serif}
-section{padding:28px 0}
-.tabs{display:flex;gap:4px;margin-bottom:20px}.tabs button{padding:6px 14px;border:0;border-radius:8px;background:none;color:var(--muted);font:500 13px "DM Sans";cursor:pointer}
-.tabs button.on{background:var(--forest);color:var(--paper)}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.kpi{padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:14px}
-.kpi b{display:block;color:var(--forest-deep);font:400 36px/1.1 "DM Serif Display",serif}.kpi span{color:var(--muted);font-size:13px}
-.card{margin-top:16px;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px}
-.head{display:flex;justify-content:space-between;color:var(--soft);font-size:13px;margin-bottom:8px}
-.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 5px 0 12px}
-svg text{font:11px "DM Sans";fill:var(--muted)}.bar{cursor:pointer}.bar:hover{opacity:.75}
-#tip{position:fixed;pointer-events:none;padding:6px 10px;border-radius:8px;background:var(--forest-deep);color:var(--paper);font-size:12px;opacity:0;transition:opacity .15s}
-.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;list-style:none;padding:0;margin:0;counter-reset:s}
-.flow li{counter-increment:s;font-size:13px;color:var(--soft);border-top:2px solid var(--sage);padding-top:10px}.flow li:before{content:counter(s);display:block;color:var(--amber);font-weight:700}
-.tasks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tasks div{padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-size:13px;color:var(--soft)}
-.tasks b{display:block;color:var(--forest);font-size:14px;margin-bottom:4px}
-footer{padding:32px 0 48px;color:var(--muted);font-size:12px}
-@media(max-width:720px){.kpis,.tasks{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr 1fr}}
-</style></head><body>
-<div class="wrap">
-<header><h1>PR Handover</h1><p>Đề nghị thanh toán của văn phòng HCM và ĐN, năm 2026.</p></header>
-<section><div class="tabs" id="tabs"></div>
-<div class="kpis"><div class="kpi"><b id="k1"></b><span>PR đã làm</span></div><div class="kpi"><b id="k2"></b><span>Văn phòng HCM</span></div><div class="kpi"><b id="k3"></b><span>Văn phòng ĐN</span></div></div>
-<div class="card"><div class="head"><span>Số PR mỗi tháng</span><span class="legend"><i style="background:var(--forest)"></i>HCM<i style="background:var(--sage)"></i>ĐN</span></div><svg id="chart" viewBox="0 0 560 220" width="100%"></svg></div>
-</section>
-<section><h2>Quy trình</h2><ol class="flow"><li>Đọc hoá đơn, hợp đồng</li><li>Chia PR có HĐ hoặc không HĐ</li><li>Điền form DNTT</li><li>Gộp chứng từ thành 1 PDF</li><li>Tạo folder nộp kế toán</li><li>Cập nhật tracking, gửi duyệt</li></ol></section>
-<section><h2>Việc chính</h2><div class="tasks"><div><b>Chi phí định kỳ</b>Thuê văn phòng, điện nước, gửi xe.</div><div><b>Hợp đồng</b>Theo dõi hạn, cọc, gia hạn phần mềm.</div><div><b>Hồ sơ kế toán</b>Folder theo ngày, tên file thống nhất.</div><div><b>Tracking</b>Một bảng chung để tra lại lịch sử.</div></div></section>
-<footer>Số liệu từ 01/2026 đến 20/10/2026. Chỉ đếm số PR. · Duong Tran</footer>
-</div><div id="tip"></div>
-<script>
-const M={"01":[5,2],"02":[4,3],"03":[10,6],"04":[7,1],"05":[8,4],"06":[2,4],"07":[5,4],"08":[6,0],"09":[7,2],"10":[6,3]};
-const P={"Cả năm":["01","02","03","04","05","06","07","08","09","10"],"Q1":["01","02","03"],"Q2":["04","05","06"],"Q3":["07","08","09"],"Q4":["10"]};
-const tip=document.getElementById('tip'),tabs=document.getElementById('tabs');
-function show(k){[...tabs.children].forEach(b=>b.classList.toggle('on',b.textContent==k));const ms=P[k];
-let h=0,d=0;ms.forEach(m=>{h+=M[m][0];d+=M[m][1]});const t=h+d;
-k1.textContent=t;k2.textContent=Math.round(h/t*100)+'%';k3.textContent=Math.round(d/t*100)+'%';
-const W=560,H=220,base=190,sc=150/16,bw=Math.min(40,(W-40)/ms.length*.5),step=(W-40)/ms.length;let g='';
-ms.forEach((m,i)=>{const[a,b]=M[m],x=20+i*step+(step-bw)/2,ha=a*sc,hb=b*sc,tt=`Tháng ${+m}: ${a+b} PR · HCM ${a} · ĐN ${b}`;
-g+=`<rect class="bar" data-t="${tt}" x="${x}" y="${base-ha}" width="${bw}" height="${ha}" rx="3" fill="#294338"/><rect class="bar" data-t="${tt}" x="${x}" y="${base-ha-hb}" width="${bw}" height="${hb}" rx="3" fill="#9caf9b"/><text x="${x+bw/2}" y="${H-8}" text-anchor="middle">T${+m}</text><text x="${x+bw/2}" y="${base-ha-hb-6}" text-anchor="middle" style="fill:#1d3229;font-weight:700">${a+b}</text>`});
-chart.innerHTML=`<line x1="20" x2="540" y1="${base}" y2="${base}" stroke="#e3e6df"/>`+g;
-chart.querySelectorAll('.bar').forEach(r=>{r.onmousemove=e=>{tip.textContent=r.dataset.t;tip.style.left=e.clientX+12+'px';tip.style.top=e.clientY+12+'px';tip.style.opacity=1};r.onmouseleave=()=>tip.style.opacity=0})}
-Object.keys(P).forEach(k=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>show(k);tabs.appendChild(b)});show('Cả năm');
-</script></body></html>
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HR handover playbook for recruitment, onboarding, employee engagement, employer branding and internal communications." />
+  <title>PR Handover · Duong Tran</title>
+  <style>
+    :root {
+      --ink: #1f2c27;
+      --ink-soft: #425149;
+      --muted: #718078;
+      --paper: #f7f5ef;
+      --paper-deep: #eeece3;
+      --card: #fffdf8;
+      --sage: #9caf9b;
+      --sage-soft: #dce6d9;
+      --forest: #294338;
+      --forest-deep: #1d3229;
+      --amber: #a76b28;
+      --amber-soft: #f3e5cf;
+      --line: #d9ded6;
+      --white: #ffffff;
+      --shadow: 0 18px 42px rgba(31, 44, 39, .08);
+      --radius-lg: 26px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .serif { font-family: "DM Serif Display", Georgia, serif; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(217, 222, 214, .88);
+      background: rgba(247, 245, 239, .93);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--forest-deep);
+    }
+    .brand strong { font-size: 15px; letter-spacing: .02em; }
+    .brand span { color: var(--muted); font-size: 12px; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav a:hover, .nav a:focus-visible { color: var(--forest); }
+
+    .hero { padding: 58px 0 34px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-copy {
+      padding: clamp(32px, 6vw, 72px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow, .section-kicker {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 18px;
+      color: var(--forest-deep);
+      font: 400 clamp(48px, 8vw, 88px)/.96 "DM Serif Display", Georgia, serif;
+      letter-spacing: -.035em;
+    }
+    .hero-lede {
+      max-width: 700px;
+      color: var(--ink-soft);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.75;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--forest);
+      background: var(--paper);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .hero-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--forest);
+      color: var(--paper);
+    }
+    .hero-panel h2 { margin: 0 0 12px; font: 400 31px/1.1 "DM Serif Display", Georgia, serif; }
+    .hero-panel p { color: #d9e5dd; font-size: 14px; line-height: 1.75; }
+    .panel-rule { height: 1px; background: rgba(255, 255, 255, .18); }
+    .panel-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+    .panel-list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; color: #edf3ee; font-size: 13px; }
+    .panel-list b { color: #e1bc81; }
+
+    .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+    .section-head h2 { max-width: 730px; margin: 10px 0 0; color: var(--forest-deep); font: 400 clamp(34px, 5vw, 56px)/1.03 "DM Serif Display", Georgia, serif; letter-spacing: -.02em; }
+    .section-intro { max-width: 650px; color: var(--muted); font-size: 15px; }
+    .section-note { max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
+
+    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .quick-card { min-height: 150px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .quick-card .number { color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+    .quick-card h3 { margin: 16px 0 7px; color: var(--forest); font-size: 16px; }
+    .quick-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .flow-wrap { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+    .flow-title { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .flow-title h3 { margin: 0; color: var(--forest); font-size: 18px; }
+    .flow-title span { color: var(--muted); font-size: 12px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(100px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
+    .flow-step:not(:last-child)::after { content: "â†’"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+    .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
+    .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .lane-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 18px; }
+    .lane { padding: 21px; border-radius: 16px; background: var(--paper-deep); }
+    .lane h4 { margin: 0 0 8px; color: var(--forest); font-size: 15px; }
+    .lane p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+    .lane b { color: var(--amber); }
+
+    .sop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .sop-card { display: grid; grid-template-columns: 46px 1fr; gap: 17px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+    .sop-num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--sage-soft); color: var(--forest); font-weight: 700; }
+    .sop-card h3 { margin: 2px 0 7px; color: var(--forest); font-size: 16px; }
+    .sop-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .resource { display: inline-block; margin-top: 10px; color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .resource:hover, .program-link:hover, .resource-card-link:hover { color: var(--forest); }
+    .resource, .program-link { text-decoration: none; }
+    .resource-card-link { color: inherit; text-decoration: none; }
+    .resource-card-link h3 { transition: color .2s ease; }
+
+    .timeline { position: relative; display: grid; gap: 14px; }
+    .timeline::before { content: ""; position: absolute; left: 18px; top: 22px; bottom: 22px; width: 1px; background: var(--sage); }
+    .timeline-row { position: relative; display: grid; grid-template-columns: 38px 150px 1fr; gap: 18px; align-items: start; }
+    .timeline-dot { position: relative; z-index: 1; width: 37px; height: 37px; display: grid; place-items: center; border: 5px solid var(--paper); border-radius: 50%; background: var(--forest); color: var(--paper); font-size: 11px; font-weight: 700; }
+    .timeline-date { padding-top: 7px; color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .timeline-content { padding: 19px 21px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
+    .timeline-content h3 { margin: 0 0 7px; color: var(--forest); font-size: 16px; }
+    .timeline-content p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .timeline-content ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .info-card { padding: 25px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--line); }
+    .info-card.dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
+    .info-card h3 { margin: 0 0 12px; color: var(--forest); font: 400 29px/1.1 "DM Serif Display", Georgia, serif; }
+    .info-card.dark h3 { color: var(--paper); }
+    .info-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .info-card.dark p { color: #d8e5dc; }
+    .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
+    .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
+    .dark .checklist li { color: #edf3ee; }
+    .checklist li::before { content: "âœ“"; color: var(--amber); font-weight: 700; }
+
+    .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .program h3 { margin: 0 0 9px; color: var(--forest); font-size: 15px; }
+    .program p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .program .program-link { display: block; margin-top: 13px; color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .resource-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .resource-item { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-deep); }
+    .resource-item h3 { margin: 0 0 5px; color: var(--forest); font-size: 14px; }
+    .resource-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .resource-item em { display: block; margin-top: 10px; color: var(--amber); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .publish-note { margin-top: 22px; padding: 21px 23px; border-left: 4px solid var(--amber); border-radius: 0 14px 14px 0; background: var(--amber-soft); }
+    .publish-note h3 { margin: 0 0 7px; color: var(--forest); font-size: 15px; }
+    .publish-note p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+
+    footer { padding: 34px 0 54px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+    .footer-inner a { color: var(--forest); font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: repeat(4, 1fr); }
+      .flow-step:nth-child(4)::after { display: none; }
+      .flow-step:nth-child(5)::before { content: ""; position: absolute; left: 50%; top: -13px; width: 1px; height: 13px; background: var(--sage); }
+      .program-grid, .resource-map { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 15px 0; }
+      .nav { gap: 10px 14px; justify-content: flex-start; }
+      .hero { padding-top: 28px; }
+      .hero-copy { padding: 32px 24px; }
+      .hero-panel { padding: 25px; }
+      .section { padding: 56px 0; }
+      .section-head { display: block; }
+      .section-note { margin-top: 15px; text-align: left; }
+      .quick-grid, .sop-grid, .lane-grid, .program-grid, .resource-map { grid-template-columns: 1fr; }
+      .flow-wrap { padding: 19px; }
+      .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .flow-step:nth-child(odd)::after { content: "â†“"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
+      .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
+      .timeline-content { grid-column: 2; grid-row: 2; }
+      .timeline-dot { width: 30px; height: 30px; font-size: 10px; }
+      .timeline::before { left: 14px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  .flow{grid-template-columns:repeat(6,1fr)!important}@media(max-width:760px){.flow{grid-template-columns:1fr 1fr!important}}</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap topbar-inner">
+<a class="brand" href="#start"><strong>Duong Tran</strong><span>PR Handover</span></a>
+<nav class="nav"><a href="#start">Bắt đầu</a><a href="#flow">Quy trình</a><a href="#tasks">Việc chính</a><a href="#rhythm">Nhịp tháng</a><a href="#tips">Mẹo</a></nav>
+</div></header>
+<main>
+<section class="hero" id="start"><div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="eyebrow">Sổ tay bàn giao · Thanh toán</div>
+<h1>Làm PR gọn.<br />Để người sau dễ tiếp.</h1>
+<p class="hero-lede">PR (đề nghị thanh toán, DNTT) là hồ sơ xin duyệt chi cho các khoản của văn phòng. Trang này ghi lại cách làm để ai nhận việc cũng làm tiếp được.</p>
+<div class="hero-meta"><span class="tag">DNTT</span><span class="tag">Chứng từ</span><span class="tag">Nộp kế toán</span><span class="tag">Tracking</span><span class="tag">HCM &amp; ĐN</span></div>
+</div>
+<aside class="hero-panel"><div>
+<div class="eyebrow" style="color:#e1bc81">15 phút đầu</div>
+<h2>Đọc theo thứ tự này.</h2>
+<p>Xem quy trình trước, rồi mở phần việc khi có PR mới.</p></div>
+<div class="panel-rule"></div>
+<ol class="panel-list">
+<li><b>01</b><span>Xem khoản chi thuộc loại nào.</span></li>
+<li><b>02</b><span>Làm theo 6 bước bên dưới.</span></li>
+<li><b>03</b><span>Cập nhật tracking trước khi đóng việc.</span></li>
+</ol></aside>
+</div></section>
+
+<section class="section" id="flow"><div class="wrap">
+<div class="section-head"><div><div class="section-kicker">01 · Quy trình</div><h2>Một PR đi qua 6 bước</h2></div>
+<p class="section-note">Bước nào cũng nên để lại dấu vết để người khác tra lại được.</p></div>
+<div class="flow-wrap"><div class="flow-title"><h3>Từ chứng từ đến lúc gửi duyệt</h3><span>Đọc → Đăng</span></div>
+<div class="flow">
+<div class="flow-step"><span class="step-no">01</span><strong>Đọc và phân loại</strong><small>Xem chứng từ, chia Có HĐ hay Không HĐ.</small></div>
+<div class="flow-step"><span class="step-no">02</span><strong>Điền DNTT</strong><small>Gọn trong 1 trang, kiểm kỹ ngày và hạn.</small></div>
+<div class="flow-step"><span class="step-no">03</span><strong>Gộp PDF</strong><small>Form và chứng từ thành 1 file.</small></div>
+<div class="flow-step"><span class="step-no">04</span><strong>Tạo folder nộp</strong><small>Mỗi lần nộp kế toán một folder theo ngày.</small></div>
+<div class="flow-step"><span class="step-no">05</span><strong>Cập nhật tracking</strong><small>Ghi vào bảng chung và canvas.</small></div>
+<div class="flow-step"><span class="step-no">06</span><strong>Đăng thread PR</strong><small>Gửi vào thread PR của tháng để duyệt.</small></div>
+</div></div>
+</div></section>
+
+<section class="section" id="tasks"><div class="wrap">
+<div class="section-head"><div><div class="section-kicker">02 · Việc chính</div><h2>Bốn mảng cần giữ đều tay</h2></div>
+<p class="section-note">Phần lớn PR rơi vào một trong bốn mảng này.</p></div>
+<div class="quick-grid">
+<article class="quick-card"><div class="number">01</div><h3>Chi phí định kỳ</h3><p>Thuê văn phòng, điện nước, gửi xe, vệ sinh. Lặp lại mỗi tháng hoặc quý.</p></article>
+<article class="quick-card"><div class="number">02</div><h3>Hợp đồng &amp; gia hạn</h3><p>Theo dõi ngày hết hạn, phụ lục, tiền cọc và bản quyền phần mềm.</p></article>
+<article class="quick-card"><div class="number">03</div><h3>Hồ sơ kế toán</h3><p>Folder theo ngày, file PDF đã gộp, tên file đặt thống nhất.</p></article>
+<article class="quick-card"><div class="number">04</div><h3>Tracking</h3><p>Một bảng chung và canvas Có HĐ / Không HĐ để tra lịch sử.</p></article>
+</div></div></section>
+
+<section class="section" id="rhythm"><div class="wrap">
+<div class="section-head"><div><div class="section-kicker">03 · Nhịp tháng</div><h2>Việc nào đến hẹn thì làm</h2></div>
+<p class="section-note">Giữ nhịp đều thì cuối tháng không bị dồn.</p></div>
+<div class="timeline">
+<div class="timeline-row"><div class="timeline-dot">T</div><div class="timeline-date">Hằng tuần</div><div class="timeline-content"><h3>Xem cảnh báo sắp hết hạn</h3><p>Rà hợp đồng và phần mềm sắp đến hạn, báo sớm để kịp gia hạn.</p></div></div>
+<div class="timeline-row"><div class="timeline-dot">+</div><div class="timeline-date">Có chứng từ mới</div><div class="timeline-content"><h3>Làm PR ngay</h3><p>Đi đủ 6 bước, đừng để chứng từ nằm chờ.</p></div></div>
+<div class="timeline-row"><div class="timeline-dot">25</div><div class="timeline-date">Ngày 25 hằng tháng</div><div class="timeline-content"><h3>Rà lại cả tháng</h3><p>Đối chiếu tracking với thread PR, xem khoản nào còn thiếu.</p></div></div>
+</div></div></section>
+
+<section class="section" id="tips"><div class="wrap">
+<div class="section-head"><div><div class="section-kicker">04 · Mẹo</div><h2>Mấy điều nhỏ giúp đỡ phải sửa lại</h2></div></div>
+<div class="two-col">
+<article class="info-card"><h3>Trước khi gửi</h3><ul class="checklist"><li>Kiểm số và ngày trên chứng từ khớp với form.</li><li>Chứng từ đủ, rõ, đúng thứ tự trong PDF.</li><li>Tên file theo đúng quy ước chung.</li></ul></article>
+<article class="info-card dark"><h3>Khi bàn giao</h3><ul class="checklist"><li>Tracking luôn là nơi xem đầu tiên.</li><li>Khoản lạ thì hỏi trước, đừng đoán.</li><li>Ghi chú ngắn cho trường hợp đặc biệt.</li></ul></article>
+</div></div></section>
+</main>
+<footer><div class="wrap footer-inner"><span>PR Handover · Bàn giao nội bộ</span><a href="#start">Lên đầu trang ↑</a></div></footer>
+</body></html>
