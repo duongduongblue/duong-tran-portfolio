@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Bàn giao công việc HR: tuyển dụng, onboarding, gắn kết nhân sự và việc phát sinh." />
-  <title>Bàn giao HR | Duong Tran</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
-  <style>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bàn giao HR | Duong Tran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
     :root {
       --ink: #1f2c27;
       --ink-soft: #425149;
@@ -169,7 +166,7 @@
       align-items: stretch;
     }
     .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
-    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step:not(:last-child)::after { content: "â†’"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
     .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
     .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
     .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
@@ -210,7 +207,7 @@
     .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
     .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
     .dark .checklist li { color: #edf3ee; }
-    .checklist li::before { content: "✓"; color: var(--amber); font-weight: 700; }
+    .checklist li::before { content: "âœ“"; color: var(--amber); font-weight: 700; }
 
     .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
     .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -254,7 +251,7 @@
       .flow-wrap { padding: 19px; }
       .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .flow-step:not(:last-child)::after { display: none; }
-      .flow-step:nth-child(odd)::after { content: "↓"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .flow-step:nth-child(odd)::after { content: "â†“"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
       .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
       .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
       .timeline-content { grid-column: 2; grid-row: 2; }
@@ -262,31 +259,18 @@
       .timeline::before { left: 14px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
-
-    /* ---- preview additions (same tokens as above) ---- */
-    .role-table { width: 100%; margin-top: 18px; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); font-size: 13px; }
-    .role-table th { padding: 13px 18px; background: var(--paper-deep); color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-align: left; text-transform: uppercase; }
-    .role-table td { padding: 15px 18px; border-top: 1px solid var(--line); color: var(--ink-soft); line-height: 1.7; vertical-align: top; }
-    .role-table td:first-child { width: 220px; color: var(--forest); font-weight: 700; }
-    .role-table b { color: var(--amber); }
-    .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 16px; padding: 0 18px; border-radius: 999px; background: var(--forest); color: var(--paper); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
-    .btn:hover, .btn:focus-visible { background: var(--forest-deep); }
-    .info-card.dark .btn { background: var(--amber-soft); color: var(--forest-deep); }
-    .btn.ghost { border: 1px solid var(--line); background: var(--paper); color: var(--forest); }
-    .position-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 4px; }
-    .tag.priority { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); }
-    @media (max-width: 640px) { .role-table td:first-child { width: auto; } .role-table th:first-child, .role-table td:first-child { white-space: nowrap; } }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="../index.html" aria-label="Quay lại portfolio Duong Tran"><strong>Duong Tran</strong><span>Bàn giao HR</span></a>
-      <nav class="nav" aria-label="Điều hướng trang">
+      <a class="brand" href="../index.html"><strong>Duong Tran</strong><span>Bàn giao HR</span></a>
+      <nav class="nav" aria-label="Điều hướng">
+        <a href="#start">Bắt đầu</a>
         <a href="#recruitment">Tuyển dụng</a>
         <a href="#onboarding">Onboarding</a>
         <a href="#engagement">EE / EB / IC</a>
-        <a href="#adhoc">Phát sinh</a>
+        <a href="#adhoc">Việc phát sinh</a>
         <a href="#related">Trang liên quan</a>
       </nav>
     </div>
@@ -295,37 +279,76 @@
     <section class="hero" id="start">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Bàn giao · HR</div>
-          <h1>Mọi người<br />luôn là trọng tâm.</h1>
-          <p class="hero-lede">Những việc HR mình làm mỗi ngày, gói gọn để người tiếp theo bắt nhịp thật nhanh.</p>
-          <div class="hero-meta"><span class="tag">Tuyển dụng</span><span class="tag">Onboarding</span><span class="tag">EE / EB / IC</span><span class="tag">Việc phát sinh</span></div>
+          <div class="eyebrow">Sổ tay bàn giao · HR Ather Labs</div>
+          <h1>Rõ việc.<br />Làm bằng cả sự quan tâm.</h1>
+          <p class="hero-lede">Trang này gom lại những việc HR làm hằng ngày: việc gì, làm lúc nào, phối hợp với ai và cần mở file nào. Để người tiếp quản đọc là làm được, và sau này nhìn lại vẫn thấy quy trình nằm đó.</p>
+          <div class="hero-meta">
+            <span class="tag">Tuyển dụng</span><span class="tag">Onboarding</span><span class="tag">Thử việc</span><span class="tag">Gắn kết nhân sự</span><span class="tag">Truyền thông nội bộ</span>
+          </div>
         </div>
         <aside class="hero-panel">
           <div>
-            <div class="eyebrow" style="color:#e1bc81">Đọc nhanh</div>
-            <h2>Cứ xem trang này như tấm bản đồ.</h2>
-            <p>Việc nào tới thì mở đúng mục đó. Phần chi tiết mình sẽ bàn giao trực tiếp.</p>
+            <div class="eyebrow" style="color:#e1bc81">15 phút đầu tiên</div>
+            <h2>Coi trang này như tấm bản đồ.</h2>
+            <p>Đọc phần tổng quan trước, có việc tới thì mở đúng mục. Link tài liệu chi tiết sẽ được bàn giao trực tiếp, không để trên trang này.</p>
           </div>
+          <div class="panel-rule"></div>
+          <ol class="panel-list">
+            <li><b>01</b><span>Xem mình đang xử lý vị trí tuyển nào, hay mốc nào của nhân sự.</span></li>
+            <li><b>02</b><span>Mở đúng file theo dõi, mẫu hoặc kênh trao đổi.</span></li>
+            <li><b>03</b><span>Ghi lại bước tiếp theo và ai phụ trách trước khi đóng việc.</span></li>
+          </ol>
         </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">01 · Tổng quan</div><h2>Nhịp làm việc trong một cái nhìn</h2></div>
+          <p class="section-note">Tóm từ tài liệu bàn giao công việc HR thực tế ở văn phòng Đà Nẵng và HCM.</p>
+        </div>
+        <div class="quick-grid">
+          <article class="quick-card"><div class="number">01</div><h3>Tuyển dụng</h3><p>Từ lúc nhận yêu cầu tuyển đến khi chốt offer và trao đổi với ứng viên.</p></article>
+          <article class="quick-card"><div class="number">02</div><h3>Vòng đời nhân sự</h3><p>Onboarding, offboarding, theo dõi thử việc và báo cáo định kỳ.</p></article>
+          <article class="quick-card"><div class="number">03</div><h3>Gắn kết & thương hiệu</h3><p>Gắn kết nhân sự, thương hiệu tuyển dụng và truyền thông nội bộ.</p></article>
+          <article class="quick-card"><div class="number">04</div><h3>Việc phát sinh</h3><p>Những việc ngoài quy trình được ghi lại ở không gian riêng của team HR.</p></article>
+        </div>
       </div>
     </section>
 
     <section class="section" id="recruitment">
       <div class="wrap">
         <div class="section-head">
-          <div><div class="section-kicker">01 · Tuyển dụng</div><h2>Ứng viên nào cũng biết bước tiếp theo</h2></div>
-          <p class="section-note">Vòng phỏng vấn cuối có thể bỏ qua tùy vị trí.</p>
+          <div><div class="section-kicker">02 · Tuyển dụng</div><h2>Ứng viên nào cũng luôn có một bước tiếp theo rõ ràng</h2></div>
+          <p class="section-note">Quy trình có thể co giãn theo vị trí, nhưng các điểm chuyển giao và ghi chép thì luôn phải rõ. Vòng phỏng vấn với CEO tùy vị trí có thể bỏ qua.</p>
         </div>
         <div class="flow-wrap">
-          <div class="flow-title"><h3>Hành trình một ứng viên</h3><span>Từ CV đến offer</span></div>
-          <div class="flow" style="grid-template-columns:repeat(6,minmax(100px,1fr))">
-            <div class="flow-step"><span class="step-no">01</span><strong>Lọc CV</strong><small>Đối chiếu với JD.</small></div>
-            <div class="flow-step"><span class="step-no">02</span><strong>Gọi điện</strong><small>Làm quen, hỏi nhanh.</small></div>
-            <div class="flow-step"><span class="step-no">03</span><strong>Bài test</strong><small>Theo từng vị trí.</small></div>
-            <div class="flow-step"><span class="step-no">04</span><strong>Phỏng vấn</strong><small>Cùng team chuyên môn.</small></div>
-            <div class="flow-step"><span class="step-no">05</span><strong>Phản hồi</strong><small>Càng sớm càng tốt.</small></div>
-            <div class="flow-step"><span class="step-no">06</span><strong>Offer</strong><small>Chốt và gửi thư mời.</small></div>
+          <div class="flow-title"><h3>Quy trình tuyển chung</h3><span>Lọc CV → Offer</span></div>
+          <div class="flow">
+            <div class="flow-step"><span class="step-no">01</span><strong>Lọc CV</strong><small>Đối chiếu tiêu chí trong JD.</small></div>
+            <div class="flow-step"><span class="step-no">02</span><strong>Gọi điện sơ bộ</strong><small>Hỏi thông tin theo vị trí.</small></div>
+            <div class="flow-step"><span class="step-no">03</span><strong>HM xem hồ sơ</strong><small>Gửi tóm tắt ứng viên.</small></div>
+            <div class="flow-step"><span class="step-no">04</span><strong>Bài test</strong><small>Đúng bài, rõ deadline.</small></div>
+            <div class="flow-step"><span class="step-no">05</span><strong>Phỏng vấn vòng 1</strong><small>Team chuyên môn hoặc livecode.</small></div>
+            <div class="flow-step"><span class="step-no">06</span><strong>Phỏng vấn vòng 2</strong><small>Với CEO, tùy vị trí.</small></div>
+            <div class="flow-step"><span class="step-no">07</span><strong>Feedback</strong><small>Hỏi kết quả càng sớm càng tốt.</small></div>
+            <div class="flow-step"><span class="step-no">08</span><strong>Offer</strong><small>Thống nhất, duyệt, gửi ứng viên.</small></div>
           </div>
+        </div>
+        <div class="lane-grid">
+          <div class="lane"><h4>Game Designer</h4><p>Lọc CV → Gọi điện → HM xem hồ sơ → <b>Bài test (2 tuần)</b> → Phỏng vấn vòng 1 với team chuyên môn → Phỏng vấn vòng 2 với CEO.</p></div>
+          <div class="lane"><h4>Kỹ thuật / Software</h4><p>Lọc CV → Gọi điện → HM xem hồ sơ → <b>Bài test (2 tuần)</b> → <b>Livecode + phỏng vấn</b> với team chuyên môn → Phỏng vấn vòng 2 với CEO.</p></div>
+        </div>
+        <div class="sop-grid" style="margin-top:18px;">
+          <article class="sop-card"><div class="sop-num">1</div><div><h3>Nhận yêu cầu tuyển dụng</h3><p>Soạn JD theo mẫu, gửi Hiring Manager xem và góp ý. JD chốt xong thì đăng lên hệ thống HRM và chọn kênh đăng tuyển hợp với vị trí.</p></div></article>
+          <article class="sop-card"><div class="sop-num">2</div><div><h3>Lọc CV</h3><p>Đọc từng CV theo đúng tiêu chí đã thống nhất trong JD. Loại hay giữ đều nên giải thích được, để HM hỏi lại là trả lời ngay.</p></div></article>
+          <article class="sop-card"><div class="sop-num">3</div><div><h3>Lưu và theo dõi ứng viên</h3><p>Cập nhật thông tin ứng viên vào file theo dõi. Đợt nào tuyển nhiều thì tạo file mới hoặc dùng form tự động để đỡ nhập tay.</p></div></article>
+          <article class="sop-card"><div class="sop-num">4</div><div><h3>Gọi điện sơ bộ</h3><p>Dùng cuộc gọi để hỏi những thông tin cần cho vị trí đó, rồi tóm lại nội dung gửi HM.</p></div></article>
+          <article class="sop-card"><div class="sop-num">5</div><div><h3>Gửi bài test và nhắc deadline</h3><p>Chọn đúng bài test theo vị trí, báo rõ hạn nộp, theo dõi và nhắc khéo khi gần tới hạn.</p></div></article>
+          <article class="sop-card"><div class="sop-num">6</div><div><h3>Sắp xếp phỏng vấn / livecode</h3><p>Hẹn lịch cùng HM. Trước buổi phỏng vấn, gửi sẵn Interview Note để người phỏng vấn ghi nhận xét chung một chỗ.</p></div></article>
+          <article class="sop-card"><div class="sop-num">7</div><div><h3>Hỏi feedback và đề xuất offer</h3><p>Hỏi kết quả từ người phỏng vấn càng sớm càng tốt. Ứng viên đạt thì thống nhất đề xuất offer với HRM rồi trình CEO duyệt.</p></div></article>
+          <article class="sop-card"><div class="sop-num">8</div><div><h3>Trao đổi và gửi Offer Letter</h3><p>Trao đổi các điều khoản đã thống nhất với ứng viên, đủ duyệt và đủ thông tin thì gửi thư mời làm việc.</p></div></article>
         </div>
       </div>
     </section>
@@ -333,13 +356,22 @@
     <section class="section" id="onboarding">
       <div class="wrap">
         <div class="section-head">
-          <div><div class="section-kicker">02 · Onboarding</div><h2>Ngày đầu đi làm thật nhẹ nhàng</h2></div>
+          <div><div class="section-kicker">03 · Vòng đời nhân sự</div><h2>Onboarding là cả một chuỗi, không chỉ là ngày đầu</h2></div>
+          <p class="section-note">Bắt đầu chuẩn bị trước khoảng 1 tuần để người, công cụ và chỗ ngồi sẵn sàng cùng lúc.</p>
         </div>
-        <div class="sop-grid">
-          <article class="sop-card"><div class="sop-num">1</div><div><h3>Chuẩn bị trước</h3><p>Lo sẵn máy móc, tài khoản và chỗ ngồi khoảng một tuần trước ngày bạn mới đến.</p></div></article>
-          <article class="sop-card"><div class="sop-num">2</div><div><h3>Ngày đầu tiên</h3><p>Đón bạn mới, giới thiệu team và đi một vòng văn phòng.</p></div></article>
-          <article class="sop-card"><div class="sop-num">3</div><div><h3>Thử việc</h3><p>Hỏi thăm giữa kỳ, nhắc đánh giá khi gần hết thử việc.</p></div></article>
-          <article class="sop-card"><div class="sop-num">4</div><div><h3>Chia tay</h3><p>Thu hồi tài khoản, thiết bị và gửi lời cảm ơn tử tế.</p></div></article>
+        <div class="timeline">
+          <div class="timeline-row"><div class="timeline-dot">D-7</div><div class="timeline-date">Trước 1 tuần</div><div class="timeline-content"><h3>Chuẩn bị tài khoản và chỗ làm</h3><p>Tạo email công ty và tài khoản làm việc cho bạn mới theo quy ước đặt tên chung. Phối hợp với Operations và IT để chuẩn bị máy móc, thiết bị và chỗ ngồi.</p></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D-5</div><div class="timeline-date">Trước 3–5 ngày</div><div class="timeline-content"><h3>Báo cho mọi người biết có bạn mới</h3><p>Đăng thông báo pre-onboarding trên kênh chat nội bộ, gửi thông tin bạn mới vào nhóm onboarding của từng team và xác nhận những người liên quan đã nắm.</p><ul><li>Game Designer</li><li>Art</li><li>Game QA / Producer</li><li>Game Engineer</li></ul></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D-2</div><div class="timeline-date">Trước ngày vào làm</div><div class="timeline-content"><h3>Chốt các việc lặt vặt</h3><p>Đăng ký thẻ gửi xe theo thông tin ứng viên, cập nhật sơ đồ chỗ ngồi nếu cần. Chuẩn bị slide Welcome / Orientation và ảnh giới thiệu bạn mới.</p><ul><li>File theo dõi thẻ xe: Đà Nẵng và HCM</li><li>Sơ đồ chỗ ngồi</li><li>Slide Welcome Onboard Orientation</li><li>Mẫu ảnh giới thiệu nhân sự mới</li></ul></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D+1</div><div class="timeline-date">Ngày đầu tiên</div><div class="timeline-content"><h3>Chào đón, giới thiệu và ghi nhận</h3><p>Gửi email chào mừng kèm thông tin nhân sự và tài khoản, chạy buổi Welcome / Orientation, rồi đăng bài chào bạn mới cho cả công ty.</p></div></div>
+        </div>
+        <div class="two-col" style="margin-top:20px;">
+          <article class="info-card"><h3>Offboarding</h3><p>Chuẩn bị thông tin và giấy tờ nghỉ việc theo đúng biểu mẫu, phối hợp với Operations và những người liên quan.</p><ul class="checklist"><li>Dùng đúng mẫu offboarding.</li><li>Phối hợp bàn giao với Operations.</li><li>Kiểm tra mọi bên đã có đủ thông tin cần.</li></ul></article>
+          <article class="info-card dark"><h3>Theo dõi thử việc</h3><p>Làm sớm để không trễ hạn: gửi form đánh giá và nhắc nhở ít nhất 2 tuần trước ngày đánh giá thử việc.</p><ul class="checklist"><li>Theo dõi nhân sự và Line Manager đã điền xong chưa.</li><li>Cập nhật vào file theo dõi nhân sự.</li><li>Dùng mẫu email thông báo thử việc có sẵn.</li></ul></article>
+        </div>
+        <div class="two-col" style="margin-top:18px;">
+          <article class="info-card"><h3>Báo cáo hằng ngày, hằng tuần</h3><p>Để việc luôn hiện rõ và ai cũng tiếp được.</p><ul class="checklist"><li>Hằng ngày: đăng việc trong ngày vào thread lúc <strong>09:15</strong>.</li><li>Hằng tuần: cập nhật tiến độ vào file Weekly Report.</li><li>Có sẵn mẫu Daily Standup để tham khảo.</li></ul></article>
+          <article class="info-card"><h3>Hồ sơ nhân sự</h3><p>Các file theo dõi hiện có là nguồn chuẩn cho những mốc định kỳ.</p><ul class="checklist"><li>Thông tin nghỉ việc năm 2026.</li><li>Thông tin nhân sự mới năm 2026.</li><li>File theo dõi thử việc.</li></ul></article>
         </div>
       </div>
     </section>
@@ -347,12 +379,20 @@
     <section class="section" id="engagement">
       <div class="wrap">
         <div class="section-head">
-          <div><div class="section-kicker">03 · EE / EB / IC</div><h2>Giữ cho văn phòng luôn ấm</h2></div>
+          <div><div class="section-kicker">04 · EE / EB / IC</div><h2>Lên lịch cho những khoảnh khắc giữ mọi người gần nhau</h2></div>
+          <p class="section-note">Gắn kết nhân sự, thương hiệu tuyển dụng và truyền thông nội bộ nên đi theo một nhịp đều, không chỉ là vài sự kiện lẻ.</p>
         </div>
-        <div class="quick-grid" style="grid-template-columns:repeat(3,1fr)">
-          <article class="quick-card"><div class="number">EE</div><h3>Gắn kết nhân sự</h3><p>Sinh nhật, lễ Tết và những buổi gặp mặt nhỏ trong năm.</p></article>
-          <article class="quick-card"><div class="number">EB</div><h3>Thương hiệu tuyển dụng</h3><p>Kể chuyện đời sống công ty để ứng viên thấy mình thuộc về.</p></article>
-          <article class="quick-card"><div class="number">IC</div><h3>Truyền thông nội bộ</h3><p>Thông báo rõ ràng, đúng lúc để ai cũng nắm tin.</p></article>
+        <div class="info-card" style="margin-bottom:18px;"><h3>Cách làm lịch</h3><p>Duy trì Communication Plan, ghi lại nội dung bài đăng mạng xã hội, rồi dựng timeline theo tháng hoặc theo năm để triển khai. Lấy các chương trình định kỳ bên dưới làm khung, rồi điều chỉnh theo nhu cầu từng năm.</p></div>
+        <div class="program-grid">
+          <article class="program"><h3>Du lịch công ty</h3><p>Lên kế hoạch và tổ chức chuyến đi hằng năm.</p></article>
+          <article class="program"><h3>Ngày Phụ nữ</h3><p>Sự kiện cho ngày 8/3 và 20/10.</p></article>
+          <article class="program"><h3>Last Friday</h3><p>Buổi gặp mặt cuối tháng cho mọi người kết nối.</p></article>
+          <article class="program"><h3>Sự kiện nội bộ nhỏ</h3><p>Các hoạt động nhỏ tổ chức khi cần.</p></article>
+          <article class="program"><h3>Recharge Time</h3><p>Ba tháng một lần, thường là đi ăn cùng nhau.</p></article>
+          <article class="program"><h3>Công tác</h3><p>Sắp xếp chuyến công tác theo quy trình đã có.</p></article>
+          <article class="program"><h3>Tiệc tất niên</h3><p>Lên kế hoạch và phối hợp tiệc cuối năm.</p></article>
+          <article class="program"><h3>Thiện nguyện</h3><p>Phối hợp các hoạt động thiện nguyện, cộng đồng.</p></article>
+          <article class="program"><h3>Leadership Meeting</h3><p>Dành cho leader, producer, manager, director và BOD; thường 1–2 lần mỗi năm, hay rơi vào đầu năm.</p></article>
         </div>
       </div>
     </section>
@@ -360,28 +400,31 @@
     <section class="section" id="adhoc">
       <div class="wrap">
         <div class="section-head">
-          <div><div class="section-kicker">04 · Việc phát sinh</div><h2>Việc gì tới cũng có chỗ ghi lại</h2></div>
+          <div><div class="section-kicker">05 · Việc phát sinh</div><h2>Việc ngoài quy trình cũng có chỗ để ghi lại</h2></div>
+          <p class="section-note">Những yêu cầu bất chợt không nằm trong các mục trên.</p>
         </div>
-        <div class="flow-wrap"><p style="margin:0;color:var(--ink-soft)">Mọi đầu việc ngoài kế hoạch đều được ghi vào sổ chung của HR, để người sau biết việc đang ở đâu và ai đang theo.</p></div>
+        <div class="two-col">
+          <article class="info-card"><h3>Không gian riêng của team HR</h3><p>Mỗi việc phát sinh được ghi vào không gian riêng của team HR trên Notion, kèm người yêu cầu, hạn và tình trạng, để người sau biết việc nào đang dở.</p></article>
+          <article class="info-card"><h3>Công cụ hay dùng</h3><ul class="checklist"><li>Notion: mẫu JD, bài test, Interview Note, mẫu email, Communication Plan.</li><li>Google Sheets: theo dõi ứng viên, nhân sự, thẻ xe, báo cáo tuần.</li><li>Google Slides và Canva: slide orientation, sơ đồ chỗ ngồi, ảnh chào bạn mới.</li><li>Hệ thống HRM: đăng JD đã duyệt.</li></ul></article>
+        </div>
       </div>
     </section>
 
     <section class="section" id="related">
       <div class="wrap">
         <div class="section-head">
-          <div><div class="section-kicker">05 · Trang liên quan</div><h2>Xem thêm</h2></div>
+          <div><div class="section-kicker">06 · Trang liên quan</div><h2>Các trang bàn giao khác</h2></div>
+          <p class="section-note">Mỗi mảng có một trang riêng cho dễ tra.</p>
         </div>
-        <div class="quick-grid">
-          <a class="resource-card-link" href="recruitment-dashboard.html"><article class="quick-card"><div class="number">→</div><h3>Dashboard tuyển dụng</h3><p>Số liệu tuyển dụng qua từng năm.</p></article></a>
-          <a class="resource-card-link" href="ops-handover.html"><article class="quick-card"><div class="number">→</div><h3>Vận hành</h3><p>Văn phòng Đà Nẵng và HCM.</p></article></a>
-          <a class="resource-card-link" href="pr-handover.html"><article class="quick-card"><div class="number">→</div><h3>PR</h3><p>Đề xuất mua sắm theo văn phòng.</p></article></a>
-          <a class="resource-card-link" href="events-handover.html"><article class="quick-card"><div class="number">→</div><h3>Sự kiện</h3><p>Lịch sự kiện trong năm.</p></article></a>
+        <div class="resource-map">
+          <article class="resource-item"><a class="resource-card-link" href="recruitment-dashboard.html"><h3>Recruitment Dashboard</h3><p>Pipeline và số liệu tuyển dụng.</p><em>Mở dashboard</em></a></article>
+          <article class="resource-item"><a class="resource-card-link" href="ops-handover.html"><h3>Operations</h3><p>Bàn giao mảng vận hành / admin.</p><em>Mở trang Operations</em></a></article>
+          <article class="resource-item"><a class="resource-card-link" href="pr-handover.html"><h3>PR</h3><p>Quy trình làm PR và các việc chính.</p><em>Mở trang PR</em></a></article>
+          <article class="resource-item"><a class="resource-card-link" href="events-handover.html"><h3>Sự kiện</h3><p>Các chương trình định kỳ và timeline trong năm.</p><em>Mở trang sự kiện</em></a></article>
         </div>
       </div>
     </section>
   </main>
-  <footer>
-    <div class="wrap footer-inner"><span>Bàn giao HR · Cảm ơn vì đã cùng nhau đi một đoạn đường</span><a href="#start">Về đầu trang ↑</a></div>
-  </footer>
+  <footer><div class="wrap footer-inner"><span>Bàn giao HR · Chuẩn bị cho giai đoạn chuyển giao</span><a href="#start">Về đầu trang ↑</a></div></footer>
 </body>
 </html>
