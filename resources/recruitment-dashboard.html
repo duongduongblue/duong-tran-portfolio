@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Recruitment Analytics 2022–2026 | Duong Tran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--forest:#1E2D24;--sage:#7D927B;--moss:#A8B7A1;--mist:#E8EEE7;--ivory:#F7F4EE;--charcoal:#2F342F;--muted:#5F6F5C;--line:rgba(125,146,123,.45);--line-soft:rgba(168,183,161,.35);--shadow:0 18px 40px rgba(30,45,36,.08);--radius:22px;--max:1240px;--accent:#B07A3B}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--charcoal);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto}
+.serif,h1,h2,.kv{font-family:'Cormorant Garamond',serif;font-weight:500}
+.top{position:sticky;top:0;z-index:20;background:rgba(247,244,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;flex-wrap:wrap}
+.brand{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--forest);text-decoration:none}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pick{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.pick button{border:0;background:none;padding:6px 13px;border-radius:999px;font:500 13px 'Inter';color:var(--muted);cursor:pointer;transition:.2s}
+.pick button.on{background:var(--forest);color:var(--ivory)}
+.tog{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+.tog input{display:none}.tog i{width:34px;height:20px;border-radius:99px;background:var(--moss);position:relative;transition:.2s}
+.tog i::after{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.2s}
+.tog input:checked+i{background:var(--forest)}.tog input:checked+i::after{left:17px}
+.tog.off{opacity:.4;pointer-events:none}
+.hero{padding:52px 0 18px}
+.kick{color:var(--sage);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+h1{margin:10px 0 12px;color:var(--forest);font-size:clamp(42px,6vw,72px);line-height:1}
+.lede{max-width:760px;color:var(--muted);font-size:16px;margin:0}
+.round{display:inline-block;margin-top:14px;padding:3px 10px;border-radius:99px;background:var(--mist);color:var(--muted);font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0}
+.kpi{padding:20px 22px;border:1px solid var(--line-soft);border-radius:18px;background:#fff;box-shadow:var(--shadow)}
+.kpi .lb{font-size:12px;color:var(--muted);font-weight:500}
+.kv{font-size:46px;line-height:1.05;color:var(--forest);margin-top:6px;transition:opacity .25s}
+.kpi .sb{font-size:12.5px;color:var(--muted);min-height:20px}
+.d{font-weight:600}.d.up{color:#3d7a52}.d.dn{color:#a4502f}
+section.blk{display:grid;grid-template-columns:320px 1fr;gap:28px;padding:34px 0;border-top:1px solid var(--line-soft)}
+.story .num{color:var(--sage);font-size:12px;font-weight:600;letter-spacing:.14em}
+.story h2{margin:8px 0 14px;font-size:32px;line-height:1.1;color:var(--forest);transition:opacity .25s}
+.story dl{margin:0}.story dt{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-top:12px}
+.story dd{margin:3px 0 0;font-size:14px;color:var(--charcoal)}
+.panel{padding:22px;border:1px solid var(--line-soft);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow);min-width:0}
+.panel .cap{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.cv{position:relative;height:300px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chips button{border:1px solid var(--line);background:var(--ivory);border-radius:99px;padding:4px 11px;font:500 12px 'Inter';color:var(--forest);cursor:pointer;transition:.2s}
+.chips button.on{background:var(--forest);color:var(--ivory);border-color:var(--forest)}
+.srcinfo{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--mist);font-size:13.5px;color:var(--forest);min-height:46px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.two>div{min-width:0}
+.take{margin:10px 0 0;padding:26px 28px;border-radius:var(--radius);background:var(--forest);color:var(--mist)}
+.take h2{margin:0 0 8px;color:#fff;font-size:30px}.take p{margin:0;max-width:900px;font-size:14.5px}
+footer{padding:28px 0 50px;color:var(--muted);font-size:12px}
+@media(max-width:900px){section.blk{grid-template-columns:1fr;gap:16px}.kpis{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){.wrap{width:calc(100% - 28px)}.kv{font-size:36px}.pick button{padding:5px 8px;font-size:12px}.cv{height:260px}h1{font-size:40px}.top .wrap{padding:8px 0}.story h2{font-size:27px}}
+</style></head><body>
+<header class="top"><div class="wrap"><a class="brand" href="../index.html">Duong Tran</a>
+<div class="controls"><div class="pick" id="pick"></div><label class="tog" id="togL"><input type="checkbox" id="cmp"/><i></i>Compare with previous year</label></div></div></header>
+<main class="wrap">
+<div class="hero"><div class="kick">Recruitment analytics · 2022–2026</div><h1>What five years of hiring data says</h1>
+<p class="lede">CV volume, hires and where they come from, at a game and blockchain studio with offices in Ho Chi Minh City, Da Nang and (until 2026) Hanoi. Pick a year or click a bar to explore.</p>
+<span class="round">Figures rounded · CVs to ~10, hires to ~5, rates to whole % · no candidate data</span></div>
+<div class="kpis" id="kpis"></div>
+
+<section class="blk"><div class="story"><div class="num">01 · VOLUME &amp; CONVERSION</div><h2 id="h1"></h2><dl><dt>Why</dt><dd id="w1"></dd><dt>What I did</dt><dd id="a1"></dd></dl></div>
+<div class="panel"><p class="cap">CVs per year (bars) and hire rate (line). Click a bar to select that year.</p><div class="cv"><canvas id="cT"></canvas></div></div></section>
+
+<section class="blk"><div class="story"><div class="num">02 · CHANNEL EFFICIENCY</div><h2 id="h2"></h2><dl><dt>Why</dt><dd id="w2"></dd><dt>What I did</dt><dd id="a2"></dd></dl></div>
+<div class="panel"><p class="cap">Share of CVs vs share of hires by source. A channel that brings more hires than CVs punches above its weight. Click a source to highlight it.</p>
+<div class="chips" id="chips"></div><div class="cv"><canvas id="cS"></canvas></div><div class="srcinfo" id="srcinfo"></div></div></section>
+
+<section class="blk"><div class="story"><div class="num">03 · WHERE CANDIDATES EXIT</div><h2 id="h3"></h2><dl><dt>Why</dt><dd id="w3"></dd><dt>What I did</dt><dd id="a3"></dd></dl></div>
+<div class="panel"><p class="cap">Share of rejections by step (100% = all rejected candidates in the period).</p><div class="cv"><canvas id="cR"></canvas></div></div></section>
+
+<section class="blk"><div class="story"><div class="num">04 · ROLES &amp; LOCATION</div><h2 id="h4"></h2><dl><dt>Why</dt><dd id="w4"></dd><dt>What I did</dt><dd id="a4"></dd></dl></div>
+<div class="panel two"><div><p class="cap">Top roles by share of CVs</p><div class="cv"><canvas id="cP"></canvas></div></div><div><p class="cap">Candidate location, share of CVs</p><div class="cv"><canvas id="cL"></canvas></div></div></div></section>
+
+<div class="take"><h2>The takeaway</h2><p>From 2022 to 2026: ~3,300 CVs and ~130 hires, about 4% overall. Volume nearly doubled at the 2025 peak while the hire rate drifted from ~6% to ~3%. More CVs did not mean more hires. Referrals were ~6% of CVs but ~30% of hires, and most rejections happen at CV and hiring-manager screen. The work since then: automated intake to handle volume, tighter JDs and screening to reduce noise, and more referral and direct sourcing where quality matters.</p></div>
+</main>
+<footer class="wrap">Source: internal recruitment tracker, aggregated and rounded. "Direct email" = applications sent to the recruitment inbox. Location = candidate's stated location. 2026 covers Jan–Oct.</footer>
+<script>
+const D={"2022": {"cv": 570, "hired": 35, "rate": 6, "src": {"HR networking": [1, 6, 33], "Referral": [11, 53, 29], "Facebook": [7, 6, 5], "LinkedIn": [54, 32, 4], "Other": [8, 0, 0], "Job boards": [18, 3, 1], "Direct email": [2, 0, 0]}, "loc": {"Ho Chi Minh City": 65, "Da Nang": 14, "Hanoi": 6, "Not recorded": 1, "Other provinces": 2, "Overseas": 14}, "rej": {"1st interview": 32, "Candidate withdrew": 8, "2nd interview": 7, "CV screen": 39, "Hiring manager screen": 9, "HR screen": 4}, "rejShare": 36, "nostatus": 0, "pos": [["Game Engineer", 15], ["Product Marketing Lead", 11], ["Copywriter", 8], ["Senior Legal Executive", 8], ["Full-stack Engineer", 7], ["Performance Marketing Specialist", 6]]}, "2023": {"cv": 560, "hired": 5, "rate": 1, "src": {"LinkedIn": [53, 29, 1], "Referral": [8, 57, 9], "Direct email": [13, 14, 1], "Other": [5, 0, 0], "Job boards": [17, 0, 0], "Facebook": [3, 0, 0], "HR networking": [1, 0, 0]}, "loc": {"Overseas": 2, "Da Nang": 6, "Ho Chi Minh City": 86, "Other provinces": 5}, "rej": {"CV screen": 41, "HR screen": 14, "Hiring manager screen": 26, "1st interview": 16, "Candidate withdrew": 3, "Test": 1}, "rejShare": 34, "nostatus": 17, "pos": [["Business Analyst", 11], ["Game Engineer", 9], ["Mobile Engineer", 8], ["Chief Accountant", 8], ["QA Engineer - Game", 7], ["Office Administrator", 7]]}, "2024": {"cv": 550, "hired": 30, "rate": 5, "src": {"Direct email": [42, 24, 3], "Facebook": [11, 24, 12], "LinkedIn": [37, 28, 4], "HR networking": [1, 0, 0], "Referral": [5, 24, 24], "Other": [5, 0, 0]}, "loc": {"Ho Chi Minh City": 82, "Da Nang": 10, "Overseas": 5, "Other provinces": 4}, "rej": {"1st interview": 22, "CV screen": 46, "Hiring manager screen": 21, "HR screen": 5, "2nd interview": 3, "Candidate withdrew": 2, "Test": 2}, "rejShare": 67, "nostatus": 1, "pos": [["QA Engineer - Game", 13], ["Office Administrator", 13], ["Game Engineer", 9], ["QA Engineer - Blockchain", 5], ["Game Marketing Senior/Lead", 4], ["DevOps Engineer", 4]]}, "2025": {"cv": 980, "hired": 40, "rate": 4, "src": {"Facebook": [6, 2, 2], "Referral": [5, 25, 21], "Direct email": [65, 48, 3], "LinkedIn": [21, 15, 3], "Other": [2, 5, 8], "HR networking": [1, 5, 18]}, "loc": {"Ho Chi Minh City": 91, "Other provinces": 3, "Overseas": 4, "Da Nang": 2, "Not recorded": 1}, "rej": {"CV screen": 44, "2nd interview": 1, "Candidate withdrew": 8, "Hiring manager screen": 23, "HR screen": 5, "Test": 10, "1st interview": 8}, "rejShare": 55, "nostatus": 7, "pos": [["3D Artist", 22], ["2D Artist", 19], ["Game Engineer", 8], ["QA Engineer - Game", 7], ["Game Design", 7], ["3D Animator", 7]]}, "2026": {"cv": 620, "hired": 20, "rate": 3, "src": {"LinkedIn": [7, 0, 0], "Direct email": [84, 89, 3], "Other": [3, 0, 0], "Referral": [3, 5, 6], "HR networking": [1, 5, 17], "Facebook": [2, 0, 0]}, "loc": {"Ho Chi Minh City": 99}, "rej": {"1st interview": 9, "HR screen": 6, "CV screen": 53, "Candidate withdrew": 7, "Hiring manager screen": 14, "2nd interview": 1, "Test": 9}, "rejShare": 44, "nostatus": 18, "pos": [["DevOps Engineer", 15], ["3D Artist", 13], ["Game Design", 12], ["QA Engineer - Game", 11], ["2D Artist", 11], ["Game Engineer", 8]]}, "all": {"cv": 3300, "hired": 130, "rate": 4, "src": {"HR networking": [1, 4, 15], "Referral": [6, 31, 20], "Facebook": [5, 8, 6], "LinkedIn": [32, 21, 3], "Other": [4, 2, 1], "Job boards": [6, 1, 0], "Direct email": [45, 34, 3]}, "loc": {"Ho Chi Minh City": 85, "Da Nang": 6, "Hanoi": 1, "Other provinces": 3, "Overseas": 5}, "rej": {"1st interview": 15, "Candidate withdrew": 6, "2nd interview": 2, "CV screen": 45, "Hiring manager screen": 20, "HR screen": 6, "Test": 5}, "rejShare": 48, "nostatus": 9, "pos": [["Game Engineer", 9], ["3D Artist", 9], ["2D Artist", 8], ["QA Engineer - Game", 8], ["Office Administrator", 5], ["Game Design", 5]]}},Y={"2022": {"h": "The most efficient year: ~6% of CVs became hires", "why": "Referrals were about 1 in 10 CVs but more than half of hires. The team still hired in three offices, Hanoi included.", "did": "Built referrals into the routine hiring flow and kept LinkedIn for reach."}, "2023": {"h": "Similar volume, very few hires, and a tracking gap", "why": "Hiring slowed, and about 1 in 6 records has no status, so the year is under-recorded rather than only weak.", "did": "Standardised the tracker (status, source and reject step on every row) so later years can be compared."}, "2024": {"h": "Hiring recovered to ~5% on the same CV volume", "why": "Direct email applications grew to ~40% of CVs and job-board postings stopped. CV screen became the main exit point.", "did": "Tightened JDs and used a screening checklist so rejections happen early and consistently."}, "2025": {"h": "Peak year: CVs up ~75%, hires at their highest", "why": "Volume grew faster than hires, so the hire rate slipped to ~4%. Art roles drew a large share of CVs for few hires.", "did": "Automated CV intake from email into Drive and the tracker, and added direct sourcing for hard roles."}, "2026": {"h": "Jan–Oct: direct email brings ~85% of CVs and ~90% of hires", "why": "Smaller, Ho Chi Minh City-focused hiring after the Hanoi office closed. About 1 in 5 records still waits for a status.", "did": "Built the Master Dashboard with a year selector to track volume, sources and outcomes each month."}},YRS=Object.keys(Y);
+const C={f:'#1E2D24',s:'#7D927B',m:'#A8B7A1',mi:'#E8EEE7',a:'#B07A3B'};
+Chart.defaults.font.family="'Inter',sans-serif";Chart.defaults.font.size=11;Chart.defaults.color='#5F6F5C';
+Chart.defaults.animation={duration:500,easing:'easeOutQuart'};
+Chart.defaults.plugins.tooltip.backgroundColor='#1E2D24';Chart.defaults.plugins.tooltip.padding=10;Chart.defaults.plugins.tooltip.titleFont={weight:'600'};
+const isM=()=>innerWidth<600;
+let sel='all',cmp=false,src=null,ch={};
+const ANN={'2023':'Tracking gap','2025':'Peak','2026':'Jan–Oct · HN closed'};
+const SRCNOTE={'Referral':'Small volume, highest yield: people recommended by employees are pre-screened for fit.','Direct email':'Largest channel since 2024; volume is high, so screening load is high too.','LinkedIn':'Main channel in 2022–2023; reach is wide but conversion is low.','Job boards':'Used until 2023 (ITviec, VietnamWorks), then dropped.','Facebook':'Community groups; useful in 2024 for game roles.','HR networking':'Candidates I approached directly; tiny volume, solid yield.','Other':'Telegram, headhunters, company website and unrecorded sources.'};
+const annot={id:'annot',afterDatasetsDraw(c){if(c.canvas.id!=="cT"||isM())return;const x=c.ctx,m=c.getDatasetMeta(0);x.save();x.font="500 11px Inter";x.fillStyle='#B07A3B';x.textAlign='center';
+ m.data.forEach((b,i)=>{const t=ANN[YRS[i]];if(t)x.fillText(t,b.x,b.y-(t.length>12?22:8))});x.restore();}};
+Chart.register(annot);
+function mk(id,cfg){if(ch[id]){ch[id].data=cfg.data;ch[id].options=cfg.options;ch[id].update();return}ch[id]=new Chart(document.getElementById(id),cfg)}
+const prevY=()=>sel!=='all'&&D[+sel-1]?String(+sel-1):null;
+function delta(a,b,u=''){if(b==null)return'';const v=a-b;const p=u?v:Math.round(100*v/b);return`<span class="d ${v>=0?'up':'dn'}">${v>=0?'+':''}${p}${u||'%'}</span> vs ${prevY()}`}
+function kpis(){const d=D[sel],p=prevY()?D[prevY()]:null,c=cmp&&p;
+ const bestH=Object.entries(d.src).sort((a,b)=>b[1][1]-a[1][1])[0];
+ const K=[['CVs received','~'+d.cv.toLocaleString(),c?delta(d.cv,p.cv):(sel==='all'?'2022–2026':'Applications logged')],
+ ['Hires','~'+d.hired,c?delta(d.hired,p.hired):'Offers accepted'],
+ ['Hire rate',d.rate+'%',c?delta(d.rate,p.rate,' pts'):'Roughly 1 hire per '+Math.round(100/Math.max(d.rate,1))+' CVs'],
+ ['Top source of hires',bestH[0],`${bestH[1][1]}% of hires from ${bestH[1][0]}% of CVs`]];
+ document.getElementById('kpis').innerHTML=K.map(k=>`<div class="kpi"><div class="lb">${k[0]}</div><div class="kv">${k[1]}</div><div class="sb">${k[2]}</div></div>`).join('');}
+function story(){const s=sel==='all'?{h:'~3,300 CVs, ~130 hires, and a hire rate that halved',why:'Volume rose sharply in 2025, but hires did not keep pace. More CVs meant more screening, not more hires.',did:'Automated CV intake from email into Drive and the tracker, and built a Master Dashboard with a year selector.'}:Y[sel];
+ set('h1',s.h);set('w1',s.why);set('a1',s.did);
+ const d=D[sel],r=d.src.Referral||[0,0],e=d.src['Direct email']||[0,0];
+ set('h2',`Referrals: ${r[0]}% of CVs, ${r[1]}% of hires`);
+ set('w2',`Direct email brings ${e[0]}% of CVs and ${e[1]}% of hires. Channels with a personal recommendation convert far better than open applications.`);
+ set('a2','Pushed employee referrals and direct outreach for hard-to-fill roles; dropped paid job boards after 2023.');
+ const rj=d.rej,cs=rj['CV screen']||0,hm=rj['Hiring manager screen']||0;
+ set('h3',`${Math.round((cs+hm)/5)*5}% of rejections happen at CV or manager screen`);
+ set('w3',`${d.rejShare}% of all CVs ended in a rejection. Most were filtered before any interview, which means many applications don't match the role.`);
+ set('a3','Tightened JDs with clear must-haves and used a screening checklist, so mismatches are filtered quickly and the same way every time.');
+ const p0=d.pos[0],hcm=d.loc['Ho Chi Minh City']||0;
+ set('h4',`${p0[0]} drew the most CVs (${p0[1]}%); ${hcm}% of candidates were in HCMC`);
+ set('w4',sel==='2022'?'Hiring still covered three offices, with a meaningful share of overseas and Hanoi candidates.':'Hiring concentrated in Ho Chi Minh City; Da Nang demand was small, and the Hanoi office closed in early 2026.');
+ set('a4','Planned sourcing by role family (art, engineering, game design) and location, and reused shortlists for recurring roles.');}
+function set(id,t){const e=document.getElementById(id);e.style.opacity=0;setTimeout(()=>{e.textContent=t;e.style.opacity=1},120)}
+function charts(){const p=prevY();
+ // trend
+ mk('cT',{type:'bar',data:{labels:YRS,datasets:[{label:'CVs (~)',data:YRS.map(y=>D[y].cv),backgroundColor:YRS.map(y=>sel==='all'||y===sel?C.s:(cmp&&y===p?C.m:C.mi)),borderRadius:8,yAxisID:'y',order:2},
+  {type:'line',label:'Hire rate %',data:YRS.map(y=>D[y].rate),borderColor:C.a,backgroundColor:C.a,pointRadius:5,tension:.35,yAxisID:'y2',order:1}]},
+  options:{maintainAspectRatio:false,layout:{padding:{top:18}},onHover:(e,a)=>e.native.target.style.cursor=a.length?'pointer':'default',
+  onClick:(e,a)=>{if(a.length)go(YRS[a[0].index])},
+  plugins:{legend:{position:'bottom',labels:{boxWidth:10}},tooltip:{callbacks:{label:c=>c.datasetIndex?` Hire rate ${c.raw}% (~${D[YRS[c.dataIndex]].hired} hires)`:` ~${c.raw} CVs`,afterBody:c=>{const y=YRS[c[0].dataIndex];return{'2023':'Many records lack a status: under-tracked year.','2025':'Highest volume; screening load peaked.','2026':'Partial year; Hanoi office closed.'}[y]||''}}}},
+  scales:{y:{grid:{color:'#EEF1EC'},beginAtZero:true,grace:'12%'},y2:{position:'right',grid:{display:false},beginAtZero:true,ticks:{callback:v=>v+'%'}}}}});
+ // sources
+ const d=D[sel],S=Object.keys(d.src).sort((a,b)=>d.src[b][0]-d.src[a][0]);
+ document.getElementById('chips').innerHTML=['All',...S].map(s=>`<button class="${(s==='All'&&!src)||s===src?'on':''}" data-s="${s}">${s}</button>`).join('');
+ const hi=(s,c,f)=>!src||s===src?c:f;
+ const ds=[{label:'Share of CVs',data:S.map(s=>d.src[s][0]),backgroundColor:S.map(s=>hi(s,C.m,'#EEF1EC')),borderRadius:5},
+  {label:'Share of hires',data:S.map(s=>d.src[s][1]),backgroundColor:S.map(s=>hi(s,C.f,'#D5DCD3')),borderRadius:5}];
+ if(cmp&&p)ds.push({label:'Hires '+p,data:S.map(s=>(D[p].src[s]||[0,0])[1]),backgroundColor:S.map(s=>hi(s,C.a,'#EADCC9')),borderRadius:5});
+ mk('cS',{type:'bar',data:{labels:S,datasets:ds},options:{indexAxis:'y',maintainAspectRatio:false,
+  onClick:(e,a)=>{if(a.length){const s=S[a[0].index];src=src===s?null:s;charts();info()}},
+  plugins:{legend:{position:'bottom',labels:{boxWidth:10}},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}%`,afterBody:c=>{const s=S[c[0].dataIndex];return `${d.src[s][2]}% of its CVs became hires.`}}}},
+  scales:{x:{grid:{color:'#EEF1EC'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+ // rejections
+ const R=['CV screen','HR screen','Hiring manager screen','Test','1st interview','2nd interview','Candidate withdrew'];
+ const rd=[{label:sel==='all'?'2022–2026':sel,data:R.map(r=>d.rej[r]||0),backgroundColor:R.map((r,i)=>i<3?C.s:(i===6?'#D5DCD3':C.m)),borderRadius:5}];
+ if(cmp&&p)rd.push({label:p,data:R.map(r=>D[p].rej[r]||0),backgroundColor:'#EADCC9',borderRadius:5});
+ mk('cR',{type:'bar',data:{labels:isM()?['CV','HR','Manager','Test','Int. 1','Int. 2','Withdrew']:R,datasets:rd},options:{indexAxis:'y',maintainAspectRatio:false,
+  plugins:{legend:{display:cmp&&!!p,position:'bottom'},tooltip:{callbacks:{label:c=>` ${c.raw}% of rejections`,afterBody:c=>({0:'Profile does not match the role on paper.',2:'Hiring manager reviewed and passed.',3:'Did not pass the technical or art test.',6:'Candidate withdrew or declined.'})[c[0].dataIndex]||''}}},
+  scales:{x:{grid:{color:'#EEF1EC'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+ // roles
+ mk('cP',{type:'bar',data:{labels:d.pos.map(p=>p[0]),datasets:[{data:d.pos.map(p=>p[1]),backgroundColor:C.s,borderRadius:5}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}% of CVs`}}},scales:{x:{grid:{color:'#EEF1EC'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+ const L=Object.entries(d.loc).sort((a,b)=>b[1]-a[1]);
+ mk('cL',{type:'doughnut',data:{labels:L.map(l=>l[0]),datasets:[{data:L.map(l=>l[1]),backgroundColor:[C.f,C.s,C.m,C.a,'#D5DCD3','#EADCC9'],borderColor:'#fff',borderWidth:2}]},options:{maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'bottom',labels:{boxWidth:10}},tooltip:{callbacks:{label:c=>` ${c.label}: ${c.raw}%`}}}}});}
+function info(){const d=D[sel],e=document.getElementById('srcinfo');
+ if(!src||!d.src[src]){e.innerHTML='Click a source to see what it contributes.';return}
+ const v=d.src[src];e.innerHTML=`<b>${src}</b>: ${v[0]}% of CVs → ${v[1]}% of hires (${v[2]}% of its CVs hired). ${SRCNOTE[src]||''}`}
+function go(y){sel=y;if(src&&!D[y].src[src])src=null;document.querySelectorAll('#pick button').forEach(b=>b.classList.toggle('on',b.dataset.y===y));
+ document.getElementById('togL').classList.toggle('off',!prevY());
+ const u=new URL(location);y==='all'?u.searchParams.delete('year'):u.searchParams.set('year',y);history.replaceState(null,'',u);
+ kpis();story();charts();info()}
+document.getElementById('pick').innerHTML=['all',...YRS].map(y=>`<button data-y="${y}">${y==='all'?'All':y}</button>`).join('');
+document.getElementById('pick').onclick=e=>e.target.dataset.y&&go(e.target.dataset.y);
+document.getElementById('cmp').onchange=e=>{cmp=e.target.checked;kpis();charts()};
+document.getElementById('chips').onclick=e=>{const s=e.target.dataset.s;if(!s)return;src=s==='All'?null:s;charts();info()};
+const q=new URLSearchParams(location.search);if(q.get('compare')==='1'){cmp=true;document.getElementById('cmp').checked=true}
+go(YRS.includes(q.get('year'))?q.get('year'):'all');
+</script></body></html>
