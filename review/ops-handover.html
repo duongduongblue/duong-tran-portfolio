@@ -263,83 +263,69 @@
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
   </style>
-
+  <style>
+    .plain { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+    .plain li { padding: 18px 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); color: var(--ink-soft); font-size: 15px; }
+    .plain li b { color: var(--forest); }
+    .hero-copy h1 { font-size: clamp(42px, 6vw, 68px); }
+  </style>
 </head>
 <body>
   <header class="topbar"><div class="wrap topbar-inner">
-    <a class="brand" href="../index.html" aria-label="Back to Duong Tran portfolio"><strong>Duong Tran</strong><span>Operations Handover Playbook</span></a>
-    <nav class="nav" aria-label="Page navigation"><a href="#start">Start here</a><a href="#rhythm">Rhythm</a><a href="#building">Building</a><a href="#assets">Assets</a><a href="#devices">Test devices</a><a href="#vendors">Vendors</a><a href="#resources">Resources</a></nav>
+    <a class="brand" href="../index.html" aria-label="Back to Duong Tran portfolio"><strong>Duong Tran</strong><span>Operations handover</span></a>
+    <nav class="nav" aria-label="Page navigation"><a href="#rhythm">Each month</a><a href="#parking">Parking</a><a href="#assets">Assets</a><a href="#vendors">Vendors</a><a href="#resources">Where things live</a></nav>
   </div></header>
   <main>
-    <section class="hero" id="start"><div class="wrap hero-grid">
+    <section class="hero" id="start"><div class="wrap">
       <div class="hero-copy">
-        <div class="eyebrow">Internal working guide · Office operations</div>
-        <h1>Keep the offices quiet.<br />Keep the records honest.</h1>
-        <p class="hero-lede">The main operations work for the Đà Nẵng and HCM offices, and where each record lives.</p>
-        <div class="hero-meta" aria-label="Guide scope"><span class="tag">Building & parking</span><span class="tag">Asset lifecycle</span><span class="tag">Test devices</span><span class="tag">Office supplies</span><span class="tag">Vendor coordination</span></div>
+        <h1>Operations handover</h1>
+        <p class="hero-lede">This is the day-to-day office work for the Đà Nẵng and HCM offices. The Hà Nội office closed in early 2026, so there's nothing left to do there.</p>
       </div>
-      <aside class="hero-panel"><div>
-        <div class="eyebrow" style="color:#e1bc81">First 15 minutes</div>
-        <h2>Use this page as your map.</h2>
-        <p>Check the rhythm, open the matching flow, update the record the same day.</p></div>
-        <div class="panel-rule"></div>
-        <ol class="panel-list">
-          <li><b>01</b><span>Pick the office and the area.</span></li>
-          <li><b>02</b><span>Open the matching tracker.</span></li>
-          <li><b>03</b><span>Record the change and the next step.</span></li>
-        </ol>
-      </aside>
     </div></section>
 
     <section class="section" id="rhythm"><div class="wrap">
-      <div class="section-head"><div><div class="section-kicker">01 · Overview</div><h2>The operating rhythm at a glance</h2></div><p class="section-note">Two active offices: Đà Nẵng and HCM. The Hà Nội office closed in early 2026.</p></div>
-      <div class="quick-grid">
-        <article class="quick-card"><div class="number">01</div><h3>Office & building</h3><p>Building contact, parking and day-to-day office care.</p></article>
-        <article class="quick-card"><div class="number">02</div><h3>Assets</h3><p>Issue, return, transfer and monthly inventory.</p></article>
-        <article class="quick-card"><div class="number">03</div><h3>Test devices</h3><p>Regular check with the Đà Nẵng team.</p></article>
-        <article class="quick-card"><div class="number">04</div><h3>Vendors & recurring schedule</h3><p>Recurring office vendors on a monthly or quarterly cycle.</p></article>
-      </div>
-      <div class="timeline" aria-label="Monthly rhythm" style="margin-top:22px;">
-        <div class="timeline-row"><div class="timeline-dot">D1</div><div class="timeline-date">Start of month</div><div class="timeline-content"><h3>Open the new month</h3><p>New monthly asset tab for each office; review contracts near expiry.</p><a class="resource" href="#">Open task guide · Monthly asset tab</a></div></div>
-        <div class="timeline-row"><div class="timeline-dot">D10</div><div class="timeline-date">By the 10th</div><div class="timeline-content"><h3>Close recurring vendor items</h3><p>Recurring vendor invoices collected and submitted.</p><a class="resource" href="#">Open task guide · Recurring vendor checklist</a></div></div>
-        
-        <div class="timeline-row"><div class="timeline-dot">D28</div><div class="timeline-date">End of month</div><div class="timeline-content"><h3>Reconcile and confirm</h3><p>Match joiners and leavers to parking and assets; holders confirm their lists.</p><a class="resource" href="#">Open task guide · Month-end reconciliation</a></div></div>
-        
-      </div>
+      <div class="section-head"><h2>Each month</h2></div>
+      <ul class="plain">
+        <li><b>Start of the month:</b> open a new asset tab for each office and check which contracts are about to expire.</li>
+        <li><b>By the 10th:</b> collect the invoices from the regular office vendors and send them for payment.</li>
+        <li><b>End of the month:</b> compare who joined and who left against the parking and asset lists, then ask everyone to confirm the equipment they hold.</li>
+      </ul>
     </div></section>
 
-    <section class="section" id="building"><div class="wrap">
-      <div class="section-head"><div><div class="section-kicker">02 · Building management & parking</div><h2>Stay close to the building, and the small things stay small</h2></div><p class="section-note">Building requests go through each office’s building management Zalo group.</p></div>
-      <div class="flow-wrap"><div class="flow-title"><h3>Parking card flow</h3><span>Request → Record</span></div>
-      <div class="flow" aria-label="Parking flow"><div class="flow-step"><span class="step-no">01</span><strong>Collect details</strong><small>Name, plate, start date.</small></div><div class="flow-step"><span class="step-no">02</span><strong>Send to building</strong><small>Via the building Zalo group.</small></div><div class="flow-step"><span class="step-no">03</span><strong>Confirm card</strong><small>Check the card is issued and working.</small></div><div class="flow-step"><span class="step-no">04</span><strong>Record it</strong><small>Add to the monthly parking tracker.</small></div><div class="flow-step"><span class="step-no">05</span><strong>Cancel on exit</strong><small>Notify the building and update the tracker.</small></div></div></div>
-      
+    <section class="section" id="parking"><div class="wrap">
+      <div class="section-head"><h2>Parking</h2></div>
+      <ul class="plain">
+        <li>When someone new needs a parking card, get their name, plate number and start date and send them to the building management team. Once the card works, add it to that month's parking list.</li>
+        <li>When someone leaves, tell the building to cancel the card and remove it from the list the same day.</li>
+      </ul>
     </div></section>
 
     <section class="section" id="assets"><div class="wrap">
-      <div class="section-head"><div><div class="section-kicker">03 · Asset lifecycle</div><h2>Every device has one holder, one row and one story</h2></div><p class="section-note">One monthly tab per office; every move leaves a written trace.</p></div>
-      <div class="flow-wrap"><div class="flow-title"><h3>Asset lifecycle</h3><span>Issue → Transfer → Confirm</span></div>
-      <div class="flow"><div class="flow-step"><span class="step-no">01</span><strong>Issue</strong><small>Signed handover form.</small></div><div class="flow-step"><span class="step-no">02</span><strong>Record</strong><small>Add to the month tab.</small></div><div class="flow-step"><span class="step-no">03</span><strong>Return</strong><small>Back to admin storage.</small></div><div class="flow-step"><span class="step-no">04</span><strong>Transfer</strong><small>Between offices, with an origin note.</small></div><div class="flow-step"><span class="step-no">05</span><strong>Monthly tab</strong><small>Carry changes forward.</small></div><div class="flow-step"><span class="step-no">06</span><strong>Confirm</strong><small>Holders confirm by Slack DM.</small></div></div></div>
-      <div class="sop-grid" style="margin-top:18px;"><article class="sop-card"><div class="sop-num">1</div><div><h3>Issue equipment</h3><p>Standard setup per role, signed handover form, row updated.</p><a class="resource" href="#">Open task guide · Issue equipment</a></div></article><article class="sop-card"><div class="sop-num">2</div><div><h3>Take equipment back</h3><p>Return form on offboarding; item back to admin storage the same day.</p><a class="resource" href="#">Open task guide · Return equipment</a></div></article><article class="sop-card"><div class="sop-num">3</div><div><h3>Move equipment between offices</h3><p>Mark the source row as moved and add it to the receiving office’s file with an origin note.</p><a class="resource" href="#">Open task guide · Office transfer</a></div></article><article class="sop-card"><div class="sop-num">4</div><div><h3>Confirm with holders</h3><p>Each holder confirms their list by Slack DM; note the date.</p><a class="resource" href="#">Open task guide · Holder confirmation</a></div></article></div>
-    </div></section>
-
-    <section class="section" id="devices"><div class="wrap">
-      <div class="section-head"><div><div class="section-kicker">04 · Test devices & office care</div><h2>Count the test kit with the people who use it</h2></div><p class="section-note">Test devices are checked with the Đà Nẵng team; office supplies sit with admin.</p></div>
-      <div class="two-col">
-        <article class="info-card"><h3>Test device check</h3><p>Check every device against the list with the team and note the date and any gaps.</p><a class="resource" href="#">Open task guide · Test device check</a></article>
-        <article class="info-card dark"><h3>Office supplies & wifi cabinet</h3><p>Keep supplies stocked and check the wifi cabinet regularly.</p><a class="resource" href="#">Open task guide · Office supplies</a></article>
-      </div>
+      <div class="section-head"><h2>Assets</h2></div>
+      <ul class="plain">
+        <li><b>Giving out equipment:</b> hand it over with a signed form and add it to the current month's tab.</li>
+        <li><b>Taking it back:</b> when someone leaves, collect their equipment on their last day and put it back in admin storage.</li>
+        <li><b>Moving it between offices:</b> mark it as moved in the old office's file and add it to the new office's file, noting where it came from.</li>
+        <li><b>Monthly check:</b> each person confirms their list in a direct message, and you note the date.</li>
+      </ul>
     </div></section>
 
     <section class="section" id="vendors"><div class="wrap">
-      <div class="section-head"><div><div class="section-kicker">05 · Vendor coordination</div><h2>Know who does what, and when they bill</h2></div><p class="section-note">Overview only; payments have their own playbook.</p></div>
-      <div class="program-grid"><article class="program"><h3>Office rent & utilities</h3><p>Monthly, around the 10th.</p><a class="program-link" href="#">Open program guide</a></article><article class="program"><h3>Cleaning & water</h3><p>Monthly statement and invoice.</p><a class="program-link" href="#">Open program guide</a></article><article class="program"><h3>Plants</h3><p>Quarterly cycle.</p><a class="program-link" href="#">Open program guide</a></article><article class="program"><h3>Courier</h3><p>As needed; may be billed over several months.</p><a class="program-link" href="#">Open program guide</a></article></div><div class="publish-note"><h3>Payments live elsewhere</h3><p>See the <a href="#">Payment Request playbook</a>.</p></div>
+      <div class="section-head"><h2>Vendors</h2></div>
+      <ul class="plain">
+        <li>Rent, utilities, cleaning and water are billed every month, mostly around the 10th. Plants are billed every quarter, and courier only when it's used.</li>
+        <li>Payment steps are on the <a href="#">payment request page</a>.</li>
+      </ul>
     </div></section>
 
     <section class="section" id="resources"><div class="wrap">
-      <div class="section-head"><div><div class="section-kicker">06 · Resource map</div><h2>Open the right place before you start the task</h2></div><p class="section-note">Links are placeholders on this public page.</p></div>
-      <div class="resource-map"><article class="resource-item"><a class="resource-card-link" href="#"><h3>Google Sheets</h3><p>Asset files (ĐN, HCM), parking trackers and the vendor checklist.</p><em>Open task guide</em></a></article><article class="resource-item"><a class="resource-card-link" href="#"><h3>Slack</h3><p>Admin requests and holder confirmations.</p><em>Open task guide</em></a></article><article class="resource-item"><a class="resource-card-link" href="#"><h3>Zalo</h3><p>Building management groups.</p><em>Open task guide</em></a></article><article class="resource-item"><a class="resource-card-link" href="#"><h3>Notion</h3><p>Operations handover page.</p><em>Open task guide</em></a></article></div>
+      <div class="section-head"><h2>Where things live</h2></div>
+      <ul class="plain">
+        <li>Asset files and parking lists are in Google Sheets, and the full handover notes are in Notion.</li>
+        <li>Requests and confirmations from the team come in on Slack. The building team is on Zalo.</li>
+      </ul>
     </div></section>
   </main>
-  <footer><div class="wrap footer-inner"><span>Operations Handover Playbook · Prepared for internal transition</span><a href="#start">Back to top ↑</a></div></footer>
+  <footer><div class="wrap footer-inner"><span>Operations handover · Duong Tran</span><a href="#start">Back to top ↑</a></div></footer>
 </body>
 </html>
