@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+&#65279;<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -169,7 +169,7 @@
       align-items: stretch;
     }
     .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
-    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step:not(:last-child)::after { content: "&#8594;"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
     .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
     .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
     .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
@@ -210,7 +210,7 @@
     .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
     .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
     .dark .checklist li { color: #edf3ee; }
-    .checklist li::before { content: "✓"; color: var(--amber); font-weight: 700; }
+    .checklist li::before { content: "&#10003;"; color: var(--amber); font-weight: 700; }
 
     .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
     .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -254,7 +254,7 @@
       .flow-wrap { padding: 19px; }
       .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .flow-step:not(:last-child)::after { display: none; }
-      .flow-step:nth-child(odd)::after { content: "↓"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .flow-step:nth-child(odd)::after { content: "&#8595;"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
       .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
       .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
       .timeline-content { grid-column: 2; grid-row: 2; }
@@ -284,9 +284,9 @@
     <section class="hero" id="start">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Internal working guide · Office operations</div>
+          <div class="eyebrow">Internal working guide &#183; Office operations</div>
           <h1>Small tasks, done on time.<br />Records kept up to date.</h1>
-          <p class="hero-lede">Day-to-day office work for the Da Nang, HCM and Ha Noi offices: monthly checkpoints, task steps and where files live.</p>
+          <p class="hero-lede">Day-to-day office work across the Da Nang, HCM and Hanoi offices (Hanoi closed early 2026): monthly checkpoints, task steps and where files live.</p>
           <div class="hero-meta" aria-label="Guide scope">
             <span class="tag">Monthly rhythm</span>
             <span class="tag">Parking</span>
@@ -315,10 +315,10 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">01 · Overview</div>
+            <div class="section-kicker">01 &#183; Overview</div>
             <h2>The work at a glance</h2>
           </div>
-          <p class="section-note">Da Nang and HCM, plus Ha Noi until it closed in early 2026.</p>
+          <p class="section-note">Da Nang and HCM, plus Hanoi until it closed in early 2026.</p>
         </div>
         <div class="quick-grid">
           <article class="quick-card"><div class="number">01</div><h3>Building & parking</h3><p>Building contact and parking cards.</p></article>
@@ -333,7 +333,7 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">02 · Monthly rhythm</div>
+            <div class="section-kicker">02 &#183; Monthly rhythm</div>
             <h2>Three checkpoints each month</h2>
           </div>
           <p class="section-note">Three dates catch most issues early.</p>
@@ -350,13 +350,13 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">03 · Building & parking</div>
+            <div class="section-kicker">03 &#183; Building & parking</div>
             <h2>Stay in touch with the building</h2>
           </div>
           <p class="section-note">Requests go to each building's Zalo group.</p>
         </div>
         <div class="flow-wrap">
-          <div class="flow-title"><h3>Parking card flow</h3><span>Request → Record</span></div>
+          <div class="flow-title"><h3>Parking card flow</h3><span>Request &#8594; Record</span></div>
           <div class="flow" aria-label="Parking card flow" style="grid-template-columns: repeat(5, minmax(100px, 1fr));">
             <div class="flow-step"><span class="step-no">01</span><strong>Collect details</strong><small>Name, plate number and start date.</small></div>
             <div class="flow-step"><span class="step-no">02</span><strong>Send to building</strong><small>Post it in the building group.</small></div>
@@ -372,16 +372,16 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">04 · Assets</div>
+            <div class="section-kicker">04 &#183; Assets</div>
             <h2>Every device has one holder and one row</h2>
           </div>
           <p class="section-note">One tab per office per month. Log every change.</p>
         </div>
         <div class="sop-grid">
-          <article class="sop-card"><div class="sop-num">1</div><div><h3>Hand out equipment</h3><p>Prepare the setup, get the form signed, add the row.</p><a class="resource" href="#">Open task guide · Issue equipment</a></div></article>
-          <article class="sop-card"><div class="sop-num">2</div><div><h3>Take equipment back</h3><p>Fill the return form and store the device the same day.</p><a class="resource" href="#">Open task guide · Return equipment</a></div></article>
-          <article class="sop-card"><div class="sop-num">3</div><div><h3>Move equipment between offices</h3><p>Mark it moved at the sender, add it at the receiver with its origin.</p><a class="resource" href="#">Open task guide · Office transfer</a></div></article>
-          <article class="sop-card"><div class="sop-num">4</div><div><h3>Confirm with holders</h3><p>Send each holder their list at month end. Note the confirm date.</p><a class="resource" href="#">Open task guide · Holder confirmation</a></div></article>
+          <article class="sop-card"><div class="sop-num">1</div><div><h3>Hand out equipment</h3><p>Prepare the setup, get the form signed, add the row.</p><a class="resource" href="#">Open task guide &#183; Issue equipment</a></div></article>
+          <article class="sop-card"><div class="sop-num">2</div><div><h3>Take equipment back</h3><p>Fill the return form and store the device the same day.</p><a class="resource" href="#">Open task guide &#183; Return equipment</a></div></article>
+          <article class="sop-card"><div class="sop-num">3</div><div><h3>Move equipment between offices</h3><p>Mark it moved at the sender, add it at the receiver with its origin.</p><a class="resource" href="#">Open task guide &#183; Office transfer</a></div></article>
+          <article class="sop-card"><div class="sop-num">4</div><div><h3>Confirm with holders</h3><p>Send each holder their list at month end. Note the confirm date.</p><a class="resource" href="#">Open task guide &#183; Holder confirmation</a></div></article>
         </div>
       </div>
     </section>
@@ -390,7 +390,7 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">05 · Test devices & office care</div>
+            <div class="section-kicker">05 &#183; Test devices & office care</div>
             <h2>Count the test devices with the people who use them</h2>
           </div>
           <p class="section-note">Device checks are done with the Da Nang team.</p>
@@ -406,7 +406,7 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">06 · Vendors</div>
+            <div class="section-kicker">06 &#183; Vendors</div>
             <h2>Know who does what, and when they bill</h2>
           </div>
           <p class="section-note">Payments follow the Payment Request steps.</p>
@@ -425,7 +425,7 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="section-kicker">07 · Resource map</div>
+            <div class="section-kicker">07 &#183; Resource map</div>
             <h2>Open the right place before you start the task</h2>
           </div>
           <p class="section-note">Links are placeholders on this public page.</p>
@@ -436,13 +436,13 @@
           <article class="resource-item"><a class="resource-card-link" href="#"><h3>Zalo</h3><p>Building groups, one per office.</p><em>Open parking guide</em></a></article>
           <article class="resource-item"><a class="resource-card-link" href="#"><h3>Notion</h3><p>Full operations handover.</p><em>Open handover page</em></a></article>
         </div>
-        <div class="publish-note"><h3>Ha Noi office</h3><p>Closed early 2026. Records kept for reference only.</p></div>
+        <div class="publish-note"><h3>Hanoi office</h3><p>Closed early 2026. Records kept for reference only.</p></div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap footer-inner"><span>Operations Handover Playbook · Prepared for internal transition</span><a href="#start">Back to top ↑</a></div>
+    <div class="wrap footer-inner"><span>Operations Handover Playbook &#183; Prepared for internal transition</span><a href="#start">Back to top &#8593;</a></div>
   </footer>
 </body>
 </html>
