@@ -138,5 +138,6 @@ footer a{text-decoration:none}
 
 <footer><span>HR handover &#183; Duong Tran</span><a href="#">Back to top &#8593;</a></footer>
 </div>
+<script>document.addEventListener("click",function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var t=document.getElementById(a.getAttribute("href").slice(1));if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth"});}});</script>
 </body>
 </html>
