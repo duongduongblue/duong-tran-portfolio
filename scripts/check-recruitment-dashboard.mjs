@@ -1,5 +1,6 @@
 // Headless checks for work/recruitment-dashboard.html.
 // Usage: node scripts/check-recruitment-dashboard.mjs
+import fs from "node:fs";
 import { spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
 import path from "node:path";
@@ -332,7 +333,65 @@ function audit(mode) {
   open("2026", "all");
   check("2026 YTD KPIs", text("k1") === "534" && text("k2") === "20" && text("kDays") === "32" && text("kFun") === "16.1% | 31.4% | 74.1%");
 
+  function chartMetrics(id) {
+    var svg = document.querySelector("#" + id + " svg");
+    if (!svg) return null;
+    var box = svg.getBoundingClientRect();
+    var worst = 999;
+    var sample = "";
+    Array.prototype.forEach.call(svg.querySelectorAll("text"), function (t) {
+      var ctm = t.getScreenCTM();
+      if (!ctm) return;
+      var sx = Math.sqrt(ctm.a * ctm.a + ctm.b * ctm.b);
+      var sy = Math.sqrt(ctm.c * ctm.c + ctm.d * ctm.d);
+      var specified = parseFloat(window.getComputedStyle(t).fontSize);
+      var rendered = specified * Math.min(sx, sy);
+      if (rendered < worst) { worst = rendered; sample = t.textContent; }
+    });
+    var sc = svg.closest(".chart-scroll");
+    var cs = window.getComputedStyle(sc);
+    return {
+      worst: Math.round(worst * 10) / 10,
+      sample: sample,
+      h: Math.round(box.height),
+      w: Math.round(box.width),
+      overflowX: cs.overflowX,
+      scroll: sc.scrollWidth,
+      client: sc.clientWidth
+    };
+  }
   if (mode === "mobile") {
+    ["trend", "vol"].forEach(function (id) {
+      var metrics = chartMetrics(id);
+      check(id + " axis labels are at least 11px at 390", !!metrics && metrics.worst >= 11, metrics && (metrics.worst + "px (" + metrics.sample + ")"));
+      check(id + " chart canvas is at least 640 by 260", !!metrics && metrics.w >= 640 && metrics.h >= 260, metrics && (metrics.w + "x" + metrics.h));
+      check(id + " chart scrolls sideways inside the page", !!metrics && (metrics.overflowX === "auto" || metrics.overflowX === "scroll") && metrics.scroll >= 640 && metrics.scroll > metrics.client + 1, metrics && (metrics.overflowX + " " + metrics.scroll + "/" + metrics.client));
+      if (metrics) log.push("INFO " + id + " labels " + metrics.worst + "px canvas " + metrics.w + "x" + metrics.h);
+    });
+    var mos = document.getElementById("mos");
+    var cols = window.getComputedStyle(mos).gridTemplateColumns.split(/\s+/).filter(Boolean);
+    var monthBtns = Array.prototype.slice.call(mos.querySelectorAll("button")).slice(1);
+    var rowMap = [];
+    monthBtns.forEach(function (b) {
+      var top = Math.round(b.getBoundingClientRect().top);
+      var found = null;
+      rowMap.forEach(function (row) { if (Math.abs(row.top - top) <= 2) found = row; });
+      if (!found) { found = { top: top, items: [] }; rowMap.push(found); }
+      found.items.push(b);
+    });
+    rowMap.sort(function (a, b) { return a.top - b.top; });
+    var even = rowMap.length === 2 && rowMap.every(function (row) {
+      if (row.items.length !== 6) return false;
+      var widths = row.items.map(function (b) { return b.getBoundingClientRect().width; });
+      return Math.max.apply(null, widths) - Math.min.apply(null, widths) <= 2;
+    });
+    var allBox = mos.querySelector('button[data-v="all"]').getBoundingClientRect();
+    var firstBox = rowMap[0] ? rowMap[0].items[0].getBoundingClientRect() : null;
+    var decBox = mos.querySelector('button[data-v="12"]').getBoundingClientRect();
+    var julBox = mos.querySelector('button[data-v="7"]').getBoundingClientRect();
+    check("month buttons are 6 per row at 390", even && cols.length === 6 && window.getComputedStyle(mos).display === "grid", rowMap.map(function (row) { return row.items.length; }).join(",") + " cols " + cols.join(" "));
+    check("All sits on its own full-width row", !!firstBox && allBox.bottom <= firstBox.top + 1 && allBox.width >= firstBox.width * 4, firstBox && (Math.round(allBox.width) + " vs " + Math.round(firstBox.width)));
+    check("Dec shares a full row with Jul", !!rowMap[1] && rowMap[1].items.length === 6 && Math.abs(decBox.top - julBox.top) <= 2);
     check("mobile width is 390", window.innerWidth === 390, "inner " + window.innerWidth + " client " + document.documentElement.clientWidth + " visual " + (window.visualViewport && window.visualViewport.width));
     check("mobile has no horizontal overflow", worst <= 1, worstKey + " gap " + worst + " client " + document.documentElement.clientWidth);
     var taps = [];
@@ -352,6 +411,14 @@ function audit(mode) {
     check("Nov 2026 usable at 390", text("k1") === "not yet" && document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1);
     log.push("INFO mobile innerWidth " + window.innerWidth + " clientWidth " + document.documentElement.clientWidth + " scrollWidth " + document.documentElement.scrollWidth + " worstGap " + worst);
   } else {
+    var deskTrend = chartMetrics("trend");
+    var deskVol = chartMetrics("vol");
+    var trendSvg = document.querySelector("#trend svg");
+    var trendBox = trendSvg.getBoundingClientRect();
+    var trendVb = trendSvg.viewBox.baseVal;
+    check("desktop charts stay full width", !!deskTrend && !!deskVol && deskTrend.w > 700 && deskVol.w > 700 && deskTrend.overflowX === "visible" && deskTrend.scroll <= deskTrend.client + 1 && deskVol.scroll <= deskVol.client + 1, deskTrend && (deskTrend.w + "px " + deskTrend.overflowX + " scroll " + deskTrend.scroll + "/" + deskTrend.client));
+    check("desktop trend keeps its aspect ratio", Math.abs(trendBox.width / trendBox.height - trendVb.width / trendVb.height) < 0.05, Math.round(trendBox.width) + "x" + Math.round(trendBox.height));
+    check("desktop month buttons stay in a wrapping row", window.getComputedStyle(document.getElementById("mos")).display === "flex");
     log.push("INFO desktop innerWidth " + window.innerWidth + " clientWidth " + document.documentElement.clientWidth);
   }
   check("no page errors", !window.__errs || window.__errs.length === 0, (window.__errs || []).join(" | "));
@@ -384,6 +451,87 @@ class Cdp {
       this.ws.send(JSON.stringify({ id, method, params }));
     });
   }
+}
+
+async function evalJson(cdp, expression) {
+  const batch = await cdp.send("Runtime.evaluate", {
+    expression,
+    returnByValue: true,
+    awaitPromise: true
+  });
+  if (batch.exceptionDetails) {
+    throw new Error(batch.exceptionDetails.text || "eval failed");
+  }
+  return batch.result && batch.result.value;
+}
+
+async function saveShot(cdp, file, clip) {
+  const params = { format: "png", captureBeyondViewport: true };
+  if (clip) params.clip = clip;
+  const shot = await cdp.send("Page.captureScreenshot", params);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, Buffer.from(shot.data, "base64"));
+  console.log("SAVED " + file);
+}
+
+async function saveMobileShots(cdp, dir) {
+  const layout = await evalJson(cdp, `(function(){
+    show("all","all");
+    document.querySelectorAll(".chart-scroll").forEach(function(el){ el.scrollLeft = 0; });
+    window.scrollTo(0,0);
+    var mos = document.getElementById("ml").parentElement.getBoundingClientRect();
+    var trend = document.querySelector("#trend").closest(".chart-scroll").getBoundingClientRect();
+    var vol = document.querySelector("#vol").closest(".chart-scroll").getBoundingClientRect();
+    return {
+      mosY: mos.top + window.scrollY,
+      mosH: mos.height,
+      trendY: trend.top + window.scrollY,
+      volY: vol.top + window.scrollY,
+      volH: vol.height,
+      pageW: document.documentElement.clientWidth
+    };
+  })()`);
+  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_months.png"), {
+    x: 0,
+    y: Math.max(0, layout.mosY - 12),
+    width: layout.pageW,
+    height: layout.mosH + 28,
+    scale: 2
+  });
+  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_charts.png"), {
+    x: 0,
+    y: Math.max(0, layout.trendY - 72),
+    width: layout.pageW,
+    height: layout.volY + layout.volH - layout.trendY + 130,
+    scale: 2
+  });
+  await evalJson(cdp, `document.querySelector("#trend").closest(".chart-scroll").scrollLeft = 260`);
+  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_trend_scrolled.png"), {
+    x: 0,
+    y: Math.max(0, layout.trendY - 72),
+    width: layout.pageW,
+    height: 380,
+    scale: 2
+  });
+  const monthly = await evalJson(cdp, `(function(){
+    show("2025","9");
+    document.querySelectorAll(".chart-scroll").forEach(function(el){ el.scrollLeft = 0; });
+    var trend = document.querySelector("#trend").closest(".chart-scroll").getBoundingClientRect();
+    var vol = document.querySelector("#vol").closest(".chart-scroll").getBoundingClientRect();
+    return {
+      trendY: trend.top + window.scrollY,
+      volY: vol.top + window.scrollY,
+      volH: vol.height,
+      pageW: document.documentElement.clientWidth
+    };
+  })()`);
+  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_sep2025_charts.png"), {
+    x: 0,
+    y: Math.max(0, monthly.trendY - 72),
+    width: monthly.pageW,
+    height: monthly.volY + monthly.volH - monthly.trendY + 130,
+    scale: 2
+  });
 }
 
 function withTimeout(promise, ms, label) {
@@ -486,6 +634,10 @@ async function main() {
       for (const line of batch.result.value) {
         console.log("[" + view.width + "] " + line);
         lines.push(line);
+      }
+      if (view.mode === "mobile" && !batch.result.value.some((line) => line.startsWith("FAIL"))) {
+        const dir = "/opt/cursor/artifacts/screenshots";
+        await saveMobileShots(cdp, dir);
       }
     }
     if (runtimeErrors.length) {

@@ -41,7 +41,8 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 .empty{margin:0;color:var(--muted)}
 .banner{background:var(--mist);border-left:3px solid var(--sage);padding:10px 14px;font-size:14px;color:var(--forest);margin:-24px 0 28px;border-radius:4px}
 .sel{font-weight:600;color:var(--forest)}
-@media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:block}.fgrp{display:block;width:100%;margin-bottom:12px}.fgrp .lbl{display:block;margin:0 0 6px}.yrs button{padding:8px 12px}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}}</style></head><body><div class="wrap">
+@media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:block}.fgrp{display:block;width:100%;margin-bottom:12px}.fgrp .lbl{display:block;margin:0 0 6px}.yrs button{padding:8px 12px}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}#mos{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}#mos button{width:100%;padding:8px 4px;text-align:center;white-space:nowrap}#mos button:first-child{grid-column:1 / -1}}
+@media(max-width:480px){.chart-scroll{overflow-x:auto;max-width:100%;min-width:0}.chart-scroll svg{display:block;width:640px;min-width:640px;height:280px}.chart-scroll svg text{font-size:16px}}</style></head><body><div class="wrap">
 <div class="top"><a href="https://htmlpreview.github.io/?https://github.com/duongduongblue/duong-tran-portfolio/blob/review/work/index.html">&larr; Back to Work</a></div>
 <h1>Recruitment, 2022&ndash;2026</h1>
 <p class="sub">Five years of hiring at a tech startup. Pick a year and a month.</p>
@@ -62,8 +63,8 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 <div class="kpi"><div class="l">Offer acceptance</div><div class="v" id="kAcc"></div><div class="n" id="kAccN">joined &divide; offers</div></div>
 </div>
 <div class="cmp" id="cmp"></div>
-<section><h2>Monthly trend</h2><p id="trendNote"></p><div id="trend"></div><div class="leg" id="trendLeg"></div></section>
-<section><h2>Pipeline volume</h2><p><span id="volLead"></span> Hire bars use a 10&times; scale.</p><div id="vol"></div><div class="leg"><span><i style="background:#A8B7A1"></i>CVs</span><span><i style="background:#1E2D24"></i>Hires</span><span id="volStar">* Jan&ndash;Oct</span></div></section>
+<section><h2>Monthly trend</h2><p id="trendNote"></p><div class="chart-scroll"><div id="trend"></div></div><div class="leg" id="trendLeg"></div></section>
+<section><h2>Pipeline volume</h2><p><span id="volLead"></span> Hire bars use a 10&times; scale.</p><div class="chart-scroll"><div id="vol"></div></div><div class="leg"><span><i style="background:#A8B7A1"></i>CVs</span><span><i style="background:#1E2D24"></i>Hires</span><span id="volStar">* Jan&ndash;Oct</span></div></section>
 <div class="grid">
 <section><h2>Source mix</h2><p><span class="sel" data-y></span>: CVs by source (hires).</p><div class="bars" id="src"></div></section>
 <section><h2>Role groups</h2><p><span class="sel" data-y></span>: CVs by role group (hires).</p><div class="bars" id="grp"></div></section>
@@ -202,7 +203,7 @@ function bars(id,o,tot,order,cmp){
   el.innerHTML=h;
 }
 function volYears(sel){
-  var s='<svg viewBox="0 0 880 300" role="img" aria-label="CVs and hires by year">';
+  var s='<svg viewBox="0 0 880 300" preserveAspectRatio="none" role="img" aria-label="CVs and hires by year">';
   [0,800,1600].forEach(function(t){var yv=260-t*0.15;s+='<line x1="50" x2="860" y1="'+yv+'" y2="'+yv+'" stroke="#ECEAE3"/><text x="42" y="'+(yv+4)+'" text-anchor="end">'+f(t)+'</text>'});
   YS.slice(1).forEach(function(y,i){
     var d=D[y],x=97+i*162,op=(sel=="all"||sel==y)?1:0.3,c=d.cv*0.15,h=d.hired*1.5;
@@ -221,7 +222,7 @@ function volMonth(y,m){
     if(r.hired!=null&&r.hired*10>maxC)maxC=r.hired*10;
   });
   var top=nice(maxC);
-  var s='<svg viewBox="0 0 880 300" role="img" aria-label="CVs and hires in the selected month">';
+  var s='<svg viewBox="0 0 880 300" preserveAspectRatio="none" role="img" aria-label="CVs and hires in the selected month">';
   [0,top/2,top].forEach(function(t){
     var yv=260-(t/top)*200;
     s+='<line x1="50" x2="860" y1="'+n1(yv)+'" y2="'+n1(yv)+'" stroke="#ECEAE3"/><text x="42" y="'+n1(yv+4)+'" text-anchor="end">'+f(t)+'</text>';
@@ -260,7 +261,7 @@ function trend(y,m){
   function x(i){return left+(i+0.5)*plotW/12}
   function yC(v){return base-v/topC*(base-top)}
   function yH(v){return base-v/topH*(base-top)}
-  var s='<svg viewBox="0 0 880 280" role="img" aria-label="Monthly recruitment trend">';
+  var s='<svg viewBox="0 0 880 280" preserveAspectRatio="none" role="img" aria-label="Monthly recruitment trend">';
   [0,topC/2,topC].forEach(function(t){
     var yv=yC(t);
     s+='<line x1="'+left+'" x2="'+(880-right)+'" y1="'+n1(yv)+'" y2="'+n1(yv)+'" stroke="#ECEAE3"/><text x="'+(left-8)+'" y="'+n1(yv+4)+'" text-anchor="end">'+f(t)+'</text>';
