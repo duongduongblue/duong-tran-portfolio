@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Payment requests and communications: how I run office payment requests." />
-  <title>PR &amp; Communications | Duong Tran</title>
+  <meta name="description" content="Operations playbook: monthly rhythm, parking, assets, test devices, office care and vendors." />
+  <title>Operations Playbook | Duong Tran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --ink: #1f2c27;
@@ -129,7 +132,7 @@
     .hero-panel {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
       gap: 26px;
       padding: 30px;
       border-radius: var(--radius-lg);
@@ -166,7 +169,7 @@
       align-items: stretch;
     }
     .flow-step { position: relative; min-height: 112px; padding: 16px 13px; border: 1px solid var(--sage); border-radius: 14px; background: #f6f9f3; }
-    .flow-step:not(:last-child)::after { content: "\2192"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
+    .flow-step:not(:last-child)::after { content: "&#8594;"; position: absolute; right: -17px; top: 42px; z-index: 2; color: var(--sage); font-size: 19px; }
     .flow-step .step-no { color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
     .flow-step strong { display: block; margin-top: 13px; color: var(--forest); font-size: 13px; line-height: 1.35; }
     .flow-step small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.4; }
@@ -207,7 +210,7 @@
     .checklist { display: grid; gap: 11px; margin: 17px 0 0; padding: 0; list-style: none; }
     .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--ink-soft); font-size: 13px; }
     .dark .checklist li { color: #edf3ee; }
-    .checklist li::before { content: "\2713"; color: var(--amber); font-weight: 700; }
+    .checklist li::before { content: "&#10003;"; color: var(--amber); font-weight: 700; }
 
     .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
     .program { min-height: 150px; padding: 20px; border-top: 3px solid var(--sage); border-radius: 0 0 14px 14px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -251,7 +254,7 @@
       .flow-wrap { padding: 19px; }
       .flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .flow-step:not(:last-child)::after { display: none; }
-      .flow-step:nth-child(odd)::after { content: "\2193"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
+      .flow-step:nth-child(odd)::after { content: "&#8595;"; display: block; right: auto; top: auto; bottom: -20px; left: calc(50% - 4px); }
       .timeline-row { grid-template-columns: 30px 1fr; gap: 12px; }
       .timeline-date { grid-column: 2; grid-row: 1; padding-top: 5px; }
       .timeline-content { grid-column: 2; grid-row: 2; }
@@ -259,79 +262,188 @@
       .timeline::before { left: 14px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
-  .flow{grid-template-columns:repeat(6,1fr)!important}@media(max-width:760px){.flow{grid-template-columns:1fr 1fr!important}}  .section-intro{margin:10px 0 0}.bul{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px}.bul li{margin:3px 0}.flow-step small{font-size:12px}.top-link::after{content:" \2191"}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  </style>
 </head>
 <body>
-<a href="https://htmlpreview.github.io/?https://github.com/duongduongblue/duong-tran-portfolio/blob/review/work/handover-hub.html" style="position:fixed;top:14px;left:16px;z-index:99;padding:6px 14px;border:1px solid #d9d4c7;border-radius:999px;background:#fffdf8;color:#1f3a32;font:500 13px 'Inter',sans-serif;text-decoration:none">&larr; Back to Work</a>
-<header class="topbar"><div class="wrap topbar-inner">
-<a class="brand" href="#start"><strong>Duong Tran</strong><span>PR &amp; Communications</span></a>
-<nav class="nav"><a href="#what">What</a><a href="#flow">Flow</a><a href="#tasks">Tasks</a><a href="#rhythm">Rhythm</a><a href="#tips">Tips</a></nav>
-</div></header>
-<main>
-<section class="hero" id="start"><div class="wrap hero-grid">
-<div class="hero-copy">
-<div class="eyebrow">Work &middot; Payments</div>
-<h1>Clean PRs.<br>How I keep them clear.</h1>
-<p class="hero-lede">How office payment requests get done, step by step.</p>
-<div class="hero-meta"><span class="tag">Payment form</span><span class="tag">Documents</span><span class="tag">Accounting</span><span class="tag">Tracking</span></div>
-</div>
-<aside class="hero-panel"><div>
-<div class="eyebrow" style="color:#e1bc81">Where I start</div>
-<h2>The order I follow.</h2></div>
-<div class="panel-rule"></div>
-<ol class="panel-list">
-<li><b>01</b><span>What a PR is.</span></li>
-<li><b>02</b><span>The 6-step flow.</span></li>
-<li><b>03</b><span>The monthly rhythm.</span></li>
-</ol></aside>
-</div></section>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="https://htmlpreview.github.io/?https://github.com/duongduongblue/duong-tran-portfolio/blob/review/index.html" aria-label="Back to Duong Tran portfolio"><strong>Duong Tran</strong><span>Operations</span></a>
+      <nav class="nav" aria-label="Page navigation">
+        <a href="#start">Start here</a>
+        <a href="#rhythm">Monthly rhythm</a>
+        <a href="#parking">Parking</a>
+        <a href="#assets">Assets</a>
+        <a href="#office">Office care</a>
+        <a href="#vendors">Vendors</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
 
-<section class="section" id="what"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">01 &middot; Basics</div><h2>What is a PR?</h2><p class="section-intro">A payment request asks for approval to pay an office expense.</p></div></div>
-<div class="two-col">
-<article class="info-card"><h3>It includes</h3><ul class="checklist"><li>A payment form</li><li>Invoices and supporting documents</li><li>The contract, if there is one</li></ul></article>
-<article class="info-card dark"><h3>Two types</h3><ul class="checklist"><li>With contract</li><li>Without contract</li></ul></article>
-</div></div></section>
+  <main>
+    <section class="hero" id="start">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">How I work &#183; Office operations</div>
+          <h1>Small tasks, done on time.<br />Records kept up to date.</h1>
+          <p class="hero-lede">Day-to-day office work across the Da Nang, HCM and Hanoi offices: monthly checkpoints, task steps and where files live.</p>
+          <div class="hero-meta" aria-label="Guide scope">
+            <span class="tag">Monthly rhythm</span>
+            <span class="tag">Parking</span>
+            <span class="tag">Assets</span>
+            <span class="tag">Test devices</span>
+            <span class="tag">Vendors</span>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <div>
+            <div class="eyebrow" style="color:#e1bc81">Where I start</div>
+            <h2>This page is the map I work from.</h2>
+            <p>I start with the monthly rhythm, then open the section the task needs.</p>
+          </div>
+          <div class="panel-rule"></div>
+          <ol class="panel-list">
+            <li><b>01</b><span>Identify the office and area.</span></li>
+            <li><b>02</b><span>Open the matching tracker.</span></li>
+            <li><b>03</b><span>Log the change the same day.</span></li>
+          </ol>
+        </aside>
+      </div>
+    </section>
 
-<section class="section" id="flow"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">02 &middot; Flow</div><h2>Six steps per PR</h2><p class="section-intro">I follow every step, in order.</p></div></div>
-<div class="flow-wrap">
-<div class="flow">
-<div class="flow-step"><span class="step-no">01</span><strong>Classify</strong><small>With or without contract.</small></div>
-<div class="flow-step"><span class="step-no">02</span><strong>Fill the form</strong><small>One A4 page, signed by the requester.</small></div>
-<div class="flow-step"><span class="step-no">03</span><strong>Merge</strong><small>All documents into one PDF.</small></div>
-<div class="flow-step"><span class="step-no">04</span><strong>Submit folder</strong><small>New folder for accounting.</small></div>
-<div class="flow-step"><span class="step-no">05</span><strong>Track</strong><small>Master sheet + monthly canvas.</small></div>
-<div class="flow-step"><span class="step-no">06</span><strong>Post</strong><small>Numbered update in the monthly PR thread, reviewed first.</small></div>
-</div></div>
-</div></section>
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">01 &#183; Overview</div>
+            <h2>The work at a glance</h2>
+          </div>
+          <p class="section-note">Da Nang, HCM and Hanoi offices.</p>
+        </div>
+        <div class="quick-grid">
+          <article class="quick-card"><div class="number">01</div><h3>Building & parking</h3><p>Building contact and parking cards.</p></article>
+          <article class="quick-card"><div class="number">02</div><h3>Assets</h3><p>Issue, return and move equipment.</p></article>
+          <article class="quick-card"><div class="number">03</div><h3>Test devices & office care</h3><p>Device checks, supplies and the wifi cabinet.</p></article>
+          <article class="quick-card"><div class="number">04</div><h3>Vendors</h3><p>Recurring services, monthly or quarterly.</p></article>
+        </div>
+      </div>
+    </section>
 
-<section class="section" id="tasks"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">03 &middot; Tasks</div><h2>Four core tasks</h2><p class="section-intro">Most PRs fall into one of these.</p></div></div>
-<div class="quick-grid">
-<article class="quick-card"><div class="number">01</div><h3>Recurring costs</h3><ul class="bul"><li>Rent and utilities</li><li>Parking, cleaning</li></ul></article>
-<article class="quick-card"><div class="number">02</div><h3>Contracts</h3><ul class="bul"><li>Expiry dates</li><li>Renewals and licenses</li></ul></article>
-<article class="quick-card"><div class="number">03</div><h3>Accounting files</h3><ul class="bul"><li>One folder per submission</li><li>Consistent file names</li></ul></article>
-<article class="quick-card"><div class="number">04</div><h3>Tracking</h3><ul class="bul"><li>Master sheet</li><li>Monthly canvas</li></ul></article>
-</div></div></section>
+    <section class="section" id="rhythm">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">02 &#183; Monthly rhythm</div>
+            <h2>Three checkpoints each month</h2>
+          </div>
+          <p class="section-note">Three dates catch most issues early.</p>
+        </div>
+        <div class="timeline" aria-label="Monthly rhythm">
+          <div class="timeline-row"><div class="timeline-dot">D1</div><div class="timeline-date">Start of month</div><div class="timeline-content"><h3>Open the new month</h3><p>New asset tab per office. Check contract end dates.</p></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D10</div><div class="timeline-date">By the 10th</div><div class="timeline-content"><h3>Close recurring vendor items</h3><p>Collect vendor invoices and send for payment.</p></div></div>
+          <div class="timeline-row"><div class="timeline-dot">D28</div><div class="timeline-date">End of month</div><div class="timeline-content"><h3>Reconcile and confirm</h3><p>Match joiners and leavers to parking and asset lists. Get holder confirmations.</p></div></div>
+        </div>
+      </div>
+    </section>
 
-<section class="section" id="rhythm"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">04 &middot; Rhythm</div><h2>Monthly rhythm</h2><p class="section-intro">Steady work avoids a month-end rush.</p></div></div>
-<div class="timeline">
-<div class="timeline-row"><div class="timeline-dot">M</div><div class="timeline-date">Every Monday</div><div class="timeline-content"><h3>Expiry alerts</h3><ul class="bul"><li>Check contracts due soon</li><li>Flag renewals early</li></ul></div></div>
-<div class="timeline-row"><div class="timeline-dot">+</div><div class="timeline-date">New invoice</div><div class="timeline-content"><h3>Start the PR</h3><ul class="bul"><li>Run all 6 steps right away</li></ul></div></div>
-<div class="timeline-row"><div class="timeline-dot">25</div><div class="timeline-date">The 25th</div><div class="timeline-content"><h3>Monthly review</h3><ul class="bul"><li>Match tracking with the PR thread</li><li>Chase missing items</li></ul></div></div>
-</div></div></section>
+    <section class="section" id="parking">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">03 &#183; Building & parking</div>
+            <h2>Stay in touch with the building</h2>
+          </div>
+          <p class="section-note">Requests go to each building's Zalo group.</p>
+        </div>
+        <div class="flow-wrap">
+          <div class="flow-title"><h3>Parking card flow</h3><span>Request &#8594; Record</span></div>
+          <div class="flow" aria-label="Parking card flow" style="grid-template-columns: repeat(5, minmax(100px, 1fr));">
+            <div class="flow-step"><span class="step-no">01</span><strong>Collect details</strong><small>Name, plate number and start date.</small></div>
+            <div class="flow-step"><span class="step-no">02</span><strong>Send to building</strong><small>Post it in the building group.</small></div>
+            <div class="flow-step"><span class="step-no">03</span><strong>Check the card</strong><small>Make sure the card was issued and works.</small></div>
+            <div class="flow-step"><span class="step-no">04</span><strong>Record it</strong><small>Add it to the monthly parking tracker.</small></div>
+            <div class="flow-step"><span class="step-no">05</span><strong>Cancel on exit</strong><small>Tell the building and update the tracker.</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="section" id="tips"><div class="wrap">
-<div class="section-head"><div><div class="section-kicker">05 &middot; Tips</div><h2>Quick tips</h2><p class="section-intro">Small habits that prevent rework.</p></div></div>
-<div class="two-col">
-<article class="info-card"><h3>Before sending</h3><ul class="checklist"><li>Amounts and dates match the form</li><li>Documents complete and in order</li><li>File names follow the convention</li></ul></article>
-<article class="info-card dark"><h3>Always</h3><ul class="checklist"><li>Check tracking first</li><li>Ask, don&rsquo;t guess</li><li>Note special cases briefly</li></ul></article>
-</div></div></section>
-</main>
-<footer><div class="wrap footer-inner"><span>PR &amp; Communications</span><a class="top-link" href="#start">Back to top</a></div></footer>
+    <section class="section" id="assets">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">04 &#183; Assets</div>
+            <h2>Every device has one holder and one row</h2>
+          </div>
+          <p class="section-note">One tab per office per month. Log every change.</p>
+        </div>
+        <div class="sop-grid">
+          <article class="sop-card"><div class="sop-num">1</div><div><h3>Hand out equipment</h3><p>Prepare the setup, get the form signed, add the row.</p><a class="resource" href="#">Open task guide &#183; Issue equipment</a></div></article>
+          <article class="sop-card"><div class="sop-num">2</div><div><h3>Take equipment back</h3><p>Fill the return form and store the device the same day.</p><a class="resource" href="#">Open task guide &#183; Return equipment</a></div></article>
+          <article class="sop-card"><div class="sop-num">3</div><div><h3>Move equipment between offices</h3><p>Mark it moved at the sender, add it at the receiver with its origin.</p><a class="resource" href="#">Open task guide &#183; Office transfer</a></div></article>
+          <article class="sop-card"><div class="sop-num">4</div><div><h3>Confirm with holders</h3><p>Send each holder their list at month end. Note the confirm date.</p><a class="resource" href="#">Open task guide &#183; Holder confirmation</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="office">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">05 &#183; Test devices & office care</div>
+            <h2>Count the test devices with the people who use them</h2>
+          </div>
+          <p class="section-note">Device checks are done with the Da Nang team.</p>
+        </div>
+        <div class="two-col">
+          <article class="info-card"><h3>Test device check</h3><ul class="checklist"><li>Check every device against the list.</li><li>Note the date of the check.</li><li>Log missing or broken items and the owner.</li></ul></article>
+          <article class="info-card dark"><h3>Office supplies & wifi cabinet</h3><ul class="checklist"><li>Reorder supplies before they run out.</li><li>Keep the wifi cabinet checked and tidy.</li><li>Report building issues through the building group.</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vendors">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">06 &#183; Vendors</div>
+            <h2>Know who does what, and when they bill</h2>
+          </div>
+          <p class="section-note">Payments follow the Payment Request steps.</p>
+        </div>
+        <div class="program-grid">
+          <article class="program"><h3>Office rent & utilities</h3><p>Billed monthly, around the 10th.</p><a class="program-link" href="#">Open program guide</a></article>
+          <article class="program"><h3>Cleaning & water</h3><p>A statement and an invoice each month.</p><a class="program-link" href="#">Open program guide</a></article>
+          <article class="program"><h3>Plants</h3><p>Billed quarterly.</p><a class="program-link" href="#">Open program guide</a></article>
+          <article class="program"><h3>Courier</h3><p>As needed. One bill may cover several months.</p><a class="program-link" href="#">Open program guide</a></article>
+          <article class="program"><h3>Payments</h3><p>Invoice, approval, payment.</p><a class="program-link" href="#">Open Payment Request page</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">07 &#183; Resource map</div>
+            <h2>I open the right place before I start a task</h2>
+          </div>
+          <p class="section-note">Links are placeholders on this public page.</p>
+        </div>
+        <div class="resource-map">
+          <article class="resource-item"><a class="resource-card-link" href="#"><h3>Google Sheets</h3><p>Asset, parking and vendor trackers.</p><em>Open tracker guide</em></a></article>
+          <article class="resource-item"><a class="resource-card-link" href="#"><h3>Slack</h3><p>Admin requests and holder confirmations.</p><em>Open communication guide</em></a></article>
+          <article class="resource-item"><a class="resource-card-link" href="#"><h3>Zalo</h3><p>Building groups, one per office.</p><em>Open parking guide</em></a></article>
+          <article class="resource-item"><a class="resource-card-link" href="#"><h3>Notion</h3><p>Full operations notes.</p><em>Open the notes</em></a></article>
+        </div>
+        
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner"><span>Operations &#183; Duong Tran</span><a href="#start">Back to top &#8593;</a></div>
+  </footer>
 <script>document.addEventListener("click",function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var t=document.getElementById(a.getAttribute("href").slice(1));if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth"});}});</script>
-</body></html>
+</body>
+</html>
