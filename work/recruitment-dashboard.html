@@ -44,7 +44,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 .empty{margin:0;color:var(--muted)}
 .banner{background:var(--mist);border-left:3px solid var(--sage);padding:10px 14px;font-size:14px;color:var(--forest);margin:-24px 0 28px;border-radius:4px}
 .sel{font-weight:600;color:var(--forest)}
-@media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:flex;width:100%;border-radius:16px;box-sizing:border-box}.fgrp{flex:1 1 0;min-width:0;margin:0}.pick{flex:1 1 auto;min-width:0}.pick select{width:100%;min-width:0}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}}
+@media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:flex;flex-wrap:wrap;width:100%;border-radius:16px;box-sizing:border-box}.fgrp{flex:1 1 auto;min-width:max-content;margin:0}.pick{flex:0 0 auto;min-width:max-content}.pick select{width:auto;min-width:12ch;max-width:none}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}}
 @media(max-width:480px){.chart-scroll{overflow-x:auto;max-width:100%;min-width:0}.chart-scroll svg{display:block;width:640px;min-width:640px;height:280px}.chart-scroll svg text{font-size:16px}}</style></head><body><div class="wrap">
 <div class="top"><a href="https://htmlpreview.github.io/?https://github.com/duongduongblue/duong-tran-portfolio/blob/review/work/index.html">&larr; Back to Work</a></div>
 <h1>Recruitment dashboard</h1>
@@ -306,9 +306,9 @@ function trend(y,m){
   if(y=="all")years.forEach(function(yy){leg+='<span><i style="background:'+COL[yy]+'"></i>'+yy+'</span>';});
   else leg='<span><i style="background:'+COL[y]+'"></i>CVs</span><span><i style="background:#7D927B"></i>Hires</span>';
   $("trendLeg").innerHTML=leg;
-  var note=y=="all"?"CVs by month for each year. November and December 2026 are not yet.":"CVs and hires by month in "+y+". The hire line uses its own scale.";
+  var note=y=="all"?"CVs by month for each year. November and December 2026 are not yet in the sample.":"CVs and hires by month in "+y+". The hire line uses its own scale.";
   if(y!="all"&&m!="all"&&M[y][+m-1])note+=" "+MONTHS[+m-1]+" is marked.";
-  if(y=="2026")note+=" November and December are not yet.";
+  if(y=="2026")note+=" November and December are not yet in the sample.";
   $("trendNote").textContent=note;
 }
 function delta(cur,prev){
