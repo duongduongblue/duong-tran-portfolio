@@ -59,7 +59,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 <div class="kpi"><div class="l">Hires</div><div class="v" id="k2"></div><div class="n" id="k2n"></div></div>
 <div class="kpi"><div class="l">CV-to-hire conversion</div><div class="v" id="k3"></div><div class="n">hires &divide; CVs</div></div>
 <div class="kpi"><div class="l">Top source</div><div class="v sm" id="k5"></div><div class="n" id="k5n"></div></div>
-<div class="kpi"><div class="l">Average days to hire</div><div class="v" id="kDays"></div><div class="n" id="kDaysN">sample, weighted by hires</div></div>
+<div class="kpi"><div class="l">Average days to hire</div><div class="v" id="kDays"></div><div class="n" id="kDaysN">days on average (sample data)</div></div>
 <div class="kpi"><div class="l">Funnel pass rates</div><div class="v sm" id="kFun"></div><div class="n" id="kFunN">CV to interview, then offer, then joined</div></div>
 <div class="kpi"><div class="l">Offer acceptance</div><div class="v" id="kAcc"></div><div class="n" id="kAccN">joined &divide; offers</div></div>
 </div>
@@ -411,7 +411,7 @@ function fillKpis(d,label){
   setText("k5",top.name||"-");
   setText("k5n",top.name?(f(top.cv)+" CVs, "+top.hired+" hires"):label);
   if(d.days==null){setText("kDays","-");setText("kDaysN","no hires in this period");}
-  else{setText("kDays",String(d.days));setText("kDaysN","sample, weighted by hires");}
+  else{setText("kDays",String(d.days));setText("kDaysN","days on average (sample data)");}
   setText("kFun",[pc(d.iv,d.cv),pc(d.of,d.iv),pc(d.hired,d.of)].join(" | "));
   setText("kFunN","CV to interview, then offer, then joined");
   if(!d.of){setText("kAcc","-");setText("kAccN","joined / offers");}
