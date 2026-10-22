@@ -39,9 +39,11 @@ main iframe.on{display:block}
 </main></div>
 <script>
 const fit=f=>{try{const d=f.contentDocument;if(d&&d.body)f.style.height=d.documentElement.scrollHeight+"px"}catch(e){}};
-document.querySelectorAll("main iframe").forEach(f=>{f.addEventListener("load",()=>{fit(f);try{new ResizeObserver(()=>fit(f)).observe(f.contentDocument.body)}catch(e){}})});
-const show=t=>{document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
-document.querySelectorAll("main iframe").forEach(f=>{f.classList.toggle("on",f.id===t);if(f.id===t){f.loading="eager";fit(f)}});history.replaceState(null,"","#"+t)};
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{show(b.dataset.t);if(innerWidth>820)scrollTo({top:document.querySelector(".wrap").offsetTop-10,behavior:"smooth"})});
+const resetFrame=f=>{try{var root=f.contentDocument.documentElement;var prev=root.style.scrollBehavior;root.style.scrollBehavior="auto";f.contentWindow.scrollTo(0,0);root.style.scrollBehavior=prev;}catch(e){try{f.contentWindow.scrollTo(0,0);}catch(err){}}};
+const frameTop=f=>{var bar=0;if(innerWidth<=820){var nav=document.querySelector("nav");if(nav)bar=nav.getBoundingClientRect().height;}var y=Math.max(0,f.getBoundingClientRect().top+window.scrollY-bar);var root=document.documentElement,prev=root.style.scrollBehavior;root.style.scrollBehavior="auto";window.scrollTo({top:y,behavior:"auto"});root.style.scrollBehavior=prev;};
+document.querySelectorAll("main iframe").forEach(f=>{f.addEventListener("load",()=>{fit(f);resetFrame(f);try{new ResizeObserver(()=>fit(f)).observe(f.contentDocument.body)}catch(e){}})});
+const show=t=>{var active=null;document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+document.querySelectorAll("main iframe").forEach(f=>{var on=f.id===t;f.classList.toggle("on",on);if(on){f.loading="eager";fit(f);active=f;resetFrame(f);}});history.replaceState(null,"","#"+t);return active;};
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{var f=show(b.dataset.t);if(f)frameTop(f);});
 const h=location.hash.slice(1);if(["hr","ops","pr","events"].includes(h))show(h);
 </script></body></html>
