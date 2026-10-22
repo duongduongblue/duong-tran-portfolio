@@ -30,10 +30,13 @@ svg{display:block;width:100%;height:auto}svg text{font-family:'Inter',sans-serif
 ul.notes{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
 .shows li{margin-bottom:10px}.shows b{color:var(--forest)}
 footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);font-size:13px}
-.filters{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin:0 0 28px}
-.fgrp{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.filters{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 16px;max-width:100%;margin:0 0 28px;padding:8px 12px 8px 14px;background:#fff;border:1px solid var(--line);border-radius:999px}
+.fgrp{display:flex;align-items:center;gap:8px;min-width:0}
 .lbl{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.yrs{display:flex;flex-wrap:wrap;gap:8px;margin:0}.yrs button{font:500 14px 'Inter',sans-serif;padding:7px 14px;border:1px solid var(--forest);background:#fff;color:var(--forest);border-radius:20px;cursor:pointer}.yrs button.on{background:var(--forest);color:#fff}.yrs button:disabled{opacity:.35;cursor:default}
+.pick{position:relative;display:inline-flex;min-width:0}
+.pick select{font:500 14px/1.2 'Inter',sans-serif;color:var(--forest);background:#fff;border:1px solid var(--forest);border-radius:999px;padding:7px 30px 7px 12px;cursor:pointer;appearance:none;-webkit-appearance:none;accent-color:var(--forest);max-width:100%}
+.pick::after{content:"\25BE";position:absolute;right:11px;top:50%;transform:translateY(-54%);color:var(--forest);font-size:11px;line-height:1;pointer-events:none}
+.pick select:focus{outline:2px solid var(--sage);outline-offset:1px}
 .cmp{display:none}.cmp.on{display:grid;gap:4px;margin:0 0 36px;font-size:13px;color:var(--muted)}.cmp p{margin:0}.cmp .k{color:var(--forest);font-weight:600;margin-right:6px}
 .up{color:#1E2D24;font-weight:600}.dn{color:#8C4B2F;font-weight:600}
 .up::before{content:"\2191 "}.dn::before{content:"\2193 "}
@@ -41,15 +44,15 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 .empty{margin:0;color:var(--muted)}
 .banner{background:var(--mist);border-left:3px solid var(--sage);padding:10px 14px;font-size:14px;color:var(--forest);margin:-24px 0 28px;border-radius:4px}
 .sel{font-weight:600;color:var(--forest)}
-@media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:block}.fgrp{display:block;width:100%;margin-bottom:12px}.fgrp .lbl{display:block;margin:0 0 6px}.yrs button{padding:8px 12px}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}#mos{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}#mos button{width:100%;padding:8px 4px;text-align:center;white-space:nowrap}#mos button:first-child{grid-column:1 / -1}}
+@media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:flex;width:100%;border-radius:16px;box-sizing:border-box}.fgrp{flex:1 1 0;min-width:0;margin:0}.pick{flex:1 1 auto;min-width:0}.pick select{width:100%;min-width:0}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}}
 @media(max-width:480px){.chart-scroll{overflow-x:auto;max-width:100%;min-width:0}.chart-scroll svg{display:block;width:640px;min-width:640px;height:280px}.chart-scroll svg text{font-size:16px}}</style></head><body><div class="wrap">
 <div class="top"><a href="https://htmlpreview.github.io/?https://github.com/duongduongblue/duong-tran-portfolio/blob/review/work/index.html">&larr; Back to Work</a></div>
 <h1>Recruitment, 2022&ndash;2026</h1>
 <p class="sub">Five years of hiring at a tech startup. Pick a year and a month.</p>
 <p class="banner">Illustrative sample data. Figures are anonymized and do not reflect actual company numbers.</p>
 <div class="filters">
-<div class="fgrp"><span class="lbl" id="yl">Year</span><div class="yrs" id="yrs" role="group" aria-labelledby="yl"></div></div>
-<div class="fgrp"><span class="lbl" id="ml">Month</span><div class="yrs" id="mos" role="group" aria-labelledby="ml"></div></div>
+<label class="fgrp"><span class="lbl" id="yl">Year</span><span class="pick"><select id="yrs" aria-labelledby="yl"></select></span></label>
+<label class="fgrp"><span class="lbl" id="ml">Month</span><span class="pick"><select id="mos" aria-labelledby="ml"></select></span></label>
 </div>
 <div class="kpis">
 <div class="kpi"><div class="l">CVs received</div><div class="v" id="k1"></div><div class="n" id="k1n"></div></div>
@@ -380,18 +383,10 @@ function renderCmp(y,m){
     else box.appendChild(metricLine("YoY vs "+whenLabel(yy[0],yy[1]),cur,prior));
   }
 }
-function paintButtons(y,m){
-  document.querySelectorAll("#yrs button").forEach(function(b){
-    var on=b.getAttribute("data-v")==y;
-    b.className=on?"on":"";
-    b.setAttribute("aria-pressed",on?"true":"false");
-  });
-  document.querySelectorAll("#mos button").forEach(function(b){
-    var on=b.getAttribute("data-v")==m;
-    b.disabled=false;
-    b.className=on?"on":"";
-    b.setAttribute("aria-pressed",on?"true":"false");
-  });
+function paintSelects(y,m){
+  var ys=$("yrs"),ms=$("mos");
+  if(ys.value!==y)ys.value=y;
+  if(ms.value!==m)ms.value=m;
 }
 function setText(id,text){var el=$(id);if(el)el.textContent=text;}
 function showNotYet(y,m){
@@ -437,7 +432,7 @@ function show(y,m){
     if(!(+m>=1&&+m<=12))m="all";
   }
   year=y;month=m;
-  paintButtons(y,m);
+  paintSelects(y,m);
   if(missingSelection(y,m)){showNotYet(y,m);try{history.replaceState(null,"","?year="+y+"&month="+m)}catch(e){}return;}
   var d=slice(y,m),label=selLabel(y,m);
   document.querySelectorAll("[data-y]").forEach(function(e){e.textContent=label});
@@ -461,17 +456,20 @@ function show(y,m){
   $("volStar").style.display=m=="all"?"":"none";
   try{history.replaceState(null,"","?year="+y+"&month="+m)}catch(e){}
 }
-function makeBtn(label,value,host){
-  var b=document.createElement("button");
-  b.type="button";
-  b.textContent=label;
-  b.setAttribute("data-v",value);
-  b.onclick=function(){if(host=="yrs")show(value,month);else show(year,value);};
-  $(host).appendChild(b);
+function fillSelect(id,items,onChange){
+  var sel=$(id);
+  items.forEach(function(it){
+    var o=document.createElement("option");
+    o.value=it[0];
+    o.textContent=it[1];
+    sel.appendChild(o);
+  });
+  sel.onchange=onChange;
 }
-YS.forEach(function(y){makeBtn(lb(y),y,"yrs")});
-makeBtn("All","all","mos");
-MONTHS.forEach(function(name,i){makeBtn(name,String(i+1),"mos")});
+fillSelect("yrs",YS.map(function(y){return [y,lb(y)];}),function(){show($("yrs").value,month);});
+var monthItems=[["all","All months"]];
+MONTHS.forEach(function(name,i){monthItems.push([String(i+1),name]);});
+fillSelect("mos",monthItems,function(){show(year,$("mos").value);});
 var qy=(location.search.match(/year=([^&]+)/)||[])[1]||"all";
 var qm=(location.search.match(/month=([^&]+)/)||[])[1]||"all";
 show(qy,qm);

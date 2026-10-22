@@ -58,7 +58,7 @@ function audit(mode) {
     return obj.src[k][0];
   }
   function badNumber(s) {
-    return s.indexOf("Infinity") !== -1 || s.indexOf("NaN") !== -1;
+    return s.indexOf("Infinity") !== -1 || s.indexOf("NaN") !== -1 || s.indexOf("undefined") !== -1;
   }
   function sumPairs(rows, key) {
     var out = {};
@@ -193,13 +193,16 @@ function audit(mode) {
     ["all"].concat(MONTHS.map(function (_, i) { return String(i + 1); })).forEach(function (m) {
       var key = y + " " + m;
       try {
-        show(y, m);
+        pick(y, m);
       } catch (err) {
         sweepBad.push(key + " threw " + err.message);
         return;
       }
       var live = regionBlob(["kpis", "cmp", "src", "grp", "loc", "stg", "vol", "trend", "trendNote", "volLead"]);
-      if (badNumber(live) || badNumber(document.body.textContent)) sweepBad.push(key + " has Infinity or NaN");
+      if (badNumber(live) || badNumber(document.body.textContent)) sweepBad.push(key + " has Infinity, NaN, or undefined");
+      if (document.getElementById("yrs").value !== y || document.getElementById("mos").value !== m) {
+        sweepBad.push(key + " select " + document.getElementById("yrs").value + "/" + document.getElementById("mos").value);
+      }
       var missing = m !== "all" && !slice(y, m);
       if (missing) {
         ["k1", "k2", "k3", "k4", "k5", "kDays", "kFun", "kBest", "kAcc"].forEach(function (id) {
@@ -263,16 +266,18 @@ function audit(mode) {
   });
   check("every year/month view stays finite and consistent", sweepBad.length === 0, sweepBad.slice(0, 6).join(" | "));
 
-  function open(y, m) {
-    var yb = document.querySelector('#yrs button[data-v="' + y + '"]');
-    var mb = document.querySelector('#mos button[data-v="' + m + '"]');
-    yb.click();
-    mb.click();
-    return { yOn: yb.classList.contains("on"), mOn: mb.classList.contains("on"), yOff: yb.disabled, mOff: mb.disabled };
+  function pick(y, m) {
+    var ySel = document.getElementById("yrs");
+    var mSel = document.getElementById("mos");
+    ySel.value = y;
+    ySel.dispatchEvent(new Event("change"));
+    mSel.value = m;
+    mSel.dispatchEvent(new Event("change"));
+    return { yOn: ySel.value === y, mOn: mSel.value === m, yOff: ySel.disabled, mOff: mSel.disabled };
   }
 
-  var sep = open("2025", "9");
-  check("Sep 2025 buttons select", sep.yOn && sep.mOn && !sep.mOff);
+  var sep = pick("2025", "9");
+  check("Sep 2025 selects", sep.yOn && sep.mOn && !sep.mOff);
   check("Sep 2025 shows CVs, hires, and conversion", text("k1") === "182" && text("k2") === "10" && text("k3") === "5.5%");
   check("Sep 2025 days, funnel, best source, acceptance", text("kDays") === "27" && text("kFun") === "17.6% | 37.5% | 83.3%" && text("kBest") === "Facebook" && text("kBestN") === "12.5% from 8 CVs" && text("kAcc") === "83.3%" && text("kAccN") === "10 of 12 offers");
   check("Sep 2025 joined equals hires", text("kAccN").indexOf("10 of ") === 0 && text("k2") === "10");
@@ -287,51 +292,64 @@ function audit(mode) {
   check("comparison arrows render", !!up && !!dn && getComputedStyle(up, "::before").content.indexOf("\u2191") !== -1 && getComputedStyle(dn, "::before").content.indexOf("\u2193") !== -1);
   check("Sep 2025 innerText has no literal entities", !/&#|&amp;/.test(document.body.innerText));
 
-  var aug = open("2023", "8");
+  var aug = pick("2023", "8");
   var augCmp = cmpLines();
   check("Aug 2023 MoM hires is '-' against a 0 base", aug.mOn && augCmp[0].spans[1] === "-" && augCmp[0].spans[2] === "-" && text("k2") === "0" && text("kDays") === "-" && text("kAcc") === "-");
   check("Aug 2023 YoY hires is a real -100.0%, not Infinity", augCmp[1].spans[1] === "-100.0%" && augCmp[1].spans.join(" ").indexOf("Infinity") === -1);
 
-  var sep23 = open("2023", "9");
+  var sep23 = pick("2023", "9");
   check("Sep 2023 MoM hires is '-' against a 0 base", sep23.mOn && cmpLines()[0].spans[1] === "-" && text("k2") === "1");
 
-  var jan = open("2022", "1");
+  var jan = pick("2022", "1");
   var janCmp = cmpLines();
   var janSources = sourceRows();
   check("Jan 2022 missing base is '-'", janCmp[0].raw === "MoM: -" && janCmp[1].raw === "YoY: -" && text("k1") === "69" && text("k2") === "3" && janSources.length > 0 && janSources.every(function (row) { return row.mom === "-" && row.yoy === "-"; }));
 
-  open("2026", "3");
+  pick("2026", "3");
   var missingSource = sourceRows().filter(function (row) { return row.name === "Not recorded"; })[0];
   check("Mar 2026 MoM is '-' when that source was absent in February", !!missingSource && missingSource.mom === "-", missingSource && missingSource.mom);
 
-  open("2026", "11");
+  pick("2026", "11");
   check("Nov 2026 is not yet", text("k1") === "not yet" && text("k2") === "not yet" && text("k3") === "not yet" && text("kFun") === "not yet" && cmpLines().map(function (l) { return l.raw; }).join(" | ") === "MoM: - | YoY: -");
-  check("Nov 2026 button stays enabled", document.querySelector('#mos button[data-v="11"]').disabled === false);
-  open("2026", "12");
+  check("Nov 2026 stays selectable", document.querySelector('#mos option[value="11"]').disabled === false && document.getElementById("mos").value === "11");
+  pick("2026", "12");
   check("Dec 2026 is not yet", text("k1") === "not yet" && text("kAcc") === "not yet" && text("src") === "Not yet" && text("trend") === "Not yet" && text("vol") === "Not yet");
-  check("Dec 2026 button stays enabled", document.querySelector('#mos button[data-v="12"]').disabled === false);
+  check("Dec 2026 stays selectable", document.querySelector('#mos option[value="12"]').disabled === false && document.getElementById("mos").value === "12");
 
-  open("all", "11");
+  pick("all", "11");
   var novGroup = document.querySelectorAll("#vol svg g");
   var nov2026 = novGroup[novGroup.length - 1].textContent;
   check("all-years November keeps 2026 blank", nov2026.indexOf("not yet") !== -1 && !/\b0\b/.test(nov2026) && nov2026.indexOf("-100") === -1, nov2026);
 
-  open("2026", "all");
+  pick("2026", "all");
   var monthLabels = Array.prototype.filter.call(document.querySelectorAll("#trend text"), function (t) { return t.getAttribute("y") === "248"; });
   check("2026 trend labels Nov and Dec not yet", monthLabels.length === 12 && monthLabels[10].textContent === "not yet" && monthLabels[11].textContent === "not yet");
 
-  open("all", "all");
+  pick("all", "all");
   check("all-years KPIs", text("k1") === "4,500" && text("k2") === "192" && text("k3") === "4.3%" && text("k4") === "19.3%" && text("kDays") === "33" && text("kBest") === "Referral" && text("kAcc") === "77.4%" && text("kAccN") === "192 of 248 offers");
-  open("2022", "all");
+  pick("2022", "all");
   check("2022 year KPIs", text("k1") === "928" && text("k2") === "35" && text("kDays") === "36" && text("kFun") === "15.9% | 31.1% | 76.1%" && text("kAcc") === "76.1%" && text("kAccN") === "35 of 46 offers");
-  open("2024", "all");
+  pick("2024", "all");
   check("2024 best source is Direct email", text("kBest") === "Direct email" && text("kDays") === "33" && text("kFun") === "17.8% | 38.1% | 78.1%");
-  open("2025", "all");
+  pick("2025", "all");
   check("2025 year KPIs", text("kDays") === "29" && text("kFun") === "16.9% | 35.7% | 80.2%" && text("k2") === "73");
-  open("2023", "all");
+  pick("2023", "all");
   check("2023 year days", text("kDays") === "48" && text("k1") === "586" && text("k2") === "14");
-  open("2026", "all");
+  pick("2026", "all");
   check("2026 YTD KPIs", text("k1") === "534" && text("k2") === "20" && text("kDays") === "32" && text("kFun") === "16.1% | 31.4% | 74.1%");
+  function optText(id) {
+    return Array.prototype.map.call(document.getElementById(id).options, function (o) {
+      return o.value + "=" + o.textContent;
+    }).join("|");
+  }
+  check("year dropdown options", optText("yrs") === "all=All years|2022=2022|2023=2023|2024=2024|2025=2025|2026=2026 YTD");
+  check("month dropdown options", optText("mos") === "all=All months|1=Jan|2=Feb|3=Mar|4=Apr|5=May|6=Jun|7=Jul|8=Aug|9=Sep|10=Oct|11=Nov|12=Dec");
+  check("chip buttons are gone", document.querySelectorAll("button").length === 0);
+  var chev = getComputedStyle(document.querySelector(".pick"), "::after").content;
+  check("custom chevron", chev.indexOf("\u25BE") !== -1, chev);
+  check("chevron source is a CSS escape", document.querySelector("style").textContent.indexOf(String.fromCharCode(92) + "25BE") !== -1);
+  check("select uses Inter", getComputedStyle(document.getElementById("yrs")).fontFamily.indexOf("Inter") !== -1, getComputedStyle(document.getElementById("yrs")).fontFamily);
+  check("select border is dark green", getComputedStyle(document.getElementById("yrs")).borderTopColor === "rgb(30, 45, 36)");
 
   function chartMetrics(id) {
     var svg = document.querySelector("#" + id + " svg");
@@ -368,46 +386,19 @@ function audit(mode) {
       check(id + " chart scrolls sideways inside the page", !!metrics && (metrics.overflowX === "auto" || metrics.overflowX === "scroll") && metrics.scroll >= 640 && metrics.scroll > metrics.client + 1, metrics && (metrics.overflowX + " " + metrics.scroll + "/" + metrics.client));
       if (metrics) log.push("INFO " + id + " labels " + metrics.worst + "px canvas " + metrics.w + "x" + metrics.h);
     });
-    var mos = document.getElementById("mos");
-    var cols = window.getComputedStyle(mos).gridTemplateColumns.split(/\s+/).filter(Boolean);
-    var monthBtns = Array.prototype.slice.call(mos.querySelectorAll("button")).slice(1);
-    var rowMap = [];
-    monthBtns.forEach(function (b) {
-      var top = Math.round(b.getBoundingClientRect().top);
-      var found = null;
-      rowMap.forEach(function (row) { if (Math.abs(row.top - top) <= 2) found = row; });
-      if (!found) { found = { top: top, items: [] }; rowMap.push(found); }
-      found.items.push(b);
-    });
-    rowMap.sort(function (a, b) { return a.top - b.top; });
-    var even = rowMap.length === 2 && rowMap.every(function (row) {
-      if (row.items.length !== 6) return false;
-      var widths = row.items.map(function (b) { return b.getBoundingClientRect().width; });
-      return Math.max.apply(null, widths) - Math.min.apply(null, widths) <= 2;
-    });
-    var allBox = mos.querySelector('button[data-v="all"]').getBoundingClientRect();
-    var firstBox = rowMap[0] ? rowMap[0].items[0].getBoundingClientRect() : null;
-    var decBox = mos.querySelector('button[data-v="12"]').getBoundingClientRect();
-    var julBox = mos.querySelector('button[data-v="7"]').getBoundingClientRect();
-    check("month buttons are 6 per row at 390", even && cols.length === 6 && window.getComputedStyle(mos).display === "grid", rowMap.map(function (row) { return row.items.length; }).join(",") + " cols " + cols.join(" "));
-    check("All sits on its own full-width row", !!firstBox && allBox.bottom <= firstBox.top + 1 && allBox.width >= firstBox.width * 4, firstBox && (Math.round(allBox.width) + " vs " + Math.round(firstBox.width)));
-    check("Dec shares a full row with Jul", !!rowMap[1] && rowMap[1].items.length === 6 && Math.abs(decBox.top - julBox.top) <= 2);
-    check("mobile width is 390", window.innerWidth === 390, "inner " + window.innerWidth + " client " + document.documentElement.clientWidth + " visual " + (window.visualViewport && window.visualViewport.width));
-    check("mobile has no horizontal overflow", worst <= 1, worstKey + " gap " + worst + " client " + document.documentElement.clientWidth);
-    var taps = [];
-    [["yrs", "all"], ["yrs", "2025"], ["yrs", "2026"], ["mos", "all"], ["mos", "1"], ["mos", "9"], ["mos", "11"], ["mos", "12"]].forEach(function (pair) {
-      var b = document.querySelector("#" + pair[0] + ' button[data-v="' + pair[1] + '"]');
-      b.scrollIntoView({ block: "center", inline: "nearest" });
-      var r = b.getBoundingClientRect();
-      var hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
-      var inside = r.left >= -1 && r.right <= document.documentElement.clientWidth + 1;
-      taps.push(pair.join(":") + (b.disabled || r.height < 28 || r.width < 28 || !inside || !(hit === b || b.contains(hit)) ? " FAIL " + Math.round(r.width) + "x" + Math.round(r.height) : " ok"));
-    });
-    check("mobile filters are tappable", taps.every(function (t) { return t.indexOf("FAIL") === -1; }), taps.join(", "));
-    open("2025", "9");
+    var box = document.querySelector(".filters").getBoundingClientRect();
+    var yb = document.getElementById("yrs").getBoundingClientRect();
+    var mb = document.getElementById("mos").getBoundingClientRect();
+    var pageW = document.documentElement.clientWidth;
+    var sameRow = Math.abs(yb.top - mb.top) <= 4;
+    var stacked = yb.bottom <= mb.top + 2;
+    check("mobile width is 390", window.innerWidth === 390, "inner " + window.innerWidth + " client " + pageW + " visual " + (window.visualViewport && window.visualViewport.width));
+    check("mobile has no horizontal overflow", worst <= 1, worstKey + " gap " + worst + " client " + pageW);
+    check("mobile selects fit on one row or stack", (sameRow || stacked) && box.left >= -1 && box.right <= pageW + 1 && yb.right <= pageW + 1 && mb.right <= pageW + 1 && yb.width >= 80 && mb.width >= 80 && yb.height >= 28 && mb.height >= 28, "row " + sameRow + " stack " + stacked + " box " + Math.round(box.left) + "-" + Math.round(box.right) + " selects " + Math.round(yb.width) + "x" + Math.round(yb.height) + " " + Math.round(mb.width) + "x" + Math.round(mb.height));
+    pick("2025", "9");
     var mobileGap = document.documentElement.scrollWidth - document.documentElement.clientWidth;
     check("Sep 2025 usable at 390", text("k1") === "182" && text("k3") === "5.5%" && text("src").indexOf("MoM") !== -1 && mobileGap <= 1 && getComputedStyle(document.querySelector(".bars .r")).display === "block", "gap " + mobileGap);
-    open("2026", "11");
+    pick("2026", "11");
     check("Nov 2026 usable at 390", text("k1") === "not yet" && document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1);
     log.push("INFO mobile innerWidth " + window.innerWidth + " clientWidth " + document.documentElement.clientWidth + " scrollWidth " + document.documentElement.scrollWidth + " worstGap " + worst);
   } else {
@@ -418,7 +409,10 @@ function audit(mode) {
     var trendVb = trendSvg.viewBox.baseVal;
     check("desktop charts stay full width", !!deskTrend && !!deskVol && deskTrend.w > 700 && deskVol.w > 700 && deskTrend.overflowX === "visible" && deskTrend.scroll <= deskTrend.client + 1 && deskVol.scroll <= deskVol.client + 1, deskTrend && (deskTrend.w + "px " + deskTrend.overflowX + " scroll " + deskTrend.scroll + "/" + deskTrend.client));
     check("desktop trend keeps its aspect ratio", Math.abs(trendBox.width / trendBox.height - trendVb.width / trendVb.height) < 0.05, Math.round(trendBox.width) + "x" + Math.round(trendBox.height));
-    check("desktop month buttons stay in a wrapping row", window.getComputedStyle(document.getElementById("mos")).display === "flex");
+    var deskBox = document.querySelector(".filters").getBoundingClientRect();
+    var deskYear = document.getElementById("yrs").getBoundingClientRect();
+    var deskMonth = document.getElementById("mos").getBoundingClientRect();
+    check("desktop selects sit side by side", Math.abs(deskYear.top - deskMonth.top) <= 4 && deskYear.right <= deskMonth.left + 2 && deskBox.right <= document.documentElement.clientWidth + 1, Math.round(deskYear.right) + " vs " + Math.round(deskMonth.left));
     log.push("INFO desktop innerWidth " + window.innerWidth + " clientWidth " + document.documentElement.clientWidth);
   }
   check("no page errors", !window.__errs || window.__errs.length === 0, (window.__errs || []).join(" | "));
@@ -474,63 +468,34 @@ async function saveShot(cdp, file, clip) {
   console.log("SAVED " + file);
 }
 
-async function saveMobileShots(cdp, dir) {
-  const layout = await evalJson(cdp, `(function(){
+async function saveViewShots(cdp, dir, width) {
+  const top = await evalJson(cdp, `(function(){
     show("all","all");
-    document.querySelectorAll(".chart-scroll").forEach(function(el){ el.scrollLeft = 0; });
     window.scrollTo(0,0);
-    var mos = document.getElementById("ml").parentElement.getBoundingClientRect();
-    var trend = document.querySelector("#trend").closest(".chart-scroll").getBoundingClientRect();
-    var vol = document.querySelector("#vol").closest(".chart-scroll").getBoundingClientRect();
-    return {
-      mosY: mos.top + window.scrollY,
-      mosH: mos.height,
-      trendY: trend.top + window.scrollY,
-      volY: vol.top + window.scrollY,
-      volH: vol.height,
-      pageW: document.documentElement.clientWidth
-    };
+    var box = document.querySelector(".filters").getBoundingClientRect();
+    return { y: Math.max(0, box.top + window.scrollY - 16), h: box.height + 36, pageW: document.documentElement.clientWidth };
   })()`);
-  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_months.png"), {
+  await saveShot(cdp, path.join(dir, "dashboard_selects_" + width + ".png"), {
     x: 0,
-    y: Math.max(0, layout.mosY - 12),
-    width: layout.pageW,
-    height: layout.mosH + 28,
+    y: 0,
+    width: top.pageW,
+    height: width >= 1000 ? 720 : 844,
+    scale: 1
+  });
+  await saveShot(cdp, path.join(dir, "dashboard_selects_" + width + "_filters.png"), {
+    x: 0,
+    y: top.y,
+    width: top.pageW,
+    height: Math.max(120, top.h + 80),
     scale: 2
   });
-  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_charts.png"), {
+  await evalJson(cdp, `show("2025","9"); window.scrollTo(0,0);`);
+  await saveShot(cdp, path.join(dir, "dashboard_selects_" + width + "_sep2025.png"), {
     x: 0,
-    y: Math.max(0, layout.trendY - 72),
-    width: layout.pageW,
-    height: layout.volY + layout.volH - layout.trendY + 130,
-    scale: 2
-  });
-  await evalJson(cdp, `document.querySelector("#trend").closest(".chart-scroll").scrollLeft = 260`);
-  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_trend_scrolled.png"), {
-    x: 0,
-    y: Math.max(0, layout.trendY - 72),
-    width: layout.pageW,
-    height: 380,
-    scale: 2
-  });
-  const monthly = await evalJson(cdp, `(function(){
-    show("2025","9");
-    document.querySelectorAll(".chart-scroll").forEach(function(el){ el.scrollLeft = 0; });
-    var trend = document.querySelector("#trend").closest(".chart-scroll").getBoundingClientRect();
-    var vol = document.querySelector("#vol").closest(".chart-scroll").getBoundingClientRect();
-    return {
-      trendY: trend.top + window.scrollY,
-      volY: vol.top + window.scrollY,
-      volH: vol.height,
-      pageW: document.documentElement.clientWidth
-    };
-  })()`);
-  await saveShot(cdp, path.join(dir, "dashboard_mobile_390_sep2025_charts.png"), {
-    x: 0,
-    y: Math.max(0, monthly.trendY - 72),
-    width: monthly.pageW,
-    height: monthly.volY + monthly.volH - monthly.trendY + 130,
-    scale: 2
+    y: 0,
+    width: top.pageW,
+    height: width >= 1000 ? 860 : 900,
+    scale: 1
   });
 }
 
@@ -635,9 +600,8 @@ async function main() {
         console.log("[" + view.width + "] " + line);
         lines.push(line);
       }
-      if (view.mode === "mobile" && !batch.result.value.some((line) => line.startsWith("FAIL"))) {
-        const dir = "/opt/cursor/artifacts/screenshots";
-        await saveMobileShots(cdp, dir);
+      if (!batch.result.value.some((line) => line.startsWith("FAIL"))) {
+        await saveViewShots(cdp, "/opt/cursor/artifacts/screenshots", view.width);
       }
     }
     if (runtimeErrors.length) {
