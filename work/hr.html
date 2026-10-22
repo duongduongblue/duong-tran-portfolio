@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';function topIfNoHash(){var el=document.documentElement;var prev=el.style.scrollBehavior;el.style.scrollBehavior='auto';if(!location.hash){window.scrollTo(0,0);}else{var id=location.hash.slice(1);try{id=decodeURIComponent(id);}catch(err){}var target=document.getElementById(id);if(target)window.scrollTo(0,target.getBoundingClientRect().top+window.scrollY);}el.style.scrollBehavior=prev;}document.addEventListener('DOMContentLoaded',topIfNoHash);window.addEventListener('load',function(){topIfNoHash();document.documentElement.style.scrollBehavior='smooth';});window.addEventListener('pageshow',topIfNoHash);</script>
 <title>HR Work | Duong Tran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
 :root{--ink:#1f2c27;--ink-soft:#425149;--muted:#718078;--paper:#f7f5ef;--card:#fffdf8;--sage-soft:#dce6d9;--forest:#294338;--amber:#a76b28;--amber-soft:#f3e5cf;--line:#d9ded6;--max:1080px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+*{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
 a{color:inherit}
 nav{position:sticky;top:0;z-index:5;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}

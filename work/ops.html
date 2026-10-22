@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if('scrollRestoration' in history)history.scrollRestoration='manual';function topIfNoHash(){var el=document.documentElement;var prev=el.style.scrollBehavior;el.style.scrollBehavior='auto';if(!location.hash){window.scrollTo(0,0);}else{var id=location.hash.slice(1);try{id=decodeURIComponent(id);}catch(err){}var target=document.getElementById(id);if(target)window.scrollTo(0,target.getBoundingClientRect().top+window.scrollY);}el.style.scrollBehavior=prev;}document.addEventListener('DOMContentLoaded',topIfNoHash);window.addEventListener('load',function(){topIfNoHash();document.documentElement.style.scrollBehavior='smooth';});window.addEventListener('pageshow',topIfNoHash);</script>
   <meta name="description" content="Operations playbook: monthly rhythm, parking, assets, test devices, office care and vendors." />
   <title>Operations Playbook | Duong Tran</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,7 +32,6 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--paper);
