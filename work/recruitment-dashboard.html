@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><script>if('scrollRestoration' in history)history.scrollRestoration='manual';function topIfNoHash(){var el=document.documentElement;var prev=el.style.scrollBehavior;el.style.scrollBehavior='auto';if(!location.hash){window.scrollTo(0,0);}else{var id=location.hash.slice(1);try{id=decodeURIComponent(id);}catch(err){}var target=document.getElementById(id);if(target)window.scrollTo(0,target.getBoundingClientRect().top+window.scrollY);}el.style.scrollBehavior=prev;}document.addEventListener('DOMContentLoaded',topIfNoHash);window.addEventListener('load',topIfNoHash);window.addEventListener('pageshow',topIfNoHash);</script><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Recruitment 2022&ndash;2026 &middot; Duong Tran</title>
+<title>Recruitment dashboard &middot; Duong Tran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
@@ -47,8 +47,8 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 @media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:flex;width:100%;border-radius:16px;box-sizing:border-box}.fgrp{flex:1 1 0;min-width:0;margin:0}.pick{flex:1 1 auto;min-width:0}.pick select{width:100%;min-width:0}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}}
 @media(max-width:480px){.chart-scroll{overflow-x:auto;max-width:100%;min-width:0}.chart-scroll svg{display:block;width:640px;min-width:640px;height:280px}.chart-scroll svg text{font-size:16px}}</style></head><body><div class="wrap">
 <div class="top"><a href="https://htmlpreview.github.io/?https://github.com/duongduongblue/duong-tran-portfolio/blob/review/work/index.html">&larr; Back to Work</a></div>
-<h1>Recruitment, 2022&ndash;2026</h1>
-<p class="sub">Five years of hiring at a tech startup. Pick a year and a month.</p>
+<h1>Recruitment dashboard</h1>
+<p class="sub">A sample hiring pipeline. Pick a year and a month.</p>
 <p class="banner">Illustrative sample data. Figures are anonymized and do not reflect actual company numbers.</p>
 <div class="filters">
 <label class="fgrp"><span class="lbl" id="yl">Year</span><span class="pick"><select id="yrs" aria-labelledby="yl"></select></span></label>
@@ -74,31 +74,31 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 <section><h2>Location</h2><p><span class="sel" data-y></span>: CVs by candidate location (hires).</p><div class="bars" id="loc"></div></section>
 <section><h2>Current status</h2><p><span class="sel" data-y></span>: where each CV ended up.</p><div class="bars" id="stg"></div></section>
 </div>
-<section><h2>Key takeaways</h2><p>Four shifts that define the period.</p><div class="cards">
-<div class="card"><b>Inbound replaced LinkedIn</b><span>LinkedIn fell from 33% to 5% of CVs; direct email rose from 3% to 58% (2022 &rarr; 2026). Job boards stopped after 2023.</span></div>
-<div class="card"><b>Referrals: few CVs, many hires</b><span>About 10% of CVs but 19% of hires. In 2022, 11 of 35 hires came by referral.</span></div>
-<div class="card"><b>Role mix moved to Art &amp; Game Design</b><span>From 16% of CVs in 2022 to 73% in 2025; 78 of 93 hires in 2025&ndash;26.</span></div>
-<div class="card"><b>Freeze, then rebuild, in one city</b><span>14 hires in 2023, then 50 and 73. By 2026, 67% of CVs and 13 of 20 hires are in Ho Chi Minh City.</span></div>
+<section><h2>Key takeaways</h2><p>What this sample view is for.</p><div class="cards">
+<div class="card"><b>Source mix</b><span>CVs and hires are grouped by channel so a hiring team can review the mix.</span></div>
+<div class="card"><b>Role groups</b><span>Job titles are grouped so volume can be reviewed without listing every role.</span></div>
+<div class="card"><b>Pipeline status</b><span>Each CV is counted once, from application through hire.</span></div>
+<div class="card"><b>Filters</b><span>Year and month filters show the same sample in a yearly or monthly view.</span></div>
 </div></section>
 <section><h2>Year by year</h2><p>Conversion = hires &divide; CVs.</p><ul class="tl">
-<li id="y2022"><span class="yr">2022</span><span class="num">928 CVs &middot; 35 hires &middot; 3.8%</span><p>35 of 46 offers were accepted, and referrals made 11 of the 35 hires. The sample average was 36 days to hire.</p></li>
-<li id="y2023"><span class="yr">2023</span><span class="num">586 CVs &middot; 14 hires &middot; 2.4%</span><p>CVs fell to 586 and hiring paused at 14 people, with none hired in July or August. Job boards were used for the last time, and the sample average was 48 days to hire.</p></li>
-<li id="y2024"><span class="yr">2024</span><span class="num">945 CVs &middot; 50 hires &middot; 5.3%</span><p>Hiring restarted with 50 hires from 945 CVs, and 50 of 64 offers were accepted. Direct email was 27% of CVs and the best source by conversion.</p></li>
-<li id="y2025"><span class="yr">2025</span><span class="num">1,507 CVs &middot; 73 hires &middot; 4.8%</span><p>This was the peak: 1,507 CVs, 73 hires, and the shortest sample time to hire at 29 days. Art &amp; Game Design was 73% of CVs and 60 of the hires.</p></li>
-<li id="y2026"><span class="yr">2026</span><span class="num">534 CVs &middot; 20 hires &middot; 3.7% (to Oct)</span><p>January to October brought 534 CVs and 20 hires; November and December are not yet. Most of that hiring is in Ho Chi Minh City, 13 of 20 hires.</p></li>
+<li id="y2022"><span class="yr">2022</span><span class="num">Sample year</span><p>Sample pipeline view for the year.</p></li>
+<li id="y2023"><span class="yr">2023</span><span class="num">Sample year</span><p>Sample pipeline view for the year.</p></li>
+<li id="y2024"><span class="yr">2024</span><span class="num">Sample year</span><p>Sample pipeline view for the year.</p></li>
+<li id="y2025"><span class="yr">2025</span><span class="num">Sample year</span><p>Sample pipeline view for the year.</p></li>
+<li id="y2026"><span class="yr">2026</span><span class="num">Sample year</span><p>Sample pipeline view through October. November and December are not in the sample.</p></li>
 </ul></section>
 <section><h2>What this shows</h2><ul class="shows">
-<li><b>Source effectiveness, measured to hire.</b> Tracking each source through to hire showed referrals converting far above the overall rate (8.2% vs 4.3%), while inbound email replaced most LinkedIn and job-board sourcing.</li>
-<li><b>Hiring that follows the business.</b> From a near freeze in 2023 to a peak in 2025, while the role mix shifted to Art &amp; Game Design and hiring moved to one office.</li>
-<li><b>Data-driven reporting from a spreadsheet.</b> Five yearly candidate tabs were consolidated into one dataset, so funnel conversion, source and role trends can be compared year on year.</li>
+<li><b>Pipeline tracking.</b> A dashboard can follow CVs through to hire so the funnel is easy to review.</li>
+<li><b>Comparable views.</b> Year and month filters keep source, role and status in one place.</li>
+<li><b>Reporting from a spreadsheet.</b> Records can be consolidated so conversion and mix can be reviewed over time.</li>
 </ul></section>
 <section><h2>Data notes</h2><ul class="notes">
 <li>Illustrative sample data. Figures are anonymized and do not reflect actual company numbers.</li>
 <li>2026 covers January to October.</li>
-<li>Monthly counts are a sample split of each year's totals. February is the quiet month and September to October is the busiest stretch. 2026 stops at October.</li>
+<li>Monthly counts are a sample split of each year's totals. 2026 stops at October.</li>
 <li>Days to hire, interviews and offers are sample figures. Joined equals hires, and each funnel stage is at most the stage before it.</li>
 <li>November and December 2026 are not yet in the sample, so those months stay blank.</li>
-<li>427 CVs have no final status, so conversion rates are minimums.</li>
+<li>Some CVs have no final status, so conversion rates are minimums.</li>
 <li>Role groups are mapped from job titles. Categories absent in a year are not listed.</li>
 </ul></section>
 <footer>Aggregates only. No candidate data is shown.</footer>

@@ -163,11 +163,11 @@ function audit(mode) {
     check("2023 July and August hired nobody", july.hired === 0 && august.hired === 0 && july.days == null && august.days == null && july.of === 0 && august.of === 0);
 
     var takeaways = {
-      y2022: "35 of 46 offers were accepted, and referrals made 11 of the 35 hires. The sample average was 36 days to hire.",
-      y2023: "CVs fell to 586 and hiring paused at 14 people, with none hired in July or August. Job boards were used for the last time, and the sample average was 48 days to hire.",
-      y2024: "Hiring restarted with 50 hires from 945 CVs, and 50 of 64 offers were accepted. Direct email was 27% of CVs and the best source by conversion.",
-      y2025: "This was the peak: 1,507 CVs, 73 hires, and the shortest sample time to hire at 29 days. Art & Game Design was 73% of CVs and 60 of the hires.",
-      y2026: "January to October brought 534 CVs and 20 hires; November and December are not yet. Most of that hiring is in Ho Chi Minh City, 13 of 20 hires."
+      y2022: "Sample pipeline view for the year.",
+      y2023: "Sample pipeline view for the year.",
+      y2024: "Sample pipeline view for the year.",
+      y2025: "Sample pipeline view for the year.",
+      y2026: "Sample pipeline view through October. November and December are not in the sample."
     };
     Object.keys(takeaways).forEach(function (id) {
       var body = document.querySelector("#" + id + " p").textContent;
