@@ -205,7 +205,7 @@ function audit(mode) {
       }
       var missing = m !== "all" && !slice(y, m);
       if (missing) {
-        ["k1", "k2", "k3", "k4", "k5", "kDays", "kFun", "kBest", "kAcc"].forEach(function (id) {
+        ["k1", "k2", "k3", "k5", "kDays", "kFun", "kAcc"].forEach(function (id) {
           if (text(id) !== "not yet") sweepBad.push(key + " " + id + "=" + text(id));
         });
         var raw = cmpLines().map(function (line) { return line.raw; });
@@ -279,9 +279,9 @@ function audit(mode) {
   var sep = pick("2025", "9");
   check("Sep 2025 selects", sep.yOn && sep.mOn && !sep.mOff);
   check("Sep 2025 shows CVs, hires, and conversion", text("k1") === "182" && text("k2") === "10" && text("k3") === "5.5%");
-  check("Sep 2025 days, funnel, best source, acceptance", text("kDays") === "27" && text("kFun") === "17.6% | 37.5% | 83.3%" && text("kBest") === "Facebook" && text("kBestN") === "12.5% from 8 CVs" && text("kAcc") === "83.3%" && text("kAccN") === "10 of 12 offers");
+  check("Sep 2025 days, funnel, and acceptance", text("kDays") === "27" && text("kFun") === "17.6% | 37.5% | 83.3%" && text("kAcc") === "83.3%" && text("kAccN") === "10 of 12 offers");
   check("Sep 2025 joined equals hires", text("kAccN").indexOf("10 of ") === 0 && text("k2") === "10");
-  check("Sep 2025 top source and referral share", text("k5") === "Direct email" && text("k5n") === "80 CVs, 7 hires" && text("k4") === "10.0%" && text("k4n") === "1 of 10 hires");
+  check("Sep 2025 top source", text("k5") === "Direct email" && text("k5n") === "80 CVs, 7 hires");
   var sepCmp = cmpLines();
   check("Sep 2025 MoM", sepCmp[0].label === "MoM vs Aug 2025" && sepCmp[0].spans.join(" ") === "+32.8% +42.9% +7.5%", sepCmp[0] && sepCmp[0].spans.join(" "));
   check("Sep 2025 YoY", sepCmp[1].label === "YoY vs Sep 2024" && sepCmp[1].spans.join(" ") === "+70.1% +42.9% -16.0%", sepCmp[1] && sepCmp[1].spans.join(" "));
@@ -326,11 +326,11 @@ function audit(mode) {
   check("2026 trend labels Nov and Dec not yet", monthLabels.length === 12 && monthLabels[10].textContent === "not yet" && monthLabels[11].textContent === "not yet");
 
   pick("all", "all");
-  check("all-years KPIs", text("k1") === "4,500" && text("k2") === "192" && text("k3") === "4.3%" && text("k4") === "19.3%" && text("kDays") === "33" && text("kBest") === "Referral" && text("kAcc") === "77.4%" && text("kAccN") === "192 of 248 offers");
+  check("all-years KPIs", text("k1") === "4,500" && text("k2") === "192" && text("k3") === "4.3%" && text("kDays") === "33" && text("kAcc") === "77.4%" && text("kAccN") === "192 of 248 offers");
   pick("2022", "all");
   check("2022 year KPIs", text("k1") === "928" && text("k2") === "35" && text("kDays") === "36" && text("kFun") === "15.9% | 31.1% | 76.1%" && text("kAcc") === "76.1%" && text("kAccN") === "35 of 46 offers");
   pick("2024", "all");
-  check("2024 best source is Direct email", text("kBest") === "Direct email" && text("kDays") === "33" && text("kFun") === "17.8% | 38.1% | 78.1%");
+  check("2024 days and funnel", text("kDays") === "33" && text("kFun") === "17.8% | 38.1% | 78.1%");
   pick("2025", "all");
   check("2025 year KPIs", text("kDays") === "29" && text("kFun") === "16.9% | 35.7% | 80.2%" && text("k2") === "73");
   pick("2023", "all");

@@ -59,10 +59,8 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 <div class="kpi"><div class="l">Hires</div><div class="v" id="k2"></div><div class="n" id="k2n"></div></div>
 <div class="kpi"><div class="l">CV-to-hire conversion</div><div class="v" id="k3"></div><div class="n">hires &divide; CVs</div></div>
 <div class="kpi"><div class="l">Top source</div><div class="v sm" id="k5"></div><div class="n" id="k5n"></div></div>
-<div class="kpi"><div class="l">Referral share of hires</div><div class="v" id="k4"></div><div class="n" id="k4n"></div></div>
 <div class="kpi"><div class="l">Average days to hire</div><div class="v" id="kDays"></div><div class="n" id="kDaysN">sample, weighted by hires</div></div>
 <div class="kpi"><div class="l">Funnel pass rates</div><div class="v sm" id="kFun"></div><div class="n" id="kFunN">CV to interview, then offer, then joined</div></div>
-<div class="kpi"><div class="l">Best source</div><div class="v sm" id="kBest"></div><div class="n" id="kBestN"></div></div>
 <div class="kpi"><div class="l">Offer acceptance</div><div class="v" id="kAcc"></div><div class="n" id="kAccN">joined &divide; offers</div></div>
 </div>
 <div class="cmp" id="cmp"></div>
@@ -392,8 +390,8 @@ function setText(id,text){var el=$(id);if(el)el.textContent=text;}
 function showNotYet(y,m){
   var label=selLabel(y,m);
   document.querySelectorAll("[data-y]").forEach(function(e){e.textContent=label});
-  ["k1","k2","k3","k4","k5","kDays","kFun","kBest","kAcc"].forEach(function(id){setText(id,"not yet");});
-  ["k1n","k2n","k4n","k5n","kBestN"].forEach(function(id){setText(id,label);});
+  ["k1","k2","k3","k5","kDays","kFun","kAcc"].forEach(function(id){setText(id,"not yet");});
+  ["k1n","k2n","k5n"].forEach(function(id){setText(id,label);});
   setText("kDaysN",label);
   setText("kFunN",label);
   setText("kAccN",label);
@@ -412,16 +410,10 @@ function fillKpis(d,label){
   var top=topSource(d);
   setText("k5",top.name||"-");
   setText("k5n",top.name?(f(top.cv)+" CVs, "+top.hired+" hires"):label);
-  var ref=(d.src&&d.src.Referral)||[0,0];
-  if(!d.hired){setText("k4","-");setText("k4n","no hires");}
-  else{setText("k4",pc(ref[1],d.hired));setText("k4n",ref[1]+" of "+d.hired+" hires");}
   if(d.days==null){setText("kDays","-");setText("kDaysN","no hires in this period");}
   else{setText("kDays",String(d.days));setText("kDaysN","sample, weighted by hires");}
   setText("kFun",[pc(d.iv,d.cv),pc(d.of,d.iv),pc(d.hired,d.of)].join(" | "));
   setText("kFunN","CV to interview, then offer, then joined");
-  var best=bestSource(d);
-  if(!best.name){setText("kBest","-");setText("kBestN","no hired source");}
-  else{setText("kBest",best.name);setText("kBestN",pc(best.hired,best.cv)+" from "+f(best.cv)+" CVs");}
   if(!d.of){setText("kAcc","-");setText("kAccN","joined / offers");}
   else{setText("kAcc",pc(d.hired,d.of));setText("kAccN",d.hired+" of "+d.of+" offers");}
 }
