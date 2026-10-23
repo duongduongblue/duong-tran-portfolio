@@ -25,7 +25,7 @@ section>p{color:var(--muted);margin:0 0 20px;max-width:640px}
 .tl .yr{font:600 18px 'Cormorant Garamond', serif;color:var(--forest);margin-right:10px}.tl .num{font-size:13px;color:var(--muted)}
 .tl p{margin:2px 0 0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-svg{display:block;width:100%;height:auto}svg text{font-family:'Inter',sans-serif;fill:#5F6F5C;font-size:12px}svg text.b{fill:#1E2D24;font-weight:600}
+svg{display:block;width:100%;height:auto}svg text{font-family:'Inter',sans-serif;fill:#5F6F5C;font-size:12px;pointer-events:none}svg text.b{fill:#1E2D24;font-weight:600}
 .leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:10px}.leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
 ul.notes{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
 .shows li{margin-bottom:10px}.shows b{color:var(--forest)}
@@ -45,7 +45,8 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 .banner{background:var(--mist);border-left:3px solid var(--sage);padding:10px 14px;font-size:14px;color:var(--forest);margin:-24px 0 28px;border-radius:4px}
 .sel{font-weight:600;color:var(--forest)}
 @media(max-width:720px){h1{font-size:34px}.wrap{padding:0 16px}.kpis{grid-template-columns:1fr 1fr;row-gap:20px}.kpi{border:0;padding:0 10px}.kpi:nth-child(4n+1){border-left:1px solid var(--line);padding-left:10px}.kpi:nth-child(odd){padding-left:0;border:0}.kpi:nth-child(even){border-left:1px solid var(--line);padding-left:12px}.kpi .v{font-size:28px}.kpi .v.sm{font-size:16px}.grid,.cards{grid-template-columns:1fr;gap:28px}.filters{display:flex;flex-wrap:wrap;width:100%;border-radius:16px;box-sizing:border-box}.fgrp{flex:1 1 auto;min-width:max-content;margin:0}.pick{flex:0 0 auto;min-width:max-content}.pick select{width:auto;min-width:12ch;max-width:none}.bars .r{display:block;margin-bottom:14px}.bars .t{margin:4px 0}.bars .v{display:block;text-align:left}.cmp{font-size:14px}}
-@media(max-width:480px){.chart-scroll{overflow-x:auto;max-width:100%;min-width:0}.chart-scroll svg{display:block;width:640px;min-width:640px;height:280px}.chart-scroll svg text{font-size:16px}}</style></head><body><div class="wrap">
+.yearkey{display:flex;flex-wrap:wrap;gap:4px 8px;margin:0 0 12px}.yearkey .lg,.leg .lg{display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border:1px solid transparent;border-radius:999px;color:var(--forest);cursor:pointer}.yearkey .lg.hot,.leg .lg.hot{border-color:var(--sage);background:#fff;font-weight:600}.yearkey .lg.dim,.leg .lg.dim{opacity:.4}.yearkey .lg:focus,.leg .lg:focus,.bars .r:focus{outline:2px solid var(--sage);outline-offset:2px}.yearkey svg{display:block;width:22px;height:12px;flex:0 0 auto}.tip{position:fixed;z-index:80;left:0;top:0;visibility:hidden;max-width:min(280px,calc(100vw - 16px));padding:8px 10px;background:#F7F4EE;color:#1E2D24;border:1px solid #A8B7A1;border-radius:8px;box-shadow:0 8px 22px rgba(30,45,36,.16);font:500 13px/1.4 'Inter',sans-serif;pointer-events:none}.tip.on{visibility:visible}.tip .ln{display:block}.tip .ln.b{font-weight:600}.hit,.hitline,.pad{pointer-events:all;cursor:pointer}.mk,.line,.halo,.bar{pointer-events:none}.halo{opacity:0}.bars .r{cursor:pointer;border-radius:6px}#trend svg .yr.dim{opacity:.22}#trend svg .yr.hot{opacity:1}#trend svg .yr.hot .glow{filter:drop-shadow(0 0 4px rgba(30,45,36,.45)) brightness(1.12)}#trend svg .yr.hot .line{stroke-width:4}#trend svg .yr.hot .halo{opacity:.4}#vol svg .yr.off{opacity:.3}#vol svg.hot .yr{opacity:.35}#vol svg.hot .yr.hot{opacity:1}#vol svg.hot .yr.hot .bar{opacity:.4;filter:none}#vol svg.hot .yr.hot .bar.hot{opacity:1;filter:brightness(1.18) drop-shadow(0 0 5px rgba(30,45,36,.55))}.bars.is-hot .r{opacity:.4}.bars.is-hot .r.hot{opacity:1}.bars.is-hot .r.hot .f{filter:brightness(1.16) drop-shadow(0 0 6px rgba(125,146,123,.95))}
+@media(max-width:480px){.chart-scroll{overflow-x:auto;max-width:100%;min-width:0}.chart-scroll svg{display:block;width:640px;min-width:640px;height:280px}.chart-scroll svg text{font-size:16px}}</style></head><body><div id="tip" class="tip" role="tooltip"></div><div class="wrap">
 <div class="top"><a href="index.html">&larr; Back to Work</a></div>
 <h1>Recruitment dashboard</h1>
 <p class="sub">A sample hiring pipeline. Pick a year and a month.</p>
@@ -64,7 +65,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 <div class="kpi"><div class="l">Offer acceptance</div><div class="v" id="kAcc"></div><div class="n" id="kAccN">joined &divide; offers</div></div>
 </div>
 <div class="cmp" id="cmp"></div>
-<section><h2>Monthly trend</h2><p id="trendNote"></p><div class="chart-scroll"><div id="trend"></div></div><div class="leg" id="trendLeg"></div></section>
+<section><h2>Monthly trend</h2><p id="trendNote"></p><div class="leg yearkey" id="trendKey"></div><div class="chart-scroll"><div id="trend"></div></div><div class="leg" id="trendLeg"></div></section>
 <section><h2>Pipeline volume</h2><p><span id="volLead"></span> Hire bars use a 10&times; scale.</p><div class="chart-scroll"><div id="vol"></div></div><div class="leg"><span><i style="background:#A8B7A1"></i>CVs</span><span><i style="background:#1E2D24"></i>Hires</span><span id="volStar">* Jan&ndash;Oct</span></div></section>
 <div class="grid">
 <section><h2>Source mix</h2><p><span class="sel" data-y></span>: CVs by source (hires).</p><div class="bars" id="src"></div></section>
@@ -107,7 +108,7 @@ var M={"2022":[{"cv":69,"hired":3,"src":{"LinkedIn":[22,2],"Job boards":[17,0],"
 var YS=["all","2022","2023","2024","2025","2026"];
 var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 var LB={all:"All years","2026":"2026 YTD"};
-var COL={"2022":"#1E2D24","2023":"#3F5C4B","2024":"#7D927B","2025":"#5C7A6A","2026":"#8C4B2F"};
+var COL={"2022":"#1E2D24","2023":"#2A6F97","2024":"#C4841D","2025":"#6B5B95","2026":"#8C4B2F"};
 var year="all", month="all";
 function lb(y){return LB[y]||y}
 function f(n){return n.toLocaleString("en-US")}
@@ -180,6 +181,61 @@ function bestSource(d){
   return {name:name,cv:cv,hired:hires<0?0:hires,rate:best<0?null:best};
 }
 function esc(s){return String(s).replace("&","&amp;");}
+function escAttr(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function legendMark(yy){
+  var ns="http://www.w3.org/2000/svg";
+  var svg=document.createElementNS(ns,"svg");
+  svg.setAttribute("viewBox","0 0 22 12");
+  svg.setAttribute("width","22");
+  svg.setAttribute("height","12");
+  svg.setAttribute("aria-hidden","true");
+  var c=COL[yy];
+  function put(name, attrs){
+    var n=document.createElementNS(ns,name);
+    Object.keys(attrs).forEach(function(k){n.setAttribute(k, attrs[k]);});
+    svg.appendChild(n);
+  }
+  put("line",{x1:"1",y1:"6",x2:"21",y2:"6",stroke:c,"stroke-width":"2","stroke-linecap":"round"});
+  if(yy=="2023") put("rect",{x:"7.5",y:"2",width:"7",height:"8",rx:"1",fill:c});
+  else if(yy=="2024") put("polygon",{points:"11,1 15.5,6 11,11 6.5,6",fill:c});
+  else if(yy=="2025") put("polygon",{points:"11,1.2 16,10.5 6,10.5",fill:c});
+  else if(yy=="2026") put("circle",{cx:"11",cy:"6",r:"3.2",fill:"#F7F4EE",stroke:c,"stroke-width":"2"});
+  else put("circle",{cx:"11",cy:"6",r:"3.4",fill:c});
+  return svg;
+}
+function fillYearKey(){
+  var box=$("trendKey");
+  if(!box)return;
+  box.innerHTML="";
+  YS.slice(1).forEach(function(yy){
+    var s=document.createElement("span");
+    s.className="lg";
+    s.tabIndex=0;
+    s.setAttribute("data-year",yy);
+    s.setAttribute("data-series","cv");
+    s.appendChild(legendMark(yy));
+    s.appendChild(document.createTextNode(yy));
+    box.appendChild(s);
+  });
+}
+function markShape(yy,cx,cy){
+  var c=COL[yy], x=n1(cx), y=n1(cy);
+  if(yy=="2023") return '<rect class="mk" x="'+n1(x-3.5)+'" y="'+n1(y-3.5)+'" width="7" height="7" fill="'+c+'"/>';
+  if(yy=="2024") return '<polygon class="mk" points="'+x+','+n1(y-4.6)+' '+n1(x+4.4)+','+y+' '+x+','+n1(y+4.6)+' '+n1(x-4.4)+','+y+'" fill="'+c+'"/>';
+  if(yy=="2025") return '<polygon class="mk" points="'+x+','+n1(y-4.8)+' '+n1(x+4.6)+','+n1(y+3.6)+' '+n1(x-4.6)+','+n1(y+3.6)+'" fill="'+c+'"/>';
+  if(yy=="2026") return '<circle class="mk" cx="'+x+'" cy="'+y+'" r="3.3" fill="#F7F4EE" stroke="'+c+'" stroke-width="2"/>';
+  return '<circle class="mk" cx="'+x+'" cy="'+y+'" r="3.5" fill="'+c+'"/>';
+}
+function hitDot(yy, series, mi, cx, cy){
+  return '<circle class="hit" data-year="'+yy+'" data-series="'+series+'" data-month="'+mi+'" cx="'+n1(cx)+'" cy="'+n1(cy)+'" r="16" fill="transparent"/>';
+}
+function volPad(x, top, w, h){
+  var y=top, hh=h;
+  if(hh<36){ y=top-(36-h); hh=36; }
+  if(y<16) y=16;
+  if(y+hh<top+h) hh=top+h-y;
+  return ' x="'+n1(x-6)+'" y="'+n1(y)+'" width="'+n1(w+12)+'" height="'+n1(hh)+'"';
+}
 function bars(id,o,tot,order,cmp){
   var el=$(id),h="";
   var ks=(order||Object.keys(o||{})).filter(function(k){
@@ -195,20 +251,32 @@ function bars(id,o,tot,order,cmp){
   var prev=cmp&&cmp.prev,yoy=cmp&&cmp.yoy;
   ks.forEach(function(k){
     var c=cv(k),hh=typeof o[k]=="number"?"":" ("+o[k][1]+")";
+    var pct=Math.round(100*c/tot);
+    var tipText=typeof o[k]=="number"?(k+": "+f(c)+", "+pct+"%"):(k+": "+f(c)+" CVs ("+o[k][1]+" hires), "+pct+"%");
     var extra="";
     if(cmp){
       extra='<span class="d">MoM '+deltaHTML(prev?delta(c,cvOf(prev,k)):{cls:"flat",text:"-"})+' | YoY '+deltaHTML(yoy?delta(c,cvOf(yoy,k)):{cls:"flat",text:"-"})+'</span>';
     }
-    h+='<div class="r"><span>'+esc(k)+'</span><div class="t"><div class="f" style="width:'+(100*c/mx).toFixed(1)+'%"></div></div><span class="v">'+f(c)+hh+' | '+Math.round(100*c/tot)+'%</span>'+extra+'</div>';
+    h+='<div class="r" tabindex="0" data-tip="'+escAttr(tipText)+'"><span>'+esc(k)+'</span><div class="t"><div class="f" style="width:'+(100*c/mx).toFixed(1)+'%"></div></div><span class="v">'+f(c)+hh+' | '+pct+'%</span>'+extra+'</div>';
   });
   el.innerHTML=h;
 }
 function volYears(sel){
   var s='<svg viewBox="0 0 880 300" preserveAspectRatio="none" role="img" aria-label="CVs and hires by year">';
   [0,800,1600].forEach(function(t){var yv=260-t*0.15;s+='<line x1="50" x2="860" y1="'+yv+'" y2="'+yv+'" stroke="#ECEAE3"/><text x="42" y="'+(yv+4)+'" text-anchor="end">'+f(t)+'</text>'});
-  YS.slice(1).forEach(function(y,i){
-    var d=D[y],x=97+i*162,op=(sel=="all"||sel==y)?1:0.3,c=d.cv*0.15,h=d.hired*1.5;
-    s+='<g opacity="'+op+'"><rect x="'+x+'" y="'+(260-c)+'" width="32" height="'+c+'" rx="3" fill="#A8B7A1"/><rect x="'+(x+36)+'" y="'+(260-h)+'" width="32" height="'+h+'" rx="3" fill="#1E2D24"/><text x="'+(x+16)+'" y="'+(254-c)+'" text-anchor="middle">'+f(d.cv)+'</text><text x="'+(x+52)+'" y="'+(254-h)+'" text-anchor="middle">'+d.hired+'</text><text x="'+(x+34)+'" y="284" text-anchor="middle" class="b">'+y+(y=="2026"?"*":"")+'</text></g>';
+  YS.slice(1).forEach(function(yy,i){
+    var d=D[yy],x=97+i*162,c=d.cv*0.15,h=d.hired*1.5;
+    var off=(sel=="all"||sel==yy)?"":" off";
+    s+='<g class="yr'+off+'" data-year="'+yy+'">';
+    if(c>0){
+      s+='<rect class="bar cv" data-bar="cv" x="'+x+'" y="'+(260-c)+'" width="32" height="'+c+'" rx="3" fill="#A8B7A1"/>';
+      s+='<rect class="pad" data-bar="cv" data-tip="'+yy+': '+f(d.cv)+' CVs"'+volPad(x,260-c,32,c)+' fill="transparent"/>';
+    }
+    if(h>0){
+      s+='<rect class="bar hi" data-bar="hires" x="'+(x+36)+'" y="'+(260-h)+'" width="32" height="'+h+'" rx="3" fill="#1E2D24"/>';
+      s+='<rect class="pad" data-bar="hires" data-tip="'+yy+': '+f(d.hired)+' hires"'+volPad(x+36,260-h,32,h)+' fill="transparent"/>';
+    }
+    s+='<text x="'+(x+16)+'" y="'+(254-c)+'" text-anchor="middle">'+f(d.cv)+'</text><text x="'+(x+52)+'" y="'+(254-h)+'" text-anchor="middle">'+d.hired+'</text><text x="'+(x+34)+'" y="284" text-anchor="middle" class="b">'+yy+(yy=="2026"?"*":"")+'</text></g>';
   });
   $("vol").innerHTML=s+"</svg>";
 }
@@ -223,20 +291,29 @@ function volMonth(y,m){
     if(r.hired!=null&&r.hired*10>maxC)maxC=r.hired*10;
   });
   var top=nice(maxC);
+  var label=MONTHS[+m-1];
   var s='<svg viewBox="0 0 880 300" preserveAspectRatio="none" role="img" aria-label="CVs and hires in the selected month">';
   [0,top/2,top].forEach(function(t){
     var yv=260-(t/top)*200;
     s+='<line x1="50" x2="860" y1="'+n1(yv)+'" y2="'+n1(yv)+'" stroke="#ECEAE3"/><text x="42" y="'+n1(yv+4)+'" text-anchor="end">'+f(t)+'</text>';
   });
   rows.forEach(function(r,i){
-    var x=97+i*162,op=(y=="all"||y==r.y)?1:0.3;
-    s+='<g opacity="'+op+'">';
+    var x=97+i*162;
+    var off=(y=="all"||y==r.y)?"":" off";
+    s+='<g class="yr'+off+'" data-year="'+r.y+'">';
     if(r.cv==null){
       s+='<text x="'+(x+34)+'" y="248" text-anchor="middle">not yet</text>';
+      s+='<rect class="pad" data-bar="cv" data-tip="'+label+' '+r.y+': not yet" x="'+(x)+'" y="214" width="68" height="40" fill="transparent"/>';
     }else{
       var c=r.cv/top*200,hv=r.hired*10/top*200;
-      if(c>0)s+='<rect x="'+x+'" y="'+n1(260-c)+'" width="32" height="'+n1(c)+'" rx="3" fill="#A8B7A1"/>';
-      if(hv>0)s+='<rect x="'+(x+36)+'" y="'+n1(260-hv)+'" width="32" height="'+n1(hv)+'" rx="3" fill="#1E2D24"/>';
+      if(c>0){
+        s+='<rect class="bar cv" data-bar="cv" x="'+x+'" y="'+n1(260-c)+'" width="32" height="'+n1(c)+'" rx="3" fill="#A8B7A1"/>';
+        s+='<rect class="pad" data-bar="cv" data-tip="'+label+' '+r.y+': '+f(r.cv)+' CVs"'+volPad(x,260-c,32,c)+' fill="transparent"/>';
+      }
+      if(hv>0){
+        s+='<rect class="bar hi" data-bar="hires" x="'+(x+36)+'" y="'+n1(260-hv)+'" width="32" height="'+n1(hv)+'" rx="3" fill="#1E2D24"/>';
+        s+='<rect class="pad" data-bar="hires" data-tip="'+label+' '+r.y+': '+f(r.hired)+' hires"'+volPad(x+36,260-hv,32,hv)+' fill="transparent"/>';
+      }
       s+='<text x="'+(x+16)+'" y="'+n1(254-c)+'" text-anchor="middle">'+f(r.cv)+'</text><text x="'+(x+52)+'" y="'+n1(254-hv)+'" text-anchor="middle">'+r.hired+'</text>';
     }
     s+='<text x="'+(x+34)+'" y="284" text-anchor="middle" class="b">'+r.y+'</text></g>';
@@ -262,7 +339,7 @@ function trend(y,m){
   function x(i){return left+(i+0.5)*plotW/12}
   function yC(v){return base-v/topC*(base-top)}
   function yH(v){return base-v/topH*(base-top)}
-  var s='<svg viewBox="0 0 880 280" preserveAspectRatio="none" role="img" aria-label="Monthly recruitment trend">';
+  var s='<svg viewBox="0 0 880 280" preserveAspectRatio="none" role="img" aria-label="Monthly recruitment trend" data-left="'+left+'" data-plot="'+plotW+'">';
   [0,topC/2,topC].forEach(function(t){
     var yv=yC(t);
     s+='<line x1="'+left+'" x2="'+(880-right)+'" y1="'+n1(yv)+'" y2="'+n1(yv)+'" stroke="#ECEAE3"/><text x="'+(left-8)+'" y="'+n1(yv+4)+'" text-anchor="end">'+f(t)+'</text>';
@@ -279,17 +356,28 @@ function trend(y,m){
   }
   years.forEach(function(yy){
     var pts=M[yy].map(function(mo,i){return mo?[x(i),yC(mo.cv)]:null});
-    s+='<path d="'+pathOf(pts)+'" fill="none" stroke="'+COL[yy]+'" stroke-width="2.5" stroke-linejoin="round"/>';
-    pts.forEach(function(p,i){
-      if(!p)return;
-      var on=m!="all"&&(+m-1)==i;
-      s+='<circle cx="'+n1(p[0])+'" cy="'+n1(p[1])+'" r="'+(on?5:3)+'" fill="'+COL[yy]+'"/>';
-    });
+    s+='<g class="yr" data-year="'+yy+'" data-series="cv">';
+    s+='<path class="hitline" data-year="'+yy+'" data-series="cv" d="'+pathOf(pts)+'" fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>';
+    s+='<g class="glow">';
+    s+='<path class="halo" d="'+pathOf(pts)+'" fill="none" stroke="'+COL[yy]+'" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>';
+    s+='<path class="line" d="'+pathOf(pts)+'" fill="none" stroke="'+COL[yy]+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    pts.forEach(function(p,i){ if(p) s+=markShape(yy,p[0],p[1]); });
+    if(m!="all"&&pts[+m-1]) s+='<circle class="mk" cx="'+n1(pts[+m-1][0])+'" cy="'+n1(pts[+m-1][1])+'" r="7" fill="none" stroke="'+COL[yy]+'" stroke-width="1.5"/>';
+    s+='</g>';
+    pts.forEach(function(p,i){ if(p) s+=hitDot(yy,"cv",i,p[0],p[1]); });
+    s+='</g>';
   });
   if(y!="all"){
     var hpts=M[y].map(function(mo,i){return mo?[x(i),yH(mo.hired)]:null});
-    s+='<path d="'+pathOf(hpts)+'" fill="none" stroke="#7D927B" stroke-width="2" stroke-dasharray="5 4"/>';
-    hpts.forEach(function(p){if(p)s+='<circle cx="'+n1(p[0])+'" cy="'+n1(p[1])+'" r="3" fill="#7D927B"/>';});
+    s+='<g class="yr" data-year="'+y+'" data-series="hires">';
+    s+='<path class="hitline" data-year="'+y+'" data-series="hires" d="'+pathOf(hpts)+'" fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>';
+    s+='<g class="glow">';
+    s+='<path class="halo" d="'+pathOf(hpts)+'" fill="none" stroke="#7D927B" stroke-width="8" stroke-linecap="round"/>';
+    s+='<path class="line" d="'+pathOf(hpts)+'" fill="none" stroke="#7D927B" stroke-width="2" stroke-dasharray="5 4" stroke-linecap="round"/>';
+    hpts.forEach(function(p){ if(p) s+='<circle class="mk" cx="'+n1(p[0])+'" cy="'+n1(p[1])+'" r="3" fill="#7D927B"/>'; });
+    s+='</g>';
+    hpts.forEach(function(p,i){ if(p) s+=hitDot(y,"hires",i,p[0],p[1]); });
+    s+='</g>';
     if(m!="all"&&M[y][+m-1]){
       var pt=[x(+m-1),yC(M[y][+m-1].cv)];
       var ly=pt[1]-10;if(ly<14)ly=pt[1]+16;
@@ -302,15 +390,285 @@ function trend(y,m){
   });
   s+='<line x1="'+left+'" x2="'+(880-right)+'" y1="'+base+'" y2="'+base+'" stroke="#E2E0D8"/>';
   $("trend").innerHTML=s+"</svg>";
+  fillYearKey();
   var leg="";
-  if(y=="all")years.forEach(function(yy){leg+='<span><i style="background:'+COL[yy]+'"></i>'+yy+'</span>';});
-  else leg='<span><i style="background:'+COL[y]+'"></i>CVs</span><span><i style="background:#7D927B"></i>Hires</span>';
+  if(y!="all") leg='<span class="lg" tabindex="0" data-year="'+y+'" data-series="cv"><i style="background:'+COL[y]+'"></i>CVs</span><span class="lg" tabindex="0" data-year="'+y+'" data-series="hires"><i style="background:#7D927B"></i>Hires</span>';
   $("trendLeg").innerHTML=leg;
   var note=y=="all"?"CVs by month for each year. November and December 2026 are not yet in the sample.":"CVs and hires by month in "+y+". The hire line uses its own scale.";
   if(y!="all"&&m!="all"&&M[y][+m-1])note+=" "+MONTHS[+m-1]+" is marked.";
   if(y=="2026")note+=" November and December are not yet in the sample.";
   $("trendNote").textContent=note;
 }
+var pinned=false;
+var lastPointer="mouse";
+function hideTip(){
+  var tip=$("tip");
+  if(!tip)return;
+  tip.classList.remove("on");
+  tip.textContent="";
+  tip.style.visibility="";
+}
+function clearHot(){
+  document.querySelectorAll("#trend svg .yr, #vol svg, #vol svg .yr, #vol .bar, .bars, .bars .r, #trendKey .lg, #trendLeg .lg").forEach(function(el){
+    el.classList.remove("hot","dim","is-hot");
+  });
+}
+function setTip(lines){
+  var tip=$("tip");
+  tip.textContent="";
+  lines.forEach(function(ln){
+    var s=document.createElement("span");
+    s.className=ln.b?"ln b":"ln";
+    s.textContent=ln.t;
+    tip.appendChild(s);
+  });
+}
+function overlaps(a,b){
+  return a.left<b.right-0.5 && a.right>b.left+0.5 && a.top<b.bottom-0.5 && a.bottom>b.top+0.5;
+}
+function placeTip(anchor){
+  var tip=$("tip");
+  if(!tip||!anchor||!anchor.width&&anchor.width!==0)return;
+  tip.style.visibility="hidden";
+  tip.style.left="0px";
+  tip.style.top="0px";
+  tip.classList.add("on");
+  var tw=tip.offsetWidth, th=tip.offsetHeight;
+  var gap=14, m=8;
+  var vw=document.documentElement.clientWidth, vh=document.documentElement.clientHeight;
+  var spots=[
+    {l:anchor.left+anchor.width/2-tw/2, t:anchor.top-gap-th},
+    {l:anchor.right+gap, t:anchor.top+anchor.height/2-th/2},
+    {l:anchor.left-gap-tw, t:anchor.top+anchor.height/2-th/2},
+    {l:anchor.left+anchor.width/2-tw/2, t:anchor.bottom+gap}
+  ];
+  var choice=null, i;
+  for(i=0;i<spots.length;i++){
+    var c=spots[i];
+    var box={left:c.l, right:c.l+tw, top:c.t, bottom:c.t+th};
+    if(c.l<m||c.t<m||c.l+tw>vw-m||c.t+th>vh-m) continue;
+    if(!overlaps(box, anchor)){ choice=c; break; }
+  }
+  if(!choice) choice=anchor.top-gap-th>=m?spots[0]:spots[3];
+  var l=choice.l, t=choice.t;
+  if(l<m) l=m;
+  if(t<m) t=m;
+  if(l+tw>vw-m) l=Math.max(m, vw-m-tw);
+  if(t+th>vh-m) t=Math.max(m, vh-m-th);
+  var placed={left:l, right:l+tw, top:t, bottom:t+th};
+  if(overlaps(placed, anchor)){
+    var opts=[
+      {l:anchor.right+gap, t:anchor.top+anchor.height/2-th/2},
+      {l:anchor.left-gap-tw, t:anchor.top+anchor.height/2-th/2},
+      {l:anchor.left+anchor.width/2-tw/2, t:anchor.bottom+gap},
+      {l:anchor.left+anchor.width/2-tw/2, t:anchor.top-gap-th}
+    ];
+    for(i=0;i<opts.length;i++){
+      var o=opts[i];
+      var ol=Math.min(Math.max(o.l, m), Math.max(m, vw-m-tw));
+      var ot=Math.min(Math.max(o.t, m), Math.max(m, vh-m-th));
+      var ob={left:ol, right:ol+tw, top:ot, bottom:ot+th};
+      if(!overlaps(ob, anchor)){ l=ol; t=ot; break; }
+    }
+  }
+  tip.style.left=Math.round(l)+"px";
+  tip.style.top=Math.round(t)+"px";
+  tip.style.visibility="";
+}
+function monthLine(yy, mi, kind){
+  var name=MONTHS[mi];
+  var row=M[yy]&&M[yy][mi];
+  if(!row) return name+" "+yy+": not yet";
+  if(kind==="hires") return name+" "+yy+": "+f(row.hired)+" hires";
+  return name+" "+yy+": "+f(row.cv)+" CVs";
+}
+function trendLines(mi, hotYear, hotSeries){
+  var lines=[];
+  if(year!="all"){
+    var cv={t:monthLine(year, mi, "cv"), b:hotSeries!="hires"};
+    var hr={t:monthLine(year, mi, "hires"), b:hotSeries==="hires"};
+    if(hotSeries==="hires") lines.push(hr, cv);
+    else lines.push(cv, hr);
+    return lines;
+  }
+  var first=null, rest=[];
+  YS.slice(1).forEach(function(yy){
+    var ln={t:monthLine(yy, mi, "cv"), b:yy===hotYear};
+    if(yy===hotYear) first=ln; else rest.push(ln);
+  });
+  if(first) lines.push(first);
+  rest.forEach(function(ln){ lines.push(ln); });
+  return lines;
+}
+function seriesSummary(yy, series){
+  var want=series||"cv";
+  var drawn=document.querySelector('#trend svg .yr[data-year="'+yy+'"][data-series="'+want+'"]');
+  if(!drawn) return null;
+  if(month!="all") return [{t:monthLine(yy, +month-1, want==="hires"?"hires":"cv"), b:true}];
+  if(want==="hires") return [{t:yy+": "+f(D[yy].hired)+" hires", b:true}];
+  return [{t:yy+": "+f(D[yy].cv)+" CVs", b:true}];
+}
+function highlightTrend(yy, series){
+  clearHot();
+  var want=series||"cv";
+  var svg=document.querySelector("#trend svg");
+  var groups=svg?svg.querySelectorAll(".yr"):[];
+  var any=false;
+  groups.forEach(function(g){
+    if(g.getAttribute("data-year")===yy && g.getAttribute("data-series")===want) any=true;
+  });
+  groups.forEach(function(g){
+    var match=any && g.getAttribute("data-year")===yy && g.getAttribute("data-series")===want;
+    g.classList.toggle("hot", match);
+    g.classList.toggle("dim", any && !match);
+  });
+  document.querySelectorAll("#trendKey .lg, #trendLeg .lg").forEach(function(el){
+    var elSeries=el.getAttribute("data-series")||"cv";
+    var match=el.getAttribute("data-year")===yy && elSeries===want;
+    el.classList.toggle("hot", !!match);
+    el.classList.toggle("dim", !!(any && !match));
+  });
+  return any;
+}
+function hotBar(row){
+  clearHot();
+  var box=row.closest(".bars");
+  if(box) box.classList.add("is-hot");
+  row.classList.add("hot");
+}
+function hotVol(pad){
+  clearHot();
+  var svg=pad.ownerSVGElement;
+  var g=pad.parentNode;
+  if(svg) svg.classList.add("hot");
+  if(g&&g.classList) g.classList.add("hot");
+  var key=pad.getAttribute("data-bar");
+  if(g&&g.querySelectorAll){
+    g.querySelectorAll(".bar").forEach(function(b){
+      if(b.getAttribute("data-bar")===key) b.classList.add("hot");
+    });
+  }
+}
+function hoverEl(node){
+  if(!node||!node.closest) return null;
+  return node.closest(".pad, .hit, .hitline, .bars .r, .lg");
+}
+function monthFromEvent(svg, ev){
+  if(!svg||!ev||ev.clientX==null) return month==="all"?0:(+month-1);
+  var pt=svg.createSVGPoint();
+  pt.x=ev.clientX; pt.y=ev.clientY;
+  var ctm=svg.getScreenCTM();
+  if(!ctm) return 0;
+  var p=pt.matrixTransform(ctm.inverse());
+  var left=+svg.getAttribute("data-left")||48;
+  var plot=+svg.getAttribute("data-plot")||800;
+  var i=Math.round((p.x-left)/(plot/12)-0.5);
+  if(i<0) i=0;
+  if(i>11) i=11;
+  return i;
+}
+function pointRect(svg, yy, series, mi){
+  if(!svg) return null;
+  var hit=svg.querySelector('.hit[data-year="'+yy+'"][data-series="'+series+'"][data-month="'+mi+'"]');
+  if(hit) return hit.getBoundingClientRect();
+  var labels=[];
+  svg.querySelectorAll("text").forEach(function(t){ if(t.getAttribute("y")==="248") labels.push(t); });
+  if(labels[mi]) return labels[mi].getBoundingClientRect();
+  return svg.getBoundingClientRect();
+}
+function showFor(el, ev){
+  if(!el) return;
+  if(el.classList.contains("r")){
+    hotBar(el);
+    setTip([{t:el.getAttribute("data-tip")||"", b:true}]);
+    placeTip(el.getBoundingClientRect());
+    return;
+  }
+  if(el.classList.contains("pad")){
+    hotVol(el);
+    setTip([{t:el.getAttribute("data-tip")||"", b:true}]);
+    placeTip(el.getBoundingClientRect());
+    return;
+  }
+  if(el.classList.contains("lg")){
+    var yy=el.getAttribute("data-year");
+    var series=el.getAttribute("data-series")||"cv";
+    var drawn=highlightTrend(yy, series);
+    var lines=drawn?seriesSummary(yy, series):null;
+    if(!lines){ hideTip(); return; }
+    setTip(lines);
+    placeTip(el.getBoundingClientRect());
+    return;
+  }
+  var yy2=el.getAttribute("data-year");
+  var series2=el.getAttribute("data-series")||"cv";
+  var svg=el.ownerSVGElement||document.querySelector("#trend svg");
+  var monthAttr=el.getAttribute("data-month");
+  var mi=monthAttr!=null && monthAttr!=="" ? +monthAttr : monthFromEvent(svg, ev);
+  highlightTrend(yy2, series2);
+  setTip(trendLines(mi, yy2, series2));
+  placeTip(pointRect(svg, yy2, series2, mi));
+}
+function sameGroup(a,b){
+  if(!a||!b) return false;
+  if(a===b) return true;
+  if(a.classList.contains("pad")||b.classList.contains("pad")) return false;
+  var ga=a.closest(".yr, .r, .lg");
+  var gb=b.closest(".yr, .r, .lg");
+  return !!(ga&&ga===gb);
+}
+function onOver(e){
+  if(pinned||lastPointer==="touch") return;
+  var hit=hoverEl(e.target);
+  if(!hit) return;
+  showFor(hit, e);
+}
+function onMove(e){
+  if(pinned||lastPointer==="touch") return;
+  var hit=hoverEl(e.target);
+  if(!hit||!hit.classList.contains("hitline")) return;
+  showFor(hit, e);
+}
+function onOut(e){
+  if(pinned) return;
+  var from=hoverEl(e.target);
+  if(!from) return;
+  var to=e.relatedTarget?hoverEl(e.relatedTarget):null;
+  if(sameGroup(from, to)) return;
+  hideTip();
+  clearHot();
+}
+function onTouchEnd(e){
+  var hit=hoverEl(e.target);
+  if(!hit){ pinned=false; hideTip(); clearHot(); return; }
+  pinned=true;
+  var t=e.changedTouches&&e.changedTouches[0];
+  showFor(hit, t||e);
+}
+function onClick(e){
+  var hit=hoverEl(e.target);
+  if(!hit){
+    if(pinned){ pinned=false; hideTip(); clearHot(); }
+    return;
+  }
+  if(lastPointer==="touch"){ pinned=true; showFor(hit, e); }
+}
+document.addEventListener("pointerdown", function(e){ lastPointer=e.pointerType||"mouse"; }, true);
+document.addEventListener("pointermove", function(e){ if(e.pointerType) lastPointer=e.pointerType; }, true);
+document.addEventListener("mouseover", onOver);
+document.addEventListener("mousemove", onMove);
+document.addEventListener("mouseout", onOut);
+document.addEventListener("touchend", onTouchEnd, true);
+document.addEventListener("click", onClick);
+document.addEventListener("focusin", function(e){
+  var hit=hoverEl(e.target);
+  if(!hit) return;
+  showFor(hit, null);
+});
+document.addEventListener("focusout", function(e){
+  if(pinned) return;
+  if(hoverEl(e.target)){ hideTip(); clearHot(); }
+});
 function delta(cur,prev){
   if(cur==null||prev==null||prev===0)return {cls:"flat",text:"-"};
   if(!isFinite(cur)||!isFinite(prev))return {cls:"flat",text:"-"};
@@ -388,6 +746,7 @@ function paintSelects(y,m){
 }
 function setText(id,text){var el=$(id);if(el)el.textContent=text;}
 function showNotYet(y,m){
+  pinned=false;hideTip();clearHot();
   var label=selLabel(y,m);
   document.querySelectorAll("[data-y]").forEach(function(e){e.textContent=label});
   ["k1","k2","k3","k5","kDays","kFun","kAcc"].forEach(function(id){setText(id,"not yet");});
@@ -399,6 +758,7 @@ function showNotYet(y,m){
   ["src","grp","loc","stg","vol"].forEach(function(id){$(id).innerHTML='<p class="empty">Not yet</p>';});
   $("trend").innerHTML='<p class="empty">Not yet</p>';
   $("trendLeg").innerHTML="";
+  $("trendKey").innerHTML="";
   $("trendNote").textContent="November and December 2026 are not yet in the sample.";
   $("volLead").textContent="This month is not yet in the sample.";
   $("volStar").style.display="none";
@@ -418,6 +778,7 @@ function fillKpis(d,label){
   else{setText("kAcc",pc(d.hired,d.of));setText("kAccN",d.hired+" of "+d.of+" offers");}
 }
 function show(y,m){
+  pinned=false;hideTip();clearHot();
   if(!D[y])y="all";
   if(m!="all"){
     m=String(+m);
